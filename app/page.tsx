@@ -1,65 +1,105 @@
-import Image from "next/image";
+import Link from "next/link";
+import { getAllChapters } from "@/data";
 
-export default function Home() {
+export default function HomePage() {
+  const chapters = getAllChapters();
+  const totalMCQs = chapters.reduce(
+    (acc, ch) => acc + ch.lessons.reduce((a, l) => a + l.mcqs.length, 0),
+    0
+  );
+  const totalLessons = chapters.reduce((acc, ch) => acc + ch.lessons.length, 0);
+
+  const colorMap: Record<string, { bg: string; border: string; badge: string; btn: string; glow: string }> = {
+    blue:   { bg: "bg-blue-950/40",   border: "border-blue-700/40",   badge: "bg-blue-700/30 text-blue-300",   btn: "bg-blue-600 hover:bg-blue-500", glow: "hover:shadow-blue-900/50" },
+    purple: { bg: "bg-purple-950/40", border: "border-purple-700/40", badge: "bg-purple-700/30 text-purple-300", btn: "bg-purple-600 hover:bg-purple-500", glow: "hover:shadow-purple-900/50" },
+    green:  { bg: "bg-emerald-950/40",border: "border-emerald-700/40",badge: "bg-emerald-700/30 text-emerald-300",btn: "bg-emerald-600 hover:bg-emerald-500", glow: "hover:shadow-emerald-900/50" },
+    orange: { bg: "bg-orange-950/40", border: "border-orange-700/40", badge: "bg-orange-700/30 text-orange-300", btn: "bg-orange-600 hover:bg-orange-500", glow: "hover:shadow-orange-900/50" },
+    red:    { bg: "bg-rose-950/40",   border: "border-rose-700/40",   badge: "bg-rose-700/30 text-rose-300",   btn: "bg-rose-600 hover:bg-rose-500", glow: "hover:shadow-rose-900/50" },
+    teal:   { bg: "bg-teal-950/40",   border: "border-teal-700/40",   badge: "bg-teal-700/30 text-teal-300",   btn: "bg-teal-600 hover:bg-teal-500", glow: "hover:shadow-teal-900/50" },
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-screen">
+      {/* Hero */}
+      <div className="relative overflow-hidden border-b border-slate-800/60">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-950 to-violet-950" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/8 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-violet-600/8 rounded-full blur-3xl" />
+        <div className="relative max-w-5xl mx-auto px-6 py-20 text-center">
+          <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/25 rounded-full px-4 py-1.5 text-sm text-indigo-300 mb-8">
+            <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse inline-block" />
+            Panaversity · General Agents Foundations · Part 1
+          </div>
+          <h1 className="text-5xl md:text-6xl font-bold mb-5 text-white tracking-tight">
+            AgentFactory{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400">
+              MCQ Prep
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Ace your exams with{" "}
+            <span className="text-white font-semibold">{totalMCQs.toLocaleString()}+</span> questions
+            across{" "}
+            <span className="text-white font-semibold">{chapters.length} chapters</span> and{" "}
+            <span className="text-white font-semibold">{totalLessons} lessons</span>.
           </p>
+          <div className="flex justify-center gap-10">
+            {[
+              { value: chapters.length, label: "Chapters" },
+              { value: totalLessons, label: "Lessons" },
+              { value: `${totalMCQs.toLocaleString()}+`, label: "MCQs" },
+            ].map((stat, i) => (
+              <div key={i} className="text-center">
+                <div className="text-3xl font-bold text-white">{stat.value}</div>
+                <div className="text-slate-400 text-sm mt-0.5">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </div>
+
+      {/* Chapters Grid */}
+      <div className="max-w-5xl mx-auto px-6 py-14">
+        <h2 className="text-xl font-semibold text-slate-300 mb-8">
+          Select a Chapter to Begin
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {chapters.map((chapter) => {
+            const c = colorMap[chapter.color] ?? colorMap.blue;
+            const chMCQs = chapter.lessons.reduce((a, l) => a + l.mcqs.length, 0);
+            return (
+              <Link
+                key={chapter.id}
+                href={`/chapter/${chapter.id}`}
+                className={`group block rounded-2xl border ${c.bg} ${c.border} p-6 transition-all duration-300 hover:scale-[1.015] hover:shadow-2xl ${c.glow}`}
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <span className={`text-xs font-bold px-3 py-1 rounded-full ${c.badge} tracking-wide`}>
+                    CH {chapter.id}
+                  </span>
+                  <span className="text-slate-500 text-xs">{chapter.lessons.length} lessons</span>
+                </div>
+                <h3 className="text-base font-bold text-white mb-2 leading-snug">
+                  {chapter.title}
+                </h3>
+                <p className="text-sm text-slate-400 mb-5 leading-relaxed line-clamp-2">
+                  {chapter.description}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-slate-500">{chMCQs.toLocaleString()} questions</span>
+                  <span className={`text-xs font-semibold px-3 py-1.5 rounded-lg text-white ${c.btn} transition-colors`}>
+                    Start →
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
-      </main>
-    </div>
+      </div>
+
+      <footer className="border-t border-slate-800/60 py-6 text-center text-slate-600 text-sm">
+        Panaversity · AgentFactory MCQ Prep · Chapters 12–17
+      </footer>
+    </main>
   );
 }
