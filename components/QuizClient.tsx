@@ -135,7 +135,7 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
   // ── Result Screen ──────────────────────────────────────────────────────────
   if (showResult) {
     const { label, color } = getScoreLabel(score.correct, total);
-    const passed = score.correct >= 7;
+    const passed = score.correct / total >= 0.7;
     return (
       <main className="min-h-screen flex flex-col items-center justify-center px-4 bg-slate-950">
         <div className="bg-slate-900 border border-slate-700/50 rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl">
@@ -208,7 +208,7 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
         {/* Progress bar - only shown when all questions are attempted */}
         {allQuestionsAttempted && (
           <div className="h-1 bg-slate-800">
-            <div className={`h-full ${score.correct >= 7 ? "bg-emerald-500" : "bg-rose-500"} transition-all duration-500`} style={{ width: `${scorePercent}%` }} />
+            <div className={`h-full ${score.correct / total >= 0.7 ? "bg-emerald-500" : "bg-rose-500"} transition-all duration-500`} style={{ width: `${scorePercent}%` }} />
           </div>
         )}
       </div>
