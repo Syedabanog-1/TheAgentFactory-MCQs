@@ -1310,7 +1310,7 @@ export const chapter17: Chapter = {
     },
     {
       id: 8,
-      title: "Lesson 8: Operational Best Practices",
+      title: "Operational Best Practices",
       mcqs: [
         {
           id: 1,
@@ -1496,11 +1496,11 @@ export const chapter17: Chapter = {
     },
     {
       id: 9,
-      title: "Lesson 9: Putting It All Together",
+      title: "Putting It All Together",
       mcqs: [
         {
           id: 1,
-          question: "What is the Director's mindset shift described in Lesson 9?",
+          question: "What is the Director's mindset shift?",
           options: {
             A: "You become the movie director of your own film",
             B: "You shift from typist (writing code yourself) to director (managing an AI agent) — providing clear direction, context, guardrails, and verification rather than writing every line",
@@ -1682,7 +1682,7 @@ export const chapter17: Chapter = {
     },
     {
       id: 10,
-      title: "Lesson 10: Principles Exercises",
+      title: "Principles Exercises",
       mcqs: [
         {
           id: 1,
@@ -1816,54 +1816,6 @@ export const chapter17: Chapter = {
           correct: "B",
           explanation: "Health Score counts principles actively applied (not average). Scores 1-2 = not actively applied, 3-4 = actively applied. Your scores: P1(3)=yes, P2(2)=no, P3(4)=yes, P4(2)=no, P5(1)=no, P6(3)=yes, P7(4)=yes = 4 principles = Collaborator. The lesson: be honest about low scores — they reveal your specific improvement targets (P2, P4, P5)."
         },
-        {
-          id: 12,
-          question: "Scenario: During the Module 5 exercise (Constraints and Permission Models), you set Claude to 'Confirming' mode for a routine task (renaming a variable across 3 files). Your instructor says this is overkill. According to the permission model guidance, when should you use 'Confirming' vs. 'Permissive'?",
-          options: {
-            A: "Always use Confirming — it's the safest",
-            B: "Confirming for: new AI collaboration, unfamiliar codebase, learning phase, production systems. Permissive for: routine work on familiar projects, trusted AI, experienced users. Variable renaming across 3 files in a familiar codebase = Permissive is appropriate.",
-            C: "Always use Permissive — Confirming slows you down",
-            D: "Use Restricted for all tasks"
-          },
-          correct: "B",
-          explanation: "Permission model matching: Confirming (approve all writes) is right for unfamiliar situations — new AI, unfamiliar code, production systems. Permissive (auto-approve safe operations) is right for routine work on familiar projects where you trust the AI's judgment. Variable renaming is low-risk, well-defined, in a familiar codebase — Permissive is appropriate. The key: match the permission level to the situation's risk and familiarity."
-        },
-        {
-          id: 13,
-          question: "Scenario: You complete the Module 7 exercise (Full Cycle: Debug Production Issue). You investigated with Bash (P1), traced through logs (P7), proposed a fix, verified it in staging (P3), made an atomic commit (P4), and showed the diff before applying (P6). Your instructor asks: 'What about P2 and P5?' How were those principles implicitly applied?",
-          options: {
-            A: "They weren't applied — you missed two principles",
-            B: "P2 (Code as Interface): your fix was a specific code change, not a vague description. P5 (Persisting State): you documented the incident and fix in an ADR or runbook for future reference. Both were applied even if not explicitly named.",
-            C: "P2 and P5 don't apply to debugging",
-            D: "You should have written tests (P2) and updated CLAUDE.md (P5)"
-          },
-          correct: "B",
-          explanation: "P2 and P5 in debugging: P2 (Code as Interface) — your fix was a concrete code change (specific diff), not a vague 'improve error handling' description. P5 (Persisting State) — documenting the incident and fix (in an ADR, runbook, or post-mortem) ensures the next person debugging a similar issue has persistent context. Both principles were applied through the debugging workflow even if not explicitly named."
-        },
-        {
-          id: 14,
-          question: "Scenario: After a month of applying the 7 principles, you re-assess your Capstone C Health Score. It went from 4 to 6. According to the exercise guidance, what changed and what's your next step?",
-          options: {
-            A: "You went from Collaborator to Agent Architect — you're now managing AI effectively with professional-grade workflows. Next step: optimize further and work toward 7 (Master Director) by teaching others and refining judgment.",
-            B: "Nothing changed — 4 and 6 are both passing scores",
-            C: "You should restart the exercises from the beginning",
-            D: "You've reached the maximum — no further improvement is possible"
-          },
-          correct: "A",
-          explanation: "Health Score progression: 4 (Collaborator) → 6 (Agent Architect) means you've moved from 'working with AI effectively' to 'professional grade — managing AI as a force multiplier.' The next step isn't more exercises — it's optimization and teaching. The Master Director level (7) requires full integration plus the ability to teach and refine others' workflows. The progression is: learn → apply → teach → refine."
-        },
-        {
-          id: 15,
-          question: "Scenario: Your team completes all 17 exercises. One developer says 'I can name all 7 principles but still struggle to apply them in real work.' According to the Assessment Rubric, what level are they at and what's the gap?",
-          options: {
-            A: "Advanced — naming principles is the highest level",
-            B: "Beginner/Developing gap — they have Recognition (can name principles) but lack Application (using them to solve concrete problems). The gap is practice: exercises build recognition; real work builds application. They need to deliberately apply one principle per task until it becomes habit.",
-            C: "Proficient — they're ready for capstone projects",
-            D: "They need to retake the course"
-          },
-          correct: "B",
-          explanation: "Assessment Rubric levels: Recognition (can name/identify), Application (can use for concrete problems), Workflow Diagnosis (can identify violations from failures). Naming all 7 = Recognition level. Struggling to apply = Application gap. The fix: don't try all 7 at once. Pick ONE principle (e.g., P3 Verification) and deliberately apply it to every task for a week. Once it's habit, add another. Principles become automatic through deliberate repetition, not just knowledge."
-        }
       ]
     }
   ]

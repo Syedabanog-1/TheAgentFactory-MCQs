@@ -42,6 +42,16 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
   const [timeLeft, setTimeLeft] = useState(60);
   const [showResult, setShowResult] = useState(false);
 
+  const resetQuiz = () => {
+    setCurrentIdx(0);
+    setSelected(null);
+    setRevealed(false);
+    setScore({ correct: 0, attempted: 0 });
+    setAnswered({});
+    setTimeLeft(60);
+    setShowResult(false);
+  };
+
   const c = COLOR[chapterColor as keyof typeof COLOR] ?? COLOR.blue;
   const mcq = mcqs[currentIdx];
   const total = mcqs.length;
@@ -170,6 +180,20 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
             })}
           </div>
 
+          {!passed && (
+            <div className="mb-4">
+              <p className="text-rose-400 text-sm font-semibold mb-3">
+                You need 70% or higher to pass. Please re-attempt the exam.
+              </p>
+              <button
+                onClick={resetQuiz}
+                className="block w-full py-3 rounded-xl font-semibold text-sm text-white text-center bg-rose-600 hover:bg-rose-500 transition-all mb-2"
+              >
+                Re-attempt Exam
+              </button>
+            </div>
+          )}
+
           <Link
             href={`/chapter/${chapterId}`}
             className={`block w-full py-3 rounded-xl font-semibold text-sm text-white text-center ${c.progress} hover:opacity-90 transition-all`}
@@ -205,10 +229,10 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
             )}
           </div>
         </div>
-        {/* Progress bar - only shown when all questions are attempted */}
-        {allQuestionsAttempted && (
+        {/* Progress bar - shown from first attempted question, color based on score % */}
+        {score.attempted > 0 && (
           <div className="h-1 bg-slate-800">
-            <div className={`h-full ${(score.correct / total) >= 0.7 ? "bg-emerald-500" : "bg-rose-500"} transition-all duration-500`} style={{ width: `${scorePercent}%` }} />
+            <div className={`h-full ${scoreRatio >= 0.7 ? "bg-emerald-500" : "bg-rose-500"} transition-all duration-500`} style={{ width: `${scorePercent}%` }} />
           </div>
         )}
       </div>
