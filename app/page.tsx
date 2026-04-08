@@ -36,13 +36,33 @@ export default function HomePage() {
               MCQ Prep
             </span>
           </h1>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-6 leading-relaxed">
             Ace your exams with{" "}
             <span className="text-white font-semibold">{totalMCQs.toLocaleString()}+</span> questions
             across{" "}
             <span className="text-white font-semibold">{chapters.length} chapters</span> and{" "}
             <span className="text-white font-semibold">{totalLessons} lessons</span>.
           </p>
+
+          {/* Study Material Banner */}
+          <div className="flex justify-center mb-10">
+            <a
+              href="https://agentfactory.panaversity.org/docs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 hover:border-indigo-400/50 rounded-2xl px-6 py-4 transition-all duration-300 hover:scale-[1.02]"
+            >
+              <span className="text-2xl">📚</span>
+              <div className="text-left">
+                <div className="text-sm font-semibold text-indigo-300 group-hover:text-indigo-200 transition-colors">
+                  Study Material — Exam Preparation
+                </div>
+                <div className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors mt-0.5">
+                  agentfactory.panaversity.org/docs →
+                </div>
+              </div>
+            </a>
+          </div>
           <div className="flex justify-center gap-10">
             {[
               { value: chapters.length, label: "Chapters" },

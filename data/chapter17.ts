@@ -189,6 +189,66 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "P1 enables the complete debugging loop: Claude observes the actual error (curl -v shows 500), investigates the cause (tail -f shows 'DATABASE_URL undefined'), applies the fix (adds to .env), restarts the server, and verifies the fix (curl returns 200). Without Bash, Claude would say 'check your environment variables' and wait for you to relay the results. With Bash, Claude is an autonomous investigator."
+        },
+        {
+          id: 16,
+          question: "Scenario: You ask Claude to optimize your application's slow query. Without Bash access, it says 'The query at line 47 looks inefficient — try adding an index on user_id.' With Bash access, Claude takes a different approach. What does the Bash-enabled Claude do that directly demonstrates P1?",
+          options: {
+            A: "Claude writes a more detailed explanation of why indexes help",
+            B: "Claude runs `EXPLAIN ANALYZE` on the actual query, observes the actual execution plan and timing, identifies that the bottleneck is a full table scan on a 10-million-row table, creates the index, runs EXPLAIN ANALYZE again to confirm the query now uses the index and went from 8s to 50ms.",
+            C: "Claude reads the database documentation to find best practices",
+            D: "Claude asks you to run the query and paste the results back"
+          },
+          correct: "B",
+          explanation: "P1 (Bash as Key) transforms the interaction: without terminal, Claude speculates from static code ('looks inefficient'). With terminal, Claude executes the EXPLAIN ANALYZE command, observes actual execution data (8-second full table scan), applies the fix (CREATE INDEX), and verifies the improvement (50ms with index). The improvement isn't claimed — it's proven. This is the complete agency loop: observe → act → verify."
+        },
+        {
+          id: 17,
+          question: "Scenario: A team uses an AI assistant without terminal access for their CI/CD pipeline setup. Builds keep failing with 'npm: command not found.' The AI offers 5 different explanations over 3 sessions. With Bash access, what single command would have resolved this in the first session?",
+          options: {
+            A: "npm install --global",
+            B: "`which npm` or `node --version` — observing actual system state (whether npm exists and where) immediately distinguishes between 'npm not installed,' 'npm not in PATH,' or 'wrong Node version.' Ground truth replaces 5 hypotheses with one observation.",
+            C: "Read the CI configuration file",
+            D: "Check the npm documentation for PATH configuration"
+          },
+          correct: "B",
+          explanation: "Bash as ground truth eliminates hypothesis loops. `which npm` returns either the path (npm exists, PATH is correct) or nothing (not installed or not in PATH). `node --version` confirms Node is available. These single commands collapse multiple explanatory hypotheses into one observable fact. Without terminal access, the AI generates plausible explanations indefinitely; with terminal access, it observes the actual system state in one command."
+        },
+        {
+          id: 18,
+          question: "Scenario: You're deploying a microservice and the health check keeps failing. Claude (with Bash) runs `curl -v http://localhost:8080/health` and gets `Connection refused`. It then runs `ps aux | grep node` and sees no matching process. What principle is being applied and what does this demonstrate?",
+          options: {
+            A: "Principle 3 — Claude is verifying the service works",
+            B: "Principle 1 — Claude is using Bash to observe actual system state (connection refused = service not running, confirmed by process list showing no node process). Ground truth from commands eliminates guessing about what's wrong with the deployment.",
+            C: "Principle 5 — Claude is documenting the deployment state",
+            D: "Principle 6 — Claude is checking safety before proceeding"
+          },
+          correct: "B",
+          explanation: "P1 in action: `curl -v` doesn't lie — 'Connection refused' means no service is listening on that port. `ps aux | grep node` confirms no Node process is running. These two commands reveal the actual system state: the service never started. Without Bash, Claude would speculate about health check configuration, port settings, or firewall rules. With Bash, the diagnosis is objective: service not running → investigate startup logs → fix the issue."
+        },
+        {
+          id: 19,
+          question: "Scenario: An AI tool without terminal access helps a developer set up a Redis cache integration. It generates perfect-looking connection code. Three hours later, the developer reports Redis connections are timing out in production. What limitation of the code-generation-only approach caused this?",
+          options: {
+            A: "The AI generated incorrect Redis commands",
+            B: "Without Bash, the AI couldn't run `redis-cli ping` to confirm Redis is reachable, `redis-cli --stat` to check connection limits, or test the actual connection with the generated code. It generated syntactically correct code that may fail due to network, auth, or config issues only discoverable at runtime.",
+            C: "Redis requires specialized knowledge the AI lacks",
+            D: "The developer should have tested the code before production"
+          },
+          correct: "B",
+          explanation: "The code-generation gap: correct Redis client code can still fail if: Redis isn't running, the network route doesn't exist, authentication is wrong, connection limits are exceeded, or the URL format is wrong for the environment. A Bash-enabled agent would run `redis-cli -h $REDIS_URL ping` to confirm connectivity before writing integration code — ground truth from actual connection, not assumed connectivity from plausible code."
+        },
+        {
+          id: 20,
+          question: "Scenario: You want to give Claude the best conditions to apply Principle 1 effectively. Your colleague suggests 'just give Claude read-only file access — it doesn't need to run commands.' What is wrong with this suggestion?",
+          options: {
+            A: "Read-only access is dangerous",
+            B: "Read-only file access removes the execution capability that defines P1's value. Without running commands, Claude can only read static files — it cannot run tests to verify behavior, execute queries to check database state, make HTTP requests to observe API responses, or run processes to confirm they start. File reading is observation of code; Bash access is observation of running systems.",
+            C: "Claude doesn't need terminal access for most tasks",
+            D: "Read-only access is fine for debugging tasks"
+          },
+          correct: "B",
+          explanation: "P1's core value is execution, not just reading. 'Bash is the Key' because it enables: running tests (not just reading test files), making HTTP requests (not just reading API code), checking process state (not just reading configuration), observing command output (not just reading log files). Read-only file access gives Claude source code observation; Bash access gives Claude system state observation. The former is static; the latter is ground truth."
         }
       ]
     },
@@ -375,6 +435,66 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "P2 converts prose to executable specifications. The user story says 'reset password' — the tests encode: what endpoint, what validation rules, token expiry duration, hashing algorithm, session invalidation, and error responses. Each test is one unambiguous requirement. Claude now has precise targets instead of a fuzzy adjective ('reset'). The tests are both the spec (this is what we need) and the acceptance criterion (this proves we have it)."
+        },
+        {
+          id: 16,
+          question: "Scenario: You ask Claude to 'implement the UserService to match the interface.' Claude implements it, but uses different parameter names and return types from what your codebase expects, causing type errors throughout. What P2 practice would have given Claude an unambiguous target?",
+          options: {
+            A: "A longer prose description of the UserService",
+            B: "Using `@src/types/UserService.ts` — the @file reference grounds Claude's implementation in the actual TypeScript interface definition. Claude cannot choose different parameter names or return types when working against the exact interface file.",
+            C: "Asking Claude to read the documentation",
+            D: "Providing a code review checklist"
+          },
+          correct: "B",
+          explanation: "P2 @file references eliminate the interpretation gap. When you say 'implement UserService' without a reference, Claude invents its own interpretation of what the interface should look like. When you say 'implement the interface defined in @src/types/UserService.ts', Claude must satisfy the exact TypeScript types, parameter names, and return types in that file. The file IS the spec — it cannot be misinterpreted."
+        },
+        {
+          id: 17,
+          question: "Scenario: Your team is building an SDK for an internal API. Two different engineers give Claude the task 'add authentication to the API client.' One provides a test file showing the expected auth behavior; the other provides a three-paragraph prose description. Which approach produces a more reliable implementation and why?",
+          options: {
+            A: "The prose description — more detail means better output",
+            B: "The test file — it encodes the exact expected behavior as executable, verifiable code. Claude knows precisely what 'done' means: make these tests pass. The prose description allows multiple valid interpretations of 'authentication.'",
+            C: "Both approaches are equally reliable",
+            D: "Neither — Claude needs the actual API documentation"
+          },
+          correct: "B",
+          explanation: "Tests as specs are superior to prose for implementation tasks because they encode precision and verifiability simultaneously. A test `it('includes Authorization header with Bearer token on each request')` is unambiguous — one implementation is correct (include the header), infinite implementations satisfy the prose ('add authentication'). The test is both specification and acceptance criterion. Pass the tests = done. Meet the prose criteria = subjective judgment."
+        },
+        {
+          id: 18,
+          question: "Scenario: You tell Claude 'the CSV export should handle special characters.' Claude adds UTF-8 encoding. But your stakeholders later complain about Excel not opening the file correctly because it needs a BOM (Byte Order Mark). What P2 practice would have specified this requirement precisely?",
+          options: {
+            A: "A longer description of CSV requirements",
+            B: "A test: `expect(csvContent.slice(0, 3)).toEqual('\\uFEFF...')` — specifying the exact bytes that must appear at the start of the file. This makes the BOM requirement verifiable and unambiguous, rather than buried in the ambiguous phrase 'handle special characters.'",
+            C: "Reference to CSV specification documents",
+            D: "A comment in the code explaining what 'special characters' means"
+          },
+          correct: "B",
+          explanation: "P2 converts vague requirements to precise specifications. 'Handle special characters' is a vague requirement that Claude interpreted as 'use UTF-8 encoding' — a reasonable interpretation that still fails in practice. The precise requirement: 'CSV files must begin with a UTF-8 BOM (bytes: 0xEF, 0xBB, 0xBF) for Excel compatibility.' As a test: `expect(buffer.slice(0,3)).toEqual(Buffer.from([0xEF, 0xBB, 0xBF]))`. This is unambiguous and verifiable."
+        },
+        {
+          id: 19,
+          question: "Scenario: A team writes comprehensive tests for their authentication module. Claude implements authentication against these tests, and all tests pass. Six months later, a security audit finds the implementation stores JWT secrets in environment variables but the tests never checked secret storage. What P2 lesson does this demonstrate?",
+          options: {
+            A: "Tests as specs don't work for security requirements",
+            B: "Tests as specs are only as complete as the tests themselves. If the test suite doesn't encode a requirement (secret storage in environment variables, not hardcoded), that requirement doesn't exist for the AI. Complete P2 practice requires comprehensive tests that encode ALL requirements — including security constraints.",
+            C: "Security requirements should be documented separately, not as tests",
+            D: "The implementation was correct — environment variable storage is secure"
+          },
+          correct: "B",
+          explanation: "P2's completeness principle: tests are authoritative specs — missing tests mean missing requirements. If no test checks 'secrets never hardcoded in source code,' Claude won't enforce that constraint. Complete test coverage for P2 includes: happy paths, error handling, security constraints, and performance thresholds. The security audit finding reveals a gap in the test-as-spec: `it('uses environment variables for JWT_SECRET, never hardcoded strings')` should have existed."
+        },
+        {
+          id: 20,
+          question: "Scenario: Claude is implementing a sorting algorithm. You provide a TypeScript type `type SortFn<T> = (arr: T[], compare: (a: T, b: T) => number) => T[]` and a test: `expect(sort([3,1,2], (a,b) => a-b)).toEqual([1,2,3])`. The implementation passes the test. Your colleague says 'but we also need stability — equal elements should maintain original order.' What P2 practice was missing?",
+          options: {
+            A: "The TypeScript type was insufficient — it should be more detailed",
+            B: "A test encoding the stability requirement: `expect(sort([{v:1,i:0},{v:1,i:1}], (a,b)=>a.v-b.v)).toEqual([{v:1,i:0},{v:1,i:1}])` — using index to verify original order is preserved for equal elements. Without this test, 'sort correctly' and 'sort stably' are indistinguishable.",
+            C: "You should have written prose documentation about stability",
+            D: "Stability is an implementation detail, not a specification concern"
+          },
+          correct: "B",
+          explanation: "Tests as specs must encode every behavioral requirement, including subtle ones like stability. A sort function passes `[1,2,3]` output for `[3,1,2]` input regardless of stability. Stability is only observable when equal elements exist and their original order matters. Without a test specifically for stability, this requirement is invisible to Claude. P2 completeness: every requirement you care about must be encoded as a failing test that the correct implementation makes pass."
         }
       ]
     },
@@ -561,6 +681,66 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "Verification hierarchy applied to database migrations: 1) Syntax — migration file parses correctly (Claude already did this). 2) Unit — query the database directly to verify the migration had the expected effect (row counts, column types, constraints). 3) Integration — run the application test suite to verify existing code works with the new schema. 4) Manual — test the feature end-to-end in the running application. Each level catches different failures."
+        },
+        {
+          id: 16,
+          question: "Scenario: Claude adds a new function `sanitizeInput()` and says 'Done! The function is implemented.' You run the test suite — all 47 tests pass. Three days later, a user submits malformed input that crashes the application. What does this situation reveal about the verification hierarchy?",
+          options: {
+            A: "The tests were wrong and need to be rewritten",
+            B: "The existing tests (syntax + unit level) verified what existed, but didn't include a test for the specific malformed input case. P3 requires verification against the complete requirement set — if malformed input handling is a requirement, a test for it must exist. Test gaps produce coverage gaps.",
+            C: "Verification was complete — unexpected inputs cannot be predicted",
+            D: "Claude should have written more comprehensive tests"
+          },
+          correct: "B",
+          explanation: "P3 verification is only as comprehensive as the test suite. 47 passing tests prove 47 things — not all possible behaviors. The missing test (what happens with malformed input?) means that requirement wasn't verified at any level. P3 applied completely: write the failing test for malformed input FIRST, then implement. Tests as executable spec + verification: passing the 'malformed input test' provides evidence that the specific requirement was met. Missing the test = requirement was never specified or verified."
+        },
+        {
+          id: 17,
+          question: "Scenario: Claude fixes an authentication bug. You run `npm test` — all tests pass. But you notice the fix uses a synchronous bcrypt comparison in an async handler. This will block the event loop under load. Is this a P3 failure, and at what verification level was it missed?",
+          options: {
+            A: "Not a P3 failure — tests passed, so verification was complete",
+            B: "P3 failure at the performance/integration level: unit tests verified functional correctness (right password accepted, wrong rejected) but didn't catch the async/blocking issue. A load test or async-specific unit test (`expect(compareSync).not.toHaveBeenCalled()`) would have caught this at a lower level before staging.",
+            C: "This is a code review issue, not a verification issue",
+            D: "All tests passing means the implementation is correct"
+          },
+          correct: "B",
+          explanation: "Verification hierarchy has multiple levels for good reason: unit tests catch functional bugs, load tests catch performance bugs. `bcrypt.compareSync` passing a functional test doesn't reveal the event-loop-blocking behavior — that requires load testing or async verification. P3 complete practice: after fixing auth, run a quick load test or verify the async call with `expect(compare).toHaveBeenCalledWith(...)` (async method). 'Tests pass' is syntactic and unit level verification; async correctness requires its own verification step."
+        },
+        {
+          id: 18,
+          question: "Scenario: You apply the 2-Minute Audit after Claude completes a database schema migration: git diff shows 3 new files (migration, rollback, seed data). Claude's summary says 'Migration complete, added 2 files.' There's a discrepancy. What does P3 require you to do?",
+          options: {
+            A: "Trust Claude's summary — it worked on the files directly",
+            B: "Investigate all 3 files in the diff (not just the 2 mentioned). The 2-Minute Audit specifically exists to catch this divergence: diff is ground truth, AI summary is the AI's belief. Investigate the 3rd unreported file — it may be an intentional addition (seed data Claude forgot to mention) or an unintended modification.",
+            C: "Accept the discrepancy as normal — AI summaries are approximate",
+            D: "Ask Claude to re-check what files it changed"
+          },
+          correct: "B",
+          explanation: "The 2-Minute Audit: when git diff (ground truth) and AI summary (AI's belief) diverge, investigate. Don't accept the summary. The 3rd file (seed data) could be: intentional and correct (Claude forgot to mention it), unintentionally created (a bug), or a modification to an existing file Claude shouldn't have touched. Review each divergence before accepting the task as complete. 'Close enough' summaries lead to production surprises."
+        },
+        {
+          id: 19,
+          question: "Scenario: You're applying the verification loop to a complex refactoring. After Step 1 (extract shared utilities), tests pass. After Step 2 (update imports), 3 tests fail. Claude immediately starts Step 3 without reading the failure messages. What P3 (and which other principle) violation is this?",
+          options: {
+            A: "Only P3 is violated — Claude should have run tests again",
+            B: "P3 (Verification): failed tests must be addressed before proceeding, not ignored. P7 (Observability): test failure output is critical information — it tells you WHAT failed and WHY. Running the next step without reading failure messages means compounding unknown failures. The verification loop requires: act → verify → read results → only proceed if passing.",
+            C: "P4 is violated — Claude should have decomposed better",
+            D: "This is acceptable — test failures during refactoring are expected"
+          },
+          correct: "B",
+          explanation: "Two principle violations: P3 — the verification loop requires observing results before proceeding. Skipping failed test analysis means building Step 3 on a broken Step 2 foundation. P7 — test failure messages are observations that inform the next action. Ignoring them means acting without information. The correct response to Step 2 failures: READ the failure messages (P7 observability), DIAGNOSE the cause, FIX Step 2, VERIFY Step 2 passes, THEN proceed to Step 3."
+        },
+        {
+          id: 20,
+          question: "Scenario: Claude says 'I've implemented the email sending feature.' You ask for verification evidence. Claude responds: 'I reviewed the implementation carefully and the logic looks correct.' According to P3's verification hierarchy, what level is this and what's the minimum acceptable verification?",
+          options: {
+            A: "This is level 3 (integration) — Claude reviewed it comprehensively",
+            B: "This is level 0 (self-review / looks correct) — the weakest form. Minimum acceptable: run the unit tests for the email function (level 2). Better: integration test with a mock email service (level 3). For production: verify an email actually arrives in a test inbox (level 4). 'Looks correct' is an opinion, not evidence.",
+            C: "Code review by Claude is equivalent to unit testing",
+            D: "Self-review is sufficient for simple features like email sending"
+          },
+          correct: "B",
+          explanation: "P3 verification hierarchy: Level 0 (self-review / looks correct) = no evidence. Level 1 (syntax) = compiles. Level 2 (unit) = functions work in isolation. Level 3 (integration) = components work together. Level 4 (manual/e2e) = real behavior. 'Reviewed and looks correct' is level 0 — an opinion. Unit tests provide minimum evidence that the email function produces correct output with mock data. Integration tests provide evidence it connects to the email service. Only level 4 provides evidence an email actually arrives."
         }
       ]
     },
@@ -747,6 +927,66 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "P4 decomposition by risk: schema changes (adding a column) are fast and reversible. Migrating 2M rows is slow, resource-intensive, and may fail partway through. Bundling them means if the migration fails, you're left with a half-migrated state and a schema change you can't easily revert. Separating them: after Step 2a the schema is ready (verified safe). Step 2b can be monitored, paused, or rolled back independently. Different risk profiles = different steps."
+        },
+        {
+          id: 16,
+          question: "Scenario: A developer has been working on a feature for 3 weeks on a local branch. They finally merge it to main — the merge commit contains 2,847 changed lines across 45 files. The day after merging, a production bug is traced to this feature. The lead developer says 'we need to revert it.' What P4 problem does this situation reveal?",
+          options: {
+            A: "The developer should have used a different branching strategy",
+            B: "P4 was violated: no atomic commits within the feature branch. A single mega-commit (3 weeks of work) makes surgical reversion impossible — the entire 3-week effort must be reverted to fix the bug. Small commits within the branch would allow reverting just the buggy change while keeping the rest of the feature",
+            C: "The bug should have been caught in code review before merging",
+            D: "The developer should have made the branch smaller"
+          },
+          correct: "B",
+          explanation: "P4: Small, Reversible Decomposition requires atomic commits WITHIN feature branches, not just the branch itself. 3 weeks of changes in one commit means: to revert the bug, you revert everything. With atomic commits (e.g., 15-20 meaningful commits over 3 weeks), the team could identify the specific commit introducing the bug via `git bisect` and revert only that change — 10 lines instead of 2,847. Branch strategy is secondary; commit granularity is primary."
+        },
+        {
+          id: 17,
+          question: "Scenario: Claude is about to refactor a core authentication module that 12 other services depend on. Without using Plan Mode, Claude begins making changes directly. After 30 minutes, you notice authentication is broken across all services, and the changes span 8 files with no clear rollback path. What P4 practice should have been followed?",
+          options: {
+            A: "Claude should have asked for permission before starting",
+            B: "Plan Mode first: Claude should have outlined the decomposed approach (which files in what order, each as a separate verified step) before executing. High-risk refactors require explicit decomposition into reviewable, reversible stages before any code changes",
+            C: "Claude should have backed up the files manually",
+            D: "The refactor was too complex for an AI to handle"
+          },
+          correct: "B",
+          explanation: "P4 + Plan Mode: before touching a high-dependency module, decompose the work explicitly. Plan Mode forces articulation: 'Step 1: Update AuthService interface (1 file, 20 lines) → verify all tests pass. Step 2: Update ServiceA to new interface → verify. Step 3: Update ServiceB...' Each step is small, independently verifiable, and creates a clear rollback point. Jumping straight to execution without this plan turns a manageable refactor into an entangled mess."
+        },
+        {
+          id: 18,
+          question: "Scenario: You ask Claude to 'add user authentication to the app.' Claude responds: 'I'll set up the database schema, implement the auth library, build the login/register UI, add middleware, write tests, and update documentation — all in this session.' According to P4, what should Claude (or you) do instead?",
+          options: {
+            A: "Proceed as Claude described — completing everything in one session is efficient",
+            B: "Decompose into separately verified phases: Phase 1 (schema + migration, verify DB), Phase 2 (auth library, verify with unit tests), Phase 3 (middleware, verify with integration tests), Phase 4 (UI, verify with E2E tests), Phase 5 (documentation). Each phase completes, is verified, and committed before the next begins",
+            C: "Ask Claude to write a detailed specification before starting",
+            D: "Split the work between multiple AI agents"
+          },
+          correct: "B",
+          explanation: "P4 applied to multi-phase features: 'authentication' is not one step — it's 5+ distinct phases with different risk profiles. Doing all at once means: if Phase 3 (middleware) breaks, you're debugging in the context of 500 uncommitted changes. Phase-by-phase: after Phase 2, auth library is verified and committed. Phase 3 is added to a known-good base. Each phase's problems are isolated to that phase. This is why P4 says: small steps, each verifiable."
+        },
+        {
+          id: 19,
+          question: "Scenario: Claude implements Step 3 of a decomposed plan: 'Update the payment API to use the new billing library.' After committing, you run integration tests — 3 tests fail in ways that suggest the new billing library has a subtle compatibility issue. What does proper P4 execution enable you to do?",
+          options: {
+            A: "Nothing — you must debug forward from the current state",
+            B: "`git revert` the Step 3 commit (which is isolated and atomic), restoring the known-good Step 2 state. You can now investigate the billing library compatibility in isolation without affecting other in-progress work, and attempt Step 3 again with a fix — or defer it while continuing other phases",
+            C: "Delete the billing library and use the old one permanently",
+            D: "Roll back the entire feature branch to the beginning"
+          },
+          correct: "B",
+          explanation: "This is P4's core payoff: when each step is a separate atomic commit, reverting it is surgical. `git revert HEAD` undoes exactly Step 3 — nothing more, nothing less. You're back to the verified Step 2 state in seconds. Then investigate the billing library issue in a branch, fix it, re-run Step 3. Without P4: if Steps 2, 3, and 4 were one commit, reverting 'just the billing library change' requires manually disentangling hundreds of lines."
+        },
+        {
+          id: 20,
+          question: "Scenario: The P4 decomposition plan includes: 'Step 4: Run data migration to populate new columns from legacy table (DROP old table after completion).' According to P4's reversibility principle, what flag should you raise before executing Step 4?",
+          options: {
+            A: "No concern — data migrations are normal operations",
+            B: "The DROP command makes Step 4 irreversible. P4 requires identifying irreversible steps and adding explicit safety measures: backup the table before dropping (pg_dump or RENAME instead of DROP), verify migration success completely before the DROP, and get explicit confirmation. Or separate: Step 4a = migrate + verify, Step 4b = drop (with rollback window). The irreversible part deserves its own step",
+            C: "The data migration should be skipped to maintain reversibility",
+            D: "Run Step 4 in a transaction so it can be rolled back"
+          },
+          correct: "B",
+          explanation: "P4 reversibility doesn't mean every step MUST be reversible — it means you must explicitly identify irreversible steps and protect them. DROP table is permanent. P4's response: (1) backup first (RENAME old_table to old_table_backup or pg_dump), (2) separate the irreversible action into its own step with explicit verification gate, (3) document the point-of-no-return clearly. P4 applied: 'Step 4a: migrate data, verify row counts match, spot-check records → commit. Step 4b: (24-hour delay) drop backup table → commit.' The delay creates a rollback window."
         }
       ]
     },
@@ -933,6 +1173,66 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "P5 requires maintaining context files as the project evolves. CLAUDE.md at project start captures initial state, but every architectural decision, constraint change, or convention update must be reflected in the file. Stale CLAUDE.md is dangerous: Claude reads 'use caching for performance' and suggests Redis — the file doesn't say 'Redis rejected on Day 3 due to infrastructure constraints; use in-memory cache instead.' Update CLAUDE.md as you go, or it becomes a liability."
+        },
+        {
+          id: 16,
+          question: "Scenario: You spend 2 hours in a Claude Code session establishing that the project uses a custom authentication library (not passport.js), prefers PostgreSQL over SQLite, and follows a specific error handling pattern. You close the session. Next day, a new session begins — Claude immediately suggests passport.js for auth, SQLite for a new microservice, and a different error pattern. What P5 practice was missing?",
+          options: {
+            A: "Claude should have remembered from the previous session automatically",
+            B: "The session's key decisions and conventions should have been written to CLAUDE.md during the session: '- Auth: use CustomAuthLib, never passport.js. - DB: PostgreSQL only, no SQLite. - Errors: use AppError class with error codes.' P5: persist every meaningful decision to files because context does not survive session boundaries",
+            C: "You should have taken notes yourself and pasted them at the start of each session",
+            D: "The session was too short to establish reliable context"
+          },
+          correct: "B",
+          explanation: "P5's fundamental insight: Claude has no memory between sessions. Everything in a session that affects future work must be persisted to files. CLAUDE.md is the primary vehicle for project conventions and architectural decisions. The 2 hours establishing conventions = investment lost if not written down. With CLAUDE.md updated during the session, the next session starts informed: Claude reads 'use CustomAuthLib' and never suggests passport.js. P5 converts ephemeral session knowledge into durable project knowledge."
+        },
+        {
+          id: 17,
+          question: "Scenario: Three months into a project, the team debates switching the message queue from RabbitMQ to Kafka. A developer asks: 'Why did we even choose RabbitMQ originally?' Nobody remembers. Hours are lost reconstructing the reasoning. According to P5, what should have happened when RabbitMQ was initially chosen?",
+          options: {
+            A: "The decision should have been committed to git with a detailed commit message",
+            B: "An ADR (Architectural Decision Record) file should have been created: ADR-003-message-queue.md documenting the decision, the alternatives considered (Kafka, SQS, RabbitMQ), the criteria (latency, team expertise, cost), and the reasoning. P5 persists decisions with their context so future conversations — human or AI — can understand why",
+            C: "The lead architect should have remembered and documented it in their own notes",
+            D: "A wiki page should have been updated with the decision"
+          },
+          correct: "B",
+          explanation: "P5's ADR practice: decisions decay without documentation. ADR-003 structure: Context (what we needed), Decision (chose RabbitMQ), Alternatives (Kafka: higher throughput but steep learning curve; SQS: managed but vendor lock-in), Consequences (team needs RabbitMQ expertise). Three months later: the team reads ADR-003, understands why RabbitMQ was chosen (team expertise + simpler ops), and can make an informed switch decision vs. the original criteria. P5 saves the 'why' so future work builds on informed foundations."
+        },
+        {
+          id: 18,
+          question: "Scenario: Claude is implementing a 12-step database migration plan. At Step 7, the session hits its context limit and must end. You start a new session next day. You say 'continue the database migration.' Claude has no context of which steps are done. According to P5, what should Claude have been doing throughout the session?",
+          options: {
+            A: "Claude should have worked faster to complete all 12 steps in one session",
+            B: "Maintaining a progress checklist file (migration-progress.md): '- [x] Step 1: Create tables... - [x] Step 2: Add indexes... - [ ] Step 8: Migrate foreign keys...' P5: for multi-step tasks, write progress to files so that any new session can immediately resume from where the previous one stopped",
+            C: "The user should have written down the progress manually",
+            D: "Use a shorter task that fits within one context window"
+          },
+          correct: "B",
+          explanation: "P5 for long tasks: context windows have limits; long tasks don't. The solution is externalizing progress into files. A `migration-progress.md` with checkboxes means: new session, new context, but the file shows exactly where you are. Claude reads: 'Steps 1-6 complete (see checked items), continuing from Step 7: Migrate constraint data.' This is not about backup — it's about making long-running work session-agnostic. P5 makes tasks outlast their sessions."
+        },
+        {
+          id: 19,
+          question: "Scenario: During a debugging session, Claude discovers three important things: (1) the test database is at localhost:5433 (not 5432), (2) the main branch has a known broken test that's being ignored, and (3) there's a commented-out code block that must never be deleted (it documents a resolved security issue). Where should each of these be persisted according to P5?",
+          options: {
+            A: "All three should go in CLAUDE.md",
+            B: "Context-appropriate persistence: (1) DB port → CLAUDE.md (project config/conventions). (2) Broken test → CLAUDE.md (known issue + ignore reason). (3) Never-delete comment → CLAUDE.md OR a comment in the code itself (closest to the code). P5: different facts have different natural homes — CLAUDE.md for project context, inline comments for code-level context. All three should be written down before the session ends",
+            C: "None of these need documentation — they can be re-discovered",
+            D: "All three should go in a separate NOTES.md file"
+          },
+          correct: "B",
+          explanation: "P5 context-appropriate persistence: different facts belong in different places. The port (5433) is a project configuration fact → CLAUDE.md's environment section. The broken test → CLAUDE.md's known issues section, with the skip reason (prevents wasted debugging). The never-delete comment → either add to the comment itself or CLAUDE.md. The principle: all three facts, if not persisted, will be re-discovered at cost. P5 eliminates re-discovery by writing as you learn."
+        },
+        {
+          id: 20,
+          question: "Scenario: You use Claude Code for 2 hours on a complex refactoring task. At the end, you're not done — you need to continue tomorrow. Claude says: 'We've made good progress.' According to P5's session handoff practice, what should happen before closing the session?",
+          options: {
+            A: "Save the chat log and paste it into the next session's context",
+            B: "Write a SESSION-HANDOFF.md (or update CLAUDE.md): current state summary, what was changed and why, what remains to be done (with specific next steps), any decisions made, and any blockers encountered. P5: end-of-session notes convert session memory into file memory, making the next session immediately productive without context reconstruction",
+            C: "Ask Claude to summarize the session verbally so you can remember",
+            D: "Start fresh tomorrow — re-reading files is more reliable than notes"
+          },
+          correct: "B",
+          explanation: "P5 session handoff: 'good progress' lives in the session context, which dies when you close it. SESSION-HANDOFF.md template: '## State: Auth module refactored (files A, B, C). ## Remaining: D, E still need updating. ## Decisions: Chose approach X over Y because Z. ## Next step: Start with file D, function processUser() — it calls the old interface.' Tomorrow's session: read SESSION-HANDOFF.md first, start immediately from the exact stopping point. Without it: 20+ minutes of re-orientation. P5 multiplies the value of today's work into tomorrow's session."
         }
       ]
     },
@@ -1119,6 +1419,66 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "Real-time observability enables real-time intervention. You saw the wrong database being accessed — Ctrl+C stops Claude before any writes can happen (P7: Real-Time Observation = intervention window). Assess damage: git diff confirms no files changed, production DB logs confirm only reads occurred. Then restart with the correct environment variables pointing to staging. The lesson: watching real-time is what enables Ctrl+C safety."
+        },
+        {
+          id: 16,
+          question: "Scenario: Claude is mid-way through implementing a 200-line database migration when you notice it's modifying a table you didn't intend to change. You have no permission controls configured. What is your only option, and what P6 safeguard was missing?",
+          options: {
+            A: "Wait for Claude to finish and then revert the migration",
+            B: "Press Ctrl+C immediately (emergency stop). Missing P6 safeguards: Permission Controls (requiring approval before modifying database schemas) and Technical Limits (whitelisting which tables Claude can modify). With these, Claude would have asked permission before touching the unintended table.",
+            C: "Accept the change — it may be necessary",
+            D: "Ask Claude to undo what it already did"
+          },
+          correct: "B",
+          explanation: "P6 Defense in Depth: Layer 1 (Technical Limits) would have whitelisted only the intended tables — any modification to unlisted tables is blocked. Layer 2 (Permission Controls) would have required your approval for schema changes. Without these layers, Ctrl+C is your only intervention option — and it may be too late if the modification already ran. The safety hierarchy exists specifically to prevent 'I had to use Ctrl+C as my last resort' situations."
+        },
+        {
+          id: 17,
+          question: "Scenario: You're starting a new project and want to use Claude Code autonomously. Your tech lead suggests starting with full autonomy to maximize speed. According to Trust Gradualism, why is this dangerous and what should you do instead?",
+          options: {
+            A: "Full autonomy is fine if the codebase is small",
+            B: "Trust Gradualism says start at Phase 1 (Observation Only): Claude reads and explains, you apply changes manually. Full autonomy on an unfamiliar tool and codebase maximizes both risk and trust simultaneously — you've granted maximum permissions without any calibration of Claude's behavior in your specific context. Build trust incrementally.",
+            C: "Start at Phase 3 (Selective Autonomy) — Phase 1 is too slow",
+            D: "Full autonomy is fine if you use a recent Claude model version"
+          },
+          correct: "B",
+          explanation: "Trust Gradualism exists because autonomy must be calibrated to earned trust. Full autonomy from day 1 means: Claude can make irreversible changes before you understand its behavior, you can't catch unexpected patterns before they cause damage, and you have no safety baseline. Phase 1 (Observation Only) costs speed but builds: understanding of Claude's behavior in YOUR codebase, awareness of edge cases specific to your project, and a calibrated mental model before granting write access."
+        },
+        {
+          id: 18,
+          question: "Scenario: Claude generates code that includes `const API_KEY = 'sk-prod-abc123'` hardcoded in a source file. You catch it before committing. What P6 controls would have prevented this from reaching the repository?",
+          options: {
+            A: "Code review — always catch it manually",
+            B: "Layer 1 (Technical Limits): a pre-commit hook scanning for secret patterns (`sk-prod-`, API keys, passwords) that rejects commits containing credentials. Layer 4 (Process Controls): a diff review step before committing where you verify no secrets are introduced. Layer 2 (Permission Controls): requiring approval for any new environment variable or string that looks like a credential.",
+            C: "Tell Claude to not include secrets in the prompt",
+            D: "Use a different AI model that doesn't generate secrets"
+          },
+          correct: "B",
+          explanation: "P6 defense in depth for secret prevention: Layer 1 (Technical Limits) — pre-commit hooks with secret scanning (`detect-secrets`, `git-secrets`) automatically reject commits with credential patterns, even if Claude generated them. Layer 4 (Process Controls) — diff review catches secrets before commit. The point: relying solely on human vigilance ('I'll notice secrets') is a single point of failure. Multiple automated layers (secret scanning hooks) catch what humans miss."
+        },
+        {
+          id: 19,
+          question: "Scenario: You're working with Claude on a production database. Claude asks: 'Should I proceed with `UPDATE users SET role = \"admin\" WHERE email LIKE \"%@company.com\"`?' According to P6, what specific checks should you perform before approving?",
+          options: {
+            A: "Approve if the SQL looks syntactically correct",
+            B: "Run `SELECT COUNT(*) FROM users WHERE email LIKE '%@company.com'` to see how many rows will be affected, verify the LIKE pattern is correct (are there non-company emails that match?), confirm this is the intended scope, and ensure a rollback backup exists. The Safety Mantra applies: understand the blast radius before approving.",
+            C: "Approve — the LIKE pattern looks correct",
+            D: "Reject all UPDATE statements — never allow mass updates"
+          },
+          correct: "B",
+          explanation: "P6 required checks before destructive SQL: 1) See the blast radius — SELECT COUNT(*) shows how many rows are affected (5 or 50,000?). 2) Verify the filter — `LIKE '%@company.com'` might match unexpected patterns. 3) Confirm scope — is every matching user supposed to become admin? 4) Backup confirmation — can you revert if wrong? These checks are the REQUIRED section of the Guardrail Prompt Template. 'Looks correct' is not sufficient; ground truth from SELECT COUNT is required."
+        },
+        {
+          id: 20,
+          question: "Scenario: After 3 months of productive work with Claude, you realize you've been in Phase 2 (Supervised Autonomy — approving every diff). Tests always pass, diffs are always reasonable, and no issues have occurred. Your colleague says 'move to Phase 3 now.' How do you decide if Phase 3 is appropriate?",
+          options: {
+            A: "Always stay in Phase 2 — maximum safety requires maximum oversight",
+            B: "Trust Gradualism: 3 months of Phase 2 with consistent reliability (tests always pass, reasonable diffs, no incidents) provides the evidence needed for Phase 3. Transition to Selective Autonomy: auto-approve tests, linting, and routine refactors within established patterns; retain approval for novel changes, new files, and deployments.",
+            C: "Move to Phase 4 (Calibrated Autonomy) immediately — you've earned it",
+            D: "Stay in Phase 2 until you've worked together for 12 months"
+          },
+          correct: "B",
+          explanation: "Trust Gradualism transition criteria: demonstrated reliability over time + understanding of Claude's behavior + calibrated mental model = readiness for next phase. 3 months of consistent reliability satisfies Phase 2 → 3 criteria. Phase 3 (Selective Autonomy): auto-approve safe operations (tests, linting, established patterns) while maintaining approval gates for novel or higher-risk operations (new files, external integrations, deployments). The phases don't have fixed durations — they have evidence thresholds."
         }
       ]
     },
@@ -1305,6 +1665,66 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "Three observability patterns combined: 1) Explain Before Executing — Claude outlines the pipeline architecture (you catch design issues before any code). 2) Checkpoint After Major Steps — Claude confirms 'Ingestion stage complete: 10,000 records loaded, schema validated' and awaits approval before transformation stage (intervention points). 3) Summary After Completion — files modified, record counts, test results. Together: you have full visibility at every stage of a complex multi-step task."
+        },
+        {
+          id: 16,
+          question: "Scenario: You ask Claude to refactor a large codebase — 'update all API calls to use the new SDK.' Twenty minutes pass. Claude is running commands in the background. You have no idea what's happening, whether it's making progress, or what files it's modifying. This is a P7 failure. What observability instruction should you have given at the start?",
+          options: {
+            A: "Tell Claude to work faster",
+            B: "Establish an observability contract: 'Before each file group you modify, tell me: what files, what changes. After each group, confirm what changed. If you hit something unexpected, stop and ask.' P7: observability must be set up proactively — you can't add it retroactively to an already-running session without disrupting it",
+            C: "Use a progress bar tool",
+            D: "Watch the filesystem for changes yourself"
+          },
+          correct: "B",
+          explanation: "P7 proactive observability: the time to establish transparency is before work begins, not after. 'Explain before executing' + 'checkpoint after batches' contracts prevent the black-box scenario. Claude announces: 'I'll now update api/users.ts, api/posts.ts (group 1 of 5)...' → you see what's happening. After: 'Group 1 done: 3 files modified, all tests passing.' You can intervene between groups. Without this contract, the 20-minute silence leaves you unable to verify, redirect, or stop at the right point."
+        },
+        {
+          id: 17,
+          question: "Scenario: Claude completes a task: 'I've updated the authentication system as requested.' You ask 'what exactly changed?' Claude responds with a vague summary. You run `git diff` and find 23 files modified, some in areas you didn't expect (config files, environment variables, a deployment script). What P7 practice failure occurred?",
+          options: {
+            A: "Claude made too many changes",
+            B: "The post-task Summary After Completion was missing or inadequate. P7 requires Claude to proactively provide: specific files changed, nature of each change, any unexpected discoveries, and test results — not wait to be asked. The deployment script change especially should have been surfaced as a checkpoint, not buried in the final diff",
+            C: "Claude should have asked permission for each file",
+            D: "You should have run `git diff` before asking Claude to summarize"
+          },
+          correct: "B",
+          explanation: "P7 Summary After Completion: after any significant task, Claude should proactively enumerate changes — not require the human to interrogate `git diff`. Template: 'Changed: [file list]. In auth/: updated JWT expiry logic (per request). In config/: updated token TTL values (required by auth change). In deploy/: updated env variable names to match new config.' The deploy script change is a scope expansion — P7 requires surfacing this at discovery time ('I found deploy/env.sh also needs updating — should I?'), not burying it in a silent diff."
+        },
+        {
+          id: 18,
+          question: "Scenario: Claude is executing Step 4 of a 10-step plan. At Step 4, it announces: 'Updating database configuration — this will reset all connection pools.' You realize this will break 3 active background jobs running in production. You need to stop Claude immediately. What P7-aligned capability should be available?",
+          options: {
+            A: "Close the terminal and reopen it",
+            B: "Claude's Explain Before Executing practice means Step 4 was announced before execution — you can now intervene with Ctrl+C or a 'STOP — do not execute this step' message before the destructive action runs. P7's interrupt capability requires that high-impact steps are announced with enough lead time for human intervention",
+            C: "Let Claude proceed — it probably won't actually break the jobs",
+            D: "Claude should have known about the background jobs without being told"
+          },
+          correct: "B",
+          explanation: "P7 interrupt capability: 'Explain Before Executing' is not just informational — it creates intervention windows. 'I'm about to reset all connection pools' gives you time to say 'STOP — there are active jobs.' Without P7: Claude acts, then announces ('I reset the connection pools'), and you discover the broken jobs after the fact. With P7: announcement → intervention window → you stop it → you provide context ('3 active jobs, schedule this for the maintenance window') → Claude adjusts plan. The announcement is the interrupt hook."
+        },
+        {
+          id: 19,
+          question: "Scenario: You're about to have Claude autonomously manage a 2-hour data processing pipeline (reading from S3, transforming records, writing to multiple databases). You want maximum visibility while not micromanaging. What P7 observability setup balances visibility with autonomy?",
+          options: {
+            A: "Tell Claude to complete the full pipeline and give a final report",
+            B: "Structured visibility contract: (1) Announce each stage before starting (S3 read, transform, DB writes). (2) Progress checkpoints every 10,000 records with counts and sample outputs. (3) Immediate escalation if error rate exceeds 1% or unexpected schema encountered. (4) Final summary with record counts, file list, error summary. This gives insight at key moments without requiring approval for every record",
+            C: "Watch the terminal output yourself for the full 2 hours",
+            D: "Enable verbose logging and review the log file after completion"
+          },
+          correct: "B",
+          explanation: "P7 for long autonomous tasks: the goal is insight at key decision points without micromanagement. Stage announcements give architectural visibility. Progress checkpoints (every 10K records) confirm progress without requiring approval. Error thresholds create automatic escalation for exceptions — Claude runs autonomously until something goes wrong, then surfaces it immediately (not at the end). The final summary closes the loop. This is P7 applied to agentic work: structured visibility, not surveillance."
+        },
+        {
+          id: 20,
+          question: "Scenario: After Claude completes a 'clean up technical debt' session, you ask your team lead to review the changes. They ask: 'What was the scope? What did it change? Was anything risky?' You find yourself unable to answer without reading every diff. This represents a P7 failure. What should Claude have produced?",
+          options: {
+            A: "Claude should have written a test for every change",
+            B: "A structured Session Summary: scope of the cleanup (which files/modules), categories of changes (dead code removed, variable renames, pattern consolidations), risk assessment (any behavioral changes vs. pure refactors), test coverage status before and after. P7 observability extends to accountability artifacts — the session's output should be auditable by someone who wasn't present",
+            C: "You should have taken notes during the session",
+            D: "The team lead should review the git diff themselves"
+          },
+          correct: "B",
+          explanation: "P7 observability includes accountability to stakeholders. 'Clean up technical debt' is vague, and the result — undocumented changes across many files — is unauditable. P7's Summary After Completion creates an audit trail: 'Removed 450 lines of dead code from auth/ and payments/ (verified unused via grep). Renamed 12 variables for clarity (no behavioral change). Extracted 3 duplicate patterns into shared utilities (behavior preserved, tests confirm). Risk: zero — all changes are refactors with test coverage unchanged.' Now the team lead can review without reading every diff."
         }
       ]
     },
@@ -1491,6 +1911,66 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "The Infinite Exploration Spiral: Claude starts investigating a bug, then explores related modules, then reads about alternative approaches, then investigates performance implications — the scope expands indefinitely. Fix: scope exploration narrowly ('Find where authentication is configured — just that, nothing else'). If broader research is needed, use subagents for it separately. This keeps the main session focused on the specific debugging task."
+        },
+        {
+          id: 16,
+          question: "Scenario: You've been in a Claude Code session for 4 hours. The conversation context is very long. You notice Claude's responses becoming slightly less precise — it references an earlier decision incorrectly and seems to mix up two file names. What operational best practice should you apply?",
+          options: {
+            A: "Continue the session — Claude will recalibrate",
+            B: "Apply context hygiene: before the session degrades further, use /compact or start a fresh session. First, ensure all important context is persisted to files (P5): update CLAUDE.md with decisions made, save any in-progress state. Then: '/compact [summary of what to retain]' or fresh session with CLAUDE.md as context. Long sessions accumulate noise that degrades precision — recognizing the signs and resetting proactively is an operational best practice",
+            C: "Repeat the incorrectly-referenced decision to correct Claude",
+            D: "Save the chat transcript and use it as context in the new session"
+          },
+          correct: "B",
+          explanation: "Context window saturation is a real operational concern. Signs: Claude references earlier items incorrectly, conflates details, or seems to lose track of constraints. The fix: proactive /compact or session restart before it gets worse. Critical prep: persist everything to files FIRST (P5), so the fresh session starts with a complete CLAUDE.md rather than a degraded conversation context. A focused, fresh session with a well-maintained CLAUDE.md often outperforms a bloated 4-hour session where precision has deteriorated."
+        },
+        {
+          id: 17,
+          question: "Scenario: You need to add a simple null check to a utility function. You open Claude Code, write a detailed spec, enter Plan Mode, create an ADR, and set up a feature branch with CI/CD gates. The change takes 45 minutes. Your colleague makes the same type of change in 3 minutes. According to operational best practices, what went wrong?",
+          options: {
+            A: "Nothing — more process is always better",
+            B: "Over-engineering the approach: operational best practices match process overhead to task risk and complexity. A null check to a utility function = low risk, low complexity, no architectural impact. The right approach: read the file, make the edit, run the specific test, commit. Process overhead (specs, ADRs, Plan Mode) is for high-risk, high-complexity decisions — not every change",
+            C: "Your colleague's approach was dangerously casual",
+            D: "You should have used a different AI tool for simple changes"
+          },
+          correct: "B",
+          explanation: "Operational best practices include right-sizing process to task. The seven principles provide a toolkit, not a mandatory checklist for every change. A null check: P3 (verification) = run the 1 relevant test. P4 (decomposition) = the change is already atomic. No SDD, no ADR, no Plan Mode needed. The trap: over-applying heavy-weight practices to light-weight changes. The skill is calibration — maximum process for maximum risk, minimal process for minimal risk. A 45-minute null check is a calibration failure."
+        },
+        {
+          id: 18,
+          question: "Scenario: You need to investigate: (1) how the payment module works, (2) what tests exist for billing, and (3) what the deployment process requires. You ask Claude to research all three in the main session, which takes 30 minutes of file-reading. This bloats your main context. What operational practice would have been more efficient?",
+          options: {
+            A: "Research everything upfront is the right approach",
+            B: "Use parallel subagents for independent research: spawn 3 subagents simultaneously (each with a specific research question) while the main session plans. Subagents return findings; main session acts on them. Parallel research (multiple agents simultaneously) vs. sequential research (one agent, then another) can reduce research phase from 30 minutes to 10 minutes while keeping main context clean",
+            C: "Ask Claude to read faster",
+            D: "Research each area on separate days to avoid context bloat"
+          },
+          correct: "B",
+          explanation: "Operational efficiency via parallel subagents: independent research tasks (payment module structure, billing tests, deployment requirements) can run simultaneously. Spawn 3 subagents, each answering one focused question, while the main session waits. Subagents are isolated — their research context doesn't pollute the main session. Results arrive in parallel. Main session then has clean findings to act on. This is a force multiplier: use subagents for research, keep main session for synthesis and action."
+        },
+        {
+          id: 19,
+          question: "Scenario: Claude is trying to fix a test but has been in a loop for 20 minutes: tries fix A → test fails → tries fix B → different error → tries fix C → back to original error. The session has 15+ attempts and the context is filled with failed experiments. What operational practice should you apply?",
+          options: {
+            A: "Let Claude continue — it will eventually converge",
+            B: "Apply the Debugging Loop Anti-Pattern intervention: stop the session, use /compact or restart. Before restarting, read the error messages directly and diagnose the root cause yourself (or with a fresh Claude session focused only on diagnosis). Then bring a specific hypothesis to a new session: 'The error is X, the root cause appears to be Y — implement fix Z.' Fresh context + specific direction breaks the loop",
+            C: "Ask Claude to try a completely different approach",
+            D: "Increase the context window to fit more attempts"
+          },
+          correct: "B",
+          explanation: "The Debugging Loop Anti-Pattern: Claude in a loop accumulates failed attempts in context, which can bias subsequent attempts. Signs: cycling through the same errors, 10+ attempts without convergence. Intervention: stop, compress or reset, then re-approach with direction. The key insight: Claude debugging alone may lack the domain knowledge to escape certain loop types. Human diagnosis of the root cause (reading error messages, checking documentation, understanding system constraints) provides the specific direction that breaks the cycle. Don't let loops run — they waste context and time."
+        },
+        {
+          id: 20,
+          question: "Scenario: You start a new Claude Code session on a project. Instead of reading CLAUDE.md or recent git history, Claude immediately begins asking 'what would you like to do today?' and then starts work based only on your current request, unaware of project conventions. What operational practice improves session startup?",
+          options: {
+            A: "Always paste the last session's transcript as context",
+            B: "Establish a session initialization protocol: at session start, Claude reads CLAUDE.md (project context), scans recent git log (what changed recently), and checks any active progress files (ongoing tasks). This takes 2 minutes but prevents suggesting approaches that violate project conventions, duplicating recently-completed work, and missing project-specific context that affects every decision",
+            C: "Tell Claude all the context verbally at the start of each session",
+            D: "Claude should automatically know the project state from its training"
+          },
+          correct: "B",
+          explanation: "Session initialization protocol: the first 2 minutes of a session determine its quality. A 'what would you like to do today?' cold-start misses everything P5 captured in files. Protocol: READ CLAUDE.md (conventions, decisions, constraints) → SCAN git log --oneline -10 (recent changes, avoid duplicating) → CHECK any progress files (ongoing tasks, stopping points). Cost: 2 minutes. Benefit: all subsequent responses informed by project reality. This operational practice converts P5's file investments into session-start value — files written are only useful if read."
         }
       ]
     },
@@ -1677,6 +2157,66 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "Assessment Rubric: Recognition (can name principles), Application (can use for simple tasks), Workflow Diagnosis (can identify violated principles from failures). You're at Developing — recognition and application are emerging, but diagnosis lags. Focus: practice working backwards from failures. 'The migration broke production — which principle was missing? P3 (no staging verification), P6 (no rollback plan).' The Compare step builds intuition: 'WITH P3, we would have caught this in staging.'"
+        },
+        {
+          id: 16,
+          question: "Scenario: You need Claude to add a new payment provider integration. The feature requires: database changes, API client implementation, webhook handling, and documentation. Which combination of principles should guide your approach?",
+          options: {
+            A: "Just P1 (Bash) — run the tests after Claude is done",
+            B: "P2 (design interface/tests first), P4 (decompose into DB → API → webhook → docs phases, each committed separately), P3 (verify each phase before proceeding), P5 (CLAUDE.md updated with payment provider constraints), P6 (approve DB schema before migration runs), P7 (explain before each phase, checkpoint after). Multiple principles applied in concert",
+            C: "P6 only — safety is the most important principle",
+            D: "P1 and P3 — execute with Bash and verify at the end"
+          },
+          correct: "B",
+          explanation: "Real-world features activate multiple principles simultaneously. Payment integration: P2 defines the PaymentProvider interface before implementation (drives design from consumer need). P4 decomposes the 4 phases into separate verifiable commits. P3 verifies each phase (DB schema, API client tests, webhook tests, docs build). P5 persists the provider's API constraints to CLAUDE.md. P6 gates the migration run and any production data access. P7 sets up checkpoints between phases. This is principles fluency: knowing which principles apply and how they interact."
+        },
+        {
+          id: 17,
+          question: "Scenario: P6 says 'require explicit approval before irreversible actions.' P7 says 'maintain forward momentum with minimal interruption.' You're running a 50-step automated pipeline. Requiring approval at each irreversible step would create 15 approval gates, killing momentum. How do you resolve this apparent tension?",
+          options: {
+            A: "Choose one principle and ignore the other",
+            B: "Resolve through pre-negotiation: before the pipeline starts, review and approve the list of all 15 irreversible steps upfront (P6 batch approval). This satisfies P6 (irreversible actions were explicitly reviewed) while enabling P7 (pipeline runs with minimal interruption after the initial review). The principles aren't in conflict — they're resolved by shifting the approval to plan time rather than execution time",
+            C: "Apply P6 strictly — interrupt 15 times, momentum is less important than safety",
+            D: "Apply P7 strictly — run all 50 steps without interruption, review at the end"
+          },
+          correct: "B",
+          explanation: "Principles sometimes create apparent tension, but usually it's resolvable through order of operations. P6 requires explicit approval — it doesn't specify real-time approval. Review the 15 irreversible steps in the Plan Mode output before running anything: 'Steps 7, 12, 19, 23... are irreversible — approve all?' One approval gate at plan time vs. 15 gates at execution time. This respects P6 (you reviewed and approved all irreversible actions), enables P7 (pipeline runs uninterrupted), and respects P4 (clear plan before execution). Multi-principle fluency includes resolving tensions creatively."
+        },
+        {
+          id: 18,
+          question: "Scenario: You assess your AI collaboration workflow. Your P3 (Verification) score is 1 — you almost never verify Claude's outputs before moving on. In the last month, you've had 3 incidents where unverified changes caused production issues that took hours to fix. According to the 'Putting It All Together' framework, what is the most impactful improvement you can make?",
+          options: {
+            A: "Improve P7 (Observability) — add more logging",
+            B: "Improve P3 specifically: establish a verification habit before every commit. 'Run the relevant tests, inspect the key output, confirm the change does what was intended.' P3 at score 1 with 3 production incidents is a direct causal link. The highest ROI fix is the lowest-scored principle causing active problems — start there, not with principles already working",
+            C: "Reduce the scope of tasks you give Claude",
+            D: "Improve P6 (Safety) — add more approval gates"
+          },
+          correct: "B",
+          explanation: "Health Score improvement strategy: fix the broken fundamentals first, then optimize working ones. P3=1 with 3 production incidents = direct evidence of impact. P3 practice: before committing any Claude-generated change, Claude runs: specific tests ('run only auth tests, not full suite'), inspection ('show me the diff for auth.ts'), and a sanity check command ('curl the endpoint and show the response'). 5 minutes of P3 per commit vs. hours of production incident response. ROI is overwhelming. A gap in any one principle creates cascading failures."
+        },
+        {
+          id: 19,
+          question: "Scenario: You want to introduce the seven principles to your 8-person development team. Some developers are skeptical ('this is just common sense'), others are overwhelmed ('I have to remember 7 things for every task'). What's the most effective adoption strategy?",
+          options: {
+            A: "Require all 7 principles in every task from day one",
+            B: "Start with P3 (Verification) and P6 (Safety) — the two principles with the highest immediate risk-reduction value and clearest application. Run a team retrospective on recent AI-collaboration incidents and map them to which principle was missing. Let the team experience the value before introducing the full framework. Add principles incrementally as understanding deepens",
+            C: "Create a detailed checklist and require it be followed for every commit",
+            D: "Let each developer choose which principles to apply"
+          },
+          correct: "B",
+          explanation: "Team adoption: start with high-value, high-clarity principles that immediately reduce pain. P3 and P6 are concrete (run tests, approve irreversible actions) and solve visible problems (broken deployments, accidental data changes). Run a retrospective: map last month's AI-related incidents to principles — the team sees the framework as a solution to real problems they've experienced, not overhead. Then add P5 (CLAUDE.md), P4 (decomposition), etc. as the team matures. Incremental adoption with evidence beats mandated compliance. The framework should feel like insight, not bureaucracy."
+        },
+        {
+          id: 20,
+          question: "Scenario: A developer claims mastery of all seven principles. They correctly explain each principle when asked. However, when given a complex real task, they apply principles in a rigid sequential checklist: 'check P1, check P2, check P3...' regardless of task type. Tasks take much longer than necessary. According to the Assessment Rubric, what level are they actually at?",
+          options: {
+            A: "Master Director — they correctly applied all principles",
+            B: "Proficient (not Master). Master Director level requires fluid, contextual application: principles activate automatically when relevant, not mechanically. The checklist approach indicates understanding but not internalization. True mastery: starting a feature, P2 activates naturally ('I should define the interface first'). P4 activates based on risk level. Rigid sequential checklisting is 'Proficient' applying rules; fluid contextual activation is 'Master' with internalized judgment",
+            C: "Developing — they don't fully understand the principles",
+            D: "Agent Architect — applying all principles is the definition of mastery"
+          },
+          correct: "B",
+          explanation: "Assessment Rubric levels: Recognizer (can name) → Applier (can use for simple tasks) → Proficient (applies consistently, sometimes rigidly) → Agent Architect (selects appropriate subset per task) → Master Director (fluid, contextual, automatic). The checklist developer is Proficient: they apply correctly but rigidly, treating every task as requiring all 7. Agent Architect: 'This null check is low-risk, only P3 applies.' Master Director: doesn't think about it — the right principles activate situationally. The path from Proficient to Master is deliberate practice until rules become instincts."
         }
       ]
     },
@@ -1816,6 +2356,114 @@ export const chapter17: Chapter = {
           correct: "B",
           explanation: "Health Score counts principles actively applied (not average). Scores 1-2 = not actively applied, 3-4 = actively applied. Your scores: P1(3)=yes, P2(2)=no, P3(4)=yes, P4(2)=no, P5(1)=no, P6(3)=yes, P7(4)=yes = 4 principles = Collaborator. The lesson: be honest about low scores — they reveal your specific improvement targets (P2, P4, P5)."
         },
+        {
+          id: 12,
+          question: "Scenario: Exercise B — Workflow Diagnosis. Claude was asked to refactor a set of data models. The result: (1) 3 models were refactored, (2) existing tests were deleted instead of updated, (3) no new tests were added, (4) all changes were in one large commit, (5) no status updates were given during the 40-minute session. Identify which principles were violated.",
+          options: {
+            A: "No principles were violated — the refactoring was completed",
+            B: "P2 violated (tests deleted/not updated — Code as Interface requires tests as specs). P3 violated (no verification — refactored models were never tested). P4 violated (one large commit — no atomic commits for granular reversibility). P7 violated (no status updates during 40 minutes — observability requires progress visibility). 4 principle violations in one task",
+            C: "Only P3 was violated — the tests should have been run",
+            D: "Only P4 was violated — the commit was too large"
+          },
+          correct: "B",
+          explanation: "Workflow Diagnosis: work backwards from failures. No tests → P2 (tests as specs were deleted). No verification → P3 (models not verified against any test). One large commit → P4 (should be per-model atomic commits). No updates → P7 (40-minute silence). P2 violation means the refactored models have no specification. P3 means correctness was assumed, not verified. P4 means reverting any one model requires reverting all. P7 means 40 minutes of invisible work. This is why multi-principle fluency matters: each violation compounds the others."
+        },
+        {
+          id: 13,
+          question: "Scenario: Exercise C — Principle Application. You want Claude to investigate why your Next.js build is 40% slower than last week. Using Principle 1 (Bash as Key), what specific terminal-based investigation would ground the diagnosis in reality rather than speculation?",
+          options: {
+            A: "Ask Claude to read all modified files from last week and reason about performance",
+            B: "Run targeted bash commands to gather ground truth: `time npm run build` (measure actual build time), `git log --oneline --since='1 week ago'` (identify recent changes), `npm run build -- --profile` (turbopack/webpack profiling output), `du -sh .next/` (output size), `git diff HEAD~N -- package.json` (dependency changes). P1: each command provides verified data — not hypotheses about what might be slower",
+            C: "Read the Next.js documentation to find common performance issues",
+            D: "Compare the current code against a backup to identify changes"
+          },
+          correct: "B",
+          explanation: "P1 applied to performance investigation: every hypothesis can be tested with bash. 'Is it slower?' → time the build (verified). 'What changed?' → git log (verified). 'Which module takes longest?' → build profiler (verified). 'Is the output larger?' → du (verified). 'New dependencies?' → diff package.json (verified). Each command converts a guess into a fact. Without P1: Claude reviews code and speculates. With P1: profiler output shows 'parser for markdown files: 8.2 seconds' — specific, actionable, verified."
+        },
+        {
+          id: 14,
+          question: "Scenario: Exercise C — You're building a notification system. Using P2 (Code as Universal Interface), what should be the FIRST artifact Claude produces before writing any implementation?",
+          options: {
+            A: "A database schema for storing notifications",
+            B: "A test file (or interface definition) that defines how the notification system will be used from the consumer's perspective: `sendNotification(userId, type, payload)`, `getNotificationHistory(userId, opts)`, `markAsRead(notificationId)` — with test cases that specify behavior for each function. P2: the interface (defined by tests) precedes the implementation",
+            C: "A list of all the features the notification system needs",
+            D: "The NotificationService class with placeholder methods"
+          },
+          correct: "B",
+          explanation: "P2 first artifact: the interface, expressed as tests. Before any implementation: 'sendNotification with valid user and type → returns notification id, sends to delivery queue.' 'sendNotification with invalid user → throws UserNotFoundError.' These tests define the contract. Implementation comes later, constrained by the interface. Benefits: (1) you review the interface before any code is written, catching design issues cheaply. (2) Claude implements against a clear specification, not assumptions. (3) When done, tests verify correctness. P2: tests first means the interface is right before the implementation begins."
+        },
+        {
+          id: 15,
+          question: "Scenario: Exercise C — Claude implements a new caching layer in 3 steps: Step 1 (cache interface), Step 2 (Redis adapter), Step 3 (integration with existing services). Using P3 (Verification as Core Step), what should happen between each step?",
+          options: {
+            A: "Proceed directly — verify everything at the end after all 3 steps",
+            B: "P3 verification between every step: After Step 1: run unit tests for the cache interface. After Step 2: run Redis adapter tests (connect, read, write, handle failures). After Step 3: run integration tests confirming existing services use the cache correctly. Plus: end-to-end test showing cache hit/miss behavior. Each verification gate catches problems while context is local",
+            C: "Verify once after Step 2 (the implementation), not after Step 1 (just an interface)",
+            D: "Only verify if something seems wrong"
+          },
+          correct: "B",
+          explanation: "P3 verification chain: verify after EACH step, not just at the end. Step 1 verification catches interface design problems before any implementation is built on top. Step 2 verification confirms the adapter works in isolation before it's integrated. Step 3 verification confirms the integration didn't break existing services. Without inter-step verification: Step 3 failure could be caused by a bug introduced in any of the 3 steps. With P3: Step 3 failure must be in the integration (Steps 1 and 2 verified working). Precise problem location every time."
+        },
+        {
+          id: 16,
+          question: "Scenario: Exercise C — You're migrating an Express.js API to FastAPI. The migration involves: authentication, data models, endpoints (×23), business logic, tests, and deployment configuration. Using P4 (Small, Reversible Decomposition), what is the correct approach?",
+          options: {
+            A: "Migrate everything in parallel to complete faster",
+            B: "Ordered phase decomposition: Phase 1 (data models → commit + verify). Phase 2 (authentication → commit + verify, most critical dependency). Phase 3 (batch endpoints by risk: health/read-only first → commit, then write endpoints → commit, then admin endpoints → commit). Phase 4 (business logic → commit + integration tests). Phase 5 (tests). Phase 6 (deployment config). Each commit is independently deployable progress, each failure is isolated",
+            C: "Migrate by file type: all models first, then all tests, then all endpoints",
+            D: "Migrate the simpler endpoints first to build momentum, then tackle auth"
+          },
+          correct: "B",
+          explanation: "P4 for large migrations: order by dependency + risk. Authentication first (all other things depend on it — failure affects everything, so verify it early). Endpoints in batches by risk (read-only changes are lower risk than writes, which are lower risk than admin operations). Each phase committed separately: if endpoint batch 2 fails, batch 1 remains deployed and working. The parallel approach (migrate everything at once) creates an entangled state where any failure requires debugging across 6 simultaneous changes. P4 decomposition: each phase is a clean checkpoint from which to advance or retreat."
+        },
+        {
+          id: 17,
+          question: "Scenario: Capstone Exercise — you're leading a 6-week AI-assisted development project with 4 developers. After 3 weeks, you notice: (1) different developers get different answers from Claude about project conventions, (2) the same architectural decisions are debated multiple times, (3) new team members take 3 days to onboard. What P5 practices are missing?",
+          options: {
+            A: "The team needs better communication, not better documentation",
+            B: "Shared P5 infrastructure: (1) Central CLAUDE.md in the repo — all conventions in one place, updated when decisions are made (consistency across developers). (2) ADR directory — every architectural decision documented (prevents re-debate). (3) Onboarding checklist — new developer reads CLAUDE.md + ADRs + gets oriented in 2 hours, not 3 days. P5 at team scale requires making file-persisted knowledge accessible and maintained by everyone",
+            C: "Use a project management tool instead of CLAUDE.md",
+            D: "Have one designated person update all documentation"
+          },
+          correct: "B",
+          explanation: "P5 at team scale: individual P5 (keeping your own CLAUDE.md) becomes insufficient when multiple developers collaborate with Claude. Symptoms: inconsistent answers → CLAUDE.md not shared or not updated. Re-debate → ADRs not written. Slow onboarding → no structured context entry point. Fix: CLAUDE.md becomes a team artifact (in git, everyone updates it when decisions are made, reviewed in PRs). ADRs are the decision history. Onboarding uses these files as the primary source. P5 at team scale is documentation culture — persisted knowledge is a team asset, not an individual practice."
+        },
+        {
+          id: 18,
+          question: "Scenario: Capstone Exercise — Claude is autonomously running database maintenance: cleaning up orphaned records, archiving old data, and rebuilding indexes. This is a 45-minute operation. Design a P6 + P7 combined protocol for this operation.",
+          options: {
+            A: "Let Claude run with full autonomy and review the results after",
+            B: "P6 gates: (1) Pre-run: review and approve the list of all DELETE/archive operations before starting. (2) Include an automatic STOP if deletion count exceeds expected by >5% (anomaly detection). P7 visibility: (3) Progress report every 5 minutes: records processed, deletion counts, index rebuild status. (4) Immediate escalation for any unexpected row count or error. (5) Final summary confirming data integrity. Combined: P6 prevents accidents; P7 ensures you can detect and intervene if something unexpected occurs",
+            C: "Use P6 only — require approval for every individual deletion",
+            D: "Use P7 only — watch the logs carefully and intervene if needed"
+          },
+          correct: "B",
+          explanation: "P6 + P7 synergy for autonomous high-stakes tasks: P6 defines WHAT requires approval (all DELETE operations, upfront not during). P7 defines HOW you stay informed (periodic updates, anomaly escalation). P6 alone would create 1000 approval gates (per-deletion), killing the automation's value. P7 alone provides visibility but no control mechanism. Together: pre-approve the operation class (P6), monitor execution with progress reports (P7), have a clear STOP condition (P6 anomaly gate), and get a verifiable completion summary (P7). The combination enables autonomous operation of high-risk tasks safely."
+        },
+        {
+          id: 19,
+          question: "Scenario: Capstone — You are an 'Agent Architect.' For a new feature (OAuth2 integration), map each of the 7 principles to a concrete action you take BEFORE asking Claude to write any code.",
+          options: {
+            A: "Agent Architects don't need to pre-plan — they guide Claude in real-time",
+            B: "P1: verify the oauth2 library is installed (bash: `npm list`). P2: write tests for the OAuth flow before implementation. P3: define verification criteria for each OAuth step. P4: decompose into phases (library setup → auth URL generation → token exchange → session → UI). P5: add OAuth constraints to CLAUDE.md. P6: identify irreversible actions (DB schema for sessions, production redirect URIs). P7: set up 'explain before each phase, checkpoint after.' These 7 pre-actions create a ready environment before Claude writes a line",
+            C: "Start with P6 (safety review) and only apply other principles if issues arise",
+            D: "Use Plan Mode — it automatically applies all 7 principles"
+          },
+          correct: "B",
+          explanation: "Agent Architect pre-task protocol maps all 7 principles to specific preparatory actions. P1: verify environment. P2: write the 'what should work' tests first. P3: define 'how we'll know each step worked.' P4: plan the decomposed phases before any execution. P5: document constraints in CLAUDE.md so they're consistently applied. P6: identify the irreversible moments and set approval gates. P7: establish the visibility contract for the session. 15 minutes of preparation → hours of focused, safe execution. The Agent Architect does the architecture — Claude does the implementation."
+        },
+        {
+          id: 20,
+          question: "Scenario: Capstone — Final assessment. You've been using the seven principles for 6 months. You encounter a novel situation: Claude is helping you analyze a competitor's public API (no code changes, pure research). Which subset of principles is active, and which can be relaxed?",
+          options: {
+            A: "All 7 principles must always be applied to every task",
+            B: "Active: P1 (Bash for curl/jq to actually query the API endpoints and get real responses), P3 (verify analysis conclusions by running the API calls), P7 (progress updates as endpoints are analyzed). Relaxed: P2 (no code interface being built), P4 (research doesn't need atomic commits), P5 (CLAUDE.md update optional unless findings affect project decisions), P6 (no irreversible actions in read-only research). Principle activation is task-contextual",
+            C: "None — pure research doesn't require any of the seven principles",
+            D: "Only P6 (safety) is always required; others are optional"
+          },
+          correct: "B",
+          explanation: "Master-level application: principles activate contextually, not universally. Research task (read-only API analysis): P1 = critical (run actual API calls, don't speculate about responses). P3 = critical (verify analysis conclusions are accurate). P7 = helpful (know what's been analyzed). P2 = N/A (no code interface). P4 = N/A (nothing to commit). P5 = conditional (update CLAUDE.md only if findings change project approach). P6 = relaxed (read-only operations have no irreversibility). This is Master Director fluency: applying the minimum necessary principles for the task type. The framework serves the work; the work doesn't serve the framework."
+        }
       ]
     }
   ]

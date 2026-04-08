@@ -189,7 +189,12 @@ export const chapter16: Chapter = {
           },
           correct: "B",
           explanation: "This is the signal-vs-noise anti-pattern. A 50-page spec for a simple login feature is noise-heavy — it contains background, motivation, edge cases that don't apply, and context that doesn't change what the AI implements. A signal-dense spec for login would be: Context (users need secure access), Constraints (bcrypt, rate limiting, 30-min session timeout), Checklist ([ ] email/password form, [ ] validation, [ ] session creation). The rest is noise."
-        }
+        },
+        { id: 16, question: "Scenario: A developer asks AI to 'build a user dashboard' without a spec. The AI creates a dashboard with charts, tables, and a sidebar. The developer says 'that's not what I meant at all.' According to SDD, what is the root cause and how should they have proceeded?", options: { A: "The AI misunderstood the prompt — use a different model", B: "Vague natural-language prompt = AI invents all details. Root cause: no written specification. They should have written a spec first: Context (what user data to show), Constraints (which chart library, responsive design), Checklist ([ ] revenue chart, [ ] recent activity, [ ] user profile summary).", C: "The developer should have given a longer prompt", D: "AI cannot build dashboards" }, correct: "B", explanation: "This is vibe coding's core failure: vague prompt → AI invents everything → output doesn't match intent → rework. SDD prevents this by requiring a written specification before any implementation. The spec transforms 'build a user dashboard' (vague, AI invents) into explicit criteria (precise, AI executes). Without the spec, every session re-invents the same misunderstandings." },
+        { id: 17, question: "Scenario: A team builds a feature using vibe coding. It works perfectly in their environment. When they share it with 3 other developers, none of them can replicate the setup — there are no documented dependencies, no deployment steps, and no configuration requirements. According to SDD, what was missing?", options: { A: "Better version control", B: "The spec's Constraints section would have captured: 'Node.js v18, requires REDIS_URL env var, run npm run migrate before starting.' Without a spec, constraints exist only in the developer's head, making the feature unreproducible by anyone else.", C: "More experienced developers", D: "A better README file" }, correct: "B", explanation: "Vibe coding externalizes knowledge only in code, not in specs. A spec's Constraints section captures: environment requirements, dependency versions, configuration variables, and setup steps. These constraints are then shared context available to every developer and AI session. Without them, the feature is a black box that only works for its creator." },
+        { id: 18, question: "Scenario: Two developers work on the same feature in parallel using vibe coding (no spec). Developer A adds client-side validation in JavaScript. Developer B adds server-side validation in Python, but with different rules. The feature ships with inconsistent validation. According to SDD, how would a spec have prevented this?", options: { A: "They should have worked on different features", B: "A shared spec defines validation rules as Constraints ('email: RFC 5322 format, password: 8+ chars, 1 uppercase, 1 number') that both developers implement against. Without a spec, each developer invents their own interpretation — creating the inconsistency.", C: "One developer should have waited for the other to finish", D: "They needed more communication" }, correct: "B", explanation: "The spec as shared reference prevents divergence: when both developers implement from the same Constraints section (explicit validation rules), their implementations align by construction. Vibe coding lets each developer imagine a different 'correct' implementation. This is the 'shared definition of done' value proposition in action." },
+        { id: 19, question: "Scenario: A project using vibe coding worked well for 2 months. Then a new developer joins and spends 3 days trying to understand why certain design decisions were made. There is no documentation. According to SDD, what artifact would have captured this context?", options: { A: "Better code comments would be sufficient", B: "The spec's Context section: 'Why this feature exists, what problem it solves, what design decisions were made and why.' Context is the institutional memory that survives developer turnover. A spec preserves the reasoning that code cannot express.", C: "A longer README file", D: "The new developer should ask the original developer" }, correct: "B", explanation: "The Context section of a spec answers 'why' — the question code cannot answer. Why was this architecture chosen? What alternatives were considered? What constraints drove the design? A new developer reading the spec's Context section in 10 minutes gains the understanding that took the original developer 2 months to accumulate. Vibe coding discards this context permanently." },
+        { id: 20, question: "Scenario: A vibe-coded API endpoint works in development but returns errors in production 10% of the time due to a race condition under concurrent load. The developer cannot reproduce it locally. According to SDD, at which phase would this have been caught?", options: { A: "There is no way to catch race conditions with SDD", B: "CLARIFY phase: 'What are the concurrent access patterns? Will multiple users write to the same record simultaneously?' surfaces the race condition risk. SPECIFY: 'Use database transactions with row-level locking for concurrent writes.' VALIDATE: load testing confirms the fix under concurrent requests.", C: "Only performance testing would catch this", D: "Race conditions are unpredictable and unpreventable" }, correct: "B", explanation: "SDD's CLARIFY phase specifically asks about edge cases and concurrency: 'What happens when two users submit simultaneously?' This surfaces the race condition before implementation. The spec's Constraints section documents the fix (transactions + row-level locking). VALIDATE with load testing confirms it. Vibe coding skips all three of these checkpoints, letting the race condition ship to production." }
       ]
     },
     {
@@ -375,6 +380,66 @@ export const chapter16: Chapter = {
           },
           correct: "C",
           explanation: "With 50 developers across multiple teams, the problem is spec maintenance at scale. Spec-as-Source treats the spec as a living document that's part of the development process — updated when requirements change, serving as the authoritative source for all implementations. This requires process discipline but solves the 'outdated specs causing inconsistencies' problem that plagues large teams."
+        },
+        {
+          id: 16,
+          question: "Scenario: A developer writes a spec for an MVP checkout feature (Spec-First), implements it, ships to production, and then gets monthly customer feedback requiring feature updates. After 6 months, the spec is outdated and nobody updates it. Customer requirements keep changing. What SDD level transition should this product make?",
+          options: {
+            A: "Switch to Spec-Anchored — more exploration before each update",
+            B: "Transition to Spec-as-Source: establish the spec as a living document maintained alongside the product. Each new customer requirement updates the spec before implementation. The spec becomes the authoritative source for ongoing product development, not a one-time kickoff artifact.",
+            C: "Stop using specs — they become outdated for mature products",
+            D: "Create a new Spec-First spec for each release cycle"
+          },
+          correct: "B",
+          explanation: "The progression: Spec-First works for initial builds with clear requirements. When requirements evolve monthly based on customer feedback, Spec-First produces outdated specs. Spec-as-Source treats the spec as a living document — it's updated when requirements change, serving as the authoritative source for all future implementations. The maintenance overhead is justified by team coordination and consistency over the product's lifetime."
+        },
+        {
+          id: 17,
+          question: "Scenario: A startup is building an AI-powered recommendation engine for the first time. Nobody on the team has built recommendation systems before. No requirements exist yet. A developer suggests jumping straight to Spec-First because 'SDD requires specs before code.' What is wrong with this suggestion?",
+          options: {
+            A: "Nothing — Spec-First is always the most rigorous approach",
+            B: "When requirements can only be discovered through building (novel problem space, first time building this type of system), forcing Spec-First before exploration means specifying unknowns. Spec-Anchored is appropriate: explore through vibe coding to discover what works, THEN write the spec before production implementation.",
+            C: "They should skip SDD entirely for AI features",
+            D: "They should use Spec-as-Source because it's more flexible"
+          },
+          correct: "B",
+          explanation: "Spec-First requires knowing requirements upfront. For novel problem spaces (first recommendation engine, unfamiliar ML domain), requirements can only be discovered through exploration. Spec-Anchored is designed for this: explore via vibe coding to discover viable approaches, then write a spec that captures what works before building for production. 'Exploration is a phase, not an end state' — once you discover what works, you commit to a spec."
+        },
+        {
+          id: 18,
+          question: "Scenario: A team starts an experiment with Spec-Anchored for a new feature. After 2 weeks of exploration, the prototype works but nobody writes a spec. They continue adding features to the prototype. After 2 months, the 'prototype' is live in production with no documentation. According to SDD, what anti-pattern occurred?",
+          options: {
+            A: "They used the wrong SDD level — should have used Spec-First",
+            B: "Perpetual exploration — they never transitioned from the exploration phase to the spec-production phase. 'Exploration is a phase, not an end state.' The discipline of Spec-Anchored is knowing when to stop exploring and commit to a specification. Their 2-week window should have triggered writing a spec before continuing.",
+            C: "Spec-Anchored is inherently flawed for multi-month projects",
+            D: "This is normal agile development — specs aren't always needed"
+          },
+          correct: "B",
+          explanation: "The perpetual exploration trap: Spec-Anchored requires a deliberate transition point from exploration to spec-writing. The trigger: 'when the prototype reveals what works, stop and write a spec.' This team's prototype kept working, so they kept adding — never committing to a spec. The result: a production system with no external reference, making future development unreliable. Spec-Anchored requires discipline to make the transition when exploration validates an approach."
+        },
+        {
+          id: 19,
+          question: "Scenario: A developer finishes a Spec-First feature build. The spec was written once at the start and the implementation satisfies every checklist item. One month later, stakeholders request two new behaviors. The developer says 'the spec is the source of truth — we can't change requirements.' A senior developer says 'update the spec and implement.' Who is right?",
+          options: {
+            A: "The developer — specs should never change after implementation begins",
+            B: "The senior developer — for ongoing products, specs should evolve with requirements. Spec-First was appropriate for the initial build; the product's ongoing maintenance benefits from moving toward Spec-as-Source behavior: update the spec when requirements change, then implement from the updated spec.",
+            C: "Neither — stakeholder requests after launch should be rejected",
+            D: "The spec should be archived and a new spec written for each change"
+          },
+          correct: "B",
+          explanation: "Spec-First describes the initial approach (write spec before implementation). It doesn't mean specs are frozen forever. Evolving products naturally migrate toward Spec-as-Source behavior: when requirements change, update the spec first, then implement. This is the correct behavior for living products. The spec tracks current requirements, not the original requirements. Treating specs as immutable post-implementation creates the 'outdated spec' problem."
+        },
+        {
+          id: 20,
+          question: "Scenario: Your organization uses Spec-First for greenfield features (clear requirements), Spec-Anchored for experimental features (unclear requirements), and Spec-as-Source for core products (evolving requirements). A new feature is a known backend integration with documented third-party API specifications. Which level should you apply?",
+          options: {
+            A: "Spec-Anchored — always explore before specifying for integrations",
+            B: "Spec-First — the third-party API is documented, requirements are known upfront (what endpoints to call, what data to send/receive, what error codes to handle), and exploration is unnecessary. Spec-First avoids wasted exploration time for well-understood problems.",
+            C: "Spec-as-Source — integrations require ongoing maintenance",
+            D: "Skip SDD — API integrations are straightforward"
+          },
+          correct: "B",
+          explanation: "Level selection is requirement-clarity driven: Spec-First when requirements are clear upfront. A documented third-party API provides all the information needed to write a spec before building: endpoint URLs, request/response formats, error codes, rate limits, authentication. No exploration needed — all constraints are in the API documentation. Spec-First is optimal here: research the API docs, write the spec, implement against it. Exploration wastes time when requirements are already known."
         }
       ]
     },
@@ -561,6 +626,66 @@ export const chapter16: Chapter = {
           },
           correct: "C",
           explanation: "The deployment process is stable information that applies to every session — perfect for the Project Constitution. Adding it to CLAUDE.md's 'Key Commands' section means Claude knows it from session 1 without being told. This is the 'cheapest way to give Claude continuous project awareness' — write it once, benefit every session."
+        },
+        {
+          id: 16,
+          question: "Scenario: You're starting a new Next.js project with TypeScript, pnpm, and Prisma. Your CLAUDE.md has a constraint: 'Never use `any` in TypeScript.' Three sessions later, Claude still uses `any` in generated code. What's the most likely reason?",
+          options: {
+            A: "CLAUDE.md only works for senior developers",
+            B: "The constraint may be phrased weakly or buried. Effective CLAUDE.md constraints must be explicit and prominent: 'CONSTRAINT: Never use TypeScript `any`. Use `unknown` with type guards instead.' Vague phrasing ('try to avoid any') or constraints buried in dense prose get overlooked.",
+            C: "You must tell Claude the constraint manually each session",
+            D: "TypeScript constraints don't work in CLAUDE.md"
+          },
+          correct: "B",
+          explanation: "CLAUDE.md constraint effectiveness depends on clarity and placement. Place critical constraints under a prominent 'Constraints' section near the top. Use absolute language: 'Never', 'Always', 'Must'. Provide examples: 'Use `unknown` and type narrowing instead of `any`'. A constraint buried in the middle of a dense prose section or softened with 'prefer' or 'try to' has far less impact than a bolded rule at the file's top."
+        },
+        {
+          id: 17,
+          question: "Scenario: A new team member will work with Claude on your project for the first time. They have a CLAUDE.md ready. Their colleague says 'Just tell Claude what to do each session — CLAUDE.md is overkill.' What is the quantifiable cost of skipping CLAUDE.md over 3 months of daily sessions?",
+          options: {
+            A: "No measurable cost — verbal context works as well",
+            B: "At ~3 minutes per session × 20 sessions/month × 3 months = 180 minutes (3 hours) of pure re-establishment overhead, plus inconsistency drift as verbal descriptions vary session-to-session. CLAUDE.md is identical every session.",
+            C: "The cost is too variable to estimate",
+            D: "CLAUDE.md maintenance costs more than 3 hours over 3 months"
+          },
+          correct: "B",
+          explanation: "The amortization math: writing CLAUDE.md takes ~30 minutes once. Saving 3 minutes/session × 60 sessions = 180 minutes saved — a 6:1 return on time invested. The consistency benefit compounds: verbal context drifts session-to-session ('I think we decided X'); CLAUDE.md is authoritative every time. The cost is front-loaded (one writing session); the benefit is perpetual (every future session)."
+        },
+        {
+          id: 18,
+          question: "Scenario: Your project's CLAUDE.md is missing the deployment command. Every deployment session starts with 2 minutes of explaining the process. What is the correct fix and why?",
+          options: {
+            A: "Create a separate DEPLOY.md file for deployment instructions",
+            B: "Add to CLAUDE.md's 'Key Commands' section: 'Deploy: pnpm run deploy:staging / pnpm run deploy:prod (requires approval).' Deployment is stable information that applies every deployment session — exactly what permanent context captures.",
+            C: "Write a specification document for the deployment process",
+            D: "Add it to the project's README instead"
+          },
+          correct: "B",
+          explanation: "The 'Key Commands' section in the 6-part CLAUDE.md structure captures how to run, test, and deploy the project. Deployment process is stable (doesn't change every sprint) and applies to every deployment session. Putting it in CLAUDE.md means Claude knows it automatically without 2-minute explanations. README serves human readers; CLAUDE.md serves Claude's session context."
+        },
+        {
+          id: 19,
+          question: "Scenario: Claude suggests hardcoding a Stripe secret key in an environment config file. Your CLAUDE.md doesn't mention secrets. Which CLAUDE.md section and what specific entry would have prevented this security risk?",
+          options: {
+            A: "Technology Stack: 'We use Stripe for payments'",
+            B: "Important Notes / Constraints: 'SECURITY: Never commit secrets, API keys, or credentials to git. All secrets in .env files only. .env must be in .gitignore.' This hard constraint, stated prominently, prevents credential exposure regardless of task context.",
+            C: "Coding Conventions: 'Use consistent naming conventions'",
+            D: "Project Overview: 'Security is a priority'"
+          },
+          correct: "B",
+          explanation: "Security constraints belong in 'Important Notes' as non-negotiable hard rules. The constraint must be specific ('Never commit secrets — .env only, .env in .gitignore') rather than general ('be careful with security'). Constitutional constraints in this category override any task's implicit permissions — no specification or instruction can override 'never commit credentials.' This is the highest-priority category of CLAUDE.md content."
+        },
+        {
+          id: 20,
+          question: "Scenario: A developer's global CLAUDE.md says 'Always use spaces for indentation' and the project-level CLAUDE.md says 'Use tabs (legacy codebase requirement).' Claude uses spaces in the project. What is wrong and how does the correct hierarchy work?",
+          options: {
+            A: "Global CLAUDE.md always wins — personal preferences override project settings",
+            B: "Project-level CLAUDE.md should take precedence within its project. The project's specific legacy requirement (tabs) must override the developer's personal default (spaces). This is the intended hierarchy: project norms are authoritative within project scope.",
+            C: "There is no resolution mechanism — Claude randomly picks one",
+            D: "Both apply equally — Claude will alternate between them"
+          },
+          correct: "B",
+          explanation: "Two-level hierarchy: Global (~/.claude/CLAUDE.md) = personal defaults across all projects. Project-level = project-specific norms. Project-level takes precedence within its scope. The project's legacy codebase requirement (tabs for compatibility) supersedes the developer's personal preference (spaces). This hierarchy enables teams: each project has its own authoritative norms regardless of individual developer preferences."
         }
       ]
     },
@@ -747,6 +872,66 @@ export const chapter16: Chapter = {
           },
           correct: "C",
           explanation: "The Decision Heuristic says: IF files_affected > 5 → Use SDD. But the lesson also teaches judgment. For an urgent production bug affecting 10 files, a full four-phase workflow is overkill, but pure vibe coding is risky. The lightweight spec pattern (Task: one-line description, Constraints: what NOT to do, Success Criteria: measurable outcomes) provides 80% of spec value with 20% of overhead — appropriate for borderline cases."
+        },
+        {
+          id: 16,
+          question: "Scenario: A team skips Research and goes straight to Specification for a new microservice. Mid-Specification, they discover they don't know the rate limits of the third-party API the service must call. They must pause to research. What SDD principle did they violate?",
+          options: {
+            A: "Implementation must always come before Specification",
+            B: "They violated sequential phase dependency: Research must complete before Specification begins. Research exists to discover constraints (like API rate limits) before embedding them in a spec. Discovering constraints during Specification forces a phase restart, wasting Specification work.",
+            C: "Research is optional for experienced teams",
+            D: "They should have started with code to discover rate limits experimentally"
+          },
+          correct: "B",
+          explanation: "Sequential phase dependency: Research → Specification → Refinement → Implementation. Research reveals constraints (rate limits, existing patterns, compatibility requirements) so the Specification can incorporate them upfront. Starting Specification without completing Research means specifying with unknowns. When those unknowns surface mid-Specification, you must pause and effectively restart Research — wasting the Specification work already done."
+        },
+        {
+          id: 17,
+          question: "Scenario: During Implementation (task 8 of 12), you discover the database schema in the spec is wrong for the performance requirements. Tasks 1-7 are committed. What does SDD's iterative nature prescribe?",
+          options: {
+            A: "Continue with the wrong schema — changing mid-implementation is too disruptive",
+            B: "Revert task 8 (git revert), update the spec's Reference Architecture with the correct schema, run Refinement on the updated design, then continue from the corrected foundation. Tasks 1-7 that don't depend on the wrong schema remain valid.",
+            C: "Abandon the project and start from scratch",
+            D: "Complete all 12 tasks then fix the schema in a follow-up sprint"
+          },
+          correct: "B",
+          explanation: "SDD is iterative, not Waterfall. When Implementation discovers a fundamental spec error: stop the failing task (atomic rollback via git revert), update the spec (it's a living document), re-run Refinement on the changed sections, then continue from the corrected foundation. Tasks 1-7 that don't depend on the wrong schema remain valid. Atomic commits make this surgical rollback possible — only the affected task is reverted."
+        },
+        {
+          id: 18,
+          question: "Scenario: You give Claude 'Implement this entire spec in one prompt.' Claude produces a 500-line monolith with no commit history. What specific instruction was missing from the implementation prompt?",
+          options: {
+            A: "You should have specified the programming language",
+            B: "The core SDD implementation prompt was missing: 'Use the task tool, each task done by a subagent, commit after each task.' Without it, Claude treats the spec as a one-shot request with no task isolation, no per-task commits, and no rollback boundaries.",
+            C: "You should have specified the spec format more clearly",
+            D: "Claude should have asked for clarification before implementing"
+          },
+          correct: "B",
+          explanation: "The SDD implementation prompt is specific: 'Implement @docs/spec.md. Use the task tool and each task should only be done by a subagent so that context is clear. After each task do a commit before you continue. You are the main agent and your subagents are your devs.' The task tool instruction triggers task extraction. The commit instruction creates rollback boundaries. Without both, Claude defaults to monolithic implementation."
+        },
+        {
+          id: 19,
+          question: "Scenario: Your team skips Refinement because 'the spec is very detailed.' During Implementation, two subagents interpret 'admin user' differently — one assumes full system access, the other assumes department-level access. What would Refinement have caught?",
+          options: {
+            A: "Refinement would only have made the spec longer, not clearer",
+            B: "The Audience/Stakeholder category in the Refinement interview would have asked: 'Who exactly is an admin user? What specific actions can they perform?' This forces an explicit definition before implementation locks in either interpretation.",
+            C: "Developers should resolve interpretation differences during implementation",
+            D: "This is a communication problem, not an SDD problem"
+          },
+          correct: "B",
+          explanation: "The Refinement phase's Audience/Stakeholder category surfaces exactly this type of ambiguity: 'Who are the users, what are their roles, what can each do?' A spec can use 'admin user' as if obvious, when in fact team members (and AI subagents) interpret it differently. The structured interview forces an explicit definition: 'Admin can do X, Y, Z. They CANNOT do A, B. This differs from a department manager.' Explicit definitions prevent implementation divergence."
+        },
+        {
+          id: 20,
+          question: "Scenario: You run the SDD implementation prompt. The main agent creates 8 tasks from the spec's checklist. Tasks 3 and 4 have no dependencies on each other. The main agent runs them sequentially. According to the Four-Phase SDD workflow, what optimization is being missed?",
+          options: {
+            A: "Sequential is always correct — never run tasks in parallel",
+            B: "Independent tasks (no dependencies on each other) should be delegated to parallel subagents simultaneously — completing in the time of the longest task rather than the sum of both. The main agent should identify independent tasks and launch them in parallel.",
+            C: "Tasks should always run one at a time for safety",
+            D: "Parallel tasks cannot commit to the same git repository"
+          },
+          correct: "B",
+          explanation: "Parallel Execution Benefit: when tasks have no dependencies on each other, they can run simultaneously. The main agent identifies independent tasks (tasks 3 and 4 don't need each other's output) and delegates both to subagents at the same time. If each takes 5 minutes, parallel = 5 minutes total; sequential = 10 minutes. For large specs with many independent tasks, this parallelism compounds significantly."
         }
       ]
     },
@@ -933,6 +1118,66 @@ export const chapter16: Chapter = {
           },
           correct: "B",
           explanation: "Good research return format: structured summary with What was found (JWT authentication), Constraints discovered (15-min token expiry, HTTP-only cookie storage for refresh tokens), and implied Key decisions (follow existing patterns for consistency). This structure feeds directly into the spec's Context (existing auth system), Constraints (must use JWT, 15-min expiry), and Reference Architecture (HTTP-only cookies) sections."
+        },
+        {
+          id: 16,
+          question: "Scenario: You need to research three aspects of a new feature: existing codebase patterns, industry best practices, and third-party library options. You assign all three to one subagent. After 20 minutes, the subagent returns an overwhelmed, shallow summary. What Parallel Research principle was violated?",
+          options: {
+            A: "Research subagents should always work sequentially",
+            B: "The decomposition principle was violated: each independent research angle should get its own dedicated subagent. Three independent questions given to one subagent produces shallow coverage of all three. Three subagents in parallel produce deeper coverage of each in the same time.",
+            C: "20 minutes is too short for any research",
+            D: "One subagent is always sufficient if the researcher is experienced"
+          },
+          correct: "B",
+          explanation: "The Parallel Research decomposition principle: identify independent research angles (angles that don't need each other's results to begin), then assign ONE subagent per angle. Giving three independent questions to one subagent creates a context-overloaded generalist. Giving each question to a dedicated subagent creates three focused specialists running simultaneously. The synthesis step then combines their findings."
+        },
+        {
+          id: 17,
+          question: "Scenario: Three parallel research subagents return their findings. Two of them independently recommend cursor-based pagination. The third recommends offset-based with different reasoning. What should the Research Synthesis step conclude?",
+          options: {
+            A: "Vote 2-1 for cursor-based — majority wins",
+            B: "Analyze WHY each recommendation was made: if cursor-based is recommended for real-time data and your use case has real-time data, recommend cursor-based with the specific reasoning. If offset is simpler for your data volume, note the tradeoff. Resolution must be context-aware, not just a majority vote.",
+            C: "Present both options without resolving — let the Specification phase decide",
+            D: "Pick the recommendation from the most senior subagent"
+          },
+          correct: "B",
+          explanation: "Research Synthesis resolves conflicts contextually, not by majority. The synthesis step asks: 'Given OUR context (real-time data, expected scale, existing patterns), which recommendation applies?' Two agents may recommend different things for good reasons — synthesis determines which reason matches your situation. The output: a single resolved recommendation with documented reasoning, ready for the spec's Reference Architecture section."
+        },
+        {
+          id: 18,
+          question: "Scenario: You're using Parallel Research for a new feature. Subagent 1 investigates authentication patterns. Subagent 2 investigates error handling strategies. You discover that Subagent 2 needs to know the authentication approach before it can research error handling (auth errors require different handling). Can these run in parallel?",
+          options: {
+            A: "Yes — all research should always be parallelized",
+            B: "No — Subagent 2 depends on Subagent 1's output. Dependencies prevent parallelism: Subagent 1 must complete first, then its findings inform the specific error handling research Subagent 2 conducts. Only independent research angles can be parallelized.",
+            C: "Yes — have Subagent 2 make assumptions and correct later",
+            D: "Merge both into one subagent to avoid the dependency problem"
+          },
+          correct: "B",
+          explanation: "Parallelism requires independence: each angle can be explored without waiting for another angle's results. If Subagent 2's research scope depends on Subagent 1's findings (auth approach affects what error handling patterns are relevant), they have a dependency and must be sequenced. The test: 'Can this subagent start immediately without waiting for any other subagent?' If no, sequence it. Only independent angles parallelize."
+        },
+        {
+          id: 19,
+          question: "Scenario: After Parallel Research on a payment integration, you have three detailed subagent summaries totaling 2,000 words. You hand all three directly to the Specification phase without synthesis. The spec author complains it's overwhelming and contains contradictory recommendations. What Research step was skipped?",
+          options: {
+            A: "The research was too detailed — shorter summaries would work",
+            B: "Research Synthesis: combining parallel summaries into a unified document that removes duplication, resolves conflicts between findings, and organizes insights into spec-ready form. Raw parallel outputs are input to synthesis, not direct input to specification.",
+            C: "You should have done sequential research instead",
+            D: "The spec author should resolve contradictions during specification writing"
+          },
+          correct: "B",
+          explanation: "Research Synthesis is the mandatory step between Parallel Research and Specification. Its purpose: 1) Remove duplication (three agents may find the same pattern), 2) Resolve conflicts (agent A recommends X, agent B recommends Y — synthesis determines which applies to your context), 3) Organize insights into spec-ready sections (constraints → Constraints section, architectural patterns → Reference Architecture). Unprocessed parallel outputs overwhelm and confuse."
+        },
+        {
+          id: 20,
+          question: "Scenario: Your team is about to start specifying a complex API gateway feature. You have limited time. An engineer suggests doing quick parallel research first (4 subagents, 10 minutes each) before specifying. The PM says 'We already know enough, skip research.' Who is right, and what does SDD say?",
+          options: {
+            A: "The PM is right — experienced teams don't need research",
+            B: "The engineer is right for complex, unfamiliar work: 40 minutes of parallel research (4 subagents × 10 minutes, compressed to 10 minutes wall clock) reveals constraints that would otherwise surface as surprises during specification or implementation. The cost of research is far less than the cost of an implementation surprise.",
+            C: "Both are right — research is optional for all teams",
+            D: "Skip research only if the feature is under 5 files"
+          },
+          correct: "B",
+          explanation: "Research-before-specification is justified for complex, unfamiliar work: API gateway patterns involve rate limiting strategies, service discovery, authentication forwarding, circuit breakers — areas where wrong assumptions produce broken specs. 10 minutes of parallel research (4 subagents × 10 min = 40 min sequential, compressed to 10 min) reveals: existing rate limiting libraries, compatible auth patterns, known circuit breaker gotchas. This knowledge prevents specification errors that would propagate to implementation."
         }
       ]
     },
@@ -1119,6 +1364,66 @@ export const chapter16: Chapter = {
           },
           correct: "B",
           explanation: "The Reference Architecture section gives the AI the structural approach and key technical decisions. Saying 'use Stripe API' is like saying 'build a house' — it's directionally correct but missing the blueprint. Specifying API version, error handling patterns, and webhook reliability requirements gives the AI the skeleton it needs to build production-grade code, not just working code."
+        },
+        {
+          id: 16,
+          question: "Scenario: You're writing a spec for a file upload feature. Your Goals/Constraints section lists: 'Files must be uploaded securely.' The AI implements upload with no size limit, no file type validation, and no malware scanning. Which spec writing principle was violated?",
+          options: {
+            A: "The Context section was insufficient",
+            B: "The Goals/Constraints section contained noise instead of signal. 'Securely' is a vague adjective that doesn't change any implementation decision. Signal-dense constraints would specify: 'Accept PDF/PNG/JPG only, max 10MB, scan for malware before storage, reject executable content types, return 400 with specific error codes for each rejection reason.'",
+            C: "The Implementation Checklist was too short",
+            D: "You should have used a different file format for the spec"
+          },
+          correct: "B",
+          explanation: "Signal-dense vs noise-heavy: 'securely' sounds like a constraint but gives the AI no specific implementation target. It's adjective noise. Each actual constraint changes specific implementation decisions: file type whitelist (what to accept), size limit (when to reject), malware scanning (which service to call), error codes (what to return on rejection). Replace every vague adjective with a concrete, verifiable requirement that directly affects the code."
+        },
+        {
+          id: 17,
+          question: "Scenario: Your spec's Reference Architecture section says 'use the MVC pattern.' The AI builds a 400-line controller file with all business logic inside it, which technically satisfies 'MVC' but violates your team's layered service architecture. What was missing from the Reference Architecture?",
+          options: {
+            A: "The spec should have specified programming language",
+            B: "The Reference Architecture must document the structural approach with enough precision to guide correct implementation: 'Thin controllers (routing only, max 20 lines), business logic in service layer (/services/), data access in repository layer (/repositories/). Controllers call services; services call repositories; no direct DB calls in controllers.'",
+            C: "MVC is too ambiguous — use a different architecture",
+            D: "The Implementation Checklist should have had more specific items"
+          },
+          correct: "B",
+          explanation: "Reference Architecture should specify the structural approach with enough precision that AI makes correct implementation decisions. 'MVC' is a pattern family with many valid interpretations — fat controllers, fat models, service layers are all 'MVC'. The spec must document YOUR specific interpretation: controller responsibilities, service layer rules, data access boundaries. Architectural constraints without boundaries are as vague as no architecture at all."
+        },
+        {
+          id: 18,
+          question: "Scenario: Your Implementation Checklist has: '[ ] Implement all authentication features.' The AI generates 800 lines of code with JWT, OAuth, session management, MFA, and password reset in one commit. When OAuth breaks three weeks later, what's the rollback problem?",
+          options: {
+            A: "OAuth is always unstable — this was inevitable",
+            B: "The checklist item wasn't atomic — 'all authentication features' bundled multiple independent concerns in one task. One commit for 800 lines means reverting OAuth requires reverting JWT and session management too. Atomic items: '[ ] JWT token generation', '[ ] OAuth provider integration', '[ ] Session management', '[ ] MFA setup', '[ ] Password reset flow' — each a separate commit with its own rollback point.",
+            C: "OAuth should have been implemented last",
+            D: "800 lines per commit is a reasonable size"
+          },
+          correct: "B",
+          explanation: "Well-formed checklist items are atomic: one clear deliverable, one commit, one rollback boundary. 'All authentication features' is a feature, not a task. Decomposing to atomic items means each concern gets its own commit: when OAuth breaks, only the OAuth commit is reverted — JWT, MFA, and session management remain intact. Atomic decomposition is the prerequisite for surgical rollback."
+        },
+        {
+          id: 19,
+          question: "Scenario: A teammate reviews your spec and says 'The Context section is great — three pages of background, user research, and competitive analysis.' But the Constraints section is two lines and the Implementation Checklist has four vague items. The AI output consistently misses requirements. What's the spec problem?",
+          options: {
+            A: "The Context section is too detailed — delete it",
+            B: "Inverted signal-to-noise ratio: three pages of context that doesn't change implementation decisions, two lines of constraints that determine every implementation decision. Compress Context to essentials ('Users upload documents for legal review — accuracy and auditability are critical'). Expand Constraints to specific, verifiable requirements.",
+            C: "The AI needs more context to work effectively",
+            D: "Add more background research to the Context section"
+          },
+          correct: "B",
+          explanation: "Signal-to-noise ratio: Context matters for AI judgment calls at ambiguous decision points, but extensive background that doesn't affect implementation wastes context window. Constraints and Implementation Checklist are signal — they directly determine what code gets written. A spec where 90% is context and 10% is constraints produces AI that understands the WHY but has no clear WHAT or HOW NOT TO. Balance: concise context, comprehensive constraints."
+        },
+        {
+          id: 20,
+          question: "Scenario: You write a spec and ask AI to implement it. The AI says 'Implementation complete!' and shows code. You review and notice the AI made a reasonable-looking assumption about the database schema that differs from what you intended. Which spec section was insufficiently specified, and what would have prevented this?",
+          options: {
+            A: "The Implementation Checklist needed more items",
+            B: "The Reference Architecture section was missing the schema definition. If the schema matters for the implementation, it must be specified: actual table names, column types, and relationships. 'Use a database' is insufficient; 'Use the `documents` table with columns: id UUID PK, owner_id FK to users, content_type VARCHAR, uploaded_at TIMESTAMP' leaves nothing to assume.",
+            C: "The Context section should have mentioned the database",
+            D: "The AI should have asked for clarification before implementing"
+          },
+          correct: "B",
+          explanation: "The Reference Architecture section must capture all structural decisions that the AI cannot safely assume: existing table names, schema constraints, API contracts, integration points. 'Use a database' is a direction; the actual schema is a structural requirement. The rule: if the AI getting a structural detail wrong would create rework, it belongs in Reference Architecture. The spec eliminates guessing at every decision point that matters."
         }
       ]
     },
@@ -1305,6 +1610,66 @@ export const chapter16: Chapter = {
           },
           correct: "B",
           explanation: "The refinement interview connected two facts: 'quick delivery' (success criteria) + 'unreliable internet' (technical constraint) = the spec needs offline-tolerant design. Vague 'delivered quickly' becomes measurable: optimistic UI timing, delivery status indicators, offline queuing, and failure recovery. This is refinement at its best — surfacing the interaction between criteria and constraints to produce a spec that handles real-world conditions."
+        },
+        {
+          id: 16,
+          question: "Scenario: During a Refinement interview for a data export feature, you ask about the Audience: 'Who will use this export?' The stakeholder says 'Everyone.' You push further: 'Who is everyone — admins, regular users, all registered users?' They reveal: 'Only users who have been verified and have active subscriptions.' This changes the scope significantly. What category surfaced this?",
+          options: {
+            A: "Technical Constraints — only verified users can access the database",
+            B: "Audience/Stakeholder — pressing beyond the initial 'everyone' answer revealed the specific qualifying criteria (verified + active subscription) that defines the actual user population. This changes authentication checks, UI visibility, and error messaging.",
+            C: "Success Criteria — more users using the feature means more success",
+            D: "Edge Cases — unverified users are an edge case"
+          },
+          correct: "B",
+          explanation: "Audience/Stakeholder refinement is about drilling past surface answers to specific qualifying criteria. 'Everyone' is a non-answer that forces AI to assume the broadest access. Pressing reveals: verified + active subscription = specific checks needed at the API level, specific UI visibility rules (hide for non-subscribers), and specific error responses (401 for unverified, 403 for inactive subscription). A one-question refinement prevents multiple implementation assumptions."
+        },
+        {
+          id: 17,
+          question: "Scenario: During Refinement of a real-time collaboration feature, you ask about Success Criteria. The team initially says: 'Users can edit documents together.' After the ask_user_question process, they refine to: 'Changes appear for collaborators within 500ms, conflict resolution uses last-writer-wins, up to 50 simultaneous editors per document, 99.9% uptime.' What did Refinement achieve?",
+          options: {
+            A: "It added unnecessary complexity to a simple feature",
+            B: "It converted subjective satisfaction ('users can edit together') into objective, measurable criteria. Each refined criterion — latency threshold, conflict strategy, scale limit, uptime target — directly determines architecture choices that the original phrase left completely open.",
+            C: "The original criterion was sufficient — the team over-specified",
+            D: "Refinement should have asked about implementation technology, not success metrics"
+          },
+          correct: "B",
+          explanation: "This is Success Criteria refinement at its best: 'can edit together' = zero architectural guidance. 500ms latency = WebSocket (not polling). Last-writer-wins = no conflict UI needed. 50 simultaneous editors = specific concurrency architecture. 99.9% uptime = infrastructure requirements. Each measurable criterion eliminates a design decision that would otherwise be guessed during implementation. 'Done' goes from subjective to objectively testable."
+        },
+        {
+          id: 18,
+          question: "Scenario: You refine a spec for a notification system. After the interview, you realize the scope is impossible: the stakeholder wants push notifications for iOS and Android, email, SMS, and Slack — all within a 2-week sprint with one developer. What should the Refinement phase produce in this situation?",
+          options: {
+            A: "A spec with all five notification channels as required",
+            B: "An updated spec with explicit scope reduction: negotiate which 1-2 channels are required for MVP, move others to future sprints with explicit 'out of scope' documentation. Refinement surfaces impossible scope before implementation commits to it.",
+            C: "A refusal to continue the project due to unrealistic scope",
+            D: "Proceed with full scope and explain limitations after implementation"
+          },
+          correct: "B",
+          explanation: "Refinement surfaces impossible scope before implementation locks it in. When the interview reveals requirements that exceed sprint capacity, the correct output is scope negotiation — not silent acceptance or project abandonment. The refined spec documents: 'MVP (this sprint): Email notifications only. Future sprint: Push notifications (iOS + Android). Backlog: SMS, Slack.' Explicit 'out of scope' declarations prevent the team from building to wrong expectations."
+        },
+        {
+          id: 19,
+          question: "Scenario: You're using the ask_user_question pattern for Refinement. You ask one question about authentication scope and receive a clear, unambiguous answer. You then have 15 more potential ambiguities. Should you ask all 15 in the next message?",
+          options: {
+            A: "Yes — get all ambiguities resolved at once for efficiency",
+            B: "No — continue asking one targeted question at a time. Each answer often resolves multiple related ambiguities or changes what the next question should be. Asking 15 at once guarantees shallow answers; asking one at a time enables depth and follow-up.",
+            C: "Yes — stakeholders prefer to answer questions in batches",
+            D: "Skip the remaining 15 — one resolved ambiguity is enough"
+          },
+          correct: "B",
+          explanation: "The ask_user_question pattern is sequential by design: one question → incorporate answer → determine next question. Why: answers often resolve multiple related ambiguities ('only verified users' resolves the authentication question AND the error handling question for unverified users). Each answer also shifts context — question 5 may become irrelevant after question 2's answer. Batching 15 questions produces 15 shallow answers; sequential questioning produces 5-8 deep answers that resolve 15 issues."
+        },
+        {
+          id: 20,
+          question: "Scenario: You complete Refinement of a spec for a dark mode toggle feature. The interview reveals: one boolean user preference, persists to localStorage, system default falls back if not set. No hidden ambiguities, no conflicting stakeholder views, no complex edge cases. The refined spec is 8 lines. What does this outcome indicate about the feature and subsequent steps?",
+          options: {
+            A: "Refinement failed — 8 lines is too short for a valid spec",
+            B: "This is the 'expand vs. accept' guidance in practice: when Refinement reveals no hidden complexity, the lightweight spec is sufficient. The 8-line spec is complete and production-ready. Proceed directly to Implementation without expanding to a full 4-part spec — the overhead isn't justified by a feature this contained.",
+            C: "You should run Refinement again to find hidden complexity",
+            D: "The spec should be expanded to at least 50 lines for completeness"
+          },
+          correct: "B",
+          explanation: "Refinement's purpose is to surface hidden complexity, not to create complexity. When the interview reveals a feature is genuinely simple (one boolean, known behavior, minimal edge cases), the lightweight spec is the right output. 'Expand vs. accept': if writing and refining the spec revealed no complexity, there's no hidden complexity to spec. Forcing a 50-line spec for a localStorage toggle wastes time on overhead that adds zero implementation value."
         }
       ]
     },
@@ -1491,6 +1856,66 @@ export const chapter16: Chapter = {
           },
           correct: "B",
           explanation: "The guidance says: use task-based when 5+ distinct items, parallelizable work, rollback boundaries needed, or implementation >30 minutes. This spec has 3 items (below threshold), sequential dependencies (model before endpoints), and likely fits in one commit. The simpler approach — main agent implements directly from the spec — is more efficient. Task-based would add orchestration overhead without proportional benefit."
+        },
+        {
+          id: 16,
+          question: "Scenario: You start an SDD implementation at 10 AM with 12 tasks. By 11:30 AM, tasks 1-6 are done with commits. You step away. At 2 PM, you return to a different machine. Without any conversation history, how do you resume exactly where you left off?",
+          options: {
+            A: "You cannot resume — you must restart from task 1",
+            B: "Read @docs/spec.md (what to build) and run TaskList (see which tasks are completed/pending). Git log shows the 6 completed commits. Start the implementation prompt again — the main agent picks up from task 7 using the persisted spec and task state.",
+            C: "Contact support to restore the session",
+            D: "You need the original machine to access session memory"
+          },
+          correct: "B",
+          explanation: "Agent Amnesia solution: the spec document and TaskList persist on disk across machine changes, session restarts, and crashes. A new session reads: @docs/spec.md (full context) + TaskList (completed/pending status) + git log (what's already committed). The main agent extracts remaining tasks and continues from task 7 without any conversation history. This is exactly why SDD externalizes state to files — machine independence is a feature."
+        },
+        {
+          id: 17,
+          question: "Scenario: You're implementing a spec with 10 tasks. Task 4 requires building a shared utility that tasks 7, 8, and 9 all depend on. If you run all tasks in parallel from the start, what happens?",
+          options: {
+            A: "All tasks complete faster due to parallelism",
+            B: "Tasks 7, 8, and 9 will fail because the shared utility from task 4 doesn't exist yet. Dependencies must be respected: run tasks 1-4 sequentially (or tasks 1-3 in parallel with task 4 last), THEN run tasks 7, 8, 9 in parallel once task 4's utility is available.",
+            C: "Parallel execution automatically handles dependencies",
+            D: "Tasks 7, 8, 9 will run slower but eventually complete"
+          },
+          correct: "B",
+          explanation: "Dependency-aware parallelism: independent tasks (no dependencies on each other) can run simultaneously. Tasks with dependencies (7, 8, 9 depend on 4) must wait. The correct execution: analyze the dependency graph first, then batch tasks by dependency level. Level 1: tasks with no deps (can parallel). Level 2: tasks that depend on Level 1 completions. Task decomposition must include dependency identification — not just listing tasks but ordering them."
+        },
+        {
+          id: 18,
+          question: "Scenario: A subagent successfully completes task 6 and commits. The main agent then tries to delegate task 7, but task 7's subagent needs context from tasks 3 and 4 (not just task 6). What does the SDD isolation model say about how to handle this?",
+          options: {
+            A: "The subagent for task 7 should read the main agent's conversation history",
+            B: "The main agent delegates task 7 with the relevant spec context for that task explicitly included — the subagent does NOT receive conversation history but DOES receive the spec sections relevant to its work, which captures the decisions from tasks 3 and 4.",
+            C: "Tasks 3 and 4 must be re-run to provide context",
+            D: "Task 7 should be merged with tasks 3 and 4 into one big task"
+          },
+          correct: "B",
+          explanation: "Subagent isolation model: each subagent starts fresh with NO prior conversation history (prevents context pollution). But the spec document captures the relevant decisions and outcomes from prior tasks. The main agent delegates: 'Complete task 7 using @docs/spec.md section 3 and the schema established in task 4's commit.' The spec IS the persistent context — not conversation history. Good specs make each task independently executable."
+        },
+        {
+          id: 19,
+          question: "Scenario: Your spec has 8 tasks. Tasks 1-5 complete successfully with commits. Task 6's subagent fails its pre-commit hook (TypeScript error) three times in a row. The main agent keeps retrying the same approach. What should happen next?",
+          options: {
+            A: "Disable the pre-commit hook to force the commit through",
+            B: "The main agent should escalate: stop retrying the same approach, analyze the TypeScript error, update the spec with the discovered constraint, and either retry task 6 with a corrected approach or pause and ask for human input. Three consecutive failures signal an unknown constraint.",
+            C: "Skip task 6 and proceed to task 7",
+            D: "Start the entire implementation from scratch"
+          },
+          correct: "B",
+          explanation: "Backpressure + escalation protocol: three identical failures on the same task mean the current approach is wrong, not just slow. The correct response: stop retrying, read the TypeScript error (P7: Observability), identify what constraint the spec missed (missing type definition? incompatible library versions?), update the spec with the discovered constraint, then retry with a corrected approach. Repeated identical attempts violate P4 (try a different atomic approach). Never bypass quality gates."
+        },
+        {
+          id: 20,
+          question: "Scenario: You're tempted to use task-based SDD implementation for a quick 2-task fix: 'Update config value A' and 'Update config value B.' Your colleague says this doesn't need subagent delegation. According to the task-based implementation guidance, who is right?",
+          options: {
+            A: "You are right — always use task-based for multiple tasks",
+            B: "Your colleague is right — 2 tasks (below the 5+ threshold), sequential, likely a single commit scope. Task-based adds orchestration overhead (TaskCreate, delegation, per-task commits) without proportional benefit. The main agent should implement directly from the spec.",
+            C: "It depends on the complexity of each config value",
+            D: "Use task-based only if the two config values are in different files"
+          },
+          correct: "B",
+          explanation: "The task-based heuristic: use when 5+ items, parallelizable work, rollback granularity needed, or >30 minutes. Two config value updates fail all four criteria: under the threshold, inherently sequential, fits in one commit, takes under 5 minutes. Adding TaskCreate/TaskUpdate/subagent delegation overhead to a 5-minute fix is the definition of over-engineering. Use the right tool for the job — task-based is a power tool, not a default."
         }
       ]
     },
@@ -1677,6 +2102,66 @@ export const chapter16: Chapter = {
           },
           correct: "B",
           explanation: "This scenario hits all three SDD triggers simultaneously: files_affected (8 > 5), requirements_unclear (verbal description, no documentation), and learning_new_tech (unfamiliar library). Each trigger independently justifies SDD; together, they make it essential. Starting to code without research means you'll discover library constraints mid-implementation and have to redo work. The research phase compresses learning from hours to minutes via parallel subagents."
+        },
+        {
+          id: 16,
+          question: "Scenario: A developer is asked to change a button's color from blue to green on one page. They open the decision framework and start evaluating: 'Is it more than 5 files? No. Is it a bug fix? No. Is it unclear requirements? No.' They conclude: skip SDD. Their colleague says 'You should at least write a lightweight spec.' Who is right?",
+          options: {
+            A: "The colleague — all changes need at least a lightweight spec",
+            B: "The developer — a one-file, one-line CSS change with a single obvious implementation has no ambiguity and no rollback risk. Applying even a lightweight spec adds overhead without value. The decision heuristic correctly identifies this as 'skip SDD.'",
+            C: "Neither — use vibe coding for UI changes",
+            D: "The developer — but they should document the change in a separate file"
+          },
+          correct: "B",
+          explanation: "The decision heuristic correctly handles obvious changes: single file, obvious solution, zero ambiguity, minimal rollback risk = skip SDD. The lightweight spec pattern is for 'judgment call' borderline cases — multiple files, some ambiguity, moderate complexity. A one-line CSS change doesn't qualify. The wisdom of SDD is knowing when NOT to use it: overhead that adds no value is waste, not rigor."
+        },
+        {
+          id: 17,
+          question: "Scenario: Your team is debating whether to use SDD for a refactor that affects 25 files across 3 modules. The tech lead says 'We've done similar refactors before, so requirements are clear — skip SDD.' A developer says 'files_affected > 5 triggers SDD.' Who is right, and what does the decision framework say?",
+          options: {
+            A: "The tech lead — experience eliminates the need for SDD",
+            B: "The developer — files_affected > 5 is an explicit SDD trigger. Past experience with similar refactors affects how quickly you write the spec, not whether you write it. 25-file cross-module refactors involve dependency interactions that benefit from a spec even when the approach is familiar.",
+            C: "Both are right — this is a judgment call either way",
+            D: "Skip SDD but use more detailed commit messages instead"
+          },
+          correct: "B",
+          explanation: "files_affected > 5 is an explicit SDD trigger because multi-file changes have compounding interaction risks — even familiar refactors can have unexpected cross-module effects. Experience makes spec writing faster and the Research phase shorter (you know the codebase), but it doesn't eliminate the value of a written spec as an external reference, rollback guide, and shared team contract. The heuristic exists precisely because 'it seems clear' is not the same as 'it is clear.'"
+        },
+        {
+          id: 18,
+          question: "Scenario: A developer is building a proof-of-concept integration with a new AI API they've never used. The PM says 'Use full SDD — this will eventually go to production.' The developer says 'Requirements are unknowable until I experiment — this is exploratory.' Who is right?",
+          options: {
+            A: "The PM — production intentions require SDD from day one",
+            B: "The developer — for exploratory work where requirements can only be discovered through building, vibe coding the exploration is appropriate. The SDD guidance: 'Exploration is a phase, not an end state.' When the prototype validates an approach, THEN write a spec before production implementation.",
+            C: "Both are wrong — a lightweight spec works for all phases",
+            D: "The developer — SDD is never needed for AI integrations"
+          },
+          correct: "B",
+          explanation: "The Decision Framework explicitly identifies exploratory prototypes as 'SDD is overkill' scenarios: requirements are unknowable until built. The appropriate sequence: vibe code the exploration to discover what's possible, validate the approach, THEN transition to Spec-Anchored SDD for the production version. The PM's instinct (production needs rigor) is correct in spirit but wrong in timing — rigor comes after exploration validates the approach, not before."
+        },
+        {
+          id: 19,
+          question: "Scenario: You're applying the Lightweight Spec Pattern to a borderline task: migrating a database connection pool configuration from 5 connections to 50 connections across your application. The change touches 8 files (all configuration) but the change itself is straightforward. Which approach does the decision framework suggest?",
+          options: {
+            A: "Full 4-phase SDD — 8 files exceeds the threshold",
+            B: "Lightweight spec: Task (change connection pool from 5 to 50 across all config files), Constraints (don't change application logic, preserve existing env var names), Success Criteria (all 8 config files updated, connection tests pass, no existing tests break). This provides spec benefits without full SDD overhead for a mechanical change.",
+            C: "Skip SDD — configuration changes never need specs",
+            D: "Only update 4 files to stay below the 5-file threshold"
+          },
+          correct: "B",
+          explanation: "Judgment call: files_affected > 5 triggers SDD consideration, but the change is mechanical (find-and-replace a number in config files). The Lightweight Spec pattern is designed for this: Task + Constraints + Success Criteria provides 80% of spec value (prevents scope creep — don't change application logic, don't rename variables) with 20% of overhead. Full 4-phase SDD for a configuration find-and-replace adds Research and Refinement phases with no proportional value."
+        },
+        {
+          id: 20,
+          question: "Scenario: A junior developer applies the SDD decision heuristic perfectly: files > 5? Yes. Requirements unclear? Yes. New tech? Yes. They conclude 'Use SDD' and proceed with the full four-phase workflow. Six months later, they've applied SDD to every task including bug fixes, typo corrections, and single-file utilities. What development has stalled?",
+          options: {
+            A: "Nothing — following the heuristic rigorously is always correct",
+            B: "The 'Building Judgment' phase: the heuristic gives correct binary answers but real expertise is calibrating when even a triggered heuristic allows a lighter approach. Over-applying SDD to every triggered case without weighing actual complexity, team context, and time pressure prevents development of judgment-based decision making.",
+            C: "They should use SDD even less — the heuristic triggers too often",
+            D: "They need a more detailed heuristic with more variables"
+          },
+          correct: "B",
+          explanation: "The heuristic is a starting point, not a replacement for judgment. A bug fix across 8 files (> 5 threshold) may still not justify full four-phase SDD if the fix is straightforward and team knows the codebase. 'Building Judgment' means developing intuition for when triggered heuristics still allow lighter approaches: weigh actual complexity (is each file a 1-line change?), team familiarity (we've done this before), urgency (production incident?), and risk (what breaks if we're wrong?). Heuristics guide; judgment decides."
         }
       ]
     },
@@ -1863,6 +2348,66 @@ export const chapter16: Chapter = {
           },
           correct: "B",
           explanation: "The 6-step framework starts with Research: 'what must be known before specifying.' For a Wedding Planner, you can't specify goals, constraints, or success criteria without knowing the basics: guest count (affects venue size), budget (affects every decision), timeline (affects vendor availability), and non-negotiables (constraints that can't be compromised). Skipping research produces a spec full of assumptions that will fail during refinement or implementation."
+        },
+        {
+          id: 16,
+          question: "Scenario: You complete Exercise 1.1 (Event Gone Wrong) and reverse-engineer a spec for a failed product launch. Your spec has: vague success criteria ('the launch should go well'), missing constraints ('don't exceed budget' without a number), and no implementation checklist. According to the Assessment Rubric, what level is your spec and what specific improvements are needed?",
+          options: {
+            A: "Advanced level — you correctly identified what went wrong",
+            B: "Developing level (vague spec). Improvements: convert 'should go well' to measurable criteria (e.g., '500 signups in first week, <2% error rate on launch day'), specify the exact budget constraint ($X total across Y channels), and add an implementation checklist with atomic, verifiable items.",
+            C: "Proficient level — identifying problems is the main skill",
+            D: "Beginner level — you need to redo the exercise from scratch"
+          },
+          correct: "B",
+          explanation: "Assessment Rubric: Spec Completeness progression goes from 'vague' → 'reusable with edge cases handled.' A spec with vague success criteria and missing numbers is at the 'vague' level. The improvement path: 1) Replace adjective criteria with measurable numbers, 2) Replace implicit constraints with explicit bounds ('budget: $50,000 total'), 3) Add implementation checklist (atomic, verifiable items). Each improvement moves up one level on the completeness scale."
+        },
+        {
+          id: 17,
+          question: "Scenario: You complete Module 3 (The Research Phase) exercises. In each exercise, your research was shallow — you found general information but missed project-specific constraints each time. According to the Assessment Rubric's Research Quality dimension, what level are you at and what exercise targets this gap?",
+          options: {
+            A: "Advanced — general information is the goal of research",
+            B: "Beginning/Developing level (skipped or shallow research). The target exercise: Module 3 specifically trains systematic multi-angle investigation. Retry with 3+ parallel research angles, including at least one angle dedicated to discovering constraints and incompatibilities specific to your project context.",
+            C: "Proficient — constraints will be discovered during implementation",
+            D: "This is a communication problem, not a research quality problem"
+          },
+          correct: "B",
+          explanation: "Assessment Rubric Research Quality: 'Skipped' → 'Single-angle' → 'Multi-angle systematic.' Shallow research that misses project-specific constraints is the single-angle level — you found what exists but not what applies to your context. Multi-angle systematic research: Angle 1 (general patterns), Angle 2 (compatibility constraints for your specific stack), Angle 3 (known issues and gotchas). Constraint-discovery is a dedicated research angle, not a side effect of general research."
+        },
+        {
+          id: 18,
+          question: "Scenario: You complete Exercise 5.2 (Role-Playing Stakeholder Perspectives) where you review a spec from three viewpoints: end-user (wants simplicity), admin (wants control), executive (wants metrics). Your review as the end-user didn't change the spec at all. Your review as the admin added 3 constraints. What does this mean for your refinement skill development?",
+          options: {
+            A: "You have strong admin skills and weak user skills — focus on admin features",
+            B: "You identified admin constraints (good) but may have missed user experience constraints — the end-user perspective should surface usability constraints: 'user must complete onboarding in under 3 minutes,' 'error messages must be actionable, not technical codes.' Zero changes from a stakeholder review usually indicates surface-level engagement with that role.",
+            C: "End-user reviews always produce fewer changes — this is normal",
+            D: "The spec was already perfect for end-users before you reviewed it"
+          },
+          correct: "B",
+          explanation: "Exercise 5.2 trains identifying gaps from each stakeholder's perspective. Zero changes from the end-user review suggests either the spec was already perfectly user-focused (rare) or the role-play was surface-level. Deep end-user engagement surfaces: time constraints on onboarding, accessible error messaging, mobile responsiveness requirements, offline behavior expectations. If admin review finds constraints but user review finds none, the user perspective is being under-examined."
+        },
+        {
+          id: 19,
+          question: "Scenario: You're building an event planning system (similar to Wedding Planner Capstone). You've done Research, written a spec, and completed Refinement. During the Execute step, Claude produces an implementation that technically satisfies every checklist item but the overall system doesn't feel like an 'event planner' — it feels more like a generic to-do list. What Verify step would have caught this?",
+          options: {
+            A: "Run all unit tests — they would have caught this",
+            B: "The 6-step framework's Verify step: 'check every output against every spec criterion' — but also run the system as an event planner user would. If the spec's Context section said 'users are event coordinators managing vendors, timelines, and guest lists,' verify that those specific workflows exist and feel natural, not just that checkboxes are technically satisfied.",
+            C: "This is an aesthetic problem that specs can't capture",
+            D: "The Iterate step will fix this in the next cycle"
+          },
+          correct: "B",
+          explanation: "The Verify step checks implementation against EVERY spec criterion — including the Context section. If Context says 'users are event coordinators,' verification includes: Can an event coordinator add a vendor with contact info and contract status? Can they track guest RSVPs against a capacity limit? Can they manage a timeline with dependencies? Technical checklist satisfaction ('CRUD operations work') is necessary but not sufficient — the system must satisfy the Context's implicit behavioral requirements."
+        },
+        {
+          id: 20,
+          question: "Scenario: After completing all 27 exercises and 3 capstone projects, you review your Assessment Rubric scores: Research (4/4), Spec Completeness (3/4), Constraint Coverage (4/4), Refinement Depth (2/4), Task Delegation (4/4). What is your specific skill gap and what exercise targets it?",
+          options: {
+            A: "Your weakest area is Spec Completeness — focus on writing longer specs",
+            B: "Your specific gap is Refinement Depth (2/4): your interviews clarify wording but don't change spec direction. Target: Exercise 5.3 (Stakeholder Perspectives) to practice finding deep conflicts between user/admin/executive views, and Exercise 4.3 (Constraint Stress Test) to adversarially probe specs until you find direction-changing gaps.",
+            C: "You are balanced enough — all areas above 2/4 is proficient",
+            D: "Refinement Depth of 2/4 is maximum — it cannot be improved further"
+          },
+          correct: "B",
+          explanation: "Assessment Rubric diagnosis: Refinement Depth 2/4 = 'some refinement but didn't change spec direction.' The gap: interviews surface minor clarifications but not fundamental assumptions that restructure the spec. The targeted exercises: 5.3 (Stakeholder Perspectives) forces you to find conflicts between viewpoints that require structural spec changes (not just wording). 4.3 (Constraint Stress Test) forces you to find loopholes an adversarial implementation could exploit — gaps significant enough to change the spec's direction when fixed."
         }
       ]
     }
