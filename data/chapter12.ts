@@ -194,7 +194,127 @@ export const chapter12: Chapter = {
         { id: 17, question: "Scenario: A startup builds a Custom Agent for invoice processing before fully understanding their edge cases. Six months later, it fails on half the invoices it encounters. Which anti-pattern caused this?", options: { A: "Perpetual Incubation", B: "Premature Specialization — crystallizing into a Custom Agent before requirements stabilize led to hard-coded assumptions that fail on real-world edge cases", C: "Skipping Incubation", D: "Over-reliance on General Agents" }, correct: "B", explanation: "Premature Specialization is exactly this pattern: building a Custom Agent before requirements are fully explored. Without using a General Agent (Incubator stage) to discover edge cases, unknowns get hard-coded as wrong assumptions. The fix: use a General Agent to discover real edge cases first, then crystallize into a Custom Agent once requirements stabilize." },
         { id: 18, question: "Scenario: A company uses Claude Code daily for prototyping but never promotes any prototype to a production Custom Agent. What anti-pattern does this represent and what is the cost?", options: { A: "Premature Specialization — they are moving too fast", B: "Perpetual Incubation — using a General Agent indefinitely for work that needs production-grade precision, governance, and reliability, surrendering the compounding value of Specialist Agents", C: "Skipping Incubation — they never prototype", D: "This is the correct approach" }, correct: "B", explanation: "Perpetual Incubation: using General Agents (Claude Code) for production workflows that require the precision, reliability, governance, and scalability of Custom Agents. The cost is that the team never builds defensible IP, cannot scale consistently, and misses the compounding value of the full Agent Factory cycle: Incubation → Crystallization → Specialization → Production." },
         { id: 19, question: "Scenario: A developer skips the General Agent stage entirely and immediately builds a Custom Agent specialist for a brand-new, poorly understood HR onboarding workflow. According to the Agent Maturity Model, what risk does this create?", options: { A: "The Custom Agent will be too expensive", B: "Skipping Incubation — critical requirements discovered only through exploration are missed. The Custom Agent is built on incomplete understanding, creating costly rework after deployment.", C: "The General Agent was not needed anyway", D: "There is no risk — Custom Agents are always better" }, correct: "B", explanation: "Skipping Incubation means you never use a General Agent to freely explore the problem space, discover unknowns, test edge cases, or surface hidden requirements. Building a Custom Agent on incomplete understanding leads to missed requirements that only emerge in production, at 10-100x the rework cost. Use the Incubator first." },
-        { id: 20, question: "Scenario: A solo developer wants to enter the $3T developer economy. They know Python syntax deeply but have never written an AI specification. Where should they invest their learning time first?", options: { A: "Learn more programming languages", B: "Invest in specification writing, agent orchestration, and validation skills — the AI-Native skill stack that separates Orchestrators from Typists. Syntax mastery is table stakes; orchestration skills are the new leverage point.", C: "Wait for AI to improve more", D: "Focus on UI/UX design instead" }, correct: "B", explanation: "The $3T developer economy rewards AI-Native skills, not traditional syntax mastery. The shift from Typist to Orchestrator means the high-value skills are: specification writing, agent orchestration, and validation/judgment. A developer who masters these will compound productivity far beyond a pure syntax expert." }
+        { id: 20, question: "Scenario: A solo developer wants to enter the $3T developer economy. They know Python syntax deeply but have never written an AI specification. Where should they invest their learning time first?", options: { A: "Learn more programming languages", B: "Invest in specification writing, agent orchestration, and validation skills — the AI-Native skill stack that separates Orchestrators from Typists. Syntax mastery is table stakes; orchestration skills are the new leverage point.", C: "Wait for AI to improve more", D: "Focus on UI/UX design instead" }, correct: "B", explanation: "The $3T developer economy rewards AI-Native skills, not traditional syntax mastery. The shift from Typist to Orchestrator means the high-value skills are: specification writing, agent orchestration, and validation/judgment. A developer who masters these will compound productivity far beyond a pure syntax expert." },
+        {
+          id: 21,
+          question: "What did Dario Amodei (Anthropic CEO) predict about AI's role in coding, and what did Sundar Pichai report about Google's engineering productivity?",
+          options: {
+            A: "Amodei predicted 50% of code by AI within 5 years; Pichai reported 25% productivity increase",
+            B: "Amodei stated 'AI will be writing 90% of the code' within months; Pichai reported a 10% engineering productivity increase at Google",
+            C: "Amodei predicted full automation within 10 years; Pichai reported no measurable change",
+            D: "Amodei predicted 70% of code by AI; Pichai reported 20% productivity increase"
+          },
+          correct: "B",
+          explanation: "Dario Amodei stated 'AI will be writing 90% of the code' within months, representing industry leadership validating the inflection point. Sundar Pichai reported a 10% engineering productivity increase at Google — a measurable organizational-level impact from AI adoption."
+        },
+        {
+          id: 22,
+          question: "According to Y Combinator Winter 2025 data, what percentage of startups had AI-generated code as their primary development approach, and what extreme ratio did some teams report?",
+          options: {
+            A: "10% of startups; some reported 50% AI-generated code",
+            B: "50% of startups; some reported 80% AI-generated code",
+            C: "25% of startups; some teams reported 95% of their codebase written by AI",
+            D: "75% of startups; some reported 100% AI-generated code"
+          },
+          correct: "C",
+          explanation: "Y Combinator Winter 2025 revealed 25% of startups had AI-generated code as their primary development approach. Some teams reported 95% of their codebase was written by AI — validating the economic disruption of traditional development workflows at the startup funding level."
+        },
+        {
+          id: 23,
+          question: "What specific usage metrics did the DORA 2025 Report find regarding AI coding tool adoption among professional developers?",
+          options: {
+            A: "60% adoption rate; average 30 minutes per day; quality decreased",
+            B: "90% adoption rate; median 2 hours per day usage; quality maintained or improved",
+            C: "75% adoption rate; median 1 hour per day; quality unchanged",
+            D: "95% adoption rate; average 4 hours per day; quality varied"
+          },
+          correct: "B",
+          explanation: "DORA 2025 Report found a 90% adoption rate with a median of 2 hours per day usage, and crucially reported that code quality was maintained or improved — countering the argument that AI tools sacrifice quality for speed."
+        },
+        {
+          id: 24,
+          question: "According to the Diagnostic Framework, which set of conditions indicates you should use a General Agent rather than building a Custom Agent?",
+          options: {
+            A: "Requirements are crystallized, volume justifies investment, users depend on consistent behavior",
+            B: "Cost/latency optimization is critical, specific constraints need enforcement, hundreds of daily runs expected",
+            C: "Requirements are unclear, solutions need exploration, one-off/internal tool, novel approach, multiple approaches need testing",
+            D: "Production deployment is ready, guardrails are defined, domain expertise is encoded"
+          },
+          correct: "C",
+          explanation: "The Diagnostic Framework says use General Agents when: requirements are unclear, solutions need exploration, it's a one-off/internal tool, the approach is novel, or multiple approaches need testing. Build Custom Agents only when requirements have crystallized, volume justifies investment, and consistent behavior is required."
+        },
+        {
+          id: 25,
+          question: "At the ICPC World Finals (September 2025), how did Google DeepMind's Gemini 2.5 perform compared to the OpenAI ensemble and human teams?",
+          options: {
+            A: "Gemini 2.5 solved all 12; OpenAI solved 11; humans solved 10",
+            B: "Gemini 2.5 solved 11; OpenAI solved 12; both beat humans",
+            C: "Gemini 2.5 solved 10; OpenAI solved 12 (perfect); human champions solved 11. Problem C was solved by both AI systems but none of 139 human teams",
+            D: "Gemini 2.5 solved 9; OpenAI solved 12; humans solved 12"
+          },
+          correct: "C",
+          explanation: "At ICPC World Finals: OpenAI ensemble achieved 12/12 (perfect); Gemini 2.5 solved 10; human champions solved 11. Problem C was uniquely AI-domain: solved by both AI systems but by none of the 139 human teams — demonstrating that specific problem classes may already be beyond human competitive reach."
+        },
+        {
+          id: 26,
+          question: "How does the AI-native development opportunity window compare to previous technology transitions like web, mobile, and cloud?",
+          options: {
+            A: "AI has a longer window (10–15 years) because it is more complex than web or mobile",
+            B: "Previous transitions (web 1995–2005, mobile 2008–2015, cloud 2010–2018) had 3–5 year windows; the AI learning advantage window is immediate (2026) and already closing",
+            C: "AI has the same 3–5 year window but starting in 2030",
+            D: "There is no opportunity window — AI adoption is mandatory for all developers immediately"
+          },
+          correct: "B",
+          explanation: "Web (1995–2005), mobile (2008–2015), and cloud (2010–2018) each offered 3–5 year windows for early adopters. The AI-native development window is immediate — starting in 2026 — and already closing. Early movers gain compounding advantages while late adopters face structural disadvantage."
+        },
+        {
+          id: 27,
+          question: "Which tools are listed for Stage 1 (General Agents/Incubators) and Stage 2 (Custom Agents/Specialists) in the Agent Maturity Model as of 2026?",
+          options: {
+            A: "Stage 1: GPT-4, Gemini Pro; Stage 2: LangChain, AutoGPT",
+            B: "Stage 1: Claude Code, OpenAI Codex CLI, Gemini CLI, Goose (Linux Foundation); Stage 2: OpenAI Agents SDK, Claude Agent SDK (Anthropic), Google ADK",
+            C: "Stage 1: GitHub Copilot, Cursor; Stage 2: AutoGen, CrewAI",
+            D: "Stage 1: ChatGPT, Bard; Stage 2: LlamaIndex, Haystack"
+          },
+          correct: "B",
+          explanation: "Stage 1 Incubator tools (2026): Claude Code (Anthropic), OpenAI Codex CLI, Gemini CLI (Google), Goose (Linux Foundation). Stage 2 Specialist tools: OpenAI Agents SDK, Claude Agent SDK (Anthropic), Google ADK. The SDKs provide the governance and precision needed for production Custom Agents."
+        },
+        {
+          id: 28,
+          question: "Which acquisition is cited as financial validation of the AI-native development inflection point in 2025?",
+          options: {
+            A: "Microsoft acquired GitHub for $7.5 billion",
+            B: "Google acquired DeepMind for $500 million",
+            C: "Workday acquired Sana for $1.1 billion",
+            D: "Salesforce acquired Slack for $27.7 billion"
+          },
+          correct: "C",
+          explanation: "Workday's acquisition of Sana for $1.1 billion is cited as financial market validation of the AI-native development inflection point — enterprise companies making billion-dollar bets on AI-powered knowledge work tools confirms that mainstream adoption is not theoretical but backed by institutional capital."
+        },
+        {
+          id: 29,
+          question: "What is the 'Convergent Evidence Pattern' and why is it important in validating the 2025 Inflection Point?",
+          options: {
+            A: "Using a single authoritative source to confirm AI capabilities",
+            B: "Validating claims through multiple independent sources: academic benchmarks (ICPC, GDPval), third-party research (Stack Overflow, DORA), startup economics (Y Combinator), and financial decisions (acquisitions)",
+            C: "Waiting for government reports before accepting AI statistics",
+            D: "Comparing AI performance only against other AI systems"
+          },
+          correct: "B",
+          explanation: "The Convergent Evidence Pattern validates the inflection point through independent, non-correlated sources: academic benchmarks (ICPC, GDPval), third-party research (Stack Overflow 2025, DORA 2025), startup economics (Y Combinator W2025), and financial market decisions (Workday/Sana acquisition). When independent sources converge, the signal is strong."
+        },
+        {
+          id: 30,
+          question: "Scenario: You are designing a Stage 2 Custom Agent for customer support tier-1. According to the Agent Maturity Model example, which combination of hard constraints and success metrics is appropriate?",
+          options: {
+            A: "No hard constraints; success = high customer satisfaction scores only",
+            B: "Hard constraints: never answer pricing, never process refunds; Success metrics: >80% resolution without escalation, <2 second response time, <45 second handle time",
+            C: "Hard constraints: never escalate; Success metrics: 100% resolution rate",
+            D: "Hard constraints: only answer FAQs; Success metrics: minimize token usage"
+          },
+          correct: "B",
+          explanation: "The Stage 2 Custom Agent example defines hard constraints (never answer pricing, never process refunds) paired with measurable success metrics (>80% resolution without escalation, <2 second response time, <45 second handle time). This reflects the key Stage 2 characteristic: predefined workflows, hard safety limits, precise tools, designed for volume and consistency."
+        }
       ]
     },
     {
@@ -385,7 +505,127 @@ export const chapter12: Chapter = {
         { id: 17, question: "Scenario: An enterprise uses a 2M token context window and assumes they no longer need AGENTS.md or spec files because 'everything fits in context.' According to the Three Constraints, what critical misunderstanding does this reveal?", options: { A: "They are correct — 2M tokens solves the stateless constraint", B: "Context window size does not resolve the Stateless constraint. Each new session still starts fresh with no memory. AGENTS.md and specs remain essential regardless of window size.", C: "2M tokens also resolves the probabilistic constraint", D: "There are no constraints with large context windows" }, correct: "B", explanation: "The Stateless constraint is not the same as the Limited Context constraint. Stateless means sessions have no memory between them. A 2M token window is large within a single session but provides zero cross-session memory. AGENTS.md and spec files solve Stateless — not context window size. Confusing these two constraints leads to architectural errors." },
         { id: 18, question: "Scenario: A developer notices a critical financial calculation produced by an LLM is always correct in tests but occasionally wrong in production. Setting temperature to 0 helped but did not fully eliminate errors. What does the Three Constraints framework prescribe?", options: { A: "Use a different LLM provider", B: "Even at temperature 0, probabilism persists subtly. The framework prescribes: TDD with deterministic test cases, automated output validation against known-good results, and human escalation for outlier confidence scores.", C: "Increase the context window", D: "Write a better AGENTS.md" }, correct: "B", explanation: "Temperature 0 reduces but cannot fully eliminate probabilistic variation. For financial calculations, the correct response is deterministic validation: write TDD test cases with known inputs and expected outputs, automate validation on every run, and escalate any result that differs from the expected range." },
         { id: 19, question: "Scenario: Your agent has a 200K token context window but its performance degrades noticeably after 3 hours of continuous operation in a complex codebase session. You have not hit the token limit yet. According to the Three Constraints, what is likely happening?", options: { A: "The model is getting tired", B: "The practical effective context (attention quality) degrades before the hard token limit is reached, a consequence of the Limited Context constraint. Curating context via progressive disclosure and spec references improves quality.", C: "The internet connection is slowing down", D: "Temperature drift is causing the issue" }, correct: "B", explanation: "The Limited Context constraint manifests not just as a hard cutoff but as quality degradation as context fills. LLM attention quality is not uniform across the full window — older context receives less effective attention. The response is proactive context curation: specification-first thinking, progressive disclosure, and file references rather than inlining all content." },
-        { id: 20, question: "Scenario: A new developer argues that since Claude now has a 200K token window, you no longer need concise specifications — you can just dump all requirements, meeting notes, and Slack history into each prompt. What does the Three Constraints framework say?", options: { A: "They are correct — larger context means less discipline needed", B: "This is poor constraint-aware practice. Limited context requires curation, not dumping. Signal-dense specs maximize the ratio of useful information to tokens consumed. Noise in the context window degrades output quality even when the hard limit is not reached.", C: "Only AGENTS.md needs to be concise", D: "Meeting notes are the best context" }, correct: "B", explanation: "The Limited Context constraint requires curation regardless of window size. Signal-dense specifications outperform raw information dumps because noise degrades reasoning quality within the window, irrelevant context crowds out important details, and attention quality drops as context grows." }
+        { id: 20, question: "Scenario: A new developer argues that since Claude now has a 200K token window, you no longer need concise specifications — you can just dump all requirements, meeting notes, and Slack history into each prompt. What does the Three Constraints framework say?", options: { A: "They are correct — larger context means less discipline needed", B: "This is poor constraint-aware practice. Limited context requires curation, not dumping. Signal-dense specs maximize the ratio of useful information to tokens consumed. Noise in the context window degrades output quality even when the hard limit is not reached.", C: "Only AGENTS.md needs to be concise", D: "Meeting notes are the best context" }, correct: "B", explanation: "The Limited Context constraint requires curation regardless of window size. Signal-dense specifications outperform raw information dumps because noise degrades reasoning quality within the window, irrelevant context crowds out important details, and attention quality drops as context grows." },
+        {
+          id: 21,
+          question: "What is GPT-5.2's context window size as of early 2026, and how many words and pages does it approximate?",
+          options: {
+            A: "128K tokens (~100,000 words / ~300 pages)",
+            B: "256K tokens (~200,000 words / ~600 pages)",
+            C: "512K tokens (~400,000 words / ~1,200 pages)",
+            D: "1M tokens (~750,000 words / ~2,500 pages)"
+          },
+          correct: "B",
+          explanation: "GPT-5.2 has a 256K token context window, approximating ~200,000 words or ~600 pages. Compare: Claude Opus 4.5 has 200K tokens (~500 pages) and Gemini 3 Pro leads with 2M tokens (~5,000 pages)."
+        },
+        {
+          id: 22,
+          question: "What is the typical token range consumed by a system prompt (AGENTS.md, skills) versus relevant code files in a session?",
+          options: {
+            A: "System prompt: 100–500 tokens; code files: 500–1,000 tokens",
+            B: "System prompt: 5,000–20,000 tokens; code files: 10,000–100,000 tokens",
+            C: "System prompt: 50,000–100,000 tokens; code files: 200,000+ tokens",
+            D: "Both are always under 1,000 tokens each"
+          },
+          correct: "B",
+          explanation: "Context fills quickly. System prompt (AGENTS.md, skills): 5,000–20,000 tokens; Specification: 1,000–5,000 tokens; Conversation history: 2,000–50,000 tokens; Relevant code files: 10,000–100,000 tokens; Model response: 1,000–10,000 tokens. Understanding these ranges is essential for context budgeting."
+        },
+        {
+          id: 23,
+          question: "How do the Stateless and Limited Context constraints combine to create a specific architectural requirement?",
+          options: {
+            A: "They are independent and require separate solutions with no interaction",
+            B: "Stateless + Limited Context: Must re-inject context efficiently each session, creating the need for concise AGENTS.md and signal-dense specifications",
+            C: "They cancel each other out — statelessness compensates for limited context",
+            D: "Their combination requires buying a larger context window"
+          },
+          correct: "B",
+          explanation: "Constraint interconnections: Stateless + Limited Context → must re-inject context efficiently → concise AGENTS.md essential. Probabilistic + Stateless → each fresh session has variable output → requires version control. Probabilistic + Limited Context → constrained information yields more varied outputs → clear specs needed."
+        },
+        {
+          id: 24,
+          question: "What is the recognized strength of the Probabilistic constraint that developers should leverage rather than only fight against?",
+          options: {
+            A: "It guarantees security — different outputs prevent replay attacks",
+            B: "Creative problem-solving, exploration of multiple valid solutions, and discovery of approaches the developer may not have considered",
+            C: "It reduces cost by avoiding repetitive outputs",
+            D: "It allows temperature 0 to work perfectly"
+          },
+          correct: "B",
+          explanation: "While probabilism creates consistency challenges, its strength is creative problem-solving: the model may generate multiple valid solutions, explore the solution space, and produce approaches the human developer would not have considered. The adaptation is to validate outputs, not to eliminate the probabilism that enables creativity."
+        },
+        {
+          id: 25,
+          question: "What is the 'Hallucination Risk' identified in the Three Constraints framework, and what does it make non-optional?",
+          options: {
+            A: "AI imagines visual hallucinations; non-optional: use text-only models",
+            B: "LLMs can confidently generate code that looks correct but contains subtle bugs, references non-existent APIs, or implements logic that doesn't match intent — making validation non-optional",
+            C: "Models confuse different users; non-optional: use authentication",
+            D: "AI hallucinates context window sizes; non-optional: test context limits"
+          },
+          correct: "B",
+          explanation: "The Hallucination Risk is a direct consequence of the Probabilistic constraint: LLMs can confidently produce code that looks correct but contains subtle bugs, references non-existent APIs, or implements logic that differs from intent. This is why SDD's Validate phase and TDD are non-optional, not optional extras."
+        },
+        {
+          id: 26,
+          question: "Why is efficient context engineering described as 'economically essential at scale' in the Three Constraints framework?",
+          options: {
+            A: "Longer contexts run slower and frustrate developers",
+            B: "Every token costs money — at scale, inefficient context engineering multiplies costs linearly with usage, making token curation a direct financial optimization",
+            C: "Context efficiency only matters for large language models",
+            D: "Economic constraints are a separate consideration from technical constraints"
+          },
+          correct: "B",
+          explanation: "Context and Cost: every token in the context window costs money via API pricing. At scale — hundreds of agents running thousands of sessions — inefficient context engineering multiplies costs directly. Signal-dense specs, progressive disclosure via file references, and Skills (load ~100 tokens metadata, full content on-demand) are both quality and cost optimizations."
+        },
+        {
+          id: 27,
+          question: "When should version control be used as a direct response to the Probabilistic constraint?",
+          options: {
+            A: "Only when working in teams, not for solo developers",
+            B: "When an AI-generated output works well — commit it immediately, because the same prompt may produce a worse result next time",
+            C: "Only after full deployment to production",
+            D: "Version control is not related to AI probabilism"
+          },
+          correct: "B",
+          explanation: "The adaptation table for the Probabilistic constraint includes: 'Version control what worked.' Because the same prompt yields different outputs each run with no consistency guarantee, committing a successful AI-generated solution immediately preserves the successful variant. This is why AI-native development requires version control discipline."
+        },
+        {
+          id: 28,
+          question: "According to the Stateless constraint adaptation table, what should you do when an LLM 'forgot' your preferred coding style between sessions?",
+          options: {
+            A: "Accept it — statelessness means style guidance is impossible",
+            B: "Provide style guides in AGENTS.md so each session starts with your coding style pre-loaded as persistent external context",
+            C: "Use a different AI provider that has memory",
+            D: "Set temperature to 0 to enforce consistency"
+          },
+          correct: "B",
+          explanation: "The Stateless constraint adaptation: 'It remembers my coding style' → Reality: No memory of past sessions → Adaptation: Provide style guides in AGENTS.md. AGENTS.md is the primary mechanism for injecting persistent conventions so the 'amnesiac expert' is briefed on your preferences at every session start."
+        },
+        {
+          id: 29,
+          question: "What does the Limited Context constraint adaptation 'more context is always better' reveal about a common developer misconception?",
+          options: {
+            A: "Developers are correct — more context always improves AI output",
+            B: "More context introduces noise that dilutes relevant information, degrading AI reasoning quality even before hitting the hard token limit — the correct adaptation is quality over quantity",
+            C: "Limited context means you should use the smallest context window available",
+            D: "The misconception only applies to code files, not to conversation history"
+          },
+          correct: "B",
+          explanation: "Adaptation table for Limited Context: 'More context is always better' → Reality: Noise dilutes relevant information → Adaptation: Curate carefully; quality over quantity. Larger context windows enable more content, but they do not eliminate the need for curation — noise degrades reasoning quality proportionally to its share of the context."
+        },
+        {
+          id: 30,
+          question: "Scenario: A team using an AI coding agent notices it consistently generates incorrect database migration syntax despite being told the correct approach in the previous session. What is the root constraint and the correct multi-layer fix?",
+          options: {
+            A: "Probabilistic constraint — set temperature to 0 to fix it",
+            B: "Stateless constraint — the agent has no memory of previous sessions. Fix: encode the correct migration syntax and conventions in AGENTS.md so they are injected every session, and add TDD migration tests to catch errors (Probabilistic backup)",
+            C: "Limited context — increase context window size",
+            D: "The agent needs to be retrained"
+          },
+          correct: "B",
+          explanation: "Root cause: Stateless — the agent never remembered the correct approach from the previous session. Primary fix: encode migration conventions in AGENTS.md for persistent injection. Secondary fix: TDD tests that catch migration errors automatically (addressing the Probabilistic fallback where AGENTS.md alone may not prevent all variations). This demonstrates the constraint interconnection: Stateless requires AGENTS.md; Probabilistic requires TDD backup."
+        }
       ]
     },
     {
@@ -576,7 +816,127 @@ export const chapter12: Chapter = {
         { id: 17, question: "Scenario: Your AI tool reads test output, identifies 3 failing tests, hypothesizes the root cause in the database schema, updates the migration file, re-runs tests, sees 2 still failing, adjusts the foreign key constraint, re-runs again, and achieves full passing. Which framework describes this behavior?", options: { A: "Passive AI prediction — single shot response", B: "OODA Loop in action — Observe (test output), Orient (root cause analysis), Decide (schema fix), Act (update file), loop back to Observe (re-run tests) until goal achieved", C: "The Five Powers without OODA", D: "Vibe Coding" }, correct: "B", explanation: "This is a textbook OODA Loop execution: Observe (read failing test output) → Orient (analyze root cause as schema issue) → Decide (update migration file) → Act (execute change) → Observe again (2 still failing) → Orient (foreign key constraint) → Decide → Act → Observe (all passing). Passive AI would have given one answer and stopped." },
         { id: 18, question: "Scenario: A product manager insists developers should adopt AI tools to 'cut coding time from 4 hours to 30 minutes per feature' but does not change planning and review processes. According to the SDLC transformation, what is the flaw?", options: { A: "The 30-minute estimate is wrong", B: "Coding time reduction is captured, but the real transformation requires rethinking all phases. Planning remains a bottleneck unless AI is also applied to requirements, testing, and deployment phases.", C: "Developers will resist the change", D: "AI cannot help with planning" }, correct: "B", explanation: "Simply using AI for coding while keeping old planning processes captures only part of the value. Full orchestration transformation applies AI across all SDLC phases — testing, deployment, requirements — yielding the full productivity improvement." },
         { id: 19, question: "Scenario: A team lead asks a developer to take on both frontend and backend work for a new microservice 'since you use AI now.' The developer worries this violates specialization best practices. According to Satya Nadella's Full-Stack Builder concept, how should the developer think about this?", options: { A: "Refuse — specialization is always better", B: "AI collapses traditional role silos, enabling one person to own the full vertical slice. The limit shifts from what you can type to what you can orchestrate. Taking ownership of the full microservice is the new normal.", C: "Only accept if given twice the salary", D: "Hire a frontend developer immediately" }, correct: "B", explanation: "The Full-Stack Builder concept is precisely about this scenario: AI collapses traditional PM/Designer/Frontend/Backend silos, enabling one person to own the complete vertical slice from requirements to deployment. The constraint is no longer typing speed but orchestration capability." },
-        { id: 20, question: "Scenario: A recruiter rewrites job postings to prioritize 'specification writing, validation, and system design' over 'proficiency in React and Node.js.' A candidate argues this is a mistake. Who is correct?", options: { A: "The candidate — React and Node.js are still the top skills", B: "The recruiter — the new AI-native skill stack centers on specification writing, quality validation, constraint analysis, and architecture decisions. Framework proficiency is commoditized; orchestration judgment is the scarce skill.", C: "Both are equally important", D: "Neither matters — only AI prompt skills count" }, correct: "B", explanation: "The new skill stack (problem decomposition/specification, quality validation/judgment, constraint analysis/tradeoffs, prompting/direction) is replacing the old stack (syntax mastery, framework proficiency, manual debugging) as the primary differentiator. The recruiter reflects an accurate understanding of 2026 market demands." }
+        { id: 20, question: "Scenario: A recruiter rewrites job postings to prioritize 'specification writing, validation, and system design' over 'proficiency in React and Node.js.' A candidate argues this is a mistake. Who is correct?", options: { A: "The candidate — React and Node.js are still the top skills", B: "The recruiter — the new AI-native skill stack centers on specification writing, quality validation, constraint analysis, and architecture decisions. Framework proficiency is commoditized; orchestration judgment is the scarce skill.", C: "Both are equally important", D: "Neither matters — only AI prompt skills count" }, correct: "B", explanation: "The new skill stack (problem decomposition/specification, quality validation/judgment, constraint analysis/tradeoffs, prompting/direction) is replacing the old stack (syntax mastery, framework proficiency, manual debugging) as the primary differentiator. The recruiter reflects an accurate understanding of 2026 market demands." },
+        {
+          id: 21,
+          question: "Approximately what percentage of traditional software development consisted of mechanical repetition, pattern application, and context transfer that AI excels at?",
+          options: {
+            A: "20%",
+            B: "50%",
+            C: "~80%",
+            D: "95%"
+          },
+          correct: "C",
+          explanation: "~80% of traditional development consisted of mechanical repetition, pattern application, and context transfer — precisely the tasks AI excels at. This is why the Typist→Orchestrator shift is so dramatic: AI takes over the majority of prior human effort, freeing humans to focus on the ~20% that requires judgment."
+        },
+        {
+          id: 22,
+          question: "Who developed the OODA Loop and in what context was it originally created?",
+          options: {
+            A: "Jeff Dean (Google), developed for distributed systems design",
+            B: "John Boyd, military strategist — originally for combat decision-making speed",
+            C: "Alan Turing, developed for early computer science theory",
+            D: "Elon Musk, developed for SpaceX launch decision protocols"
+          },
+          correct: "B",
+          explanation: "OODA (Observe, Orient, Decide, Act) was developed by military strategist John Boyd. Originally designed for fighter pilot combat decision-making speed, it maps perfectly onto how autonomous AI agents reason iteratively — cycling through Observe → Orient → Decide → Act repeatedly until achieving a goal."
+        },
+        {
+          id: 23,
+          question: "What was Gemini 3 Flash's accuracy on the SWE-bench Verified benchmark in January 2026, and what generation does this represent?",
+          options: {
+            A: "45% accuracy — Gen 3 Feature Implementation",
+            B: "~76% accuracy — Gen 4 Agentic Mainstream",
+            C: "90% accuracy — Gen 5 Resident/Self-Evolving AI",
+            D: "60% accuracy — Gen 3 Feature Implementation"
+          },
+          correct: "B",
+          explanation: "Gemini 3 Flash achieved ~76% accuracy on SWE-bench Verified (January 2026), representing Gen 4 (Agentic Mainstream, 2024–2026). Gen 4 key features: MCP for universal tool connections, multi-step autonomous orchestration over hours, and this benchmark milestone marking the mainstream transition to agentic AI."
+        },
+        {
+          id: 24,
+          question: "According to the AI-transformed SDLC time comparison, how much time does the coding phase take with AI assistance versus traditional methods?",
+          options: {
+            A: "Traditional: 80 hours; AI-Assisted: 40 hours (50% savings)",
+            B: "Traditional: 80 hours; AI-Assisted: 8 hours (90% savings)",
+            C: "Traditional: 80 hours; AI-Assisted: 20 hours (75% savings)",
+            D: "Traditional: 80 hours; AI-Assisted: 4 hours (95% savings)"
+          },
+          correct: "B",
+          explanation: "The SDLC transformation shows: Coding phase — Traditional: 80 hours, AI-Assisted: 8 hours (90% savings). Testing: 30→3 hours (90%). Deployment: 10→2 hours (80%). Planning remains 20 hours (0% savings — judgment-dependent). Total: 140→33 hours (76% overall savings)."
+        },
+        {
+          id: 25,
+          question: "After building 10 features, how does the cumulative time difference between a Typist and an Orchestrator compare?",
+          options: {
+            A: "Typist: 200 hours; Orchestrator: 150 hours",
+            B: "Typist: 400 hours; Orchestrator: 100 hours",
+            C: "Typist: 300 hours; Orchestrator: 200 hours",
+            D: "No difference — both converge at scale"
+          },
+          correct: "B",
+          explanation: "After 10 features: Typist accumulates ~400 hours vs. Orchestrator ~100 hours. This 4x compounding advantage is why the shift is not merely about productivity but about competitive positioning — the Orchestrator can ship 4 products in the time the Typist ships 1."
+        },
+        {
+          id: 26,
+          question: "What are the two defining capabilities of Gen 5 (Resident/Self-Evolving AI, 2026+) that distinguish it from Gen 4?",
+          options: {
+            A: "Faster autocomplete and better syntax highlighting",
+            B: "Self-Healing Clusters (AI monitors telemetry and applies patches before users notice) and Intent-Driven Growth (declare Business Intents, AI optimizes architecture)",
+            C: "Larger context windows and more programming language support",
+            D: "Better code review and smarter autocomplete"
+          },
+          correct: "B",
+          explanation: "Gen 5 (2026+) key capabilities: 1) Self-Healing Clusters — AI monitors telemetry, traces issues, applies patches before users notice; 2) Intent-Driven Growth — declare Business Intents, AI optimizes architecture to meet them. These move AI from tool to resident agent that proactively manages systems without being prompted."
+        },
+        {
+          id: 27,
+          question: "What three elements does 'Judgment' require in the Orchestrator model?",
+          options: {
+            A: "Speed, accuracy, and cost efficiency",
+            B: "Problem clarity, constraint awareness, and quality standards",
+            C: "Programming language mastery, framework knowledge, and debugging skills",
+            D: "API access, cloud credentials, and team permissions"
+          },
+          correct: "B",
+          explanation: "The Judgment Layer requires three elements: Problem Clarity (knowing what success looks like), Constraint Awareness (understanding what limits exist — budget, time, security, compliance), and Quality Standards (knowing how to evaluate whether AI output meets requirements). These are human-only capabilities that AI cannot substitute for."
+        },
+        {
+          id: 28,
+          question: "In the Five Generations of AI Tools, what was the primary bottleneck in Gen 2 (2022–2023, Function Generation tools like ChatGPT)?",
+          options: {
+            A: "Manual typing speed",
+            B: "Prompting skill",
+            C: "Context management",
+            D: "Human review speed"
+          },
+          correct: "B",
+          explanation: "Gen 2 (2022–2023, Function Generation — ChatGPT): Primary bottleneck was prompting skill. Compare: Gen 1 (2021–2022, Intelligent Autocomplete — Copilot): manual typing speed. Gen 3 (2023–2024, Feature Implementation — Cursor): context management. Gen 4 (2024–2026, Agentic Mainstream — Claude Code): human review speed."
+        },
+        {
+          id: 29,
+          question: "How does Passive AI (like early ChatGPT without file access) differ from Agentic AI (like Claude Code) in terms of reasoning approach?",
+          options: {
+            A: "Passive AI is slower; Agentic AI is faster at the same task",
+            B: "Passive AI predicts — generates one response based on training data. Agentic AI reasons — cycles through OODA repeatedly until achieving the goal",
+            C: "Passive AI is less accurate; Agentic AI is always correct",
+            D: "Passive AI needs more tokens; Agentic AI uses fewer tokens"
+          },
+          correct: "B",
+          explanation: "The fundamental distinction: Passive AI (ChatGPT without file access) predicts — a single forward pass generating one response, then stops. Agentic AI (Claude Code) reasons — cycles through Observe→Orient→Decide→Act repeatedly, reads files, runs tests, adjusts based on results, loops until the goal is achieved. This loop is what makes agentic AI qualitatively different from chatbots."
+        },
+        {
+          id: 30,
+          question: "Scenario: A developer spends 3 hours manually reading error logs, tracing the bug to a configuration file, editing the config, testing, finding two remaining failures, fixing the import order, re-testing, and achieving passing tests. Which AI concept maps exactly to this workflow?",
+          options: {
+            A: "The Five Powers — specifically the 'Reason' and 'Act' powers",
+            B: "The OODA Loop — Observe (read logs), Orient (trace root cause), Decide (fix config), Act (edit), Observe again (2 failures remain), Orient (import order), Decide, Act, Observe (all passing)",
+            C: "Vibe Coding — intuitive reactive iteration",
+            D: "The Judgment Layer — only humans can do this"
+          },
+          correct: "B",
+          explanation: "This is a perfect OODA Loop: Observe (error logs) → Orient (configuration file identified) → Decide (edit config) → Act (make change) → Observe (2 failures remain) → Orient (import order) → Decide → Act → Observe (all passing). Agentic AI runs this same loop autonomously. The developer who understands OODA understands how to design agentic AI systems."
+        }
       ]
     },
     {
@@ -767,7 +1127,127 @@ export const chapter12: Chapter = {
         { id: 17, question: "Scenario: You're evaluating two architectures for a healthcare data agent. Architecture A loads the model directly; Architecture B uses the Three-Layer Stack with MCP. The client asks why Architecture B costs 40% more. What is the correct justification?", options: { A: "Architecture B is just more expensive without added value", B: "Architecture B enables the Five Powers that Architecture A lacks: MCP provides See (read EHR data) and Act (update records); the IDE layer provides Hear and development tooling; the Development Agent layer provides autonomous execution.", C: "Architecture B uses a bigger model", D: "Architecture A is better for healthcare" }, correct: "B", explanation: "Architecture A (model-only) is a prediction engine — it generates text. Architecture B (Three-Layer Stack with MCP) enables: See (read EHR data via MCP Resources), Act (update patient records via MCP Tools), autonomous execution, and Remember (AGENT.md + Skills for HIPAA protocols). The 40% premium reflects the qualitative difference between a chatbot and a Digital FTE with full Five Powers." },
         { id: 18, question: "Scenario: A customer service agent retrieves order history correctly but when it tries to issue a refund nothing happens. Both use MCP. What is the likely architectural mistake?", options: { A: "The refund endpoint needs a different AI model", B: "The refund action is likely exposed as an MCP Resource (read-only) instead of an MCP Tool (state-changing). Resources retrieve data; Tools execute actions. Issuing a refund requires a Tool because it changes state.", C: "Temperature is too low", D: "The context window needs to be increased" }, correct: "B", explanation: "MCP primitives have distinct roles: Resources = read-only data retrieval (the 'Eyes' / See power). Tools = state-changing action execution (the 'Hands' / Act power). If refund processing is registered as a Resource, the agent can read its metadata but cannot execute it. Refunds must be registered as MCP Tools to enable the Act power." },
         { id: 19, question: "Scenario: You're building an agent with 40 Agent Skills. At startup, the agent loads all 40 SKILL.md files completely, consuming 180,000 tokens of your 200K context window before any user task begins. What architectural principle solves this?", options: { A: "Use a model with a larger context window", B: "Progressive Disclosure — at startup load only YAML frontmatter (~100 tokens per skill = 4,000 tokens total), defer full execution instructions to Level 2 activation, and load full templates only during Level 3 execution. Result: 97%+ context reduction.", C: "Delete half the skills", D: "Merge all skills into one large skill" }, correct: "B", explanation: "Progressive Disclosure is the architectural principle for this scenario: Level 1 (Startup) loads only name/description per skill (~100 tokens × 40 = 4,000 tokens vs. 180,000). Level 2 (Activated) loads execution steps only when a specific skill is triggered. Level 3 (Execution) loads full templates during actual execution. This achieves 97%+ context window reduction." },
-        { id: 20, question: "Scenario: An enterprise requests a Gen 5 AI tool that 'self-heals production issues without human involvement' for their 2026 infrastructure. According to the Five Generations of AI Tools, what is the honest assessment?", options: { A: "This is fully available today — just buy any tool", B: "Gen 5 (Self-Evolving Ecosystems with self-healing code) is the 2026+ roadmap trajectory. Current Gen 4 tools provide autonomous multi-step reasoning but still require human oversight for strategic direction and high-stakes approvals.", C: "Gen 5 will never exist", D: "Gen 5 is only available in enterprise licenses" }, correct: "B", explanation: "Gen 5 (Self-Evolving Ecosystems: self-healing code, intent-driven growth, autonomous improvement) is the projected trajectory for 2026+. In 2026, Gen 4 tools dominate: agentic mainstream with MCP, multi-step reasoning, ~76% SWE-bench accuracy. The honest enterprise positioning: Gen 4 autonomous reasoning with human oversight today; Gen 5 self-healing as a roadmap goal." }
+        { id: 20, question: "Scenario: An enterprise requests a Gen 5 AI tool that 'self-heals production issues without human involvement' for their 2026 infrastructure. According to the Five Generations of AI Tools, what is the honest assessment?", options: { A: "This is fully available today — just buy any tool", B: "Gen 5 (Self-Evolving Ecosystems with self-healing code) is the 2026+ roadmap trajectory. Current Gen 4 tools provide autonomous multi-step reasoning but still require human oversight for strategic direction and high-stakes approvals.", C: "Gen 5 will never exist", D: "Gen 5 is only available in enterprise licenses" }, correct: "B", explanation: "Gen 5 (Self-Evolving Ecosystems: self-healing code, intent-driven growth, autonomous improvement) is the projected trajectory for 2026+. In 2026, Gen 4 tools dominate: agentic mainstream with MCP, multi-step reasoning, ~76% SWE-bench accuracy. The honest enterprise positioning: Gen 4 autonomous reasoning with human oversight today; Gen 5 self-healing as a roadmap goal." },
+        {
+          id: 21,
+          question: "What is the traditional hotel booking workflow problem that the 'User Intent' model solves, and how many steps does each approach take?",
+          options: {
+            A: "Traditional: 5 manual steps; AI intent model: 1 step",
+            B: "Traditional: 14 manual steps (User → Interface → Action); AI intent model: 3 conversational exchanges (User Intent → Agent → Orchestrated Actions)",
+            C: "Traditional: 20 manual steps; AI intent model: 10 steps",
+            D: "Both take the same number of steps — AI is just faster"
+          },
+          correct: "B",
+          explanation: "Traditional model: User → Interface → Action — 14 manual steps (open browser, search, filter, compare, check availability, enter dates, etc.). New paradigm: User Intent → Agent → Orchestrated Actions — 3 conversational exchanges. This compression represents the fundamental UX shift enabled by the Five Powers (Hear → Reason → Remember → Act → See)."
+        },
+        {
+          id: 22,
+          question: "What was the 2025 breakthrough feature of MCP that enabled bidirectional communication between tools and models?",
+          options: {
+            A: "OAuth 2.1 authentication support",
+            B: "Bidirectional Sampling — MCP servers can now ask the LLM questions (e.g., a database server queries whether to optimize a specific index before returning results)",
+            C: "Streamable HTTP for real-time data transfer",
+            D: "JSON-RPC 3.0 protocol upgrade"
+          },
+          correct: "B",
+          explanation: "Bidirectional Sampling (2025 breakthrough) allows MCP servers to ask the LLM questions — reversing the traditional one-way communication. Example: a database MCP server can query the LLM 'should I optimize this index before returning results?' This transforms tools from passive responders into intelligent collaborators within the MCP protocol."
+        },
+        {
+          id: 23,
+          question: "What are the Three Phases of AI Evolution from Predictive to Agentic AI?",
+          options: {
+            A: "Phase 1: Text generation; Phase 2: Image generation; Phase 3: Video generation",
+            B: "Phase 1: Predictive AI (forecast from history, cannot create or act); Phase 2: Generative AI (creates content but doesn't act); Phase 3: Agentic AI (takes autonomous action to achieve goals — transitions from tool to teammate)",
+            C: "Phase 1: Rule-based systems; Phase 2: Machine learning; Phase 3: Deep learning",
+            D: "Phase 1: Chatbots; Phase 2: Coding assistants; Phase 3: Autonomous systems"
+          },
+          correct: "B",
+          explanation: "Three Phases: Phase 1 — Predictive AI (analyzed historical data, forecast outcomes; could only predict, not create or act). Phase 2 — Generative AI (creates new content from patterns; generates when prompted but doesn't initiate action). Phase 3 — Agentic AI (takes autonomous action to achieve goals; transitions from tool to teammate). The shift from Phase 2→3 is the current 2024–2026 transition."
+        },
+        {
+          id: 24,
+          question: "What is Skill Portability in the Agent Skills Standard (agentskills.io)?",
+          options: {
+            A: "The ability to move skills between programming languages",
+            B: "A skill written for Claude Code works instantly in Gemini CLI or OpenAI Codex — cross-platform compatibility via standardized SKILL.md format",
+            C: "Skills can be exported as binary files for offline use",
+            D: "Developers can sell their skills on any marketplace"
+          },
+          correct: "B",
+          explanation: "Skill Portability means a SKILL.md skill authored for one AI platform works across any platform supporting the agentskills.io standard — Claude Code, Gemini CLI, OpenAI Codex CLI — without modification. This eliminates vendor lock-in for expertise packages and enables a true open marketplace for agent capabilities."
+        },
+        {
+          id: 25,
+          question: "What role does Layer 2 (AI-First IDEs) play in the Modern AI Stack, and which tools fill this layer?",
+          options: {
+            A: "Layer 2 provides compute — AWS, Google Cloud, Azure",
+            B: "AI-First IDEs (Cursor, Windsurf, VS Code) act as the Context Orchestrator — the Skill Host where models, tools, and local file systems converge",
+            C: "Layer 2 is the data storage layer — databases and file systems",
+            D: "Layer 2 provides frontend rendering for AI outputs"
+          },
+          correct: "B",
+          explanation: "Layer 2 (AI-First IDEs): Cursor, Windsurf, VS Code serve as the Context Orchestrator — the 'Skill Host' where frontier models (Layer 1), Agent Skills (Layer 3), MCP tool connections, and local file systems converge. The IDE is no longer just an editor; it's the central intelligence hub of the 2026 development workflow."
+        },
+        {
+          id: 26,
+          question: "What is the key difference between 2024 Tool Silos and the 2026 Modular Stack in terms of vendor lock-in and integration?",
+          options: {
+            A: "2024: Open standards; 2026: Proprietary systems with vendor lock-in",
+            B: "2024: Bundled capabilities, proprietary plugin systems, high vendor lock-in; 2026: MCP and agentskills.io convergence, zero vendor lock-in, cross-platform agency, skills as markdown files",
+            C: "Both years have the same level of vendor lock-in",
+            D: "2026 has more vendor lock-in because of more standards"
+          },
+          correct: "B",
+          explanation: "2024 Tool Silos: bundled capabilities, proprietary plugin systems, vendor lock-in, heavy context requirements, static RAG/manual uploads. 2026 Modular Stack: MCP standardizes all agent-to-tool connections (zero lock-in), agentskills.io enables portable expertise, real-time governed data access, bidirectional tool-model communication, on-demand expertise loading."
+        },
+        {
+          id: 27,
+          question: "What is the 2026 shift from 'Prompting Era' to 'Skill Era' in practical terms for developers?",
+          options: {
+            A: "Developers no longer write any prompts; all communication is visual",
+            B: "2024 Prompting Era: long, fragile system prompts; custom API wrappers; manual corrections. 2026 Skill Era: structured SKILL.md with YAML metadata; skill discovery; constraint engineering with rigid workflows",
+            C: "The shift means AI does all the work and developers only review",
+            D: "Prompting is replaced by voice commands in the Skill Era"
+          },
+          correct: "B",
+          explanation: "The Skill Era shift: Prompt Engineering (long, fragile system prompts) → Skill Authoring (structured SKILL.md with YAML metadata). Tool Integration (custom API wrappers per tool) → Skill Discovery (ensure agents find appropriate skills automatically). Manual Correction (repeatedly telling AI 'do it this way') → Constraint Engineering (rigid workflows agents must follow via Skills)."
+        },
+        {
+          id: 28,
+          question: "What are the three levels of Agent Skills Progressive Disclosure and their approximate token costs?",
+          options: {
+            A: "Level 1: Full content (10K tokens); Level 2: Summary (1K tokens); Level 3: Metadata (100 tokens)",
+            B: "Level 1 (Agent Startup): name and description only (~100 tokens/skill); Level 2 (Skill Activated): full SKILL.md content (<5K tokens); Level 3 (Actually Needed): supporting resources, templates, scripts",
+            C: "Level 1: 1K tokens; Level 2: 5K tokens; Level 3: 50K tokens",
+            D: "All levels load simultaneously for maximum availability"
+          },
+          correct: "B",
+          explanation: "Progressive Disclosure has three levels: Level 1 (Agent Startup): name + brief description per skill (~100 tokens/skill). Level 2 (Skill Activated): full SKILL.md instructions when the skill is triggered (<5K tokens). Level 3 (Actually Needed): supporting resources, templates, scripts during execution. This achieves 80–98% token reduction versus loading all skills at startup."
+        },
+        {
+          id: 29,
+          question: "What was the OpenAI Apps SDK designed to provide and what is its user reach?",
+          options: {
+            A: "A mobile app framework with 10M potential users",
+            B: "An SDK delivering interactive UI components (buttons, forms, charts) via MCP Apps Extension to 800M+ ChatGPT users across Business, Enterprise, and Edu tiers, with platform handling billing, discovery, and user acquisition",
+            C: "A tool for building standalone apps with no ChatGPT integration",
+            D: "A replacement for traditional app stores"
+          },
+          correct: "B",
+          explanation: "OpenAI Apps SDK: 800M+ ChatGPT users accessible across Business, Enterprise, and Edu tiers. The platform handles billing, discovery, and user acquisition — giving developers instant distribution to the largest AI user base. Combined with MCP Apps Extension (ui:// URI scheme, sandboxed iframe security), it enables rich interactive UI delivery from MCP servers to all ChatGPT users."
+        },
+        {
+          id: 30,
+          question: "What is the Five Powers hotel booking example demonstrating about multi-power coordination?",
+          options: {
+            A: "Each power works alone — the hotel booking uses only the 'Act' power",
+            B: "Hear (request) → Reason (requirements) → Remember (preferences: quiet room, king bed) → Act (search/compare/book) → See (hotel websites) → Reason (evaluate options) → Act (book + schedule) → Remember (interaction for future) — demonstrating all five powers in one workflow",
+            C: "The Five Powers are theoretical — hotel booking is not a real use case",
+            D: "Only See and Act are needed for hotel booking"
+          },
+          correct: "B",
+          explanation: "The hotel booking example demonstrates full Five Powers coordination: Hear (understand the spoken request) → Reason (analyze requirements, budget, dates) → Remember (preferences from prior interactions: quiet room, king bed) → Act (search and compare options autonomously) → See (read hotel website visuals) → Reason (evaluate tradeoffs) → Act (book and add to calendar) → Remember (store this interaction for future preferences). This is what makes agentic AI qualitatively different from a search engine."
+        }
       ]
     },
     {
@@ -958,7 +1438,127 @@ export const chapter12: Chapter = {
         { id: 17, question: "Scenario: Your monorepo has a root AGENTS.md saying 'format all outputs as JSON' and a packages/reporting/AGENTS.md saying 'format all outputs as CSV.' The reporting agent keeps producing JSON. What is the bug and the fix?", options: { A: "Both AGENTS.md files are being ignored — delete them", B: "The Hierarchy Rule is not being respected. The file closest to the working directory (packages/reporting/AGENTS.md) must take precedence. Verify the agent's working directory is set to packages/reporting/, not the repo root.", C: "AGENTS.md files cannot specify output formats", D: "Use only one AGENTS.md file for the whole repo" }, correct: "B", explanation: "The AGENTS.md Hierarchy Rule: the file closest to the working directory wins. If the reporting agent's working directory is the repo root, it reads the root AGENTS.md (JSON). The fix: ensure the reporting agent's working directory is correctly set to packages/reporting/ so the Hierarchy Rule resolves to the correct override." },
         { id: 18, question: "Scenario: Your team adopts goose as your primary production agent for customer-facing workflows. A colleague argues this is ideal because 'it's open-source and free.' According to AIFF standards, what is the correct positioning of goose?", options: { A: "They are correct — goose is the best choice for production", B: "goose is an Incubator-stage reference architecture for prototyping and studying AAIF patterns. For immediate production productivity, Claude Code (proprietary) is more appropriate. goose is valuable for learning patterns and building Custom Agents from scratch.", C: "goose cannot be used in commercial products", D: "goose and Claude Code are identical in capability" }, correct: "B", explanation: "goose (Apache 2.0) is explicitly positioned as a reference architecture demonstrating production-ready MCP and AGENTS.md implementation — it is for prototyping, learning AAIF patterns, and building Custom Agents from scratch. Claude Code is the proprietary tool optimized for immediate production productivity. 'Free' is not the right evaluation axis." },
         { id: 19, question: "Scenario: You are building an MCP server for a legal research tool. The tool needs to: (1) retrieve case law from a database and (2) file a motion to the court system. How should these be registered in MCP?", options: { A: "Both as MCP Tools — actions require Tools", B: "Case law retrieval = MCP Resource (read-only, no state change). Filing a motion = MCP Tool (state-changing, irreversible). Mixing them incorrectly would either prevent filing or create security risks.", C: "Both as MCP Resources — they both return data", D: "Both as MCP Prompts — they are legal templates" }, correct: "B", explanation: "MCP primitive selection is architecture-critical. Resources = read-only data access (retrieving case law changes nothing). Tools = state-changing actions (filing a motion is irreversible and affects external systems). This distinction is also a security boundary: Tools require explicit user authorization, Resources do not." },
-        { id: 20, question: "Scenario: A developer writes a SKILL.md with a 6,000-token section loaded at every agent startup. The agent handles 50 different skill types. What problem does this create and what is the AIFF-correct solution?", options: { A: "The skills are too complex — simplify them", B: "6,000 tokens × 50 skills = 300,000 tokens at startup, exceeding most context windows. AIFF's Progressive Disclosure prescribes: YAML frontmatter only at startup (~100 tokens), defer execution instructions to Level 2 activation, load full templates at Level 3 only.", C: "Use a 2M token model to accommodate it", D: "Delete the sections entirely" }, correct: "B", explanation: "This violates Progressive Disclosure, AIFF's token-management standard for Agent Skills. 50 × 6,000 tokens = 300,000 tokens — impossible in a 200K context window and wasteful even in a 2M window. AIFF solution: YAML frontmatter = ~100 tokens at startup. Full content loaded only when the skill is activated. This achieves 80-98% startup context reduction." }
+        { id: 20, question: "Scenario: A developer writes a SKILL.md with a 6,000-token section loaded at every agent startup. The agent handles 50 different skill types. What problem does this create and what is the AIFF-correct solution?", options: { A: "The skills are too complex — simplify them", B: "6,000 tokens × 50 skills = 300,000 tokens at startup, exceeding most context windows. AIFF's Progressive Disclosure prescribes: YAML frontmatter only at startup (~100 tokens), defer execution instructions to Level 2 activation, load full templates at Level 3 only.", C: "Use a 2M token model to accommodate it", D: "Delete the sections entirely" }, correct: "B", explanation: "This violates Progressive Disclosure, AIFF's token-management standard for Agent Skills. 50 × 6,000 tokens = 300,000 tokens — impossible in a 200K context window and wasteful even in a 2M window. AIFF solution: YAML frontmatter = ~100 tokens at startup. Full content loaded only when the skill is activated. This achieves 80-98% startup context reduction." },
+        {
+          id: 21,
+          question: "When was the Agentic AI Foundation (AAIF) announced, and what was its founding structure?",
+          options: {
+            A: "March 2025; founded by OpenAI and Microsoft exclusively",
+            B: "December 9, 2025; Linux Foundation initiative with competing companies OpenAI, Anthropic, and Block donating core technologies; Platinum members include AWS, Google, Microsoft, Bloomberg, Cloudflare, Anthropic, OpenAI, Block",
+            C: "January 2026; founded by NIST as a government initiative",
+            D: "June 2025; private consortium with no open-source components"
+          },
+          correct: "B",
+          explanation: "AAIF was announced December 9, 2025 as a Linux Foundation initiative — a neutral governance body for open AI agent standards. Notably, competing companies OpenAI, Anthropic, and Block donated their core technologies. Platinum members: AWS, Google, Microsoft, Bloomberg, Cloudflare, Anthropic, OpenAI, Block."
+        },
+        {
+          id: 22,
+          question: "What is the 'USB Lesson' analogy for the AAIF, and what problem does it describe?",
+          options: {
+            A: "Before USB, computers had no storage; AAIF adds storage to AI",
+            B: "Before USB, every device had proprietary connectors (M×N problem); USB standardized connections. AAIF does the same for Digital FTEs — eliminating per-platform custom integrations",
+            C: "USB = Universal Service Bus — AAIF provides service hosting",
+            D: "The USB analogy describes how AAIF charges subscription fees"
+          },
+          correct: "B",
+          explanation: "The USB Lesson: before USB, every device required proprietary connectors — a multiplied integration nightmare. USB standardized all connections. AAIF plays the same role for AI agents: before AAIF, every AI model × every tool required a custom integration (M×N problem). MCP, AGENTS.md, goose, Agent Skills, and MCP Apps provide the 'USB' standardization for Digital FTEs."
+        },
+        {
+          id: 23,
+          question: "What specific milestones mark MCP's adoption timeline from its release to AAIF governance?",
+          options: {
+            A: "Released by Google in 2024; adopted by OpenAI in 2026",
+            B: "November 2024: Anthropic releases MCP as open source; March 2025: OpenAI officially adopts; April 2025: Google DeepMind confirms support; November 2025: MCP spec 2025-11-25 (OAuth 2.1, Streamable HTTP); December 2025: donated to AAIF",
+            C: "January 2025: joint release by all vendors; December 2025: finalized",
+            D: "MCP was released in 2022 and reached AAIF in 2027"
+          },
+          correct: "B",
+          explanation: "MCP adoption timeline: November 2024 (Anthropic open sources MCP) → March 2025 (OpenAI officially adopts) → April 2025 (Google DeepMind confirms support) → November 2025 (spec 2025-11-25: OAuth 2.1, Streamable HTTP added) → December 2025 (donated to AAIF/Linux Foundation governance). This 13-month adoption curve is historically fast for a protocol standard."
+        },
+        {
+          id: 24,
+          question: "What is the AGENTS.md Hierarchy Rule and why does it exist?",
+          options: {
+            A: "AGENTS.md in root directory always wins; no exceptions",
+            B: "Nearest AGENTS.md to the current working directory takes precedence over parent directories — enabling monorepo support where different subprojects can have different agent rules",
+            C: "Longest AGENTS.md wins — more rules override fewer rules",
+            D: "AGENTS.md files are merged alphabetically when multiple exist"
+          },
+          correct: "B",
+          explanation: "AGENTS.md Hierarchy Rule: nearest file takes precedence. In a monorepo with /project/frontend/AGENTS.md and /project/AGENTS.md, work in /frontend uses the frontend-specific rules. This enables per-subproject customization (e.g., React conventions for frontend, Python conventions for backend, security constraints for auth service) within a single repository."
+        },
+        {
+          id: 25,
+          question: "What productivity impact did the goose framework have at Block (its creator company)?",
+          options: {
+            A: "5% of Block engineers saved 1–2 hours weekly",
+            B: "75% of Block engineers save 8–10+ hours weekly using goose",
+            C: "All Block engineers were replaced by goose agents",
+            D: "goose reduced Block's headcount by 30%"
+          },
+          correct: "B",
+          explanation: "Block's internal usage data: 75% of Block engineers save 8–10+ hours weekly using goose. This is the enterprise validation data behind donating goose to AAIF as the reference architecture for production agent building. Apache 2.0 licensed, Local-First execution, MCP-Native design, Multi-Model support (Claude, GPT-4, Gemini, Ollama)."
+        },
+        {
+          id: 26,
+          question: "When was the Agent Skills standard released as open, and which companies first adopted the same SKILL.md format?",
+          options: {
+            A: "January 2026; adopted by Meta and Mistral first",
+            B: "October 16, 2025: Anthropic launches Agent Skills for Claude Code; December 18, 2025: released as open standard at agentskills.io; December 2025: OpenAI adopts same SKILL.md format for Codex CLI and ChatGPT",
+            C: "June 2025; Google and Microsoft adopted first",
+            D: "March 2026; only one company has adopted so far"
+          },
+          correct: "B",
+          explanation: "Agent Skills timeline: October 16, 2025 (Anthropic launches for Claude Code) → December 18, 2025 (released as open standard at agentskills.io) → December 2025 (OpenAI adopts same SKILL.md format for Codex CLI and ChatGPT). The fact that competing companies adopted the same format within weeks validates the standard's design and the industry's need for skill portability."
+        },
+        {
+          id: 27,
+          question: "Which companies have published partner Agent Skills accessible via agentskills.io?",
+          options: {
+            A: "Amazon, Facebook, Twitter, Netflix, Spotify",
+            B: "Canva, Stripe, Notion, Figma, Atlassian, Cloudflare, Ramp, Sentry, Zapier",
+            C: "Only enterprise vendors: SAP, Oracle, Salesforce",
+            D: "No partner skills exist yet — it is still in beta"
+          },
+          correct: "B",
+          explanation: "Partner skills at agentskills.io: Canva (design workflows), Stripe (payment processing), Notion (knowledge management), Figma (design collaboration), Atlassian (project management), Cloudflare (security/networking), Ramp (expense management), Sentry (error monitoring), Zapier (workflow automation). These cover the full modern SaaS stack."
+        },
+        {
+          id: 28,
+          question: "What was MCP Apps Extension (SEP-1865), when was it announced, and what capability did it add?",
+          options: {
+            A: "SEP-1865: A security patch for MCP; announced March 2026; fixed authentication bugs",
+            B: "Announced November 21, 2025: MCP servers can now deliver interactive UIs (buttons, forms, charts, dashboards) via ui:// URI scheme with sandboxed iframe security — evolving from Text Only → Structured Output → Interactive Components",
+            C: "A new MCP protocol version replacing JSON-RPC; announced January 2026",
+            D: "SEP-1865: A funding announcement; announced December 2025; raised $500M"
+          },
+          correct: "B",
+          explanation: "MCP Apps Extension (SEP-1865) was announced November 21, 2025, enabling MCP servers to deliver rich interactive UIs — buttons, forms, charts, dashboards — using the ui:// URI scheme with sandboxed iframe security. This completes the evolution: Text Only (2024) → Structured Output (2025) → Interactive Components (2025-11-21). Combined with OpenAI Apps SDK, it distributes these UIs to 800M+ ChatGPT users."
+        },
+        {
+          id: 29,
+          question: "In the AAIF Asset Map, what monetization advantage does having MCP-based tool integrations provide?",
+          options: {
+            A: "MCP integrations lock customers into your platform",
+            B: "Connect once, sell to any client — MCP standardization means your tool integration works with any AI model supporting MCP, eliminating per-client integration rework",
+            C: "MCP integrations are free, so there is no monetization advantage",
+            D: "MCP only works within one company's ecosystem"
+          },
+          correct: "B",
+          explanation: "AAIF Asset Map: Tool integrations via MCP → 'Connect once, sell to any client.' Because MCP is the universal standard, an MCP integration built once works across Claude Code, OpenAI Codex CLI, Gemini CLI, and any future MCP-supporting system. This dramatically reduces per-client customization costs and enables selling the same integration to every client."
+        },
+        {
+          id: 30,
+          question: "Scenario: A developer builds an AGENTS.md for a healthcare compliance AI that governs coding standards AND another AGENTS.md in the /hipaa-module subfolder with stricter security rules. When the agent works in the /hipaa-module folder, which rules apply?",
+          options: {
+            A: "Both files merge — all rules from both files apply simultaneously",
+            B: "The /hipaa-module AGENTS.md takes precedence (nearest file wins), applying the stricter security rules. The root AGENTS.md applies when working outside /hipaa-module.",
+            C: "The root AGENTS.md always wins regardless of location",
+            D: "Both files conflict and the agent refuses to work"
+          },
+          correct: "B",
+          explanation: "AGENTS.md Hierarchy Rule: nearest file takes precedence. /hipaa-module/AGENTS.md overrides /AGENTS.md when the agent operates within that directory. This is how AAIF enables monorepo compliance: root-level general rules, module-level stricter rules for sensitive subsystems (HIPAA-regulated modules, financial calculation services, PII-handling APIs). No conflict — clean hierarchical override."
+        }
       ]
     },
     {
@@ -1149,7 +1749,127 @@ export const chapter12: Chapter = {
         { id: 17, question: "Scenario: You have built a Digital FTE for insurance claims that handles 85% of routine claims autonomously. A new regulation requires a full audit trail for every claim decision. Which component of the Digital FTE architecture must you upgrade?", options: { A: "The General Model (Brain) — use a smarter AI", B: "MCP & Tooling (Hands) — add audit logging MCP Tools that record every decision, the data accessed (MCP Resources), and the action taken. The Autonomous Loop must trigger audit writes on every decision path including escalations.", C: "Agent Skills (Training) — add more compliance examples", D: "No upgrade needed — the audit trail is implicit" }, correct: "B", explanation: "Audit trail requirements are a tooling concern. MCP & Tooling (the 'Hands' of the Digital FTE) must be augmented with MCP Tools that write structured audit records to a compliance database on every decision, MCP Resources that record what data was accessed, and Autonomous Loop triggers that ensure no decision path bypasses the audit write." },
         { id: 18, question: "Scenario: You're launching a Digital FTE for restaurant inventory management. Restaurants are skeptical of AI replacing their judgment. According to the Shadow Mode Deployment Strategy, what is the correct launch sequence?", options: { A: "Deploy fully autonomous immediately — restaurants will adapt", B: "Phase 1 (Weeks 1-4): Run parallel — log all agent recommendations, target ≥80% agreement. Phase 2 (Weeks 5-8): Agent as input — chef sees recommendations before deciding, target <20% override. Phase 3 (Weeks 9+): Autonomous for routine reorders; chef reviews only anomalies.", C: "Only use the agent for back-office reporting, never for decisions", D: "Start at Phase 3 if the agent has >90% lab accuracy" }, correct: "B", explanation: "Shadow Mode is the trust-building deployment strategy. Phase 1 proves accuracy without risk. Phase 2 augments human judgment. Phase 3 automates only high-confidence routine decisions while humans retain control over edge cases. This mirrors the framework: ≥80% agreement gates → <20% override gates → monthly audit gates." },
         { id: 19, question: "Scenario: You're pitching a Digital FTE to an e-commerce company. They currently spend $180K/year on a 3-person customer support team handling 1,500 tickets/month. Your Digital FTE costs $18K/year and can handle 10,000 tickets/month. They ask 'What about the employees?' What is the strategically sound response?", options: { A: "'AI will replace all your support staff — that's the point'", B: "'The 3 staff members shift from handling routine tier-1 tickets to managing the Digital FTE, handling complex escalations, and owning customer experience strategy — higher-value work. You gain 6x ticket capacity while freeing human talent for judgment-requiring work.'", C: "'You should fire all support staff immediately'", D: "'The employees are irrelevant to the ROI calculation'" }, correct: "B", explanation: "The correct Digital FTE positioning addresses human role transition, not elimination. Digital FTEs replace the operator function for routine work; humans own the judgment-requiring escalations and strategic oversight. The 6x capacity increase with human talent redeployed to higher-value work is the complete value proposition." },
-        { id: 20, question: "Scenario: You launched on the Salesforce AppExchange via PPP. After 18 months you have 200 paying customers. A larger competitor acquires AppExchange ranking through paid promotion, burying your listing. According to PPP Phase 3, what is your strategic response?", options: { A: "Outspend them on AppExchange promotion", B: "Execute PPP Phase 3: re-point your standardized AIFF-based backend (MCP + Agent Skills) to your own native platform. Your 200 customers continue using the same interface with zero friction while you own the direct relationship and eliminate the 30% AppExchange cut.", C: "Abandon all 200 customers and restart", D: "Lower your pricing to compete" }, correct: "B", explanation: "PPP Phase 3 is specifically designed for when the incumbent marketplace becomes unfavorable. Because your backend was built on AIFF standards (MCP primitives and Agent Skills are portable), re-pointing to your native infrastructure requires only configuration changes — not rewrites. Zero customer friction, you own the direct relationship, and your customers see only improved service." }
+        { id: 20, question: "Scenario: You launched on the Salesforce AppExchange via PPP. After 18 months you have 200 paying customers. A larger competitor acquires AppExchange ranking through paid promotion, burying your listing. According to PPP Phase 3, what is your strategic response?", options: { A: "Outspend them on AppExchange promotion", B: "Execute PPP Phase 3: re-point your standardized AIFF-based backend (MCP + Agent Skills) to your own native platform. Your 200 customers continue using the same interface with zero friction while you own the direct relationship and eliminate the 30% AppExchange cut.", C: "Abandon all 200 customers and restart", D: "Lower your pricing to compete" }, correct: "B", explanation: "PPP Phase 3 is specifically designed for when the incumbent marketplace becomes unfavorable. Because your backend was built on AIFF standards (MCP primitives and Agent Skills are portable), re-pointing to your native infrastructure requires only configuration changes — not rewrites. Zero customer friction, you own the direct relationship, and your customers see only improved service." },
+        {
+          id: 21,
+          question: "What does FTE stand for and how does a 'Digital FTE' differ from a traditional FTE?",
+          options: {
+            A: "FTE = Full-Time Employee; a Digital FTE is a robot",
+            B: "FTE = Full-Time Equivalent (1.0 FTE = one full-time employee's workload); a Digital FTE is an autonomous AI agent capable of executing complete human employee output — focusing on outcomes rather than tasks",
+            C: "FTE = Functional Task Engine; Digital FTE adds a user interface",
+            D: "FTE = Fixed-Term Employment; Digital FTE runs fixed-term contracts"
+          },
+          correct: "B",
+          explanation: "FTE = Full-Time Equivalent, the standard HR unit where 1.0 FTE = one full-time employee's workload. A Digital FTE is an autonomous AI agent that produces human employee-equivalent output autonomously — the key distinction is outcomes (what gets delivered) rather than tasks (what gets executed). This framing enables selling AI as staff augmentation rather than software."
+        },
+        {
+          id: 22,
+          question: "What is the Digital Labor Economics comparison between a human support agent and a Digital FTE for ticket resolution?",
+          options: {
+            A: "Human: $3/ticket; Digital FTE: $150/ticket — Digital FTEs are more expensive",
+            B: "Human support agent: $6,000/month for ~20 tickets/day = $150/ticket. Digital FTE: $1,500/month for 500+ tickets/day = $3/ticket — 50x more cost-efficient",
+            C: "Human: $50/ticket; Digital FTE: $10/ticket — 5x more efficient",
+            D: "Both cost the same per ticket at scale"
+          },
+          correct: "B",
+          explanation: "Digital Labor Economics: Human support agent costs $6,000/month, handles ~20 tickets/day = $150/ticket. Digital FTE costs $1,500/month, handles 500+ tickets/day = $3/ticket. This 50x cost efficiency, not 50% efficiency — is the financial argument for Digital FTE investment. The 25x volume difference (20 vs 500 tickets/day) compounds the cost advantage."
+        },
+        {
+          id: 23,
+          question: "What is the '90/10 Split' in the Digital FTE Business Strategy, and where do specialists defend their position?",
+          options: {
+            A: "90% of revenue comes from 10% of customers — classic Pareto principle",
+            B: "90% (Commodity): structure, grammar, basic facts, standard formatting — AI excels here. 10% (Moat): nuance, edge cases, political context, experience-based judgment — specialists defend their irreplaceable value here",
+            C: "90% of features ship fast; 10% require human work",
+            D: "90% of AI outputs are correct; 10% need human correction"
+          },
+          correct: "B",
+          explanation: "The 90/10 Split: 90% Commodity (structure, grammar, facts, formatting) is where generic AI excels — it cannot be defended. 10% Moat (nuance, edge cases, political context, experience-based judgment) is where domain specialists build defensible positions. Why specialists win the 10%: network effects (industry relationships), regulatory moats (HIPAA, HITRUST), switching costs, and compounding improvement of domain-specific agents."
+        },
+        {
+          id: 24,
+          question: "What is the Snakes and Ladders Layer 3 opportunity for solo developers, and what revenue target is realistic?",
+          options: {
+            A: "Layer 3 is consumer AI — available only to large companies",
+            B: "Layer 3: Custom Agents for Vertical Markets (finance, healthcare, education). Solo developers can capture $100M+ ARR by reaching 100–200 firms at $500K–$1M each",
+            C: "Layer 3 requires team of 100+ engineers to enter",
+            D: "Layer 3 only exists for government contractors"
+          },
+          correct: "B",
+          explanation: "Snakes and Ladders Layer 3: Custom Agents for Vertical Markets (finance, healthcare, education, legal). Solo developers can reach $100M+ ARR by serving 100–200 enterprise firms. This contrasts with: Layer 1 (Consumer AI Backbone — don't compete here; billion-dollar competition), Layer 2 (General Agents as dev tools — first ladder), Layer 4 (Orchestrator Layer — build Layer 3 first)."
+        },
+        {
+          id: 25,
+          question: "What defines the three requirements for vertical success with a Custom Agent, and what failure results from missing any one element?",
+          options: {
+            A: "Speed, cost, features — missing any creates a slow, expensive, limited product",
+            B: "Domain Expertise + Deep Integrations + Complete Agentic Solutions. Missing any one: no expertise = generic AI wrapper; no integrations = sandbox demo; no agentic solution = data pipeline",
+            C: "Marketing, sales, and customer support — standard SaaS requirements",
+            D: "Only domain expertise matters — integrations and solution completeness are optional"
+          },
+          correct: "B",
+          explanation: "Three Requirements: 1) Domain Expertise (custom must hit 99% vs generic AI's 70% on domain tasks). 2) Deep Integrations (must read AND write incumbent system languages — months of API work, defensible moat). 3) Complete Agentic Solutions (end-to-end, not slices). Missing: expertise + integrations without agentic = data pipeline; expertise + agentic without integrations = sandbox demo; integrations + agentic without expertise = generic AI wrapper."
+        },
+        {
+          id: 26,
+          question: "What are the three phases and timeline of Shadow Mode Deployment for Digital FTEs?",
+          options: {
+            A: "Phase 1 (Day 1): Full automation; Phase 2 (Week 2): Remove oversight; Phase 3 (Month 2): Scale globally",
+            B: "Phase 1 (Weeks 1–4): Agent generates recommendations, humans decide, log all outputs. Phase 2 (Weeks 5–8): Humans use recommendations as input, measure <20% override. Phase 3 (Weeks 9+): Agent decides for low-risk high-confidence (>95%) scenarios; humans review high-risk",
+            C: "Shadow Mode takes 2 years minimum before any agent decisions",
+            D: "Shadow Mode has no phases — it is deployed all at once"
+          },
+          correct: "B",
+          explanation: "Shadow Mode Deployment: Phase 1 (Weeks 1–4) — agent generates, human decides, all outputs logged. Success metric: 80%+ agreement with human decisions. Phase 2 (Weeks 5–8) — humans use agent recommendations as input, measure: humans override <20%? Phase 3 (Weeks 9+) — agent decides autonomously for low-risk, high-confidence (>95%) cases; humans review high-risk. This graduated autonomy approach reduces deployment risk."
+        },
+        {
+          id: 27,
+          question: "What does the 'Productivity Trap' vs 'Ownership Model' contrast, illustrated by Sarah and Marcus, reveal about the Digital FTE opportunity?",
+          options: {
+            A: "Sarah earns more because she is more productive with AI",
+            B: "Sarah uses AI for 40% productivity boost but remains vulnerable to displacement. Marcus encodes 15 years of healthcare compliance expertise as a Digital FTE — creating a product worth millions that compounds in value. The trap is renting productivity; the model is owning the system.",
+            C: "Marcus is wrong — employees should focus on productivity, not products",
+            D: "Both paths are equally valid long-term strategies"
+          },
+          correct: "B",
+          explanation: "The Productivity Trap: Sarah boosts productivity 40% with Claude Code — still vulnerable because she is competing as a commodity worker. The Ownership Model: Marcus (15-year healthcare compliance auditor) encodes specialized knowledge as a Digital FTE → creates a product worth millions. The distinction: Sarah rents her productivity (stops when she stops working); Marcus owns a system (compounds value while he sleeps). AI-native thinking means ownership, not productivity."
+        },
+        {
+          id: 28,
+          question: "What is the Subscription monetization model's cost structure and what business type is it best suited for?",
+          options: {
+            A: "Cost: $0; Price: $500/month; Margin: 100%; Best for: consumer apps",
+            B: "Cost: ~$600/month infrastructure+monitoring; Price: $1,500/month; Margin: $900 (60% gross); Best for: mission-critical functions requiring 24/7 availability",
+            C: "Cost: $2,000/month; Price: $2,500/month; Margin: 20%; Best for: high-volume transactions",
+            D: "Cost and price vary; Margin: 80%; Best for: government contracts"
+          },
+          correct: "B",
+          explanation: "Subscription Model ($500–2,000/month): infrastructure (~$600/month total cost), price: $1,500/month, margin: $900 (60% gross). Best for: mission-critical functions where 24/7 availability justifies subscription. Compare: Success Fee (10–30% commission, zero upfront, shared risk), License ($5,000–50,000+/year, data in-house, enterprise), Marketplace (30% commission, passive income, high churn risk)."
+        },
+        {
+          id: 29,
+          question: "What are the six pitfalls defining 'When NOT to Use AI Agents' in Digital FTE deployment?",
+          options: {
+            A: "Agents should never be used in any business context",
+            B: "Fully autonomous legal decisions; financial transactions without authorization; unmonitored medical recommendations; biased hiring agents; untracked data access; no audit trail for agent decisions",
+            C: "Only consumer apps; never enterprise; only low-stakes decisions",
+            D: "Agents should avoid any task that humans can also perform"
+          },
+          correct: "B",
+          explanation: "Six pitfalls (When NOT to use AI Agents autonomously): 1) Fully autonomous legal decisions — require human attorney sign-off. 2) Financial transactions without authorization — PCI-DSS/SOX risk. 3) Unmonitored medical recommendations — FDA regulation, liability. 4) Biased hiring agents — EEOC discrimination risk. 5) Untracked data access — GDPR/CCPA compliance. 6) No audit trail — regulatory non-compliance in any regulated industry."
+        },
+        {
+          id: 30,
+          question: "What CAC (Customer Acquisition Cost) reduction does the Piggyback Protocol Pivot (PPP) Phase 2 achieve by using incumbent marketplaces?",
+          options: {
+            A: "10–20% CAC reduction through organic search",
+            B: "60–80% CAC reduction by piggybacking on incumbent marketplace trust and discovery (Salesforce AppExchange, Shopify Store) — using established user bases instead of building cold-start acquisition",
+            C: "No CAC reduction — marketplaces charge more than direct sales",
+            D: "100% CAC reduction — marketplaces are completely free to join"
+          },
+          correct: "B",
+          explanation: "PPP Phase 2 (Market Validation): by piggybacking on incumbent marketplaces (Salesforce AppExchange, Shopify Store), CAC is reduced 60–80%. The marketplace provides: existing user trust, built-in discovery and search, established billing infrastructure, and social proof from the marketplace brand. This lets early-stage companies acquire enterprise customers at startup cost levels."
+        }
       ]
     },
     {
@@ -1340,7 +2060,127 @@ export const chapter12: Chapter = {
         { id: 17, question: "Scenario: A product manager wants users to type 'Show me Q3 sales broken down by region and product category' instead of using a traditional dashboard builder. According to the Nine Pillars, which pillar enables this design pattern?", options: { A: "Progressive Disclosure — the data loads gradually", B: "Intent-Based UI — users express intent in natural language and AI generates the appropriate UI component (chart, table, filter configuration). The traditional dashboard builder's drag-and-drop menus are bypassed entirely.", C: "The FTE Threshold — the agent works proactively", D: "The Multiplier Effect — specs drive better agents" }, correct: "B", explanation: "Intent-Based UI is the AIDD pillar that replaces traditional UI navigation with natural language intent. 'Show me Q3 sales broken down by region and product category' is intent — the AI interprets it and generates the appropriate visualization. This eliminates the need for users to navigate dashboards and configure filter dropdowns." },
         { id: 18, question: "Scenario: Your DevOps agent currently waits for an on-call engineer to say 'Check the production logs' before it investigates incidents. The team wants it to autonomously detect anomalies and generate incident reports without being asked. According to the Nine Pillars, which milestone must the agent cross?", options: { A: "The Amplifier Effect — it needs better inputs", B: "The FTE Threshold — the shift from passive (waiting for prompts) to proactive (monitoring its domain, identifying needs, executing solutions without human 'Start' commands). This is when the DevOps agent becomes a true Digital FTE.", C: "Progressive Disclosure — it needs to load less context", D: "Intent-Based UI — it needs a better interface" }, correct: "B", explanation: "The FTE Threshold transforms a passive agent (waits for 'Check logs') into a Digital FTE (proactively monitors logs, detects anomalies, diagnoses root causes, and generates incident reports without human initiation). Until this threshold is crossed, the agent is a sophisticated command-line tool." },
         { id: 19, question: "Scenario: Your team mastered specification-first development 6 months ago and now builds reliable Custom Agents. These agents handle complex workflows, freeing your team to tackle larger problems — which demands even better specifications. According to AIDD, which concept describes this dynamic?", options: { A: "The Amplifier Effect — AI amplifies your specs", B: "The Multiplier Effect (Virtuous Cycle) — clear specs → precise AI execution → reliable Custom Agents → Digital FTEs → multiplied capacity → larger problems → demand for better specs → repeat. Each cycle compounds capability exponentially.", C: "The FTE Threshold — the agents are now proactive", D: "Path B — choosing SDD over Vibe Coding" }, correct: "B", explanation: "The Multiplier Effect describes exactly this virtuous cycle: discipline in specification writing enables precise AI execution, which produces reliable Custom Agents, which become Digital FTEs multiplying capacity, which enables tackling larger problems, which drives demand for even better specifications. Each iteration compounds capability." },
-        { id: 20, question: "Scenario: A junior developer argues 'I don't need to understand system design because AI can design the architecture for me.' According to the Nine Pillars and the Orchestrator Skills Matrix, what is the flaw?", options: { A: "They are correct — AI handles all architecture now", B: "Architecture decisions are in the human-only capabilities of the Skills Matrix. AI generates architectural options but cannot evaluate business constraints, regulatory requirements, team capabilities, and long-term maintainability tradeoffs. These require human judgment.", C: "Architecture is only needed for large systems", D: "AI is worse at architecture than coding" }, correct: "B", explanation: "Architecture decisions are explicitly listed as human-only in the Orchestrator Skills Matrix alongside problem decomposition, requirement gathering, security assessment, and validation. AI can generate architectural patterns, but evaluating which architecture fits specific business constraints, team size, scaling requirements, and regulatory environment requires human judgment that cannot be outsourced." }
+        { id: 20, question: "Scenario: A junior developer argues 'I don't need to understand system design because AI can design the architecture for me.' According to the Nine Pillars and the Orchestrator Skills Matrix, what is the flaw?", options: { A: "They are correct — AI handles all architecture now", B: "Architecture decisions are in the human-only capabilities of the Skills Matrix. AI generates architectural options but cannot evaluate business constraints, regulatory requirements, team capabilities, and long-term maintainability tradeoffs. These require human judgment.", C: "Architecture is only needed for large systems", D: "AI is worse at architecture than coding" }, correct: "B", explanation: "Architecture decisions are explicitly listed as human-only in the Orchestrator Skills Matrix alongside problem decomposition, requirement gathering, security assessment, and validation. AI can generate architectural patterns, but evaluating which architecture fits specific business constraints, team size, scaling requirements, and regulatory environment requires human judgment that cannot be outsourced." },
+        {
+          id: 21,
+          question: "What is the AIDD definition, and how does it reframe the developer's primary role?",
+          options: {
+            A: "AIDD = AI-Delivered Development; developers are replaced by AI agents",
+            B: "AIDD = AI-Driven Development — a specification-first methodology that transforms developers into specification engineers and system architects; AI agents handle implementation while humans guide architecture and validation",
+            C: "AIDD = Automated Integrated Dev and Deployment; CI/CD automation",
+            D: "AIDD = AI Design Document; a template format for project planning"
+          },
+          correct: "B",
+          explanation: "AIDD = AI-Driven Development (AIDD): 'a specification-first methodology that transforms developers into specification engineers and system architects.' Key framing: developers write specifications, AI agents implement, humans focus on architecture and validation. This is not about removing developers — it is about elevating them from implementation workers to system designers."
+        },
+        {
+          id: 22,
+          question: "Which of AIDD's Nine Defining Characteristics ensures that AI-generated code meets requirements before proceeding?",
+          options: {
+            A: "Specification-Driven — requirements precede implementation",
+            B: "Quality-Gated — automated validation ensures generated code meets requirements at each stage before proceeding",
+            C: "Version-Controlled — all artifacts are tracked",
+            D: "Human-Verified — humans approve final outputs"
+          },
+          correct: "B",
+          explanation: "Quality-Gated is Characteristic 4: automated validation ensures generated code meets requirements. This creates checkpoints at each stage where AI output is measured against success criteria before the next phase begins. This is distinct from Human-Verified (Characteristic 6) which is about human decision-making, and Specification-Driven (Characteristic 1) which is about requirements first."
+        },
+        {
+          id: 23,
+          question: "What distinguishes the M-Shaped developer from the T-Shaped developer, and what enables M-Shaped profiles in 2026?",
+          options: {
+            A: "T-Shaped has broader knowledge; M-Shaped is more specialized",
+            B: "T-Shaped: deep one area, broad shallow elsewhere. M-Shaped: deep expertise in 2–4 complementary domains simultaneously — previously nearly impossible; now enabled by AI which handles implementation across all domains so one person can master multiple deep areas",
+            C: "M-Shaped requires 20+ years of experience; T-Shaped is for junior developers",
+            D: "The M-Shaped model is only for startups, not enterprise"
+          },
+          correct: "B",
+          explanation: "Developer shapes: I-Shaped (single deep specialty) → T-Shaped (deep one area, broad elsewhere — traditional full-stack ideal) → M-Shaped (deep expertise in 2–4 complementary domains simultaneously). M-Shaped was previously nearly impossible because mastering multiple domains required decades. AI enables M-Shaped by handling implementation details across all domains, letting humans focus on mastery of the judgment layer in multiple areas."
+        },
+        {
+          id: 24,
+          question: "What is a real example of an M-Shaped profile in the 2026 developer economy?",
+          options: {
+            A: "A developer who knows 10 programming languages",
+            B: "A Vertical SaaS Builder with healthcare domain + full-stack dev + MLOps + product design (traditionally requiring 5 people), now achievable by one person using AI for implementation",
+            C: "A developer who manages 10 junior developers",
+            D: "A developer who uses all five AI powers simultaneously"
+          },
+          correct: "B",
+          explanation: "Real M-Shaped profile examples: Vertical SaaS Builder (healthcare domain + full-stack dev + MLOps + product design — traditionally 5 people); Platform Engineer (backend + DevOps + cloud + security — traditionally 4 people); AI Product Developer (frontend + ML integration + API design + user research — traditionally 4 people). AI enables each because it handles implementation while the human masters the judgment layer across multiple domains."
+        },
+        {
+          id: 25,
+          question: "What is the AIDD Pillar 7 (Spec-Driven Development) and what specific tools does it use?",
+          options: {
+            A: "Pillar 7 is about version control using Git",
+            B: "Spec-Driven Development: Markdown specs as source of truth; specifically uses CLAUDE.md (project conventions), subagents (specialized AI workers), and tasks (discrete work units with acceptance criteria)",
+            C: "Pillar 7 is about deployment pipelines using Docker",
+            D: "Pillar 7 is about AI model fine-tuning"
+          },
+          correct: "B",
+          explanation: "Pillar 7: Spec-Driven Development — Markdown specs as source of truth. Tools: CLAUDE.md (encodes project conventions that persist across sessions), subagents (specialized AI workers for discrete tasks), tasks (concrete work items with acceptance criteria). This pillar makes specification the 'source code' that AI executes — fundamentally different from traditional prose requirements."
+        },
+        {
+          id: 26,
+          question: "What is the AIDD Pillar 6 (Test-Driven Development) and what specific fear does it remove?",
+          options: {
+            A: "Pillar 6 removes the fear of losing data in production",
+            B: "TDD: write tests before implementation; removes the fear of AI-generated code by creating a verifiable contract that catches errors regardless of how the code was generated",
+            C: "Pillar 6 removes the fear of choosing the wrong programming language",
+            D: "Pillar 6 removes the fear of deploying to cloud environments"
+          },
+          correct: "B",
+          explanation: "Pillar 6: Test-Driven Development — write tests before implementation. The specific fear it removes is fear of AI-generated code: by defining what correct behavior looks like before AI writes the implementation, any errors in AI-generated code are caught immediately by the pre-written tests. TDD turns AI code from 'trust but verify' to 'verify before trust.'"
+        },
+        {
+          id: 27,
+          question: "What is the AIDD Pillar 9 (Universal Cloud Deployment) and which technologies does it specify?",
+          options: {
+            A: "Pillar 9 uses only AWS and Azure for deployment",
+            B: "Universal Cloud Deployment using Kubernetes (orchestration), Docker (containers), Dapr (microservice runtime), Kafka (event streaming), Ray (distributed AI compute) — production-ready infrastructure from inception",
+            C: "Pillar 9 is about deploying to edge devices, not cloud",
+            D: "Pillar 9 only applies to consumer applications"
+          },
+          correct: "B",
+          explanation: "Pillar 9: Universal Cloud Deployment — Kubernetes (container orchestration), Docker (containerization), Dapr (microservice communication runtime), Kafka (distributed event streaming), Ray (distributed AI/ML compute). These are not aspirational — AIDD embeds production-grade infrastructure from Day 1, not as a Phase 3 migration. This is what makes AIDD outputs 'production-ready from inception.'"
+        },
+        {
+          id: 28,
+          question: "What is the realistic learning pathway for mastering all Nine AIDD Pillars, and how much faster does AI accelerate this versus traditional solo mastery?",
+          options: {
+            A: "6 months for all nine pillars; 10x faster with AI",
+            B: "Months 1–6: Pillars 1–3 (AI agents, Markdown specs, MCP); Months 7–12: Pillars 4–6 (AI-First IDEs, Linux, TDD); Months 13–18: Pillars 7–9 (SDD, Composable Skills, Cloud); Year 2+: mastery. AI accelerates 3–5x versus traditional solo mastery",
+            C: "5 years for all pillars; AI provides no speed advantage",
+            D: "3 months total if using Claude Code daily"
+          },
+          correct: "B",
+          explanation: "AIDD Realistic Learning Pathway: Months 1–6 (Pillars 1–3: AI CLI agents, Markdown as programming language, MCP standard). Months 7–12 (Pillars 4–6: AI-First IDEs, Linux universal dev environment, TDD). Months 13–18 (Pillars 7–9: SDD, Composable Vertical Skills, Universal Cloud). Year 2+: mastery and specialization. AI partnership accelerates learning 3–5x versus traditional solo self-study."
+        },
+        {
+          id: 29,
+          question: "What role does Pillar 2 (Markdown as Programming Language) play in AIDD?",
+          options: {
+            A: "Markdown is used for README files and documentation only",
+            B: "Markdown specs become executable 'source code' for AI agents — a SPEC.md is not documentation but the specification that an AI agent executes directly, making Markdown the primary programming interface in AI-native development",
+            C: "Markdown replaces all other programming languages entirely",
+            D: "Pillar 2 is about formatting code comments in Markdown"
+          },
+          correct: "B",
+          explanation: "Pillar 2: Markdown as Programming Language — specs become executable 'source code' for AI agents. In AIDD, a SPEC.md is not prose documentation that a developer reads to write code; it is the specification that an AI agent reads and implements directly. This elevates Markdown from a formatting tool to the primary programming interface: developers program in Markdown, AI executes in code."
+        },
+        {
+          id: 30,
+          question: "Scenario: A team is planning their first AIDD project. They want to start with Pillars 7–9 (SDD, Composable Skills, Cloud) because those seem most powerful. According to the AIDD Learning Pathway, what is wrong with this approach?",
+          options: {
+            A: "Nothing is wrong — start with whatever interests you most",
+            B: "The Learning Pathway is sequential by design: Pillars 1–3 (AI agents + Markdown + MCP) are the foundation. Without mastering these, Pillars 7–9 have no infrastructure to run on — SDD requires AI agent mastery, Composable Skills require MCP, Cloud deployment requires the full stack below it.",
+            C: "Pillars 7–9 are only for senior developers — juniors should skip them",
+            D: "Start with Pillar 9 (Cloud) first because production readiness is most important"
+          },
+          correct: "B",
+          explanation: "The AIDD Pillars are sequenced intentionally: Pillars 1–3 are foundational (you cannot do SDD without AI agents, cannot build Composable Skills without MCP, cannot deploy without the dev environment). Jumping to Pillars 7–9 without 1–6 creates: SDD without an AI agent to execute specs (useless), Skills without MCP (un-discoverable), Cloud deployment without containerized builds (impossible). Sequential learning is the path."
+        }
       ]
     },
     {
@@ -1531,7 +2371,127 @@ export const chapter12: Chapter = {
         { id: 17, question: "Scenario: Your team's TASKS phase has a single task: 'Implement the full payment processing module — 3 days.' According to SDD's TASKS Gate requirements, what must be done before proceeding to IMPLEMENT?", options: { A: "Nothing — 3 days is a reasonable estimate", B: "Decompose: no task should exceed 2 hours. Break into subtasks: create payment schema, build charge endpoint, add webhook handler, implement retry logic, write refund endpoint, add idempotency keys — each with explicit acceptance criteria.", C: "Add more developers to do it faster", D: "Skip directly to IMPLEMENT — 3 days is urgent" }, correct: "B", explanation: "SDD's TASKS Gate requires: no task exceeds 2 hours, each task has explicit acceptance criteria, and dependencies are ordered correctly. A '3-day payment module' task violates this — it hides complexity, makes validation impossible, and creates a single point of failure. Decompose into subtasks of ≤2 hours each." },
         { id: 18, question: "Scenario: A developer completes a feature, realizes the spec missed a critical constraint, and instead of updating the spec, just adds the constraint silently in the code with a comment 'TODO: add to spec.' According to SDD's living document principle, why is this harmful?", options: { A: "It is fine — the code is the spec", B: "It creates spec-code divergence: the spec no longer reflects reality, future AI sessions following the spec will remove the silent constraint, other developers won't know about it, and the VALIDATE phase will reference an outdated spec.", C: "TODO comments are standard practice", D: "The developer should delete the constraint instead" }, correct: "B", explanation: "SDD treats specs as living documents — they must be updated when new constraints are discovered. A silent code constraint with a TODO creates: spec-code divergence, AI regression risk (next session follows old spec), team knowledge fragmentation, and VALIDATE phase failure. The correct action: immediately update the spec with the discovered constraint." },
         { id: 19, question: "Scenario: Developer A uses SDD and completes 10 features in 100 hours with all tests passing. Developer B uses Vibe Coding and completes 15 features in 100 hours, but 4 fail in staging and 2 have security vulnerabilities. What does this comparison demonstrate about SDD?", options: { A: "Developer B is more productive", B: "SDD's 1-2 iteration refinement vs. Vibe Coding's 5+ iteration cycle. Developer B's 15 features include hidden rework (4 staging failures + 2 security issues). Accounting for the hidden work, B delivers ~9 reliable features with outstanding risk vs. A's 10 reliable ones.", C: "Vibe Coding is better for experienced developers", D: "Both approaches are equivalent in quality" }, correct: "B", explanation: "The SDD equation in practice: Developer A's clear specs enabled 10 reliable features, zero rework. Developer B's vague approach created 5+ hidden iteration cycles, 2 security vulnerabilities representing potential breach liability, and 4 features requiring rework. Accounting for hidden work: B's 15 features reduce to ~9 reliable deliverables with outstanding risk." },
-        { id: 20, question: "Scenario: A healthcare startup's CTO says 'We can't afford to spend time on specs — we need to ship 20 features this quarter' for a product handling patient data. According to SDD, how should you respond?", options: { A: "Agree — speed is critical for startups", B: "SDD is non-negotiable for healthcare/patient data. HIPAA violations from rushed, unspecified features carry fines up to $1.9M per violation category. The CLARIFY phase surfaces compliance requirements; the VALIDATE phase verifies them. Skipping specs costs orders of magnitude more in breach remediation.", C: "Use Vibe Coding for features and SDD only for security", D: "Hire more developers to do both" }, correct: "B", explanation: "SDD is essential for security/compliance projects. Healthcare + patient data means HIPAA compliance, where specification-free development creates: unspecified access controls, missing audit logging, inadequate encryption standards. HIPAA fines range up to $1.9M per violation category. The CLARIFY phase would surface these requirements; VALIDATE would verify them." }
+        { id: 20, question: "Scenario: A healthcare startup's CTO says 'We can't afford to spend time on specs — we need to ship 20 features this quarter' for a product handling patient data. According to SDD, how should you respond?", options: { A: "Agree — speed is critical for startups", B: "SDD is non-negotiable for healthcare/patient data. HIPAA violations from rushed, unspecified features carry fines up to $1.9M per violation category. The CLARIFY phase surfaces compliance requirements; the VALIDATE phase verifies them. Skipping specs costs orders of magnitude more in breach remediation.", C: "Use Vibe Coding for features and SDD only for security", D: "Hire more developers to do both" }, correct: "B", explanation: "SDD is essential for security/compliance projects. Healthcare + patient data means HIPAA compliance, where specification-free development creates: unspecified access controls, missing audit logging, inadequate encryption standards. HIPAA fines range up to $1.9M per violation category. The CLARIFY phase would surface these requirements; VALIDATE would verify them." },
+        {
+          id: 21,
+          question: "Why did Spec-Driven Development become practically viable specifically in the AI era?",
+          options: {
+            A: "SDD was always practical — AI just made it more popular",
+            B: "AI generates code faster than humans type, shifting the bottleneck from implementation to specification clarity — making SDD economically rational because writing a spec is now faster than the iteration cycles it eliminates",
+            C: "SDD became viable because context windows grew large enough to hold specs",
+            D: "SDD is viable only for large teams — AI made it work for solo developers"
+          },
+          correct: "B",
+          explanation: "SDD became practical because AI removed implementation as the bottleneck. Pre-AI: writing a 500-line spec took longer than just coding. Post-AI: AI generates 500 lines of code in seconds, but iterating on misaligned requirements takes hours. The bottleneck shifted from 'writing code' to 'clarifying intent.' SDD addresses exactly that bottleneck — making it economically optimal in the AI era."
+        },
+        {
+          id: 22,
+          question: "What is the SDD SPECIFY phase, and what four elements should it define?",
+          options: {
+            A: "Write code first, then specify what you built",
+            B: "Define intent (what success looks like), success criteria (measurable outcomes), constraints (technical/business/legal limits), and non-goals (explicitly what is out of scope)",
+            C: "Specify only the database schema before coding",
+            D: "SPECIFY is a documentation phase that runs after deployment"
+          },
+          correct: "B",
+          explanation: "SDD Phase 1 — SPECIFY defines: 1) Intent (what does success look like?), 2) Success Criteria (measurable, verifiable outcomes), 3) Constraints (technical standards, business deadlines, budget limits, design requirements), 4) Non-Goals (explicitly what is OUT of scope — as important as what is in scope to prevent scope creep and AI-generated extras)."
+        },
+        {
+          id: 23,
+          question: "What is the SDD CLARIFY phase designed to surface, and why is it a separate phase from SPECIFY?",
+          options: {
+            A: "CLARIFY is where you write the actual code — it clarifies the spec through implementation",
+            B: "CLARIFY removes ambiguity by identifying edge cases, integration points, and error handling scenarios — it is separate because initial specs always contain hidden assumptions that only targeted questioning reveals",
+            C: "CLARIFY is for clarifying the programming language choice",
+            D: "CLARIFY runs after implementation to explain the code to stakeholders"
+          },
+          correct: "B",
+          explanation: "SDD Phase 2 — CLARIFY: removes ambiguity; identifies edge cases (what happens when X fails?), integration points (what systems must it connect to?), and error handling (how should failures surface to users?). It is a separate phase because even well-intentioned SPECIFY outputs contain hidden assumptions that only targeted questioning by an AI reveals — before any implementation begins."
+        },
+        {
+          id: 24,
+          question: "In SDD's TASKS phase, what is the maximum size of each task and why?",
+          options: {
+            A: "Maximum 1 week per task — to fit sprint cycles",
+            B: "Maximum 2 hours per task with acceptance criteria for each — small enough to be completed in one AI session, with acceptance criteria enabling automatic validation of completion",
+            C: "Tasks have no size limit — break however feels natural",
+            D: "Maximum 1 day per task — daily standup alignment"
+          },
+          correct: "B",
+          explanation: "SDD Phase 4 — TASKS: break into concrete items with acceptance criteria, maximum 2 hours each. The 2-hour constraint ensures: tasks fit within a single AI agent context session (preventing mid-task context loss), acceptance criteria enable automated validation of completion, and small scope prevents requirement drift during implementation. Tasks this size also enable atomic commits and reviewable diffs."
+        },
+        {
+          id: 25,
+          question: "What does the SDD Specification 'Testability' characteristic require, and what example demonstrates it?",
+          options: {
+            A: "Testability means the spec can be tested manually by QA teams",
+            B: "Every success criterion must be measurable and verifiable — example: 'response time < 200ms for 95th percentile requests' (testable) vs. 'make it fast' (not testable)",
+            C: "Testability means writing all tests before writing the spec",
+            D: "Testability only applies to unit tests, not integration tests"
+          },
+          correct: "B",
+          explanation: "SDD Specification Testability: every success criterion must be measurable and verifiable through automated or manual tests. The canonical example: 'make it fast' is NOT testable — it provides no verification threshold. 'Response time < 200ms for 95th percentile requests' IS testable — you can write a load test that either passes or fails against this exact criterion. Testability is what enables the VALIDATE phase to be automated."
+        },
+        {
+          id: 26,
+          question: "What are the three contexts where Vibe Coding (no formal specifications) is acceptable according to the SDD Implementation Decision Framework?",
+          options: {
+            A: "Small projects, solo developers, internal tools",
+            B: "Learning experiments, throwaway prototypes, trivial changes — contexts where formal validation and maintainability are irrelevant because the output will never be relied upon",
+            C: "All startup projects until Series A funding",
+            D: "Vibe Coding is never acceptable — always use full SDD"
+          },
+          correct: "B",
+          explanation: "SDD Implementation Decision Framework — Skip SDD (Vibe Coding acceptable) for: learning experiments (exploring new technology), throwaway prototypes (proof-of-concept that will be rebuilt), trivial changes (a single config value change). Use Lightweight SDD for: simple internal utilities, exploratory prototypes, well-understood patterns. Use Full SDD for: production features, complex multi-component systems, security-critical, team projects, AI-assisted development."
+        },
+        {
+          id: 27,
+          question: "What does the SDD VALIDATE phase confirm, and what happens if validation fails?",
+          options: {
+            A: "VALIDATE confirms the code compiles — failure means syntax errors",
+            B: "VALIDATE confirms implementation matches specifications via testing — if validation fails, iteration returns to IMPLEMENT (not to SPECIFY), addressing only the specific misalignment identified",
+            C: "VALIDATE is a client demo phase — failure means client rejection",
+            D: "VALIDATE only runs automated tests — no human review needed"
+          },
+          correct: "B",
+          explanation: "SDD Phase 6 — VALIDATE: confirms implementation matches specifications via testing. The key is what happens on failure: return to IMPLEMENT to fix the specific gap — not restart from SPECIFY unless the spec itself was wrong. This targeted iteration loop (Implement → Validate → Implement if needed) is why SDD achieves 1–2 iterations instead of 5+. Each iteration is focused, not a full restart."
+        },
+        {
+          id: 28,
+          question: "What does SDD's Specification 'Completeness' characteristic require to be included?",
+          options: {
+            A: "Only functional requirements — what the feature does",
+            B: "Functional requirements (what it does) + non-functional requirements (performance, security, scalability) + integration requirements (what systems it connects to) — all three categories",
+            C: "Only non-functional requirements — how fast and how secure",
+            D: "Integration requirements only — all features touch multiple systems"
+          },
+          correct: "B",
+          explanation: "SDD Specification Completeness requires: Functional requirements (what the feature does — user stories, use cases), Non-functional requirements (performance thresholds, security standards, availability SLAs), Integration requirements (which systems must it connect to, what APIs, data formats, authentication methods). Missing any category creates gaps that AI fills with assumptions — generating code that is internally consistent but wrong for your actual system."
+        },
+        {
+          id: 29,
+          question: "What is the core insight of SDD regarding systematic thinking and shipping speed?",
+          options: {
+            A: "Systematic thinking slows shipping speed — move fast and fix later",
+            B: "In the agentic era, systematic thinking BEFORE coding determines shipping speed. SDD accelerates development by eliminating reactive iterations through upfront clarity — clarity is the velocity multiplier",
+            C: "Shipping speed only improves with more developers, not better specs",
+            D: "Systematic thinking only matters for large teams, not solo developers"
+          },
+          correct: "B",
+          explanation: "SDD Core Insight: 'In the agentic era, systematic thinking before coding determines shipping speed.' The counterintuitive truth: spending time on SPECIFY+CLARIFY+PLAN upfront eliminates 3–5 misaligned implementation cycles, making total time-to-ship FASTER. 'Vague Idea + AI = 5+ iterations of misalignment' vs. 'Clear Specification + AI = 1–2 iterations of refinement.' Clarity is the velocity multiplier."
+        },
+        {
+          id: 30,
+          question: "Scenario: A developer skips the CLARIFY phase and goes directly from SPECIFY to PLAN for a payment integration feature. They wrote: 'Integrate Stripe payment.' After implementation, the team discovers 12 edge cases (partial payments, currency conversion, webhook failures, refund workflows) that were never specified. What SDD lesson does this illustrate?",
+          options: {
+            A: "CLARIFY is optional for simple integrations — Stripe is well-documented",
+            B: "CLARIFY is where hidden complexity surfaces before implementation. 'Integrate Stripe payment' is deceptively simple — CLARIFY would ask: what payment methods? what currencies? how are webhooks handled? what happens on partial payment? Skipping it transferred discovery costs from specification to production bug fixes.",
+            C: "The developer should have used a different payment provider",
+            D: "12 edge cases is normal — all payment integrations have this complexity"
+          },
+          correct: "B",
+          explanation: "CLARIFY exists to surface hidden complexity before a single line of code is written. 'Integrate Stripe payment' seems simple but hides: payment method types (card, ACH, SECP), currency handling, partial payment logic, webhook signature verification, idempotency keys for retries, refund workflows, dispute handling, PCI compliance scope. CLARIFY would ask explicit questions about each, converting unknowns into specified requirements before AI starts implementing."
+        }
       ]
     },
     {
@@ -1722,7 +2682,127 @@ export const chapter12: Chapter = {
         { id: 17, question: "Scenario: You have a General Agent prototype that has been successfully handling code review suggestions for 3 weeks. Your team uses it daily. According to the Digital FTE Vision, what is the next decision point?", options: { A: "Keep it as a General Agent forever — it works well", B: "Crystallize the prototype: 3 weeks of successful patterns indicate stable requirements. Extract them into a Custom Agent spec, build with MCP and Skills, and deploy for 24/7 autonomous operation. Perpetual Incubation wastes the proven patterns.", C: "Replace it with a newer AI model", D: "Add more features to the General Agent" }, correct: "B", explanation: "3 weeks of successful daily use signals requirement stability — the Incubation phase has done its job. Crystallize: extract the proven patterns, encode them in a Custom Agent spec, build with MCP tools (automated PR comment posting, file diff reading) and Agent Skills (code review checklist, style guide SOPs). Deploy for 24/7 autonomous operation." },
         { id: 18, question: "Scenario: Your company has deployed 5 Digital FTEs, each handling a different business function. A new client asks for a 6th FTE that needs data from all 5. According to the Synthesis framework, what architectural capability is required?", options: { A: "Build a completely new standalone FTE from scratch", B: "Multi-agent orchestration — the Digital FTEs must coordinate, sharing context via MCP and AGENTS.md standards, with an orchestrator routing requests. This is the Months 10-12 milestone: scaling from individual Digital FTEs to multi-agent enterprise solutions.", C: "Merge all 5 FTEs into one large FTE", D: "Use a single larger context window to combine them" }, correct: "B", explanation: "Multi-agent orchestration is the next maturity stage after individual Digital FTEs. The 5 existing FTEs become specialized sub-agents; an orchestrator routes requests, aggregates outputs, and manages cross-FTE workflows. AIFF standards (MCP for inter-agent communication, AGENTS.md for per-agent rules, Skills for shared expertise) enable this coordination." },
         { id: 19, question: "Scenario: A software consultancy has accumulated 2 years of discipline in SDD, building 15 Custom Agents and 8 operational Digital FTEs. A well-funded competitor enters with identical AI tools but starts from scratch. Why is the established consultancy's lead not easily overcome?", options: { A: "The competitor just needs to buy better AI models", B: "The consultancy has accumulated discipline that AI cannot copy: 2 years of specification quality refinement, validated Custom Agent patterns, encoded domain expertise as defensible IP, and iteration velocity from proven workflows. AI amplifies these — the gap widens even as the competitor scales.", C: "The competitor can hire the consultancy's developers", D: "AI tools change so fast the advantage disappears in 6 months" }, correct: "B", explanation: "The Amplifier Effect creates compounding advantages. The consultancy's accumulated discipline includes: specification libraries, Custom Agent templates encoding domain expertise as IP, validated testing frameworks, and refined iteration processes. When AI amplifies these, the output quality and delivery speed far exceed a competitor starting fresh." },
-        { id: 20, question: "Scenario: You've been asked to present the '12-month Digital FTE Vision' to your company's board. They ask: 'What's the difference between what we're doing today with AI and what we'll be doing in month 12?' What is the most accurate description of the transformation?", options: { A: "Month 12 will have better AI models — we'll use those", B: "Today: AI as a productivity tool (2-3x faster development). Month 12: AI as organizational capacity (SDD mastery → Custom Agents → Digital FTEs operating 24/7 → multi-agent orchestration handling enterprise functions autonomously). The business adds FTEs without headcount.", C: "Month 12 will be the same but with more features", D: "Month 12 is uncertain — AI changes too fast to plan" }, correct: "B", explanation: "The Synthesis 12-month roadmap describes a fundamental transformation: Months 1-3 (master SDD), Months 4-6 (build Custom Agents), Months 7-9 (deploy Digital FTEs), Months 10-12 (scale to multi-agent orchestration). The board-level summary: today you accelerate humans; month 12 you add Digital FTEs — the organization gains capacity without proportional headcount growth." }
+        { id: 20, question: "Scenario: You've been asked to present the '12-month Digital FTE Vision' to your company's board. They ask: 'What's the difference between what we're doing today with AI and what we'll be doing in month 12?' What is the most accurate description of the transformation?", options: { A: "Month 12 will have better AI models — we'll use those", B: "Today: AI as a productivity tool (2-3x faster development). Month 12: AI as organizational capacity (SDD mastery → Custom Agents → Digital FTEs operating 24/7 → multi-agent orchestration handling enterprise functions autonomously). The business adds FTEs without headcount.", C: "Month 12 will be the same but with more features", D: "Month 12 is uncertain — AI changes too fast to plan" }, correct: "B", explanation: "The Synthesis 12-month roadmap describes a fundamental transformation: Months 1-3 (master SDD), Months 4-6 (build Custom Agents), Months 7-9 (deploy Digital FTEs), Months 10-12 (scale to multi-agent orchestration). The board-level summary: today you accelerate humans; month 12 you add Digital FTEs — the organization gains capacity without proportional headcount growth." },
+        {
+          id: 21,
+          question: "What are the three evolving perspectives on AI described in the Digital FTE Synthesis, and how does each view AI's role?",
+          options: {
+            A: "Cost center view, productivity view, revenue view",
+            B: "Traditional View (AI as tool responding to prompts); Agent Factory View (AI agents as reasoning teammates with memory); Digital FTE View (AI agents as specialized digital full-time employees executing complete job functions)",
+            C: "Developer view, manager view, executive view",
+            D: "Open source view, enterprise view, consumer view"
+          },
+          correct: "B",
+          explanation: "Three evolving perspectives: 1) Traditional View — AI is a tool: prompt in, response out, human does the work. 2) Agent Factory View — AI agents are reasoning teammates with memory, executing multi-step workflows autonomously. 3) Digital FTE View — AI agents are specialized digital full-time employees, running 24/7 in production, responsible for complete job functions. Each view represents a different level of AI integration maturity."
+        },
+        {
+          id: 22,
+          question: "What are the three steps that transform a General Agent into a Digital FTE?",
+          options: {
+            A: "Training, fine-tuning, deployment",
+            B: "1) Move from chat interface into production environments; 2) Augment with Agent Skills and MCP for tool access; 3) Deploy for autonomous 24/7 operation without human initiation for each task",
+            C: "Prompt engineering, testing, monitoring",
+            D: "Hiring, onboarding, performance review"
+          },
+          correct: "B",
+          explanation: "A General Agent becomes a Digital FTE through three steps: 1) Environmental shift — from chat interface (prompt-response) into production infrastructure (automated triggers, scheduled runs). 2) Capability augmentation — Agent Skills (domain expertise/SOPs) + MCP (tool access to real systems). 3) Operational mode — autonomous 24/7 operation, proactively monitoring and executing without human initiation. The FTE Threshold: tools await prompts; Digital FTEs proactively execute."
+        },
+        {
+          id: 23,
+          question: "What are the four components of a Digital FTE and what role does each play?",
+          options: {
+            A: "Hardware, software, network, storage",
+            B: "General Model (Brain — reasoning, logic, communication); MCP & Tooling (Hands — codebase/infrastructure access); Agent Skills (Training — SOPs, guardrails, domain knowledge); Autonomous Loop (Shift — 24/7 monitoring without human initiation)",
+            C: "CEO, CTO, CFO, COO of the AI organization",
+            D: "Input, processing, output, feedback"
+          },
+          correct: "B",
+          explanation: "Digital FTE Components: General Model = The Brain (reasoning, logic, communication — provided by Claude/GPT/Gemini). MCP & Tooling = The Hands (code execution, file access, API calls, infrastructure operations). Agent Skills = The Training (SOPs, guardrails, domain knowledge encoded as SKILL.md files). Autonomous Loop = The Shift (24/7 monitoring without human initiation — this is the FTE threshold). All four are required; missing any creates a less capable system."
+        },
+        {
+          id: 24,
+          question: "What does 'Vibe Coding + AI = Amplified Chaos' mean in the Digital FTE Synthesis context?",
+          options: {
+            A: "AI generates too many ideas at once, causing creative chaos",
+            B: "AI executes faster than humans correct — undisciplined development without specs produces bad code faster, compounding technical debt at AI speed rather than human speed",
+            C: "AI systems vibrate at different frequencies, causing interference",
+            D: "Vibe coding is a style choice — AI just makes it more colorful"
+          },
+          correct: "B",
+          explanation: "'Vibe Coding + AI = Amplified Chaos' captures the core synthesis lesson: AI amplifies the developer's discipline — or lack thereof. Without clear specs, AI generates misaligned code faster than humans can correct it, creating a negative compounding loop. 'AI doesn't make discipline optional. AI makes discipline critical.' The Multiplier Effect works in both directions: clear specs → excellent results fast; vague requirements → terrible results fast."
+        },
+        {
+          id: 25,
+          question: "What does the Digital FTE practice comparison table reveal about the effect of AI on disciplines like clear specifications and test-first development?",
+          options: {
+            A: "AI negates the value of good practices — discipline doesn't matter with AI",
+            B: "Clear specifications without AI: good results, slow. Clear specifications with AI: excellent results, fast. Vague requirements without AI: mediocre results, slow. Vague requirements with AI: terrible results, fast. AI amplifies the impact of discipline — good practices become excellent; bad practices become catastrophic",
+            C: "AI makes all practices equally effective",
+            D: "Only test-first development matters; specifications are optional with AI"
+          },
+          correct: "B",
+          explanation: "The practice comparison table: Clear specifications (without AI: good, slow → with AI: excellent, fast). Vague requirements (without AI: mediocre, slow → with AI: terrible, fast). Test-first (without AI: reliable → with AI: reliable + faster). No testing (without AI: fragile → with AI: extremely fragile, multiplied). AI is a discipline amplifier — the gap between disciplined and undisciplined development widens dramatically in the AI era."
+        },
+        {
+          id: 26,
+          question: "What is the FTE Threshold that distinguishes a Digital FTE from a mere AI tool?",
+          options: {
+            A: "The FTE Threshold is reaching 99% accuracy on tasks",
+            B: "Tools await prompts; Digital FTEs proactively monitor their domains and execute solutions with human-equivalent reliability — the threshold is autonomous initiation, not just autonomous execution",
+            C: "The FTE Threshold is when an AI costs more than a human employee",
+            D: "FTE Threshold means the AI passed a Turing test"
+          },
+          correct: "B",
+          explanation: "FTE Threshold: the distinguishing characteristic of a Digital FTE is proactive autonomous initiation — it monitors its domain and acts without being prompted. An AI tool waits for a human to prompt it: the human does the monitoring. A Digital FTE monitors autonomously: it detects when action is needed and executes. Examples: a compliance Digital FTE detects a regulation change and updates workflows without being asked; a support FTE routes escalations proactively."
+        },
+        {
+          id: 27,
+          question: "What is Path B in the Two Paths framework of the Digital FTE Synthesis?",
+          options: {
+            A: "Path B: maximize AI tool usage and measure productivity in tokens per hour",
+            B: "Path B: Master the Agent Factory paradigm → write clear specifications → build reliable Custom Agents → deploy Digital FTEs → multiply organizational capacity systematically. Contrast with Path A: treat AI as faster typing → Vibe Code without specs → compound technical debt",
+            C: "Path B: hire a team of AI specialists to manage the AI for you",
+            D: "Path B: wait for AGI before committing to any AI strategy"
+          },
+          correct: "B",
+          explanation: "Two Paths: Path A (Trap) — treat AI as faster typing, Vibe Code without specifications, accumulate technical debt that compounds. Path B (Transformation) — master Agent Factory paradigm, write clear specifications, build reliable Custom Agents, deploy Digital FTEs, multiply capacity systematically. Path B produces the Multiplier Effect virtuous cycle: clear specs → precise AI → reliable Custom Agents → Digital FTEs → larger problems → better specs required."
+        },
+        {
+          id: 28,
+          question: "What is the Multiplier Effect virtuous cycle described in the Digital FTE Synthesis?",
+          options: {
+            A: "More developers → more code → more features → more revenue",
+            B: "Clear specifications → precise AI execution → reliable Custom Agents → Digital FTEs deployed → multiplied organizational capacity → larger problems tackled → better specifications required → loop back to clearer specs",
+            C: "Better AI models → faster development → lower costs → higher profits",
+            D: "More AI tools → more automation → fewer employees → higher margins"
+          },
+          correct: "B",
+          explanation: "The Multiplier Effect virtuous cycle: Clear specifications → precise AI execution (AI follows exactly what you specified) → reliable Custom Agents (crystallized from successful prototypes) → Digital FTEs deployed (autonomous 24/7 operation) → multiplied capacity (organization tackles bigger problems without proportional headcount) → bigger problems require better specs → discipline compounds. Each iteration makes the organization more capable of specification-driven development."
+        },
+        {
+          id: 29,
+          question: "According to the Digital FTE Synthesis, what is the fundamental difference between the Traditional View and the Digital FTE View in terms of human-AI collaboration?",
+          options: {
+            A: "Traditional View: AI does more work; Digital FTE View: humans do more work",
+            B: "Traditional View: human monitors everything, AI responds when called. Digital FTE View: Digital FTE monitors its domain proactively, human sets policy and reviews edge cases — the human role shifts from supervisor to systems architect",
+            C: "There is no difference — both require equal human oversight",
+            D: "Traditional View uses chatbots; Digital FTE View uses robots"
+          },
+          correct: "B",
+          explanation: "The fundamental collaboration shift: Traditional View — human must initiate every AI interaction (prompt → response → human action → next prompt). Digital FTE View — Digital FTE autonomously monitors domain, executes routine work, and surfaces only genuinely novel/high-risk situations to humans for judgment. Human role evolves from supervisor (constantly monitoring) to systems architect (sets policy, defines thresholds, reviews escalations). This is the organizational transformation enabled by the full Agent Factory stack."
+        },
+        {
+          id: 30,
+          question: "Scenario: A developer says 'I don't need SDD — I'll just use AI to generate code faster and fix bugs as they appear.' According to the Digital FTE Synthesis, what compounding problem does this create over time?",
+          options: {
+            A: "No problem — this is Path B and perfectly valid",
+            B: "This is Path A (Vibe Coding with AI): each AI-generated fix creates new undocumented behavior. Without specs, no AI can reliably maintain the codebase — each change is a fresh guess. Technical debt compounds at AI speed. At 6 months: the codebase is unmaintainable. At 12 months: rewrite is cheaper than fixing. The 'faster at first' illusion collapses.",
+            C: "The only problem is slightly higher token costs",
+            D: "It works fine for small codebases but not for large ones"
+          },
+          correct: "B",
+          explanation: "Path A compounding: Month 1 — AI generates quickly, bugs fixed fast. Month 2 — AI fixes introduce new issues (no spec to verify against). Month 3 — multiple AI-generated 'fixes' conflict (no authoritative spec). Month 6 — AI cannot reliably modify codebase (every change is a guess against undocumented behavior). Month 12 — rewrite costs exceed original development. 'Vibe Coding + AI = Amplified Chaos' compounds exponentially, not linearly. SDD's investment in specs pays returns that grow over time."
+        }
       ]
     },
     {
@@ -1913,7 +2993,127 @@ export const chapter12: Chapter = {
         { id: 17, question: "Scenario: Your enterprise client's IT security team asks: 'Where is our data processed? Does your Digital FTE store our customer PII? Who has access to the LLM processing our financial data?' Which of the 6 enterprise priorities is this, and how do you address it?", options: { A: "Integration Capability — show your API connections", B: "Security/Compliance — proactively address: data residency, PII handling (encrypted in transit/at rest, SOC2 Type II certified, GDPR compliant), access controls (role-based, audit logs), and liability (DPA agreement).", C: "Vendor Stability — show your company funding", D: "Scalability — show performance benchmarks" }, correct: "B", explanation: "This is Security/Compliance — the #1 enterprise priority. Address all sub-questions directly: data residency (specify cloud region), PII storage policy (LLMs are stateless; your application layer handles retention per your DPA), access controls (SOC2 Type II, role-based access, full audit trails), regulatory compliance (GDPR Article 28 DPA). Enterprises need documented answers, not reassurances." },
         { id: 18, question: "Scenario: After a 4-month enterprise sales cycle, a logistics company signs a $120K/year license. Three months post-deployment, their volume grows 3x and they ask if it can scale. You never addressed scalability in the original proposal. What should have been included?", options: { A: "Scalability is the client's responsibility to plan for", B: "Scalability benchmarks should have been proactively included: tested throughput, horizontal scaling architecture, performance SLAs at 3x and 10x volume, and pricing tiers for volume growth. This addresses priority #6 and prevents post-sale friction.", C: "Offer a discount for the expanded volume", D: "Build a new version for the larger volume" }, correct: "B", explanation: "Scalability is the 6th enterprise priority and must be addressed proactively in proposals. Enterprise buyers experience growth and need confidence the solution scales with them. Proposal should include: throughput benchmarks at current and 10x volume, auto-scaling architecture description, performance SLA at peak load, and volume-tier pricing." },
         { id: 19, question: "Scenario: You're competing for an enterprise deal against a large consultancy at $500K. Your Digital FTE solution costs $60K/year with faster deployment. The enterprise procurement team says 'We prefer established vendors.' Which enterprise priority are they expressing, and how do you address it?", options: { A: "ROI — calculate your lower cost advantage", B: "Vendor Stability — the #3 priority. Address it directly: share company funding status/traction, enterprise customer references, team credentials, financial runway, SLA commitments with penalties. Offer a phased $15K pilot to reduce commitment risk.", C: "Support Quality — show your response times", D: "Integration Capability — show your tech stack compatibility" }, correct: "B", explanation: "Vendor Stability is the #3 enterprise priority: enterprises fear 'Will this vendor still exist in 3 years?' Address with: company funding documentation, enterprise client logos/case studies, team bios with relevant track records, contractual stability commitments (SLAs with financial penalties). The $15K pilot offer reduces commitment risk while demonstrating confidence in your solution." },
-        { id: 20, question: "Scenario: You've successfully deployed a Digital FTE for a Fortune 500's customer support (tier-1 automation). Their VP of Operations asks 'What's next — can we use this for other departments?' How do you position the expansion?", options: { A: "Sell them a new product for each department", B: "Progress up the value proposition ladder: you proved ROI as Implementer. Now position as Workflow Disruptor for operations-wide transformation — identify 2-3 high-volume repetitive workflows in adjacent departments, apply Shadow Mode for each, and propose multi-agent orchestration in Year 2.", C: "Tell them to hire more of your consultants first", D: "Stick only to support — don't expand scope" }, correct: "B", explanation: "Account expansion follows the value proposition ladder: you entered as Implementer (built and deployed the support FTE, proving ROI). The VP's question signals readiness for the Workflow Disruptor proposition — transforming multiple departments. Apply the proven playbook: identify adjacent high-volume repetitive workflows, quantify ROI, deploy via Shadow Mode, and roadmap to multi-agent orchestration connecting all department FTEs in Year 2." }
+        { id: 20, question: "Scenario: You've successfully deployed a Digital FTE for a Fortune 500's customer support (tier-1 automation). Their VP of Operations asks 'What's next — can we use this for other departments?' How do you position the expansion?", options: { A: "Sell them a new product for each department", B: "Progress up the value proposition ladder: you proved ROI as Implementer. Now position as Workflow Disruptor for operations-wide transformation — identify 2-3 high-volume repetitive workflows in adjacent departments, apply Shadow Mode for each, and propose multi-agent orchestration in Year 2.", C: "Tell them to hire more of your consultants first", D: "Stick only to support — don't expand scope" }, correct: "B", explanation: "Account expansion follows the value proposition ladder: you entered as Implementer (built and deployed the support FTE, proving ROI). The VP's question signals readiness for the Workflow Disruptor proposition — transforming multiple departments. Apply the proven playbook: identify adjacent high-volume repetitive workflows, quantify ROI, deploy via Shadow Mode, and roadmap to multi-agent orchestration connecting all department FTEs in Year 2." },
+        {
+          id: 21,
+          question: "What market statistics define the current enterprise AI opportunity, and what is the 'Gen AI Paradox'?",
+          options: {
+            A: "50% of C-suite running pilots; 50% scaled; $100B market",
+            B: "80%+ of C-suite running agentic AI pilots; only 12% have scaled deployments; 50% plan significant investments within 6 months; Gen AI Paradox: three-quarters of organizations report no material impact on earnings despite broad adoption",
+            C: "100% adoption; 100% ROI proven; $1T market fully captured",
+            D: "30% C-suite awareness; 5% investment plans; paradox does not exist"
+          },
+          correct: "B",
+          explanation: "Enterprise AI market stats: 80%+ C-suite running agentic AI pilots, only 12% have scaled deployments, 50% plan significant investments within 6 months. The Gen AI Paradox: despite broad adoption, three-quarters report no material earnings impact. This gap IS the market opportunity — enterprises need help converting AI experiments into measurable business value."
+        },
+        {
+          id: 22,
+          question: "What is the $400 billion agentic AI landscape breakdown between workflow services and business function transformation?",
+          options: {
+            A: "$10B workflow services; $390B foundation models",
+            B: "Agentic AI Workflow Services: ~$200 billion; Business Function Transformation: $100–$400 billion — the latter is larger as enterprises transform entire functions, not just automate individual workflows",
+            C: "$400B is total API revenue; no breakdown exists",
+            D: "$200B for large enterprises; $200B for SMBs"
+          },
+          correct: "B",
+          explanation: "$400B landscape: ~$200B Agentic AI Workflow Services (automate specific workflows with agents) + $100–$400B Business Function Transformation (restructure entire functions — HR, Finance, Legal, Operations). Function transformation is the larger prize because it creates structural change with high switching costs vs. workflow automation which can be replaced."
+        },
+        {
+          id: 23,
+          question: "What is the critical buying power shift reshaping enterprise AI sales motions?",
+          options: {
+            A: "Power is moving from business units back to IT departments",
+            B: "Buying power is moving from IT departments to business units — COOs, CFOs, CEOs, CHROs now control AI budgets because the value proposition is business outcomes, not technical capability",
+            C: "Individual developers now control all AI purchasing decisions",
+            D: "Procurement departments have consolidated all AI buying power"
+          },
+          correct: "B",
+          explanation: "Critical shift: AI buying power moves from IT (who buy technology) to business units (who buy outcomes). COOs buy workflow transformation, CFOs buy cost reduction and ROI, CHROs buy talent leverage, CEOs buy competitive differentiation. The sales motion must lead with business outcomes — 'what this achieves for your P&L' — rather than technical architecture."
+        },
+        {
+          id: 24,
+          question: "What is the CFO-specific value proposition for enterprise AI agent sales?",
+          options: {
+            A: "Tell CFOs about the technology architecture and model capabilities",
+            B: "'15–30% of knowledge workers' tasks handled by agents within 3 years = $X million in annual productivity gains, typical ROI within 12 months' — financial framing using their language: efficiency gains converted to dollar impact with specific payback period",
+            C: "CFOs only care about security compliance — lead with SOC 2",
+            D: "CFOs respond to demos, not financial projections"
+          },
+          correct: "B",
+          explanation: "CFO Sales Conversation: translate AI capabilities into financial metrics. '15–30% of knowledge workers' tasks handled by agents within 3 years' × their workforce size = $X million annual productivity gains. 'Typical ROI within 12 months' provides the payback period CFOs require for CapEx approval. Lead with P&L impact, payback period, and IRR — never with technology."
+        },
+        {
+          id: 25,
+          question: "What are the Three Core Enterprise Challenges that create the need for external AI implementation partners?",
+          options: {
+            A: "High costs, slow internet, outdated hardware",
+            B: "Integration Complexity (connecting AI to legacy systems, data silos, compliance requirements); Limited Technical Expertise (lacking LLM systems, prompt engineering, agent architecture talent); Security Vulnerabilities (autonomous agents accessing sensitive data create new risk vectors)",
+            C: "Lack of AI models, expensive licenses, poor vendor support",
+            D: "Regulatory approval delays, CEO resistance, IT department opposition"
+          },
+          correct: "B",
+          explanation: "Three Core Enterprise Challenges: 1) Integration Complexity — legacy ERP/CRM, data silos, compliance requirements make AI integration non-trivial. 2) Limited Technical Expertise — enterprises lack LLM systems, prompt engineering, and agent architecture talent. 3) Security Vulnerabilities — autonomous agents with sensitive data access require new governance frameworks. These three gaps define the implementation partner value proposition."
+        },
+        {
+          id: 26,
+          question: "What are the five foundational capabilities enterprise AI partners must demonstrate to win transformation mandates?",
+          options: {
+            A: "Build apps, train models, write code, debug systems, manage servers",
+            B: "1) Reimagine positioning around agentic-first opportunities; 2) Build proprietary solutions to orchestrate, adapt, and scale; 3) Lead with consultative domain-driven go-to-market; 4) Redesign operating model and talent; 5) Reinvent commercial models to align with impact",
+            C: "Hire AI talent, buy AI tools, train employees, run pilots, measure results",
+            D: "Sell licenses, provide support, offer training, develop roadmaps, report metrics"
+          },
+          correct: "B",
+          explanation: "Five Foundational Capabilities: 1) Reimagine positioning — lead with agentic AI, not traditional IT. 2) Build proprietary orchestration solutions. 3) Consultative domain-driven GTM — understand client business, not just IT. 4) Redesign own operating model. 5) Reinvent commercial models — shift from T&M to outcome-based pricing. Partners missing any capability cannot compete for transformation mandates."
+        },
+        {
+          id: 27,
+          question: "What are the three value drivers in the ROI Framework for enterprise AI agent sales?",
+          options: {
+            A: "Speed, quality, cost — the classic engineering triangle",
+            B: "Cost Reduction (FTE savings, operational efficiency), Revenue Growth (faster time-to-market, increased conversion), Strategic Value (competitive differentiation, scalability that cannot be quickly matched without AI)",
+            C: "Pilot success, stakeholder buy-in, vendor relationship",
+            D: "Token costs, compute costs, infrastructure costs"
+          },
+          correct: "B",
+          explanation: "ROI Framework three value drivers: 1) Cost Reduction — FTE savings and operational efficiency (same output, fewer resources). 2) Revenue Growth — faster time-to-market (ship features → capture market earlier), increased conversion (AI-driven personalization and response quality). 3) Strategic Value — competitive differentiation (capabilities competitors cannot quickly replicate), scalability (grow revenue without proportional cost growth)."
+        },
+        {
+          id: 28,
+          question: "What are the five phases of the Implementation Roadmap for enterprise AI deployment and their approximate timelines?",
+          options: {
+            A: "Phase 1: Buy tools (1 week); Phase 2: Deploy everything (1 month); Phase 3: Done",
+            B: "1) Discovery and Strategy (4–6 weeks); 2) Rapid Prototyping (6–8 weeks); 3) Pilot Deployment (8–12 weeks); 4) Scaled Deployment (3–6 months); 5) Ongoing Operations (continuous)",
+            C: "Single phase: 2-year transformation with no milestones",
+            D: "Phase 1: Hire AI team (6 months); Phase 2: Train models (1 year); Phase 3: Deploy (6 months)"
+          },
+          correct: "B",
+          explanation: "Implementation Roadmap: 1) Discovery and Strategy (4–6 weeks) — assess landscape, identify high-value workflows. 2) Rapid Prototyping (6–8 weeks) — validate ROI assumptions with General Agent prototypes. 3) Pilot Deployment (8–12 weeks) — limited production via Shadow Mode. 4) Scaled Deployment (3–6 months) — full scope rollout. 5) Ongoing Operations — continuous improvement. Total: 12–18 months from discovery to scaled deployment."
+        },
+        {
+          id: 29,
+          question: "What is 'Outcome-Based Pricing' and why is it strategically superior for enterprise AI sales?",
+          options: {
+            A: "Charging per API call — purely usage-based pricing",
+            B: "Fees tied to measurable results rather than time spent — aligns vendor incentives with client success, removes procurement risk perception, and enables higher total contract value when the measurable outcomes are large",
+            C: "Fixed-fee contracts with no performance measurement",
+            D: "Outcome-Based Pricing is only suitable for startup clients"
+          },
+          correct: "B",
+          explanation: "Outcome-Based Pricing: fees tied to measurable results (cost savings, revenue generated, error rate reduction) rather than hours worked. Strategic advantages: 1) Aligns incentives — you profit when client profits. 2) Removes procurement risk — client pays only for proven value. 3) Higher contract value — 10% of $10M savings = $1M, vs. $200K T&M for same work. 4) Competitive differentiation — few vendors have confidence to take outcome risk."
+        },
+        {
+          id: 30,
+          question: "What distinguishes a 'Custom Agent Developer' (Solutions partner) from an 'Agentic AI Enabler' (Infrastructure partner) in the Four-Layer Competitive Positioning?",
+          options: {
+            A: "Custom Agent Developers write more code; Enablers write documentation",
+            B: "Agentic AI Enabler (Layer 1): provides developer tools and infrastructure — enterprise calls you 'infrastructure partner.' Custom Agent Developer (Layer 3 advanced): builds domain-specific agents encoding vertical intelligence — enterprise calls you 'solutions partner' at 5–10x higher pricing",
+            C: "Both layers serve the same buyers at the same price point",
+            D: "Enablers serve large enterprises; Custom Agent Developers serve startups"
+          },
+          correct: "B",
+          explanation: "Four-Layer Positioning: Layer 1 (Agentic AI Enabler) — developer tools/infrastructure, IT buyer, commodity pricing. Layer 2 (Packaged Agent Implementer) — pre-built solutions, IT/operations buyer, implementation fees. Layer 3 (Custom Agent Developer) — domain-specific Custom Agents with vertical intelligence, business unit buyer (COO/CFO), solutions pricing 5–10x higher. Layer 4 (End-to-End Workflow Disruptor) — transforms entire functions, C-suite buyer, transformation pricing."
+        }
       ]
     }
   ]
