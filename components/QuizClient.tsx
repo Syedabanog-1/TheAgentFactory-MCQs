@@ -133,10 +133,10 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
     return <span className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold flex-shrink-0 bg-slate-700/50 text-slate-500">{key}</span>;
   };
 
-  // Score-based progress bar: green if ≥70%, red if <70%, chapter color if no attempts yet
-  const scoreRatio = score.attempted > 0 ? score.correct / score.attempted : -1;
-  const progressBarColor = scoreRatio < 0 ? c.progress : scoreRatio >= 0.7 ? "bg-emerald-500" : "bg-rose-500";
-  const scorePercent = score.attempted > 0 ? Math.round(scoreRatio * 100) : 0;
+  // Score = correct / total (not /attempted), done = attempted / total
+  const scoreRatio = total > 0 ? score.correct / total : 0;
+  const scorePercent = Math.round(scoreRatio * 100);
+  const donePercent = total > 0 ? Math.round(score.attempted / total * 100) : 0;
 
   // Timer styling
   const timerColor = timeLeft > 60 ? "text-slate-400" : timeLeft > 20 ? "text-yellow-400 font-semibold" : "text-rose-400 font-bold animate-pulse";
@@ -161,7 +161,7 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
           {/* Score bar */}
           <div className="h-2 rounded-full bg-slate-800 mb-6 overflow-hidden">
             <div
-              className={`h-full rounded-full transition-all duration-700 ${passed ? "bg-emerald-500" : "bg-rose-500"}`}
+              className={`h-full rounded-full transition-all duration-700 ${passed ? "bg-blue-500" : "bg-rose-500"}`}
               style={{ width: `${scorePercent}%` }}
             />
           </div>
@@ -223,16 +223,17 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
               {currentIdx + 1} / {total}
             </span>
             {score.attempted > 0 && (
-              <span className={`text-xs font-medium ${scoreRatio >= 0.7 ? "text-emerald-400" : "text-rose-400"}`}>
-                {score.correct}/{score.attempted}
-              </span>
+              <span className="text-xs font-medium text-emerald-400">{score.correct} correct</span>
+            )}
+            {score.attempted > 0 && (
+              <span className="text-xs font-medium text-blue-400">{donePercent}% done</span>
             )}
           </div>
         </div>
         {/* Progress bar - shown from first attempted question, color based on score % */}
         {score.attempted > 0 && (
           <div className="h-1 bg-slate-800">
-            <div className={`h-full ${scoreRatio >= 0.7 ? "bg-emerald-500" : "bg-rose-500"} transition-all duration-500`} style={{ width: `${scorePercent}%` }} />
+            <div className={`h-full ${scorePercent >= 70 ? "bg-blue-500" : "bg-rose-500"} transition-all duration-500`} style={{ width: `${donePercent}%` }} />
           </div>
         )}
       </div>
