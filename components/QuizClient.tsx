@@ -39,7 +39,7 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
   const [revealed, setRevealed] = useState(false);
   const [score, setScore] = useState({ correct: 0, attempted: 0 });
   const [answered, setAnswered] = useState<Record<number, { selected: AnswerKey; correct: boolean }>>({});
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(120);
   const [showResult, setShowResult] = useState(false);
 
   const resetQuiz = () => {
@@ -48,7 +48,7 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
     setRevealed(false);
     setScore({ correct: 0, attempted: 0 });
     setAnswered({});
-    setTimeLeft(60);
+    setTimeLeft(120);
     setShowResult(false);
   };
 
@@ -62,7 +62,7 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
 
   // Reset timer on new question
   useEffect(() => {
-    setTimeLeft(60);
+    setTimeLeft(120);
   }, [currentIdx]);
 
   // Countdown (stops when revealed or time's up)
@@ -139,8 +139,8 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
   const scorePercent = score.attempted > 0 ? Math.round(scoreRatio * 100) : 0;
 
   // Timer styling
-  const timerColor = timeLeft > 30 ? "text-slate-400" : timeLeft > 10 ? "text-yellow-400 font-semibold" : "text-rose-400 font-bold animate-pulse";
-  const timerBg = timeLeft <= 10 ? "bg-rose-500/10 border-rose-500/40" : "bg-slate-800/60 border-slate-700/40";
+  const timerColor = timeLeft > 60 ? "text-slate-400" : timeLeft > 20 ? "text-yellow-400 font-semibold" : "text-rose-400 font-bold animate-pulse";
+  const timerBg = timeLeft <= 20 ? "bg-rose-500/10 border-rose-500/40" : "bg-slate-800/60 border-slate-700/40";
 
   // ── Result Screen ──────────────────────────────────────────────────────────
   if (showResult) {
