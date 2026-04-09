@@ -249,6 +249,126 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "P1's core value is execution, not just reading. 'Bash is the Key' because it enables: running tests (not just reading test files), making HTTP requests (not just reading API code), checking process state (not just reading configuration), observing command output (not just reading log files). Read-only file access gives Claude source code observation; Bash access gives Claude system state observation. The former is static; the latter is ground truth."
+        },
+        {
+          id: 21,
+          question: "Why is Bash described as the bridge between AI reasoning and real system state?",
+          options: {
+            A: "Bash is the most widely used shell language in software development",
+            B: "Bash commands execute against the actual running system and return verified output, translating AI intentions into concrete actions with observable, ground-truth results",
+            C: "Bash is the only language that AI models can execute directly",
+            D: "Bash provides a user-friendly interface for AI interactions"
+          },
+          correct: "B",
+          explanation: "Bash bridges AI reasoning and reality: AI can reason about what should be true, but Bash execution reveals what is actually true. When Claude runs a command, the output is ground truth from the system itself — not a simulation, not a prediction, but the actual state. This bridge transforms AI from a code suggester into an agent that can verify its own assumptions against reality."
+        },
+        {
+          id: 22,
+          question: "What does `tail -f` enable in the context of Principle 1?",
+          options: {
+            A: "It reads the last line of a file and exits",
+            B: "It provides real-time log monitoring, allowing the AI to observe the application's behavior continuously as events occur rather than reading a static snapshot",
+            C: "It limits file reading to the final section of large files",
+            D: "It stops the application and displays the final output"
+          },
+          correct: "B",
+          explanation: "tail -f follows a log file in real time, displaying new lines as they are written. For Principle 1, this means observing application behavior live: as errors occur, as requests are processed, as the system state changes. This real-time observation capability transforms debugging from 'read a static log' into 'watch the system behave' — a qualitatively different level of insight."
+        },
+        {
+          id: 23,
+          question: "What does `grep` enable in the context of Principle 1?",
+          options: {
+            A: "It generates regular expressions for pattern matching",
+            B: "It searches across files and directories to find specific patterns, allowing the AI to quickly locate relevant code, error messages, or configuration without reading every file manually",
+            C: "It groups related files together for batch processing",
+            D: "It compiles code and reports compilation errors"
+          },
+          correct: "B",
+          explanation: "grep enables targeted search across a codebase or logs. Instead of reading every file to find where an error is thrown or where a function is called, Claude can run grep and receive precise results in seconds. This capability — searching across potentially thousands of files instantly — is only possible through Bash execution and dramatically accelerates investigation."
+        },
+        {
+          id: 24,
+          question: "What does `ps aux` enable in AI-assisted development?",
+          options: {
+            A: "It installs auxiliary packages required by the application",
+            B: "It shows all currently running processes, allowing the AI to verify whether services are actually running, identify resource consumption, and confirm that started processes are active",
+            C: "It starts processes in the background with auxiliary configuration",
+            D: "It diagnoses process syntax errors before execution"
+          },
+          correct: "B",
+          explanation: "ps aux provides a complete snapshot of all running processes. For Principle 1, this means the AI can answer definitively: Is the database running? Is the Node server active? Is there a zombie process consuming resources? 'Connection refused' combined with 'no matching process in ps aux' proves the service is not running. This ground truth replaces speculation about what might be wrong."
+        },
+        {
+          id: 25,
+          question: "How do CLI tools like gh, aws CLI, and git extend AI capability via Bash?",
+          options: {
+            A: "They provide graphical interfaces that are more intuitive than command line",
+            B: "They expose powerful system capabilities to terminal commands, allowing AI agents to interact with GitHub, cloud infrastructure, and version control as first-class operations rather than just generating code about them",
+            C: "They reduce the complexity of Bash scripting for beginners",
+            D: "They provide autocomplete suggestions that improve AI command accuracy"
+          },
+          correct: "B",
+          explanation: "CLI tools extend Principle 1's reach: gh enables managing pull requests, issues, and workflows from the terminal. aws CLI enables provisioning infrastructure, querying resources, and checking deployment status. git enables branching, committing, reverting, and inspecting history. Each CLI tool converts a complex domain into terminal-accessible operations that AI agents can execute and observe through Bash."
+        },
+        {
+          id: 26,
+          question: "What is Plan Mode in Claude Code and how does it relate to Principle 1?",
+          options: {
+            A: "A mode that generates implementation plans without any file access",
+            B: "A mode where Claude reads files and analyzes the codebase without making any changes, enabling safe reconnaissance before execution",
+            C: "A mode that creates project management plans with task assignments",
+            D: "A mode that plans API calls before executing them"
+          },
+          correct: "B",
+          explanation: "Plan Mode is Claude Code's read-only reconnaissance mode. In Plan Mode, Claude can read files, run read-only commands, and analyze the system state without making any changes. This applies Principle 1's ground-truth observation while adding a safety layer — Claude sees the actual codebase state before proposing changes. The investigation happens before action, not after."
+        },
+        {
+          id: 27,
+          question: "How do MCP servers extend AI capability as a Bash extension?",
+          options: {
+            A: "MCP servers provide a graphical interface for AI interactions",
+            B: "MCP servers connect external tools and services via a standard protocol, allowing AI agents to interact with databases, APIs, and specialized tools through the same terminal-based execution model as Bash",
+            C: "MCP servers replace Bash for more complex operations",
+            D: "MCP servers are only used for cloud deployment workflows"
+          },
+          correct: "B",
+          explanation: "MCP (Model Context Protocol) servers extend Principle 1 beyond what Bash alone can reach. Just as CLI tools expose GitHub and AWS to terminal commands, MCP servers expose databases, specialized APIs, browser automation, and other external systems through a standard protocol. The AI agent interacts with these systems the same way it uses Bash — execute, observe, respond — extending the ground-truth principle to new domains."
+        },
+        {
+          id: 28,
+          question: "What is the critical difference between an AI that suggests commands versus one that executes them?",
+          options: {
+            A: "There is no meaningful difference in output quality",
+            B: "A command-suggesting AI produces instructions a human must relay; a command-executing AI closes the feedback loop autonomously by observing real results and self-correcting without human relay",
+            C: "Command-executing AI is slower because it must wait for system responses",
+            D: "Command-suggesting AI is more accurate because humans can validate suggestions"
+          },
+          correct: "B",
+          explanation: "The execution gap: a suggesting AI generates plausible commands and waits. A human runs them, sees the result, and relays the output. The human becomes the error relay system. An executing AI runs the command, observes the output, adjusts, and continues — all autonomously. This closes the feedback loop, removes the human relay bottleneck, and enables the AI to iteratively investigate and solve without interruption."
+        },
+        {
+          id: 29,
+          question: "What does it mean that 'the shell does not lie' in the context of Principle 1?",
+          options: {
+            A: "Shell scripts are always syntactically correct when run",
+            B: "The output of executed shell commands reflects actual system state rather than AI conjecture — the filesystem, processes, network, and services are observed as they actually are",
+            C: "Shell commands always succeed when run by an AI agent",
+            D: "The shell validates all commands before execution to ensure correctness"
+          },
+          correct: "B",
+          explanation: "The shell does not lie means: when `ls` shows a file, the file exists. When `ps aux | grep node` shows no process, Node is not running. When `curl` returns 404, the endpoint is not there. The shell reports actual system state without opinion, assumption, or hallucination. This contrasts with AI reasoning, which can be confidently wrong. Grounding AI actions in shell output eliminates an entire category of speculation."
+        },
+        {
+          id: 30,
+          question: "Why is Bash access described as the 'key' to agentic capability rather than just a useful feature?",
+          options: {
+            A: "Because Bash is the most common tool used by software developers",
+            B: "Because without execution capability, an AI is fundamentally a text generator; with Bash access it becomes an agent that acts on the world and verifies its own actions through observed results",
+            C: "Because Bash provides the only secure method for AI to interact with systems",
+            D: "Because Bash commands run faster than other execution methods"
+          },
+          correct: "B",
+          explanation: "Bash is the key because it is the capability that transforms the nature of what an AI can do. Without execution, the AI is bounded to text generation: it suggests, humans verify. With execution, the AI can investigate (run commands), act (execute changes), and verify (observe results) — the complete agency loop. Bash access is not a feature enhancement; it is the threshold between code suggester and autonomous agent."
         }
       ]
     },
@@ -495,6 +615,126 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "Tests as specs must encode every behavioral requirement, including subtle ones like stability. A sort function passes `[1,2,3]` output for `[3,1,2]` input regardless of stability. Stability is only observable when equal elements exist and their original order matters. Without a test specifically for stability, this requirement is invisible to Claude. P2 completeness: every requirement you care about must be encoded as a failing test that the correct implementation makes pass."
+        },
+        {
+          id: 21,
+          question: "Why is code described as more precise than natural language for communicating with AI agents?",
+          options: {
+            A: "Code is shorter than natural language, saving time",
+            B: "Code is unambiguous and executable — it has exactly one meaning and can be automatically verified, while natural language admits multiple valid interpretations",
+            C: "AI models were trained primarily on code and understand it better",
+            D: "Code is easier for both humans and AI to write than prose"
+          },
+          correct: "B",
+          explanation: "Code precision: 'add validation' in natural language is ambiguous — validate what? Against what rules? On which events? A test that checks specific inputs against specific expected outputs has exactly one meaning. Either the test passes or it fails; there is no room for interpretation. This precision is why code is the universal interface — it closes the gap between what you mean and what gets built."
+        },
+        {
+          id: 22,
+          question: "How does writing tests as specifications embody Principle 2?",
+          options: {
+            A: "Tests allow developers to skip the specification phase entirely",
+            B: "Tests define exact expected behavior as executable code that is both the specification and the acceptance criterion simultaneously — pass means done, fail means not done",
+            C: "Tests are a form of documentation that supplements the specification",
+            D: "Tests only verify existing behavior and cannot specify new requirements"
+          },
+          correct: "B",
+          explanation: "Test-as-spec is the purest expression of Principle 2: a test that says 'given input X, expect output Y, throw Z on invalid input' is simultaneously the specification (this is what must be true) and the verification criterion (this is how we confirm it is true). The spec and the acceptance test are the same artifact. Writing the test first makes the requirement concrete and immediately executable."
+        },
+        {
+          id: 23,
+          question: "How do @ file references in Claude Code prompts apply Principle 2?",
+          options: {
+            A: "@ references make prompts shorter by compressing file names",
+            B: "@ references ground the AI's work in the actual current code rather than a verbal description, ensuring Claude implements against the real interface definition rather than the developer's memory of it",
+            C: "@ references are only used for including documentation files",
+            D: "@ references prevent Claude from reading files outside the project"
+          },
+          correct: "B",
+          explanation: "@ file references embody Principle 2: instead of saying 'implement the auth module' (Claude must imagine what that means), you say '@src/auth/login.ts' and Claude works against the actual file. This grounds implementation in reality — the actual current interface, the actual current schema, the actual current conventions. The file IS the specification; there is no gap between the description and the thing being described."
+        },
+        {
+          id: 24,
+          question: "How do concrete examples in prompts reduce ambiguity under Principle 2?",
+          options: {
+            A: "Examples make prompts longer, which signals to Claude that more detail is expected",
+            B: "Concrete examples demonstrate the expected behavior in executable form, leaving no room for interpretation about edge cases, data formats, or acceptable outputs",
+            C: "Examples tell Claude which part of the codebase to modify first",
+            D: "Examples replace the need for tests by showing the desired output directly"
+          },
+          correct: "B",
+          explanation: "Concrete examples are Principle 2 applied to prompts. 'Format phone numbers correctly' is ambiguous. 'Format (555) 123-4567, 5551234567, and 555-123-4567 to all produce +15551234567' is unambiguous — the expected transformation is demonstrated concretely. Examples give Claude a target that cannot be misinterpreted, unlike adjectives like 'correctly' that mean different things to different people."
+        },
+        {
+          id: 25,
+          question: "Why is the diff format called the 'universal change representation' under Principle 2?",
+          options: {
+            A: "Diffs are understood by all version control systems",
+            B: "A diff is precise, executable, and unambiguous code that shows exactly what changed and what did not — it is the most information-dense way to communicate a code change",
+            C: "Diffs are generated automatically and require no human effort",
+            D: "Diffs reduce the size of code changes for transmission"
+          },
+          correct: "B",
+          explanation: "The diff format is the universal change representation because it is maximally precise: it shows the exact lines removed and the exact lines added, nothing more. 'Make this function handle null inputs' is ambiguous. A diff showing exactly which lines add null checks and what the null return value is leaves nothing to interpretation. When reviewing or communicating code changes, diffs are Principle 2 in action."
+        },
+        {
+          id: 26,
+          question: "Why is code described as the 'shared language' between humans and AI in Principle 2?",
+          options: {
+            A: "All AI models are trained exclusively on code",
+            B: "Code is the medium that eliminates the interpretation gap — both the human and the AI understand what a test, a type definition, or a diff means without ambiguity, making it the common ground for precise communication",
+            C: "Code is the only language that can be automatically executed",
+            D: "Humans and AI have different natural languages but share programming languages"
+          },
+          correct: "B",
+          explanation: "Code as shared language: when you write a TypeScript interface, you and Claude agree on exactly what shape the data must have. When you write a test, you and Claude agree on exactly what behavior is required. Natural language introduces interpretation variance — 'validate the email' means different things to different people. Code eliminates this variance by being a language where meaning is defined by execution, not interpretation."
+        },
+        {
+          id: 27,
+          question: "Why is 'add validation' in natural language ambiguous but a test case is not?",
+          options: {
+            A: "Natural language is harder for AI to parse than code",
+            B: "Natural language leaves the specific validation rules, error messages, and edge cases undefined; a test case specifies exactly which inputs are rejected, what errors are thrown, and what the valid input range is",
+            C: "Test cases are written in programming languages that Claude knows better",
+            D: "Natural language requires translation by the developer before Claude can use it"
+          },
+          correct: "B",
+          explanation: "The ambiguity gap: 'add validation' gives Claude creative license to decide what to validate and how. It might validate length but not format, or format but not length, or use the wrong error type. A test like `expect(() => createUser({ email: 'notanemail' })).toThrow(ValidationError)` is completely specific: this exact input, this exact error type. Claude must satisfy this contract exactly — there is no room for valid but wrong interpretation."
+        },
+        {
+          id: 28,
+          question: "How does code-as-spec enable 'done' to be objective rather than subjective?",
+          options: {
+            A: "Code generates metrics that measure how done a feature is",
+            B: "Tests define done as 'all specified tests pass', making completion binary and automatically verifiable rather than dependent on human judgment about whether the feature feels complete",
+            C: "Code-as-spec requires a senior developer to certify completion",
+            D: "Code-as-spec uses a scoring system to rate completion percentage"
+          },
+          correct: "B",
+          explanation: "Objective done: 'done' in natural language is subjective — someone must judge whether the feature is complete enough. 'Done' defined by tests is binary: either all tests pass or they do not. This objectivity enables automation (tests run on every commit), eliminates disputes (pass means done, fail means not done), and makes acceptance criteria explicit and verifiable rather than emergent from human judgment."
+        },
+        {
+          id: 29,
+          question: "How do schema definitions like TypeScript interfaces serve as specifications under Principle 2?",
+          options: {
+            A: "Schemas replace tests and make additional specification unnecessary",
+            B: "TypeScript interfaces and database schemas define the exact structure, types, and constraints that the implementation must satisfy, making requirements both precise and compiler-enforceable",
+            C: "Schemas are only useful for database design, not application logic",
+            D: "TypeScript interfaces are too abstract to serve as meaningful specifications"
+          },
+          correct: "B",
+          explanation: "Type definitions as specifications: a TypeScript interface `interface UserProfile { id: string; email: string; createdAt: Date; role: 'admin' | 'user' }` specifies exactly what the data structure must be. Claude cannot produce an implementation that uses a number for id or allows other role values — the type is enforced by the compiler. This makes the specification both precise (exact types) and automatically verified (TypeScript compilation)."
+        },
+        {
+          id: 30,
+          question: "What is the precision spectrum that Principle 2 describes for communicating requirements to AI?",
+          options: {
+            A: "Beginner, intermediate, and advanced levels of prompt writing",
+            B: "Natural language (most ambiguous) to pseudocode (partially precise) to executable code (maximally precise), with Principle 2 advocating moving toward the executable end of the spectrum",
+            C: "Simple, medium, and complex specifications based on feature size",
+            D: "Verbal, written, and coded communication with equal precision"
+          },
+          correct: "B",
+          explanation: "The precision spectrum: natural language ('add pagination') admits many valid interpretations. Pseudocode ('if page param exists, return records from offset = page * size') is more precise but still interpretable. Executable code (a TypeScript interface specifying cursor-based pagination return types) is maximally precise and automatically verifiable. Principle 2 advocates moving requirements toward the executable end of this spectrum to minimize the interpretation gap."
         }
       ]
     },
@@ -741,6 +981,126 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "P3 verification hierarchy: Level 0 (self-review / looks correct) = no evidence. Level 1 (syntax) = compiles. Level 2 (unit) = functions work in isolation. Level 3 (integration) = components work together. Level 4 (manual/e2e) = real behavior. 'Reviewed and looks correct' is level 0 — an opinion. Unit tests provide minimum evidence that the email function produces correct output with mock data. Integration tests provide evidence it connects to the email service. Only level 4 provides evidence an email actually arrives."
+        },
+        {
+          id: 21,
+          question: "What are the four types of verification in the verification hierarchy from cheapest to most expensive?",
+          options: {
+            A: "Manual, automated, integration, production",
+            B: "Syntax (does it parse?), unit (does the function work?), integration (do components work together?), manual (does the feature work end-to-end in the real system?)",
+            C: "Fast, slow, thorough, complete",
+            D: "Static analysis, unit tests, system tests, user tests"
+          },
+          correct: "B",
+          explanation: "The four verification types in cost order: Syntax (compilation and parsing — instant and free), Unit (isolated function behavior with mocks — fast and automated), Integration (component interactions with real dependencies — slower and more complex), Manual (full end-to-end in the running system from user perspective — slowest and most realistic). Each level catches different failures; cheaper levels should run first to filter before expensive ones."
+        },
+        {
+          id: 22,
+          question: "What is a 'trust zone' in the context of Principle 3?",
+          options: {
+            A: "A network zone where traffic is trusted and not inspected",
+            B: "A classification of code or system components by how much verification effort they require — internal trusted code needs less verification; external inputs and boundaries need explicit verification",
+            C: "A permission level granted to verified developers",
+            D: "A geographic region with trusted data center infrastructure"
+          },
+          correct: "B",
+          explanation: "Trust zones classify where verification effort is most needed. High-trust zones (well-tested internal libraries, framework core, established patterns) have passed extensive verification already. Low-trust zones (external API responses, user input, AI-generated transformations, third-party integrations) require explicit verification at every boundary. Mapping trust zones prevents wasting verification effort on trusted foundations while ensuring thorough verification at the boundaries where failures are most likely."
+        },
+        {
+          id: 23,
+          question: "What is the risk matrix concept in Principle 3 for prioritizing verification effort?",
+          options: {
+            A: "A spreadsheet that tracks all known bugs and their risk levels",
+            B: "A framework that combines impact (how bad if this fails?) and likelihood (how often does this fail?) to determine where verification effort has the highest return",
+            C: "A matrix of which team members should verify which code changes",
+            D: "A comparison of different testing frameworks by risk reduction"
+          },
+          correct: "B",
+          explanation: "The risk matrix guides verification prioritization: Impact x Likelihood = Verification Priority. A payment processing function (high impact if it fails) used on every transaction (high likelihood of being exercised) deserves thorough verification. A rarely-used admin utility (low impact, low likelihood) deserves less. The matrix prevents over-investing verification effort in low-risk code and under-investing in high-risk code."
+        },
+        {
+          id: 24,
+          question: "What does the verification loop look like in AI-assisted development?",
+          options: {
+            A: "AI makes all changes, then human verifies all at once at the end",
+            B: "AI implements a change, runs verification, observes the result, and either proceeds (if passing) or diagnoses and fixes (if failing) before the next change",
+            C: "Human verifies the plan before AI implements, then AI verifies after",
+            D: "AI runs verification on the existing code before making any changes"
+          },
+          correct: "B",
+          explanation: "The verification loop is implement-verify-observe-decide: each action is immediately followed by verification. If the verification passes, proceed to the next step. If it fails, diagnose the failure before making another change. This loop is the antidote to the 'looks done' trap — it ensures every action produces a confirmed result rather than an assumed one. Verification inside the loop, not after it."
+        },
+        {
+          id: 25,
+          question: "What is the 'trust but verify' vs. 'verify before trust' distinction in Principle 3?",
+          options: {
+            A: "They are equivalent approaches with different names",
+            B: "For AI-generated code, 'verify before trust' is more appropriate — do not extend confidence to AI output until tests confirm correctness, rather than assuming correctness and relying on eventual discovery",
+            C: "Trust but verify applies to AI code; verify before trust applies to human code",
+            D: "Both approaches are valid depending on the project's risk tolerance"
+          },
+          correct: "B",
+          explanation: "Verification stance for AI code: 'trust but verify' assumes the output is probably correct and verifies to confirm — this is appropriate for experienced team members with a track record. 'Verify before trust' assumes nothing and requires evidence before confidence — this is more appropriate for AI output, which can be confidently wrong. AI does not have a track record in your specific codebase; verification before trust builds that track record incrementally."
+        },
+        {
+          id: 26,
+          question: "How are screenshots used as verification for UI changes?",
+          options: {
+            A: "Screenshots are taken before changes to provide rollback documentation",
+            B: "Screenshots capture the actual rendered state of UI after changes, providing visual ground truth that code inspection cannot — confirming that the change looks correct in the real browser",
+            C: "Screenshots are automatically compared by testing frameworks",
+            D: "Screenshots replace manual testing for all UI changes"
+          },
+          correct: "B",
+          explanation: "Screenshot verification applies Principle 1 (Bash as ground truth) to UI: the actual rendered output in a real browser is the ground truth for visual changes. Code inspection might confirm the CSS class was changed, but a screenshot confirms the element actually looks different in the browser. This matters because CSS interactions, browser rendering differences, and component library behavior can all produce unexpected visual results that code inspection misses."
+        },
+        {
+          id: 27,
+          question: "How does Plan Mode verification work in Claude Code?",
+          options: {
+            A: "Plan Mode automatically runs all tests against the proposed plan",
+            B: "Plan Mode shows the proposed sequence of changes before execution, allowing review and correction of the implementation approach before any modifications are made",
+            C: "Plan Mode verifies that the plan has the correct number of steps",
+            D: "Plan Mode only verifies syntax of the proposed changes"
+          },
+          correct: "B",
+          explanation: "Plan Mode verification: before Claude makes any changes, it enters Plan Mode to outline exactly what it intends to do. The developer reviews this plan — the files to be modified, the changes to be made, the approach being taken — and can catch wrong approaches before implementation begins. Verifying the plan catches design problems cheaply (edit a plan); verifying after implementation catches them expensively (undo and redo)."
+        },
+        {
+          id: 28,
+          question: "What is the cost of skipping verification in AI-assisted development?",
+          options: {
+            A: "No significant cost — AI-generated code is usually correct",
+            B: "Unverified AI output can reach production with bugs, causing user-facing failures, data corruption, security vulnerabilities, or performance problems that cost far more to fix in production than they would have cost to catch during verification",
+            C: "The only cost is slightly slower development velocity",
+            D: "Skipping verification is acceptable for non-critical features"
+          },
+          correct: "B",
+          explanation: "The cost of skipping verification compounds: a wrong assumption that passes unverified becomes the foundation for subsequent changes. A function that works incorrectly but is never tested ships to production. In production, the cost is: user-facing errors, data corruption that requires cleanup, security incidents, emergency hotfixes with rushed deployment. The verification investment is always smaller than the production incident cost."
+        },
+        {
+          id: 29,
+          question: "What is the difference between continuous verification and batch verification at the end?",
+          options: {
+            A: "Continuous verification runs tests automatically; batch verification runs them manually",
+            B: "Continuous verification catches failures immediately after each action when they are cheapest to fix; batch verification at the end allows failures to compound and interact before discovery",
+            C: "Continuous verification is for unit tests; batch verification is for integration tests",
+            D: "Both approaches produce the same quality of verification with equal effort"
+          },
+          correct: "B",
+          explanation: "The timing difference is critical: continuous verification (verify after each step) catches failures when the causing change is still fresh and isolated. Batch verification (verify everything at the end) discovers failures after 10 changes have accumulated, any of which might be the cause. Debugging which of 10 changes broke something is exponentially harder than knowing that step 3 was the first failure. Verification timing determines debugging cost."
+        },
+        {
+          id: 30,
+          question: "When is manual verification specifically required under Principle 3?",
+          options: {
+            A: "Manual verification is always required regardless of automated test coverage",
+            B: "Manual verification is required for security features (where automated tests may miss logical flaws), UI changes (where visual correctness cannot be fully automated), and user-facing flows (where the user experience must be confirmed in a real interaction)",
+            C: "Manual verification is only required when automated tests are unavailable",
+            D: "Manual verification is never required if the test suite is comprehensive"
+          },
+          correct: "B",
+          explanation: "Manual verification fills gaps that automation cannot cover: security features require human judgment to assess whether the logic is correct, not just that it executes. UI changes require visual confirmation in a real browser. User-facing flows require the actual user experience to be walked through. Automated tests can confirm individual behaviors; manual verification confirms the holistic experience that emerges from all behaviors together."
         }
       ]
     },
@@ -987,6 +1347,126 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "P4 reversibility doesn't mean every step MUST be reversible — it means you must explicitly identify irreversible steps and protect them. DROP table is permanent. P4's response: (1) backup first (RENAME old_table to old_table_backup or pg_dump), (2) separate the irreversible action into its own step with explicit verification gate, (3) document the point-of-no-return clearly. P4 applied: 'Step 4a: migrate data, verify row counts match, spot-check records → commit. Step 4b: (24-hour delay) drop backup table → commit.' The delay creates a rollback window."
+        },
+        {
+          id: 21,
+          question: "What is an 'atomic change' in the context of Principle 4?",
+          options: {
+            A: "A change that is so small it cannot be broken down further",
+            B: "A single, minimal, self-contained modification that does exactly one logical thing and can be applied or reverted independently without affecting other changes",
+            C: "A change made using database atomic transactions",
+            D: "A change that is automatically committed without human review"
+          },
+          correct: "B",
+          explanation: "An atomic change does exactly one logical thing: adds one middleware, extracts one function, updates one configuration value. It is self-contained (can stand alone as a meaningful unit), verifiable (one thing to check), and independently reversible (can be undone without touching other changes). Atomic changes make git history readable, code review tractable, and rollback precise."
+        },
+        {
+          id: 22,
+          question: "What git strategies best embody Principle 4 for reversibility?",
+          options: {
+            A: "Squashing all commits at the end and pushing to main directly",
+            B: "Feature branches for experimental work and frequent small atomic commits so that any change can be reverted independently without affecting other completed work",
+            C: "Committing only when the entire feature is complete and verified",
+            D: "Using git stash to preserve work-in-progress without committing"
+          },
+          correct: "B",
+          explanation: "Principle 4 in git: feature branches isolate experimental work (the entire branch can be discarded if the approach fails). Small atomic commits create granular reversibility (revert one commit without touching others). Together, these strategies ensure that any mistake costs at most one small change to undo, not the entirety of the feature's work. The anti-pattern: one massive commit at the end — when something breaks, everything must be reverted."
+        },
+        {
+          id: 23,
+          question: "What are the three decomposition patterns for breaking large tasks into small steps?",
+          options: {
+            A: "By developer, by deadline, by complexity",
+            B: "By feature (each layer of a feature independently), by layer (UI first then API then DB), by risk (safe refactors before risky changes)",
+            C: "By file size, by function count, by line count",
+            D: "By programming language, by module, by dependency"
+          },
+          correct: "B",
+          explanation: "Three decomposition patterns: by feature (each user-facing capability as an independent unit), by layer (UI components then API logic then database schema — each layer verified before the next begins), by risk (low-risk mechanical changes first to establish a working baseline, high-risk changes last with the verified baseline as a fallback). The pattern choice depends on where dependencies lie and where risks concentrate."
+        },
+        {
+          id: 24,
+          question: "How does reversibility function as a 'safety net' for AI-assisted development?",
+          options: {
+            A: "Reversibility prevents the AI from making any mistakes",
+            B: "Knowing that any change can be quickly undone enables confident delegation — you can let the AI try an approach without fear because a wrong approach costs minutes to revert, not hours to untangle",
+            C: "Reversibility creates automatic backups of all files before modification",
+            D: "Reversibility requires the AI to ask permission before each change"
+          },
+          correct: "B",
+          explanation: "Reversibility as safety net: the psychological effect is as important as the technical one. When you know git revert can undo any mistake in seconds, you are willing to let the AI try ambitious approaches. Without reversibility, every AI action is high-stakes — you must be certain before proceeding. With reversibility, uncertainty is acceptable — try it, verify it, revert it if wrong. This willingness to experiment enables faster progress."
+        },
+        {
+          id: 25,
+          question: "Why do small steps compound into big progress safely?",
+          options: {
+            A: "Small steps are faster than large steps because they require less planning",
+            B: "Each verified small step provides a known-good foundation for the next step, so errors discovered at step 5 require only reverting step 5 rather than reconstructing the entire system state",
+            C: "Small steps automatically generate more thorough test coverage",
+            D: "Small steps are easier for the AI to implement correctly"
+          },
+          correct: "B",
+          explanation: "The compounding value of small steps: each committed, verified step is a stable checkpoint. Step 6 builds on a verified step 5, which built on a verified step 4, and so on. If step 6 fails, you revert to the verified step 5 state — all prior work remains intact. Large steps cannot provide this — a failed large change potentially invalidates everything that was mixed into it."
+        },
+        {
+          id: 26,
+          question: "What is the danger of large, irreversible changes in AI-assisted development?",
+          options: {
+            A: "Large changes take too long and exceed context window limits",
+            B: "When a large irreversible change has a problem, the entire change must be reconsidered and often redone from scratch, making the cost of a wrong approach equivalent to the entire change",
+            C: "Large changes are harder for stakeholders to review and approve",
+            D: "Large changes require more detailed documentation"
+          },
+          correct: "B",
+          explanation: "The danger of large irreversible changes: if you implement a massive refactor affecting 50 files in one commit and it breaks something fundamental, you cannot surgically revert the problematic part — you must either live with the breakage or revert everything. In AI-assisted development, where the AI may misunderstand a requirement, large irreversible changes compound the risk of misunderstanding into potentially catastrophic outcomes."
+        },
+        {
+          id: 27,
+          question: "What is the checkpoint-before-change pattern in Principle 4?",
+          options: {
+            A: "Running the full test suite before any change is allowed",
+            B: "Creating an explicit save point (a commit, a branch, or a backup) before attempting a risky change, so that if the change fails, the pre-change state is immediately recoverable",
+            C: "Checking with a team member before making significant changes",
+            D: "Documenting the current state in a comment before modifying code"
+          },
+          correct: "B",
+          explanation: "Checkpoint-before-change: before attempting a risky refactor or experimental approach, explicitly create a save point. In git: commit the current working state, then attempt the change on top. If it fails: git checkout to the checkpoint commit. Without the checkpoint, 'undo' must piece together what was there before from memory or git stash. The checkpoint makes recovery instant and certain rather than effortful and approximate."
+        },
+        {
+          id: 28,
+          question: "Why is a git branch described as the simplest effective sandbox for AI work?",
+          options: {
+            A: "Branches use less disk space than other sandboxing approaches",
+            B: "A git branch isolates all AI work so that if anything goes wrong, the entire branch can be deleted and main remains untouched — providing total reversibility with one command",
+            C: "Branches automatically run tests on every AI commit",
+            D: "Branches are the only git feature that supports parallel development"
+          },
+          correct: "B",
+          explanation: "A git branch is a complete, zero-overhead sandbox: `git checkout -b ai-experiment` creates an isolated workspace. Any AI changes on this branch cannot affect main. If the experiment succeeds, merge it. If it fails completely, `git checkout main && git branch -D ai-experiment` — clean slate, nothing changed on main. This provides the safety of a separate environment with none of the overhead of containers or VMs."
+        },
+        {
+          id: 29,
+          question: "How does decomposition prevent context pollution in AI-assisted development?",
+          options: {
+            A: "Decomposition limits the number of files Claude can access at once",
+            B: "Each decomposed step has clear scope and isolated context, preventing the accumulated errors and wrong assumptions of one step from carrying forward and contaminating the reasoning for subsequent steps",
+            C: "Decomposition automatically creates separate Claude sessions for each step",
+            D: "Decomposition forces Claude to forget prior context between steps"
+          },
+          correct: "B",
+          explanation: "Decomposition as context pollution prevention: when a task is broken into small, scoped steps, each step's context is bounded. A wrong assumption in step 2 affects only step 2 and can be reverted with step 2's commit. In a monolithic approach, wrong assumptions compound — step 2's error shapes step 5, which shapes step 8. By the time the error is discovered, the accumulated contamination makes diagnosis and repair difficult."
+        },
+        {
+          id: 30,
+          question: "What is the task size guideline for Principle 4 and what does it ensure?",
+          options: {
+            A: "Each task should be under 50 lines of code",
+            B: "Each task should take 5-15 minutes to complete, ensuring it fits in a single focused session and produces one meaningful, atomic commit",
+            C: "Each task should touch exactly one file",
+            D: "Each task should have exactly one test case verifying it"
+          },
+          correct: "B",
+          explanation: "The 5-15 minute task guideline balances focus and momentum. Under 5 minutes: the task may be too trivial and the commit overhead disproportionate. Over 15 minutes: the task likely contains multiple logical concerns and the subagent session may accumulate context pollution. At 5-15 minutes, each task has a clear purpose, complete execution fits cleanly in one focused effort, and the result commits as a meaningful, independently verifiable unit."
         }
       ]
     },
@@ -1233,6 +1713,126 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "P5 session handoff: 'good progress' lives in the session context, which dies when you close it. SESSION-HANDOFF.md template: '## State: Auth module refactored (files A, B, C). ## Remaining: D, E still need updating. ## Decisions: Chose approach X over Y because Z. ## Next step: Start with file D, function processUser() — it calls the old interface.' Tomorrow's session: read SESSION-HANDOFF.md first, start immediately from the exact stopping point. Without it: 20+ minutes of re-orientation. P5 multiplies the value of today's work into tomorrow's session."
+        },
+        {
+          id: 21,
+          question: "What role does CLAUDE.md play as persistent project memory under Principle 5?",
+          options: {
+            A: "CLAUDE.md stores the complete history of all decisions made since the project began",
+            B: "CLAUDE.md serves as the permanent, automatically-loaded project context that converts ephemeral session knowledge into persistent file memory available to every future session",
+            C: "CLAUDE.md is the primary backup for all source code files",
+            D: "CLAUDE.md stores credentials and environment variables securely"
+          },
+          correct: "B",
+          explanation: "CLAUDE.md as persistent memory: any knowledge that should be active in every session belongs in CLAUDE.md. Project conventions, tech stack decisions, deployment commands, security constraints — all written to CLAUDE.md once and automatically available in every future session. This converts the fragile session memory (lost on /clear) into durable file memory (always present). CLAUDE.md is P5's primary vehicle for project-wide persistence."
+        },
+        {
+          id: 22,
+          question: "What are Architecture Decision Records (ADRs) and what do they persist under Principle 5?",
+          options: {
+            A: "ADRs are automated code review tools that record architectural violations",
+            B: "ADRs are documents that capture why a specific technical decision was made, including the context, alternatives considered, and consequences — preserving the reasoning that code alone cannot express",
+            C: "ADRs are diagrams that visualize the system architecture",
+            D: "ADRs are records of architecture team meetings"
+          },
+          correct: "B",
+          explanation: "ADRs capture the 'why' that code cannot express: why was PostgreSQL chosen over MongoDB? Why was this API pattern adopted? What alternatives were considered and why were they rejected? Without ADRs, these decisions are invisible — the code shows what was chosen but not why. Six months later, when a new developer or new AI session asks 'why is it done this way?', the ADR provides the answer."
+        },
+        {
+          id: 23,
+          question: "What are context files like CONTEXT.md and STATUS.md used for in Principle 5?",
+          options: {
+            A: "They replace CLAUDE.md for projects that prefer different naming conventions",
+            B: "They capture the current state of in-progress work for session handoff — what has been done, what remains, and what the next specific step is",
+            C: "They are automatically generated by Claude Code to track changes",
+            D: "They store error messages and debugging information from past sessions"
+          },
+          correct: "B",
+          explanation: "Context and status files enable session handoff by converting the ephemeral knowledge of 'where we are' into persistent file knowledge. CONTEXT.md might capture 'We are implementing OAuth. The discovery endpoint is working. The token exchange is next.' STATUS.md might track 'Steps 1-3 complete; step 4 in progress; steps 5-6 pending.' Any new session reading these files immediately knows the exact starting point without reconstructing context from history."
+        },
+        {
+          id: 24,
+          question: "What does reproducibility mean in the context of Principle 5?",
+          options: {
+            A: "The ability to reproduce bugs by running the same test cases",
+            B: "Any session — on any machine, by any person — can pick up exactly where the last session left off because all necessary context is captured in files rather than in someone's memory",
+            C: "The ability to reproduce the build process automatically",
+            D: "Running the same prompt twice produces the same output"
+          },
+          correct: "B",
+          explanation: "P5 reproducibility: if the project context exists only in one developer's head or one session's history, only that developer at that moment can continue the work. With context persisted in files, the work is reproducible: a new team member, a colleague's machine, a new AI session — all can read the files and begin contributing without reconstruction overhead. Reproducibility is team resilience and project continuity."
+        },
+        {
+          id: 25,
+          question: "What is the critical distinction between session memory and file memory?",
+          options: {
+            A: "Session memory is faster to access; file memory is more durable",
+            B: "Session memory (conversation history) is lost when the session ends or /clear is used; file memory (CLAUDE.md, ADRs, progress files) survives everything and is always accessible",
+            C: "Session memory is unlimited; file memory is limited by disk space",
+            D: "Session memory is encrypted; file memory is stored in plain text"
+          },
+          correct: "B",
+          explanation: "The durability contrast: session memory is ephemeral — /clear erases it instantly, session end makes it inaccessible, a crash loses it permanently. File memory is durable — /clear does not affect files, sessions end and files remain, crashes do not delete committed files. Principle 5's fundamental insight is that anything important enough to need in future sessions must be written to files because session memory cannot be counted on."
+        },
+        {
+          id: 26,
+          question: "What are skills in .claude/skills/ and how do they support Principle 5?",
+          options: {
+            A: "Skills are automated scripts that run without human intervention",
+            B: "Skills are reusable domain expertise files (auth.md, api.md, testing.md) that capture specialized knowledge for on-demand loading, extending CLAUDE.md without bloating it",
+            C: "Skills are Claude Code keyboard shortcuts for common operations",
+            D: "Skills are certification documents proving the team's technical abilities"
+          },
+          correct: "B",
+          explanation: "Skills in .claude/skills/ are P5's mechanism for persistent domain expertise. CLAUDE.md should stay under 60 lines of core norms. Specialized knowledge (how this project's authentication works, how to write tests in this codebase, how to interact with this API) lives in skills files and is loaded when that domain is relevant. Skills extend the persistence benefit of CLAUDE.md to specialized knowledge without creating a bloated CLAUDE.md."
+        },
+        {
+          id: 27,
+          question: "What is the 60-line limit for CLAUDE.md and what happens when it is exceeded?",
+          options: {
+            A: "Claude Code refuses to read CLAUDE.md files longer than 60 lines",
+            B: "When CLAUDE.md exceeds 60 lines it becomes a source of context bloat and signal dilution — key constraints get buried in noise, the AI struggles to identify what is important, and session startup cost increases",
+            C: "The 60-line limit is enforced by git pre-commit hooks automatically",
+            D: "Exceeding 60 lines triggers a warning but has no functional impact"
+          },
+          correct: "B",
+          explanation: "The 60-line limit prevents CLAUDE.md bloat. When CLAUDE.md grows to 200+ lines with domain knowledge, old sprint goals, and outdated constraints, every session loads all of it — including irrelevant and stale content. Signal-to-noise drops, and key constraints are buried. The fix: enforce the 60-line limit, move domain knowledge to skills files, and regularly prune outdated content. CLAUDE.md should be orientation, not encyclopedia."
+        },
+        {
+          id: 28,
+          question: "What information belongs in an ADR under Principle 5?",
+          options: {
+            A: "Only the final decision and the date it was made",
+            B: "The decision made, the context that motivated it, the alternatives that were considered, and the consequences — both intended benefits and known tradeoffs",
+            C: "A detailed technical specification of the chosen approach",
+            D: "The names of the team members who approved the decision"
+          },
+          correct: "B",
+          explanation: "A complete ADR captures four elements: Decision (what was chosen), Context (what situation prompted the decision, what constraints applied), Alternatives (what other approaches were considered and why they were rejected), Consequences (what benefits the decision provides and what tradeoffs were accepted). Without all four, future developers or AI sessions cannot evaluate whether the decision still applies or whether changed circumstances justify reconsideration."
+        },
+        {
+          id: 29,
+          question: "How do progress files support multi-session long-running projects?",
+          options: {
+            A: "Progress files automatically resume work when a new session starts",
+            B: "Progress files track what has been completed versus what remains, so any new session immediately knows the starting point without reconstructing progress from git history or memory",
+            C: "Progress files store test results for each completed task",
+            D: "Progress files notify team members when tasks are completed"
+          },
+          correct: "B",
+          explanation: "Progress files convert implementation state into persistent knowledge. A checklist file showing completed and pending steps means: any new session reads the file, sees steps 1-6 are checked and step 7 is next, and begins from step 7 immediately. Without the progress file, the new session must audit git history, read commit messages, and reconstruct what was done — a 15-20 minute process that the file eliminates entirely."
+        },
+        {
+          id: 30,
+          question: "How does file-based state enable multi-session long-running projects that cannot fit in one context window?",
+          options: {
+            A: "File-based state allows combining multiple context windows into one large session",
+            B: "Each session reads the current file-based state (specs, progress files, CLAUDE.md, ADRs) to establish full context, works until the session limit, writes updated state to files, and the next session begins from that file-based checkpoint",
+            C: "File-based state bypasses the context window limit entirely",
+            D: "Long-running projects are split across team members rather than sessions"
+          },
+          correct: "B",
+          explanation: "Multi-session projects work via file-based checkpoints: Session 1 reads the spec, completes tasks 1-5, updates the progress file, writes any new decisions to CLAUDE.md, and ends. Session 2 reads the same spec (unchanged), sees tasks 1-5 complete in the progress file, picks up from task 6. The project continues across as many sessions as needed because each session's starting knowledge is captured in files, not dependent on context window continuity."
         }
       ]
     },
@@ -1479,6 +2079,126 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "Trust Gradualism transition criteria: demonstrated reliability over time + understanding of Claude's behavior + calibrated mental model = readiness for next phase. 3 months of consistent reliability satisfies Phase 2 → 3 criteria. Phase 3 (Selective Autonomy): auto-approve safe operations (tests, linting, established patterns) while maintaining approval gates for novel or higher-risk operations (new files, external integrations, deployments). The phases don't have fixed durations — they have evidence thresholds."
+        },
+        {
+          id: 21,
+          question: "What does the Safety Mantra 'As long as I have not git pushed, I am the master of my machine' specifically identify as the point of no return?",
+          options: {
+            A: "Saving a file to disk",
+            B: "The git push — once changes are shared with others or deployed to production, recovery becomes complex; before pushing, all local changes remain fully reversible",
+            C: "Running a test suite",
+            D: "Committing changes to the local repository"
+          },
+          correct: "B",
+          explanation: "The Safety Mantra pinpoints the push as the critical boundary: uncommitted changes can be reverted with git checkout, committed changes can be reset with git reset --hard, even deleted files may be recoverable. But after git push, changes are shared, deployed, or distributed — recovery requires coordination with others. The mantra reminds you that until the push, you retain full control and reversibility over everything the AI has done."
+        },
+        {
+          id: 22,
+          question: "Which of the five Risk Spectrum categories includes hardcoded credentials and SQL injection vulnerabilities?",
+          options: {
+            A: "Data Loss, because credentials can be used to steal data",
+            B: "Security Vulnerabilities — hardcoded credentials and injection flaws can lead to system compromise, unauthorized access, and data breaches",
+            C: "Reputation Damage, because security incidents harm public trust",
+            D: "Cost Overruns, because security incidents are expensive to remediate"
+          },
+          correct: "B",
+          explanation: "The five risk categories in the Risk Spectrum: Data Loss (rm -rf, file overwrites), Security Vulnerabilities (hardcoded credentials, SQL injection — system compromise), Cost Overruns (infinite loops, unthrottled API calls), Reputation Damage (bugs corrupting user data, privacy violations), Workflow Disruption (broken CI/CD, convention violations). Security Vulnerabilities are distinct because they do not just affect your system but can compromise user data and enable external attacks."
+        },
+        {
+          id: 23,
+          question: "In the Safety Hierarchy (Defense in Depth), which layer specifically handles requiring approval before destructive operations execute?",
+          options: {
+            A: "Layer 1 (Technical Limits), because hard constraints block operations entirely",
+            B: "Layer 2 (Permission Controls) — this layer requires explicit human approval for write operations, file deletions, and command execution before they happen",
+            C: "Layer 4 (Process Controls), because diff review catches destructive changes",
+            D: "Layer 5 (Human Verification), because humans make the final call"
+          },
+          correct: "B",
+          explanation: "Layer 2 (Permission Controls) is specifically the approval gate layer: it intercepts operations before they execute and requires your explicit confirmation. Layer 1 (Technical Limits) uses hard constraints like read-only filesystems or command whitelists — operations are blocked, not approved. Layer 4 (Process Controls) reviews after changes exist. Layer 2 is the 'ask before acting' layer — it is where the Confirming permission model operates."
+        },
+        {
+          id: 24,
+          question: "What distinguishes the 'Permissive' permission model from the 'Confirming' permission model?",
+          options: {
+            A: "Permissive allows all operations; Confirming blocks all operations",
+            B: "Permissive auto-approves read operations and test execution while requiring approval only for writes, pushes, and deletions; Confirming requires approval for ALL write operations and command execution, including safe ones",
+            C: "Permissive is for production environments; Confirming is for development",
+            D: "Permissive grants root access; Confirming grants user-level access"
+          },
+          correct: "B",
+          explanation: "Permission model spectrum: Permissive = auto-approve reads (ls, cat, grep, git status/diff/log) and test execution — require approval only for writes, git push, deletions, and package installs. Confirming = auto-approve only reads; every write, modification, and command execution requires approval. Restricted = no autonomous action, all suggestions applied manually. Permissive suits calibrated collaboration where read-only and test operations are trusted. Confirming suits new AI collaboration or unfamiliar codebases."
+        },
+        {
+          id: 25,
+          question: "Which commands appear on the Destructive Operations List and require mandatory approval before execution?",
+          options: {
+            A: "ls, cat, grep, git status",
+            B: "rm / rm -rf, git reset --hard, git push --force, git clean -fd, DROP DATABASE, DELETE FROM without WHERE — commands where mistakes are expensive and potentially unrecoverable",
+            C: "npm install, pip install, apt-get install",
+            D: "echo, printf, pwd, whoami"
+          },
+          correct: "B",
+          explanation: "The Destructive Operations List contains commands with expensive recovery costs: rm (file deletion, potentially permanent), git reset --hard (discards all uncommitted work), git push --force (can overwrite collaborators' commits), git clean -fd (removes untracked files without recovery), DROP DATABASE / TRUNCATE TABLE (permanent data loss). Requiring approval for these means you see and consciously confirm each irreversible action before it executes."
+        },
+        {
+          id: 26,
+          question: "Why is a git branch described as 'the simplest effective sandbox' for AI experimentation?",
+          options: {
+            A: "Because git branches are encrypted and secure",
+            B: "Because a branch isolates all AI changes to a separate history that can be completely discarded with git checkout main and git branch -D, providing full reversibility without needing Docker or virtual machines",
+            C: "Because git branches automatically run tests before merging",
+            D: "Because git branches prevent the AI from accessing the filesystem"
+          },
+          correct: "B",
+          explanation: "A git branch as sandbox: run git checkout -b ai-experiment, let the AI work freely, review results. If anything went wrong, git checkout main and git branch -D ai-experiment wipes everything cleanly. This is simpler than Docker containers (no setup, no network config, no images) and more practical than virtual machines for most development work. The key property: complete reversibility. The AI can do whatever it wants on the branch — the risk is always bounded by the cost of branch deletion."
+        },
+        {
+          id: 27,
+          question: "What are the four phases of Trust Gradualism in order?",
+          options: {
+            A: "Read → Write → Execute → Deploy",
+            B: "Observation Only (AI reads, you apply manually) → Supervised Autonomy (AI changes, you review all diffs) → Selective Autonomy (AI handles safe ops autonomously) → Calibrated Autonomy (AI handles most ops, approval for novel/high-risk)",
+            C: "Restricted → Confirming → Permissive → Unrestricted",
+            D: "Testing → Staging → Production → Maintenance"
+          },
+          correct: "B",
+          explanation: "Trust Gradualism four phases: Phase 1 (Week 1) Observation Only — Claude reads and explains, you manually apply. Phase 2 (Weeks 2-4) Supervised Autonomy — Claude makes changes in sandbox, you review every diff before applying. Phase 3 (Month 2-3) Selective Autonomy — Claude handles tests, linting, routine refactors autonomously; approval for novel changes. Phase 4 (Month 3+) Calibrated Autonomy — Claude handles most operations; approval only for novel or high-risk operations. Phases progress based on demonstrated reliability, not fixed timelines."
+        },
+        {
+          id: 28,
+          question: "What is the correct emergency response sequence when an AI operation goes wrong?",
+          options: {
+            A: "Reboot → Reinstall → Restart",
+            B: "Stop with Ctrl+C → Assess with git status and git diff → Revert with git checkout -- . or git reset --hard → If committed, use git revert HEAD → Conduct post-incident review",
+            C: "Delete the repository → Start over → Notify the team",
+            D: "Wait for the operation to finish → Undo all changes → Update documentation"
+          },
+          correct: "B",
+          explanation: "Emergency response protocol: 1) Ctrl+C immediately stops Claude before further damage, 2) git status and git diff assess what changed (are there modified or deleted files?), 3) git checkout -- . undoes all uncommitted changes, or git reset --hard for committed changes, 4) git revert HEAD creates a clean reversion commit for pushed commits. Then post-incident review: what happened? What safety layer failed? What constraint would have prevented this? The review converts incidents into future safeguards."
+        },
+        {
+          id: 29,
+          question: "What does the 'Safety Checklist' recommend verifying before starting an AI-assisted work session?",
+          options: {
+            A: "CPU usage, memory availability, and internet connection speed",
+            B: "Environment (correct directory, correct branch, staging not production), Tool Configuration (permission model set, destructive ops list configured), and Mental Model (what is the plan, what are the risks, what is the rollback)",
+            C: "AI model version, token budget, and response format",
+            D: "Git username, email configuration, and SSH key validity"
+          },
+          correct: "B",
+          explanation: "The Safety Checklist has three categories: Environment checks (am I in the right directory? the right git branch? am I pointed at staging, not production?), Tool Configuration checks (is the permission model appropriate for this task? is the destructive operations list configured?), and Mental Model checks (what is the goal? what is the worst that could happen? what is my rollback plan if this goes wrong?). Running this checklist before starting prevents the most common AI-assisted development incidents, which typically result from wrong environment or missing rollback planning."
+        },
+        {
+          id: 30,
+          question: "What is the 'Constraints enable autonomy' paradox and why is it counterintuitive?",
+          options: {
+            A: "Constraints make AI faster, which seems like it would make AI slower",
+            B: "Counterintuitively, better safety constraints let you give AI MORE autonomy — without good safeguards you must hover over every AI action afraid of unrecoverable mistakes, but with reversibility and permission controls in place you can confidently grant greater freedom because errors are bounded",
+            C: "Constraints are paradoxical because they both allow and prevent the same operations",
+            D: "More rules make AI think more creatively, which seems contradictory"
+          },
+          correct: "B",
+          explanation: "The paradox: constraints enable autonomy. Without safety measures, every AI action requires your vigilant oversight because a mistake could be catastrophic and unrecoverable. You end up micromanaging AI because you cannot afford not to. With good safety measures (git branch sandboxing, permission controls, pre-commit hooks, emergency stop), you know mistakes are bounded and reversible — so you can confidently grant the AI more independence. Better constraints lead to greater practical freedom, not less."
         }
       ]
     },
@@ -1725,6 +2445,126 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "P7 observability includes accountability to stakeholders. 'Clean up technical debt' is vague, and the result — undocumented changes across many files — is unauditable. P7's Summary After Completion creates an audit trail: 'Removed 450 lines of dead code from auth/ and payments/ (verified unused via grep). Renamed 12 variables for clarity (no behavioral change). Extracted 3 duplicate patterns into shared utilities (behavior preserved, tests confirm). Risk: zero — all changes are refactors with test coverage unchanged.' Now the team lead can review without reading every diff."
+        },
+        {
+          id: 21,
+          question: "What are the Three Pillars of Observability in AI-assisted development?",
+          options: {
+            A: "Logging, Monitoring, and Alerting",
+            B: "Action Visibility (what did Claude do?), Rationale Visibility (why did it make that choice?), and Result Visibility (what was the outcome?) — together making AI work transparent, auditable, and debuggable",
+            C: "Input validation, Process tracking, and Output verification",
+            D: "Unit tests, Integration tests, and End-to-end tests"
+          },
+          correct: "B",
+          explanation: "The Three Pillars of Observability: 1) Action Visibility — seeing each step Claude took (Read [file], Analyze [finding], Edit [file], Run [command]), 2) Rationale Visibility — understanding the reasoning ('chose validateToken() because it matches the pattern in existing auth functions'), 3) Result Visibility — seeing outcomes (tests passed, 5 lines added, no coverage drop). All three together transform AI from a black box into a transparent collaborator whose work can be reviewed, trusted, and debugged."
+        },
+        {
+          id: 22,
+          question: "What is the Scan for Verbs technique in activity log analysis?",
+          options: {
+            A: "A grammar check for AI-generated documentation",
+            B: "Reading activity logs by focusing on action verbs (Read, Edit, Delete, Run, Create) to rapidly understand what Claude actually did without reading every detail — verbs reveal the pattern of actions taken",
+            C: "A technique for writing clearer prompts with strong action words",
+            D: "A method for naming functions using descriptive verbs"
+          },
+          correct: "B",
+          explanation: "Scan for Verbs: in Claude Code activity logs, each action starts with a verb — Read, Analyze, Edit, Delete, Run, Create, Verify. By scanning verbs first, you quickly grasp the action pattern: 'Read → Analyze → Edit → Verify → Complete' (healthy pattern). 'Edit → Edit → Edit → Edit' (warning pattern — iterating without understanding). 'Read → Delete → Delete → Delete' (alarming — unexpected deletions). Verbs give you the story structure; details give you the specifics."
+        },
+        {
+          id: 23,
+          question: "What is the 'red flag pattern' in activity logs that indicates an AI is guessing rather than working from understanding?",
+          options: {
+            A: "READ → ANALYZE → EDIT → VERIFY → COMPLETE",
+            B: "READ → EDIT → EDIT → EDIT → [no VERIFY] → COMPLETE — multiple edits without intermediate verification suggests Claude is iterating through guesses rather than understanding the problem",
+            C: "READ → PLAN → IMPLEMENT → TEST → COMMIT",
+            D: "EXPLORE → PLAN → IMPLEMENT → COMMIT"
+          },
+          correct: "B",
+          explanation: "Log pattern analysis reveals workflow quality: Success Pattern (READ → ANALYZE → EDIT → VERIFY → COMPLETE) = understood before acting, confirmed after. Warning/Red Flag Pattern (READ → EDIT → EDIT → EDIT → COMPLETE with no VERIFY) = multiple edits without checking results — Claude is guessing and fixing rather than working from genuine understanding. When you see this pattern, intervene: stop Claude, clarify the problem, and restart with better context."
+        },
+        {
+          id: 24,
+          question: "What is the 2-Minute Audit and what does it verify?",
+          options: {
+            A: "A two-minute code review for small changes",
+            B: "A quick post-session review checking activity logs for unexpected actions, git diff for actual file changes vs. expected, test results, and any error messages — verifying that what Claude said it did matches what actually changed",
+            C: "A timer-based prompt technique to keep responses concise",
+            D: "A two-minute standup format for AI-assisted teams"
+          },
+          correct: "B",
+          explanation: "The 2-Minute Audit after each Claude session: 1) Scan activity logs for unexpected verbs (Delete, Run where not expected), 2) Run git diff to see actual file changes — does reality match Claude's summary?, 3) Check test results — did tests pass as Claude claimed?, 4) Look for error messages Claude may have glossed over. This quick audit catches gaps between Claude's reported actions and actual outcomes, building the habit of verification that prevents compounding errors across sessions."
+        },
+        {
+          id: 25,
+          question: "Where are Claude Code activity logs located and how do you access them?",
+          options: {
+            A: "In a cloud dashboard at claude.ai/logs",
+            B: "In the ~/.claude/projects/ directory, organized by project — each session generates a JSONL file with timestamped entries for every action Claude took",
+            C: "In the terminal output scrollback buffer",
+            D: "In a logs/ folder in your current project directory"
+          },
+          correct: "B",
+          explanation: "Claude Code activity logs live in ~/.claude/projects/[project-path]/ as JSONL files. Each session creates a file with timestamped entries for every action: file reads, tool calls, edits, command executions, and Claude's reasoning. These logs persist across sessions, enabling post-mortem analysis days later. You can open them in any text editor or parse them programmatically. They are your audit trail for everything Claude has done in your project."
+        },
+        {
+          id: 26,
+          question: "What is the difference between real-time observation and post-mortem analysis in P7 Observability?",
+          options: {
+            A: "Real-time is faster; post-mortem is more thorough",
+            B: "Real-time observation (watching Claude work as it happens) enables intervention while actions are still reversible; post-mortem analysis (reviewing logs after completion) enables learning and accountability but cannot undo completed actions",
+            C: "Real-time uses the terminal; post-mortem uses a separate dashboard",
+            D: "They are the same technique applied at different times"
+          },
+          correct: "B",
+          explanation: "Two observability modes: Real-Time Observation — watching activity logs as Claude works, enabling Ctrl+C intervention before mistakes compound (P6 synergy: seeing wrong database = stop before writes). Post-Mortem Analysis — reviewing JSONL logs after session completion to understand what happened, verify claims, and learn patterns. Real-time is your intervention window; post-mortem is your learning loop. Both require the same underlying observability infrastructure — visible action logs."
+        },
+        {
+          id: 27,
+          question: "What are the observability anti-patterns that undermine P7?",
+          options: {
+            A: "Reading too many log files and spending too long reviewing diffs",
+            B: "Accepting 'Done!' without verification, never reading activity logs, skipping git diff after sessions, and trusting Claude's summary instead of checking actual file state — these create blind spots where errors accumulate unnoticed",
+            C: "Using Plan Mode too frequently and reviewing plans too carefully",
+            D: "Writing too-detailed explanations and over-documenting changes"
+          },
+          correct: "B",
+          explanation: "P7 anti-patterns: 1) 'Done!' acceptance — taking Claude's word for completion without verifying outcomes, 2) Log blindness — never reading activity logs, treating Claude as a black box, 3) Diff skipping — not running git diff after sessions (Claude's summary may omit unexpected changes), 4) Summary trust — believing Claude's description of what changed instead of checking actual file state. These anti-patterns compound: each skipped verification is an opportunity for errors to propagate silently into the codebase."
+        },
+        {
+          id: 28,
+          question: "What is the 'Explain Before Executing' pattern and why does it support observability?",
+          options: {
+            A: "Claude should explain its entire life history before running any command",
+            B: "Asking Claude to explain its plan before executing it — 'tell me what you are going to do and why before you do it' — surfaces the rationale upfront so you can catch incorrect assumptions before they become file changes",
+            C: "Claude should comment every line of code before the code is written",
+            D: "Running a dry-run before every destructive command"
+          },
+          correct: "B",
+          explanation: "Explain Before Executing: 'Before you make any changes, tell me what you plan to do and why.' This surfaces Rationale Visibility (Pillar 2) before execution, not after. Benefits: you catch wrong assumptions early ('Claude thinks this function is unused — but it is called from the mobile app'), you understand the approach before committing to it, and you have a reference point to compare against actual actions. It transforms observability from reactive (what did it do?) to proactive (is this the right approach?)."
+        },
+        {
+          id: 29,
+          question: "How does P7 Observability synergize with P3 (Context Management)?",
+          options: {
+            A: "They do not interact — observability is about output, context is about input",
+            B: "Activity logs and session summaries generated by P7 observability practices become the persistent context artifacts that P3 uses to maintain continuity across sessions — what Claude did yesterday (P7) becomes the context for what it does today (P3)",
+            C: "P3 reduces context so P7 has less to observe",
+            D: "They conflict because P3 removes information that P7 needs"
+          },
+          correct: "B",
+          explanation: "P7 and P3 synergy: P7 observability practices generate artifacts — session summaries, action logs, completed-task records. P3 context management uses these artifacts to maintain continuity: the summary of what Claude did in Session 1 (P7) becomes the context file that Claude reads at the start of Session 2 (P3). Without P7 (no summary), P3 has nothing to persist. Without P3 (no persistence), P7 summaries expire with the session. Together they create a continuous, auditable, multi-session collaboration history."
+        },
+        {
+          id: 30,
+          question: "What is the core failure mode that P7 Observability is specifically designed to prevent?",
+          options: {
+            A: "AI models forgetting their instructions mid-session",
+            B: "The Black Box Problem — AI makes changes without visible steps, you see 'Done!' but not what actually changed, making debugging impossible when problems surface and trust-building impossible since you cannot verify what happened",
+            C: "Claude using too many tokens in a single response",
+            D: "Developers relying on AI instead of learning to code"
+          },
+          correct: "B",
+          explanation: "P7 is the antidote to the Black Box Problem: without observability, you get 'Done!' with no visibility into what changed, why, or how. When bugs appear later, you have no audit trail. When a colleague asks what changed, you cannot explain without reading every diff. When Claude makes a wrong choice, you cannot catch it in time to intervene. P7 observability — action logs, rationale explanations, verified summaries — transforms AI from a black box into a transparent collaborator whose work is always auditable, debuggable, and trustworthy."
         }
       ]
     },
@@ -1971,6 +2811,126 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "Session initialization protocol: the first 2 minutes of a session determine its quality. A 'what would you like to do today?' cold-start misses everything P5 captured in files. Protocol: READ CLAUDE.md (conventions, decisions, constraints) → SCAN git log --oneline -10 (recent changes, avoid duplicating) → CHECK any progress files (ongoing tasks, stopping points). Cost: 2 minutes. Benefit: all subsequent responses informed by project reality. This operational practice converts P5's file investments into session-start value — files written are only useful if read."
+        },
+        {
+          id: 21,
+          question: "What are the four phases of the recommended Four-Phase Workflow in Claude Code?",
+          options: {
+            A: "Write → Test → Review → Deploy",
+            B: "EXPLORE (Plan Mode, Claude reads files and gathers context) → PLAN (Claude designs and you review the plan) → IMPLEMENT (Normal Mode, Claude executes verified steps) → COMMIT (save verified work with git)",
+            C: "Prompt → Generate → Accept → Push",
+            D: "Analyze → Design → Code → Document"
+          },
+          correct: "B",
+          explanation: "The Four-Phase Workflow: EXPLORE — enter Plan Mode so Claude reads and gathers context without making changes (no side effects during exploration). PLAN — Claude creates an implementation plan, you review and correct before anything is changed (cheap to fix a plan, expensive to fix implemented code). IMPLEMENT — switch to Normal Mode, Claude executes one verified step at a time. COMMIT — implementation verified, commit with a descriptive message. The key insight: planning is cheap, implementing the wrong plan is expensive."
+        },
+        {
+          id: 22,
+          question: "What is the Escape Key technique and what does single Esc accomplish?",
+          options: {
+            A: "Esc closes the terminal application entirely",
+            B: "Single Esc (the Escape Key technique) stops Claude mid-response while preserving the full conversation context — use it when Claude is heading in an unproductive direction so you can redirect without losing the session history",
+            C: "Esc deletes the last message sent to Claude",
+            D: "Esc switches between Plan Mode and Normal Mode"
+          },
+          correct: "B",
+          explanation: "Single Esc = steering wheel. It stops Claude while keeping full context intact. Use when: Claude is going the wrong direction, misunderstood the requirement, is heading toward over-engineering, or is exploring irrelevant territory. You do not lose your work — you redirect. Double Esc (or /rewind) is the time machine — it reverts to an earlier checkpoint state. The distinction: single Esc corrects trajectory in real time; double Esc reverses to a prior checkpoint. Single Esc is the gentlest, most targeted intervention."
+        },
+        {
+          id: 23,
+          question: "What does the Rule of Two say about handling correction loops with Claude?",
+          options: {
+            A: "Always review Claude's output twice before accepting it",
+            B: "If Claude misses the mark twice on the same fix, STOP — use /clear and start fresh with a better prompt incorporating what you learned from the two failures, because continued correction of a corrupt context produces diminishing returns",
+            C: "Two developers must review any AI-generated code before merging",
+            D: "Run every test suite twice to ensure reproducible results"
+          },
+          correct: "B",
+          explanation: "Rule of Two: after two missed attempts at the same correction, the context is likely compromised. Each correction adds noise — failed attempts, misunderstood requirements, contradictory instructions accumulate in the context window. /clear discards accumulated noise. A fresh session starts with a lesson-encoded prompt: 'Implement X. Note: NOT approach Y (fails because...) and NOT approach Z (fails because...). Use approach W.' Fresh context plus a specific, failure-informed prompt converges faster than continued correction of a degraded conversation."
+        },
+        {
+          id: 24,
+          question: "What is the Bloated CLAUDE.md anti-pattern and how do you fix it?",
+          options: {
+            A: "Using too many headers in CLAUDE.md makes it hard to read",
+            B: "When CLAUDE.md exceeds approximately 60 lines, it consumes too much context window and dilutes focus — fix by keeping CLAUDE.md lean with core norms only and moving domain-specific knowledge into skills in .claude/skills/ for on-demand loading",
+            C: "CLAUDE.md files should never be committed to version control",
+            D: "Including passwords or API keys in CLAUDE.md creates a security risk"
+          },
+          correct: "B",
+          explanation: "Bloated CLAUDE.md: CLAUDE.md is read into every session's context. When it grows to 150+ lines with API patterns, database schemas, and business rules, two problems emerge — it consumes significant context budget and dilutes Claude's focus on the current task. Fix: keep CLAUDE.md under approximately 60 lines covering project overview, tech stack, conventions, key commands, and critical constraints. Move specialized knowledge (payment API patterns, database schema details) into .claude/skills/ files loaded on-demand when that domain is relevant."
+        },
+        {
+          id: 25,
+          question: "What is the Interview Pattern and when is it appropriate to use?",
+          options: {
+            A: "A technique for interviewing Claude to assess its capabilities",
+            B: "A structured requirements-gathering conversation where Claude asks clarifying questions before beginning implementation — appropriate for complex features with unclear requirements, not for well-defined simple changes like typo fixes or single-line edits",
+            C: "A method for interviewing developers about their AI usage",
+            D: "A pattern for asking Claude multiple questions in a single prompt"
+          },
+          correct: "B",
+          explanation: "The Interview Pattern: for complex features with many unknowns, have Claude ask you clarifying questions before writing any code. 'Before starting, ask me questions until you have everything you need to implement this correctly.' This surfaces hidden requirements, constraints, and edge cases before implementation commits to an approach. When NOT to use it: simple, well-defined tasks (typo fix, adding one log statement, changing a config value) where requirements are fully clear. Applying Interview Pattern to every task is over-engineering; the skill is recognizing when requirements ambiguity justifies the overhead."
+        },
+        {
+          id: 26,
+          question: "What is the Golden Reset and when should you apply it?",
+          options: {
+            A: "A factory reset that reinstalls Claude Code from scratch",
+            B: "Starting a completely fresh Claude Code session after an exploratory session — bringing only the clean spec that emerged from exploration, leaving behind all the noisy exploratory context (failed attempts, tangents, pivots) so the implementation session has full context budget and no competing signals",
+            C: "Resetting git to the golden commit from last week",
+            D: "Clearing all project files and starting the codebase from scratch"
+          },
+          correct: "B",
+          explanation: "Golden Reset rationale: exploratory sessions are intentionally messy — you try approaches, reject them, pivot. This history stays in the context window and can influence Claude even when not directly referenced. A fresh session receiving only the cleaned-up specification has zero noise to overcome. Claude's full context budget goes to implementation. The analogy: you do not hand a junior developer your rough notes — you hand them the clean spec that emerged from the notes. The Golden Reset is the operational practice of creating that separation between exploration and implementation."
+        },
+        {
+          id: 27,
+          question: "What is the difference between /clear and /compact in Claude Code?",
+          options: {
+            A: "/clear removes files; /compact compresses them",
+            B: "/clear discards the entire conversation context and starts completely fresh — use when the context is corrupted or a task is fully complete; /compact summarizes the conversation into a shorter form while preserving key decisions and state — use when the session is long but still in progress and you want to preserve continuity",
+            C: "They are identical commands with different syntax",
+            D: "/clear is for sessions; /compact is for files"
+          },
+          correct: "B",
+          explanation: "/clear vs. /compact: /clear = full reset. The conversation history is gone; next message starts a blank session. Use when: task is complete, context is corrupt (Rule of Two triggered), or starting a completely new topic. /compact = intelligent summarization. Claude summarizes the conversation, retaining key decisions, code state, and current goals while discarding verbose exchanges. Use when: session is long and degrading but still in progress, and you want Claude to maintain awareness of decisions made. /compact preserves continuity; /clear is a clean slate."
+        },
+        {
+          id: 28,
+          question: "What are the Five Failure Patterns in Claude Code operational practice?",
+          options: {
+            A: "Syntax errors, logic errors, runtime errors, performance issues, security issues",
+            B: "Vague Prompting (no specs), Kitchen Sink Sessions (everything in one session), Infinite Exploration Spiral (unbounded research), Debugging Loop (10+ correction attempts), and Bloated Context (no /compact or session resets) — each has a specific intervention",
+            C: "Wrong model, insufficient tokens, slow internet, expired API key, rate limiting",
+            D: "Missing imports, undefined variables, null references, type mismatches, async errors"
+          },
+          correct: "B",
+          explanation: "Five Failure Patterns with interventions: 1) Vague Prompting — fix with Interview Pattern or SDD spec. 2) Kitchen Sink Sessions (everything in one long session) — fix with task decomposition and /clear between tasks. 3) Infinite Exploration Spiral — fix by scoping exploration narrowly and using subagents for research. 4) Debugging Loop (same error cycling 10+ times) — fix with /compact, human root cause diagnosis, then targeted fresh session. 5) Bloated Context — fix with /compact or Golden Reset before precision degrades. Each pattern has a recognizable signature and a specific intervention."
+        },
+        {
+          id: 29,
+          question: "What does the --continue flag do versus the --resume flag in Claude Code?",
+          options: {
+            A: "--continue resumes from the last checkpoint; --resume continues from the last message",
+            B: "--continue automatically continues the most recent conversation session (non-interactive, no prompting); --resume shows a session picker letting you choose which previous session to return to — use --continue for scripted automation, --resume when you want to select a specific prior session",
+            C: "They are identical — both resume the last session",
+            D: "--continue is for files; --resume is for conversations"
+          },
+          correct: "B",
+          explanation: "--continue vs. --resume: --continue automatically attaches to the most recent conversation without any interactive prompting — useful in scripts, CI/CD pipelines, or when you definitively want the last session. --resume opens a session picker, displaying available recent sessions with timestamps and summaries, letting you choose which to return to — useful when you have multiple parallel work streams or want to return to a session from earlier in the week. Both flags restore conversation context; the difference is whether the selection is automatic (--continue) or interactive (--resume)."
+        },
+        {
+          id: 30,
+          question: "What is the session initialization protocol and why is it the highest-leverage operational practice?",
+          options: {
+            A: "Typing 'hello' to verify Claude is responsive before starting work",
+            B: "At session start, Claude reads CLAUDE.md (project context and conventions), scans recent git log (what changed recently), and checks active progress files (ongoing tasks) — this 2-minute investment ensures every subsequent response is informed by project reality rather than working from scratch",
+            C: "Installing the latest version of Claude Code before each session",
+            D: "Setting up environment variables and API keys at the start of each session"
+          },
+          correct: "B",
+          explanation: "Session initialization protocol is highest-leverage because all subsequent decisions in a session depend on project context. Without it: Claude suggests approaches that violate established conventions, duplicates recently-completed work, misses constraints documented in CLAUDE.md. The 2-minute protocol: READ CLAUDE.md (project overview, tech stack, conventions, key commands, important notes) → SCAN git log --oneline -10 (recent changes and their messages) → CHECK any active progress files (current task status, stopping points). This converts P5 file investments into session-start value — all the work put into CLAUDE.md only pays off when Claude actually reads it."
         }
       ]
     },
@@ -2217,6 +3177,126 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "Assessment Rubric levels: Recognizer (can name) → Applier (can use for simple tasks) → Proficient (applies consistently, sometimes rigidly) → Agent Architect (selects appropriate subset per task) → Master Director (fluid, contextual, automatic). The checklist developer is Proficient: they apply correctly but rigidly, treating every task as requiring all 7. Agent Architect: 'This null check is low-risk, only P3 applies.' Master Director: doesn't think about it — the right principles activate situationally. The path from Proficient to Master is deliberate practice until rules become instincts."
+        },
+        {
+          id: 21,
+          question: "What is the Director's Loop and which principle does each step integrate?",
+          options: {
+            A: "A for loop that repeats until all tasks are finished",
+            B: "The cycle: You provide Intent and Context via code or spec (P2) → AI investigates via terminal (P1) → You observe rationale and actions (P7) → You approve using permission controls (P6) → AI implements in small verified steps (P4, P3) → State persists in CLAUDE.md (P5). All principles work together within the loop",
+            C: "A weekly meeting cadence for AI-assisted teams",
+            D: "The loop of prompt, response, accept, push"
+          },
+          correct: "B",
+          explanation: "Director's Loop integrates all seven principles: P2 (Code as Interface) — you specify intent in precise, machine-readable form. P1 (Bash) — AI investigates and acts via terminal. P7 (Observability) — you observe each action and rationale. P6 (Safety) — you approve using appropriate permission model. P4 (Decomposition) — AI implements in small reversible steps. P3 (Verification) — AI verifies each step before proceeding. P5 (State Persistence) — context and decisions persist in files across the loop. P1 underlies every AI action; P5 maintains continuity."
+        },
+        {
+          id: 22,
+          question: "What does treating AI as 'a junior developer with infinite energy' mean for how you direct it?",
+          options: {
+            A: "You should give AI simple tasks only, since juniors cannot handle complex work",
+            B: "The AI can do enormous amounts of work without fatigue, but needs clear direction, domain context it lacks, guardrails it would not think to apply, and verification it might skip — your job is to provide institutional knowledge and judgment, not just tasks",
+            C: "Junior developers should supervise AI to ensure quality",
+            D: "AI needs more rest breaks than senior developers"
+          },
+          correct: "B",
+          explanation: "The junior developer analogy: infinite energy means the AI will keep working tirelessly on whatever you direct it to do. But like a talented junior, it lacks your institutional knowledge (why things are the way they are), domain context (what this codebase is for), judgment about edge cases (what could go wrong in production), and self-imposed safety checks (when to pause and verify). Your directorial value is providing exactly what the junior lacks: context, constraints, judgment calls, and verification criteria. Energy without direction produces a lot of the wrong work very efficiently."
+        },
+        {
+          id: 23,
+          question: "When selecting principles for a 'new feature development' task, which set is most critical?",
+          options: {
+            A: "P1 and P7 only — execute and observe",
+            B: "P2 (define the interface and tests before implementation), P4 (decompose into verifiable phases), P3 (verify each phase before the next), P6 (safety controls for data or external integrations), with P5 for persisting architecture decisions",
+            C: "P6 and P5 only — safety and documentation are most important",
+            D: "All seven with equal weight always"
+          },
+          correct: "B",
+          explanation: "New feature development activates: P2 (Code as Interface) — design the public interface or write tests before implementation, ensuring the feature is built from consumer need. P4 (Decomposition) — break into phases (schema → logic → API → UI → tests), each independently committable. P3 (Verification) — verify each phase before starting the next. P6 (Safety) — if the feature touches payment data, user data, or external services, apply appropriate controls. P5 (State) — persist architecture decisions to CLAUDE.md for future sessions. Principle selection is calibrated to task type, not applied uniformly."
+        },
+        {
+          id: 24,
+          question: "What is the Workflow 1 Debug Template and what makes it effective?",
+          options: {
+            A: "A script that automatically finds and fixes all bugs",
+            B: "A structured debugging sequence: tell Claude the symptom and suspected area, enter Plan Mode for root cause analysis (read-only), review the diagnosis, switch to Normal Mode for targeted fix, verify the fix with the specific failing test or scenario, commit the fix with a message explaining root cause and resolution",
+            C: "A template for writing bug reports to the development team",
+            D: "A debugging checklist that all developers must follow"
+          },
+          correct: "B",
+          explanation: "Workflow 1 Debug Template effectiveness: starting in Plan Mode for root cause analysis prevents the Debugging Loop anti-pattern (making changes before understanding the cause). Review the diagnosis before implementing ensures you agree with Claude's root cause identification. Targeted fix in Normal Mode addresses the specific cause rather than guessing. Specific test verification (the test that was failing, not the entire suite) confirms the exact issue is resolved. Commit message with root cause teaches future maintainers. The sequence: understand before fix, verify after fix, document what was learned."
+        },
+        {
+          id: 25,
+          question: "In the Feature Development Template (Workflow 2), what happens in the PLAN phase specifically?",
+          options: {
+            A: "Claude writes all the code and presents it for review",
+            B: "In Plan Mode, Claude designs the implementation approach — file structure, data model, interface design, and ordered implementation steps — you review and correct the plan before any code is written, because fixing a plan is cheaper than fixing implemented code",
+            C: "You write the plan yourself and give it to Claude",
+            D: "Claude and you vote on the best approach simultaneously"
+          },
+          correct: "B",
+          explanation: "Feature Development Template PLAN phase: in Plan Mode (read-only, no side effects), Claude analyzes existing code patterns, proposes file structure, designs the data model or interface, and produces an ordered implementation plan. You review and correct BEFORE any code is written. Common corrections: 'Use the existing UserService pattern, not a new class,' 'The interface should match our REST conventions,' 'Do phase 3 before phase 2 to avoid migration issues.' Every correction at plan time saves multiples of that time at implementation time — plans are cheap to change, code is expensive."
+        },
+        {
+          id: 26,
+          question: "What should you do when Template 1b (Fix Bug) fails — when Claude cannot find or fix the root cause?",
+          options: {
+            A: "Try a completely different AI tool",
+            B: "Treat the failure as information: what did Claude find? What hypotheses did it test? Use those findings to narrow the search yourself, then re-engage Claude with a more specific hypothesis ('The bug is in the auth middleware, specifically the token expiry check — investigate that')",
+            C: "Accept the bug as unfixable and document it",
+            D: "Roll back to the previous version and stop"
+          },
+          correct: "B",
+          explanation: "Failure is information: when Claude cannot find the bug, its failed hypotheses tell you what it is NOT. The failed diagnostic session has value: what files did it read? What patterns did it check? What error messages appeared? Use this narrowing information to either (a) provide a more targeted hypothesis ('Focus only on the JWT validation logic, ignore everything else'), or (b) do targeted human investigation in the area Claude explored, then bring specific findings back. Re-engagement with a specific hypothesis from a failed general search is far more efficient than another general search."
+        },
+        {
+          id: 27,
+          question: "What is the central role of P1 (Bash as the Interface) within the Director's Loop?",
+          options: {
+            A: "P1 is optional — Claude can work without terminal access",
+            B: "P1 underlies every AI action in the Director's Loop — all investigation, verification, and implementation happens through terminal commands (git, grep, npm test, ls), making P1 the operational foundation that all other principles depend on for execution",
+            C: "P1 is only used during the IMPLEMENT phase",
+            D: "P1 replaces the need for an IDE or text editor"
+          },
+          correct: "B",
+          explanation: "P1 is the execution substrate: every step in the Director's Loop depends on terminal access. P7 (Observability) reads logs via terminal. P3 (Verification) runs tests via terminal. P4 (Decomposition) commits via git. P6 (Safety) uses git status, git diff, and git checkout via terminal. P5 (State) reads and writes files via terminal. Without P1 (terminal access), the other principles have no mechanism for execution. The terminal is not just one tool — it is the medium through which all AI agency operates."
+        },
+        {
+          id: 28,
+          question: "What integration challenge makes applying all seven principles simultaneously difficult in practice?",
+          options: {
+            A: "The principles contradict each other in most scenarios",
+            B: "Each principle adds overhead (specs, planning, verification, checkpoints, approvals, logs) that must be right-sized to task complexity — over-applying all seven to every change creates friction that slows work, while under-applying them to complex changes creates risk",
+            C: "There are too many principles to remember at once",
+            D: "The principles only work for certain programming languages"
+          },
+          correct: "B",
+          explanation: "The integration challenge is calibration: all seven principles have overhead costs. Applying full SDD specs, Plan Mode, atomic decomposition, parallel verification, permission controls, activity log review, and persistent state files to a one-line config change is over-engineering. Applying none of them to a complex multi-service database migration is under-engineering. The skill of 'Putting It All Together' is judgment: which principles apply at what depth to this specific task? That judgment — not memorizing the principles — is what separates Proficient from Master Director."
+        },
+        {
+          id: 29,
+          question: "How does the Director's Loop change between a 'simple bug fix' and a 'multi-service feature'?",
+          options: {
+            A: "The loop is always identical regardless of task complexity",
+            B: "For a simple bug fix, the loop may be one iteration (investigate, targeted fix, verify, commit) with only P1, P3, P7 active. For a multi-service feature, the loop runs multiple iterations across multiple phases with all seven principles active — the loop scales in iteration count and principle depth with task complexity",
+            C: "Multi-service features skip P6 to move faster",
+            D: "Simple bugs require more principles than complex features"
+          },
+          correct: "B",
+          explanation: "Director's Loop scaling: simple bug — one loop iteration: P1 (investigate with terminal), P7 (trace through logs), P3 (run the specific failing test), commit. Multi-service feature — multiple loop iterations across decomposed phases: P2 (design interface first), P4 (phase 1: schema → phase 2: service → phase 3: API → phase 4: tests), P3 (verify each phase), P6 (approve database schema change), P5 (persist decisions to CLAUDE.md), P7 (checkpoint summaries between phases). The same loop, scaled to task. Recognizing the appropriate scale is the Director's core judgment."
+        },
+        {
+          id: 30,
+          question: "What is the ultimate measure of 'Putting It All Together' mastery?",
+          options: {
+            A: "Being able to recite all seven principles from memory without notes",
+            B: "Starting a task and having the right principles activate automatically based on task type — specs emerge for complex features, verification runs before commits, safety controls engage for irreversible operations — without consciously thinking 'I should apply P2 now'",
+            C: "Always applying all seven principles to every task regardless of complexity",
+            D: "Achieving 100 percent test coverage on all AI-generated code"
+          },
+          correct: "B",
+          explanation: "Master Director mastery is internalization, not memorization. At the recognizer level, you name principles when asked. At the applier level, you use them when reminded. At proficient level, you apply them consistently but consciously. At Master Director level, principles activate automatically: you open a new feature and naturally reach for interface design (P2 activates). You see a delete command and naturally pause to confirm (P6 activates). You finish a session and naturally write a summary (P7 activates). The principles are no longer rules you follow — they are the way you think about AI collaboration."
         }
       ]
     },
@@ -2463,6 +3543,126 @@ export const chapter17: Chapter = {
           },
           correct: "B",
           explanation: "Master-level application: principles activate contextually, not universally. Research task (read-only API analysis): P1 = critical (run actual API calls, don't speculate about responses). P3 = critical (verify analysis conclusions are accurate). P7 = helpful (know what's been analyzed). P2 = N/A (no code interface). P4 = N/A (nothing to commit). P5 = conditional (update CLAUDE.md only if findings change project approach). P6 = relaxed (read-only operations have no irreversibility). This is Master Director fluency: applying the minimum necessary principles for the task type. The framework serves the work; the work doesn't serve the framework."
+        },
+        {
+          id: 21,
+          question: "Exercise: Applying All 7 Principles. You are building a user notification system. In which order should you activate the seven principles, and why does that order matter?",
+          options: {
+            A: "The order does not matter — apply them all simultaneously",
+            B: "P2 first (design the notification interface and write tests) → P4 (decompose into email, SMS, push phases) → P5 (add notification constraints to CLAUDE.md) → P6 (identify approval gates for external service calls) → P7 (set visibility checkpoints per phase) → P1 (execute with terminal commands) → P3 (verify each phase with tests). Order matters because later principles depend on decisions made by earlier ones",
+            C: "P6 first always, then the rest in any order",
+            D: "P1 first (start coding) and add other principles if problems arise"
+          },
+          correct: "B",
+          explanation: "Principle sequencing matters: P2 first because the interface design drives all subsequent implementation choices. P4 before implementation because you need the decomposition plan before starting. P5 early because project context needs to be established before Claude starts working. P6 before execution because you need approval gates in place before reaching irreversible operations. P7 before execution because visibility contracts are defined upfront. P1 during execution because terminal is the execution mechanism. P3 after each phase because verification confirms the phase worked. Starting with P1 (coding first) means discovering design problems after they are built, not before."
+        },
+        {
+          id: 22,
+          question: "Exercise: Identifying Violated Principles. A team reports: 'We give Claude large tasks, it works for 30 minutes, then we accept whatever it produces without testing. Last week it broke production.' Which principles were violated?",
+          options: {
+            A: "Only P1 was violated — they should use the terminal more",
+            B: "P4 (tasks too large, not decomposed into verifiable steps), P3 (no verification before accepting — 'accept whatever it produces'), P6 (no approval gate before production deployment), P7 (30 minutes of invisible work, no activity log review). All four violations compounded into a production incident",
+            C: "Only P7 — they should watch Claude work in real time",
+            D: "P2 only — the tasks were not specified precisely enough"
+          },
+          correct: "B",
+          explanation: "Root cause analysis via principles: P4 violated — large 30-minute tasks have no intermediate checkpoints. P3 violated — 'accept whatever it produces' means zero verification. P6 violated — no approval gate before production deployment. P7 violated — 30 minutes of unobserved work with no activity log review. The incident is a compound failure: each violated principle would have been a safety layer. With all four missing, one bad output went straight from Claude to production. The fix: P4 (decompose into 5-minute verifiable steps), P3 (verify each), P6 (require approval for deployments), P7 (review activity logs before accepting)."
+        },
+        {
+          id: 23,
+          question: "Exercise: Implementing P1 (Bash as the Interface). Your team currently uses Claude to write code but never uses it to run terminal commands. What specific P1 practice changes would have the highest impact?",
+          options: {
+            A: "Give Claude a bigger context window so it can see more code",
+            B: "Teach Claude to use terminal for investigation: grep for error messages, git log to see recent changes, npm test to run specific tests, ls to verify file structure. P1 turns Claude from a code writer into an active investigator that grounds its reasoning in actual system state rather than assumptions",
+            C: "Give Claude access to the database directly",
+            D: "Have Claude write shell scripts instead of code"
+          },
+          correct: "B",
+          explanation: "P1 implementation for maximum impact: the shift from 'Claude writes code' to 'Claude investigates via terminal' is qualitative. Without P1, Claude reasons about your codebase from what you tell it — subject to your omissions and misremembrances. With P1, Claude reads the actual files (cat), checks actual test results (npm test), searches actual error patterns (grep), and sees actual recent history (git log). Every P1 terminal command grounds Claude's reasoning in ground truth. High-impact P1 practices: grep for errors, git log for context, run the specific failing test, ls to verify file existence."
+        },
+        {
+          id: 24,
+          question: "Exercise: Implementing P5 (Persisting State in Files). Your current workflow: each Claude session starts from scratch. Three sessions have rebuilt the same context. What specific P5 artifacts would eliminate this redundancy?",
+          options: {
+            A: "Copy and paste the previous session's chat into the new one",
+            B: "CLAUDE.md with project overview, tech stack, conventions, key commands, and current focus. One ADR per significant architectural decision made. A progress.md file updated at each session end with: what was completed, current state, and next steps. These three artifacts make each new session as informed as the last one",
+            C: "A detailed README that describes the entire codebase",
+            D: "A shared Slack channel where session summaries are posted"
+          },
+          correct: "B",
+          explanation: "P5 artifact design for eliminating context rebuilding: CLAUDE.md answers 'what is this project and how do we work?' — permanent project memory that does not change session to session. ADRs answer 'why did we make this architectural choice?' — decision history that prevents re-debate. Progress file answers 'where are we right now?' — the session handoff document. Together they cost approximately 5 minutes to maintain per session and eliminate 10-20 minutes of context rebuilding. The key discipline: always update the progress file before ending a session."
+        },
+        {
+          id: 25,
+          question: "Exercise: Writing a CLAUDE.md for P5. A project has: TypeScript/Next.js frontend, Node.js/Express backend, PostgreSQL database, strict ESLint rules, and a rule that all API routes must be versioned. What are the most critical elements to include in CLAUDE.md?",
+          options: {
+            A: "The complete source code of the most important files",
+            B: "Tech stack summary, the api versioning rule ('all routes must use /v1/ prefix'), ESLint config location, key commands (dev server, test runner, build), database connection pattern, and any AI-specific instructions ('always check ESLint rules before suggesting code'). Keep under 60 lines",
+            C: "A copy of the ESLint configuration file",
+            D: "Links to all the official documentation for each technology"
+          },
+          correct: "B",
+          explanation: "CLAUDE.md for this project: Tech stack (TypeScript, Next.js, Node/Express, PostgreSQL — Claude knows how to work with these). Critical constraint: 'All API routes must use /v1/ prefix' — without this, Claude will generate unversioned routes every time. ESLint config location — so Claude can check rules before suggesting code. Key commands (npm run dev, npm test, npm run build) — so Claude can run them without asking. Database connection pattern (which ORM, connection string format). Keep under 60 lines — everything else goes in skills or ADRs. The test: would a new Claude session immediately produce correct, convention-following code after reading this?"
+        },
+        {
+          id: 26,
+          question: "Exercise: Connecting P3 and P7. Explain how P3 (Verification) and P7 (Observability) work together and where they differ.",
+          options: {
+            A: "P3 and P7 are identical — verification IS observability",
+            B: "P7 (Observability) makes Claude's actions visible so you can see what it did and catch problems in real time. P3 (Verification) confirms that the outcome is correct after actions complete. P7 is the 'watching while it happens' principle; P3 is the 'checking after it happened' principle. Both are needed: P7 without P3 means you watched but never confirmed correctness; P3 without P7 means you checked the end result but could not debug when it fails",
+            C: "P3 is for code; P7 is for infrastructure",
+            D: "P7 replaces P3 — if you observe everything, you do not need to verify"
+          },
+          correct: "B",
+          explanation: "P3 and P7 synergy: P7 (Observability) is the real-time layer — you see Claude's actions as they happen (Read, Edit, Run), which enables intervention. P3 (Verification) is the confirmation layer — after Claude says it is done, you run the specific test, check the output, or reproduce the scenario to confirm correctness. P7 catches wrong direction mid-execution. P3 catches wrong outcome post-execution. A session with P7 but no P3: you watched everything but never confirmed it worked — trust is assumed. A session with P3 but no P7: you confirmed the final result but could not debug failures because you could not see what Claude did. Both layers are essential."
+        },
+        {
+          id: 27,
+          question: "Exercise: 'Junior Developer with Infinite Energy' Model. What does this model imply about HOW you should write prompts and task assignments?",
+          options: {
+            A: "Keep prompts short because the junior is smart enough to figure out the rest",
+            B: "Write prompts that provide what a talented junior would need: explicit success criteria ('how do I know this is done?'), relevant constraints ('follow the existing UserService pattern'), scope boundaries ('only touch auth.ts, not the middleware'), and what NOT to do ('do not create a new database connection — use the existing pool'). The junior has energy but not your institutional knowledge",
+            C: "Write very long prompts covering every possible scenario",
+            D: "Always use technical jargon because juniors need to learn the terminology"
+          },
+          correct: "B",
+          explanation: "Junior developer model implies prompt design: a talented junior with infinite energy but no institutional knowledge needs: explicit success criteria (they need to know what done looks like), constraint specification (they will follow conventional patterns unless told otherwise — tell them your specific conventions), scope definition (they will explore beyond the task unless bounded — give them clear limits), and negative examples (tell them what NOT to do based on common mistakes). The junior is eager and capable — your job is information transfer. Everything you omit, they guess at; everything you specify, they follow."
+        },
+        {
+          id: 28,
+          question: "Exercise: Recognizing Anti-Patterns. A developer says: 'I just tell Claude what I want and accept what it gives me. It works fine.' What anti-patterns might be hidden in this workflow?",
+          options: {
+            A: "No anti-patterns — if it works, the approach is correct",
+            B: "Vague Prompting (no specs or success criteria), Black Box Acceptance (no activity log review, trusting 'Done!' without verification), Verification Skipping (no tests run before acceptance), and missing P5 (no CLAUDE.md so each session rebuilds context). 'Works fine' may mean 'has not catastrophically failed yet' — anti-patterns accumulate technical debt silently until an incident reveals them",
+            C: "Only Vague Prompting — the other principles are optional",
+            D: "This approach is optimal — adding principles creates unnecessary overhead"
+          },
+          correct: "B",
+          explanation: "'Seems to work' is not the same as 'is working well.' Hidden anti-patterns: Vague Prompting — 'what I want' without success criteria means Claude guesses; sometimes it guesses right. Black Box Acceptance — no log review means unnoticed unexpected actions (Claude deleted a file you did not ask about). Verification Skipping — untested changes accumulate until a production incident. Missing P5 — context rebuilding costs accumulate invisibly. The developer is not in crisis yet, but each session adds un-reviewed changes. The moment of discovery is typically a production incident or a 'why does this not work?' session that traces back to an unverified change made weeks ago."
+        },
+        {
+          id: 29,
+          question: "Exercise: The /clear Habit. Why should /clear (or Golden Reset) be a deliberate habit rather than a last resort?",
+          options: {
+            A: "/clear is only needed when Claude makes errors — avoid it in good sessions",
+            B: "Proactive /clear between tasks (not just when things break) keeps context clean, prevents Debuggin Loop accumulation, ensures each task starts with full context budget rather than leftover noise from previous tasks, and forms the habit of task-based sessions rather than one long infinite session",
+            C: "/clear is a last resort because it loses all session history",
+            D: "Only use /clear when Claude becomes confused — good sessions should run continuously"
+          },
+          correct: "B",
+          explanation: "/clear as proactive habit: reactive /clear (only when things break) means you have already accumulated noise, potentially run into the Rule of Two, and are restarting in a degraded state. Proactive /clear between tasks means: each task starts with a clean, full context budget. No leftover correction attempts from the previous task influence the current one. Sessions stay focused because each has a single clear objective. P5 (CLAUDE.md, progress files) provides continuity across clears — you lose the conversation but not the project knowledge. The habit: when one task completes and a new one begins, /clear and re-read CLAUDE.md."
+        },
+        {
+          id: 30,
+          question: "Exercise: The Compounding Effect. After 6 months of applying all 7 principles consistently, what systemic improvements should you observe in your AI collaboration quality?",
+          options: {
+            A: "Only speed improvement — the same quality of output, produced faster",
+            B: "Compounding improvements: CLAUDE.md accumulates project knowledge making each session smarter than the last (P5). ADRs eliminate re-debate of settled decisions (P5). Trust calibration means appropriate autonomy for each task type (P6). Debugging loops become rare as verification habits catch issues early (P3, P7). Large tasks decompose naturally reducing risk (P4). The principles reinforce each other — better context enables better verification, which enables more autonomy, which enables more ambitious tasks",
+            C: "Diminishing returns — principles only help in the first few months",
+            D: "No systemic improvement — each session is independent regardless of habits"
+          },
+          correct: "B",
+          explanation: "Compounding principle effects over 6 months: P5 compounds directly — every session adds to CLAUDE.md and ADRs, making the project knowledge base more comprehensive. P6 compounds through Trust Gradualism — demonstrated reliability expands the autonomy envelope over time. P3 habits compound by catching bugs earlier and earlier in the development cycle. P4 decomposition habits compound by making rollback cheaper and faster. P7 observation habits compound by building a rich audit trail that accelerates debugging. The principles reinforce each other: better P5 context enables more accurate P2 specs, which enable more confident P6 autonomy grants, which enable more ambitious P4 decompositions. At 6 months, each principle amplifies all the others."
         }
       ]
     }
