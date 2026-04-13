@@ -28,7 +28,7 @@ export default function HomePage() {
         <div className="relative max-w-5xl mx-auto px-6 py-20 text-center">
           <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/25 rounded-full px-4 py-1.5 text-sm text-indigo-300 mb-8">
             <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse inline-block" />
-            Panaversity · General Agents Foundations · Part 1
+            Panaversity · General Agents Foundations · Parts 1 &amp; 5
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-5 text-white tracking-tight">
             AgentFactory{" "}
@@ -118,7 +118,7 @@ export default function HomePage() {
       </div>
 
       <footer className="border-t border-slate-800/60 py-6 text-center text-slate-600 text-sm">
-        Panaversity · AgentFactory MCQ Prep · Chapters 12–17
+        Panaversity · AgentFactory MCQ Prep · Chapters 12–17 &amp; 56–60
       </footer>
     </main>
   );

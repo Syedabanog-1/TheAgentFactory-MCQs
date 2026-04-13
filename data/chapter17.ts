@@ -72,7 +72,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 6,
-          question: "Scenario: You ask Claude Code to debug an API returning 500 errors. Claude responds: 'The issue is likely in the authentication middleware — the token validation logic looks problematic.' No commands were run. What is the limitation of this response?",
+          question: "You ask Claude Code to debug an API returning 500 errors. Claude responds: 'The issue is likely in the authentication middleware — the token validation logic looks problematic.' No commands were run. What is the limitation of this response?",
           options: {
             A: "Claude should have asked more clarifying questions before answering",
             B: "Without Bash execution, Claude is speculating from static code inspection — not verified system state. Running `tail -f logs/error.log` or `curl -v /api/endpoint` would provide ground truth",
@@ -84,7 +84,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 7,
-          question: "Scenario: A team uses an AI coding assistant that can only suggest code (no terminal access). They ask it to set up project dependencies. The AI generates a perfect package.json. Two hours later, the developer reports 3 packages fail to install due to version conflicts. Could the AI have caught this?",
+          question: "A team uses an AI coding assistant that can only suggest code (no terminal access). They ask it to set up project dependencies. The AI generates a perfect package.json. Two hours later, the developer reports 3 packages fail to install due to version conflicts. Could the AI have caught this?",
           options: {
             A: "Yes — AI should have checked npm's compatibility matrix in its training data",
             B: "No — without terminal access, the AI cannot run `npm install` and observe the actual conflict errors. It can only generate plausible configuration, not verify it works",
@@ -96,7 +96,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 8,
-          question: "Scenario: You need to verify a database migration ran successfully. Tool A (no terminal) says: 'The migration script looks syntactically correct and should have applied.' Tool B (Bash access) responds differently. What does Tool B do that Tool A cannot?",
+          question: "You need to verify a database migration ran successfully. Tool A (no terminal) says: 'The migration script looks syntactically correct and should have applied.' Tool B (Bash access) responds differently. What does Tool B do that Tool A cannot?",
           options: {
             A: "Tool B generates more detailed documentation about the migration",
             B: "Tool B runs `psql -c '\\dt'` to list actual tables, checks migration logs, and queries the schema_migrations table — confirming the migration's effect on the real database",
@@ -108,7 +108,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 9,
-          question: "Scenario: Your Node.js version is causing compatibility issues. Claude has terminal access. It runs `node --version` (returns v16.14.0), then checks `.nvmrc` (requires v18), then runs `nvm use 18`. What principle is demonstrated and why is this better than Claude just telling you the version requirements?",
+          question: "Your Node.js version is causing compatibility issues. Claude has terminal access. It runs `node --version` (returns v16.14.0), then checks `.nvmrc` (requires v18), then runs `nvm use 18`. What principle is demonstrated and why is this better than Claude just telling you the version requirements?",
           options: {
             A: "Principle 5 — Claude is persisting version requirements to a file",
             B: "Principle 1 — Claude is using Bash to observe actual system state (v16 installed vs. v18 required) and take corrective action, rather than speculating about what might be wrong",
@@ -120,7 +120,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 10,
-          question: "Scenario: You're comparing two AI tools for deploying a Docker container. Tool A (web interface): generates Dockerfile and docker-compose.yml, explains each line. Tool B (Claude Code with terminal): same generation capability plus Bash access. For a production deployment task, what critical capability gap exists?",
+          question: "You're comparing two AI tools for deploying a Docker container. Tool A (web interface): generates Dockerfile and docker-compose.yml, explains each line. Tool B (Claude Code with terminal): same generation capability plus Bash access. For a production deployment task, what critical capability gap exists?",
           options: {
             A: "Tool A generates better-documented Dockerfiles",
             B: "Tool B can run `docker build`, observe build errors, fix them, run `docker run`, check container logs, verify the service responds — completing the full deployment loop without human relay",
@@ -132,7 +132,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: You ask Claude to investigate why your Node.js application is consuming 100% CPU. Claude responds: 'The issue might be an infinite loop in your event handlers or excessive logging.' No commands were run. What should you instruct Claude to do instead?",
+          question: "You ask Claude to investigate why your Node.js application is consuming 100% CPU. Claude responds: 'The issue might be an infinite loop in your event handlers or excessive logging.' No commands were run. What should you instruct Claude to do instead?",
           options: {
             A: "Ask Claude to review the code more carefully",
             B: "Tell Claude to use Bash: run `top` or `htop` to identify the process, `strace -p <PID>` to trace system calls, and `node --prof` to generate a CPU profile — observing actual system state instead of speculating",
@@ -144,7 +144,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: Your CI/CD pipeline is failing but the tests pass locally. Tool A (no terminal) says: 'Check if the Node versions match.' Tool B (Bash access) responds differently. What does Tool B do that Tool A cannot?",
+          question: "Your CI/CD pipeline is failing but the tests pass locally. Tool A (no terminal) says: 'Check if the Node versions match.' Tool B (Bash access) responds differently. What does Tool B do that Tool A cannot?",
           options: {
             A: "Tool A gives better advice",
             B: "Tool B runs `node --version` locally, checks the CI configuration file for the Node version, runs `npm ci` in a clean environment to reproduce the CI failure locally, and identifies the exact version mismatch",
@@ -156,7 +156,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: You're setting up a new project and need to install 15 npm packages. Claude has terminal access. It runs `npm install`, observes peer dependency conflicts, searches for compatible versions with `npm view <package> peerDependencies`, updates package.json, re-runs `npm install`, and confirms success. What principle does this demonstrate?",
+          question: "You're setting up a new project and need to install 15 npm packages. Claude has terminal access. It runs `npm install`, observes peer dependency conflicts, searches for compatible versions with `npm view <package> peerDependencies`, updates package.json, re-runs `npm install`, and confirms success. What principle does this demonstrate?",
           options: {
             A: "Principle 2 — Code as Universal Interface",
             B: "Principle 1 — Bash as the key: Claude executed commands, observed real conflict errors, searched for solutions, applied fixes, and verified the outcome — closing the action-result feedback loop",
@@ -168,7 +168,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: A developer asks Claude to 'check if the database migration ran successfully.' Claude without terminal access says: 'The migration script looks syntactically correct.' Claude with terminal access does something different. What's the critical difference?",
+          question: "A developer asks Claude to 'check if the database migration ran successfully.' Claude without terminal access says: 'The migration script looks syntactically correct.' Claude with terminal access does something different. What's the critical difference?",
           options: {
             A: "No difference — both approaches are equally reliable",
             B: "Claude with terminal access runs `psql -c '\\dt'` to list actual tables, queries `schema_migrations` to check migration history, and reviews application logs — confirming the migration's effect on the real database, not just the script's syntax",
@@ -180,7 +180,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: Your application's API endpoint is returning 500 errors. Claude has terminal access. It runs `curl -v http://localhost:3000/api/data`, observes the error response, checks `tail -f logs/error.log` for the stack trace, identifies a missing environment variable, adds it to `.env`, restarts the server, and re-runs curl to confirm 200 OK. What capability did Bash access provide?",
+          question: "Your application's API endpoint is returning 500 errors. Claude has terminal access. It runs `curl -v http://localhost:3000/api/data`, observes the error response, checks `tail -f logs/error.log` for the stack trace, identifies a missing environment variable, adds it to `.env`, restarts the server, and re-runs curl to confirm 200 OK. What capability did Bash access provide?",
           options: {
             A: "Code generation",
             B: "The ability to investigate, diagnose, fix, and verify in a single autonomous loop — observing actual HTTP responses and error logs rather than speculating about what might be wrong",
@@ -192,7 +192,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 16,
-          question: "Scenario: You ask Claude to optimize your application's slow query. Without Bash access, it says 'The query at line 47 looks inefficient — try adding an index on user_id.' With Bash access, Claude takes a different approach. What does the Bash-enabled Claude do that directly demonstrates P1?",
+          question: "You ask Claude to optimize your application's slow query. Without Bash access, it says 'The query at line 47 looks inefficient — try adding an index on user_id.' With Bash access, Claude takes a different approach. What does the Bash-enabled Claude do that directly demonstrates P1?",
           options: {
             A: "Claude writes a more detailed explanation of why indexes help",
             B: "Claude runs `EXPLAIN ANALYZE` on the actual query, observes the actual execution plan and timing, identifies that the bottleneck is a full table scan on a 10-million-row table, creates the index, runs EXPLAIN ANALYZE again to confirm the query now uses the index and went from 8s to 50ms.",
@@ -204,7 +204,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 17,
-          question: "Scenario: A team uses an AI assistant without terminal access for their CI/CD pipeline setup. Builds keep failing with 'npm: command not found.' The AI offers 5 different explanations over 3 sessions. With Bash access, what single command would have resolved this in the first session?",
+          question: "A team uses an AI assistant without terminal access for their CI/CD pipeline setup. Builds keep failing with 'npm: command not found.' The AI offers 5 different explanations over 3 sessions. With Bash access, what single command would have resolved this in the first session?",
           options: {
             A: "npm install --global",
             B: "`which npm` or `node --version` — observing actual system state (whether npm exists and where) immediately distinguishes between 'npm not installed,' 'npm not in PATH,' or 'wrong Node version.' Ground truth replaces 5 hypotheses with one observation.",
@@ -216,7 +216,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 18,
-          question: "Scenario: You're deploying a microservice and the health check keeps failing. Claude (with Bash) runs `curl -v http://localhost:8080/health` and gets `Connection refused`. It then runs `ps aux | grep node` and sees no matching process. What principle is being applied and what does this demonstrate?",
+          question: "You're deploying a microservice and the health check keeps failing. Claude (with Bash) runs `curl -v http://localhost:8080/health` and gets `Connection refused`. It then runs `ps aux | grep node` and sees no matching process. What principle is being applied and what does this demonstrate?",
           options: {
             A: "Principle 3 — Claude is verifying the service works",
             B: "Principle 1 — Claude is using Bash to observe actual system state (connection refused = service not running, confirmed by process list showing no node process). Ground truth from commands eliminates guessing about what's wrong with the deployment.",
@@ -228,7 +228,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 19,
-          question: "Scenario: An AI tool without terminal access helps a developer set up a Redis cache integration. It generates perfect-looking connection code. Three hours later, the developer reports Redis connections are timing out in production. What limitation of the code-generation-only approach caused this?",
+          question: "An AI tool without terminal access helps a developer set up a Redis cache integration. It generates perfect-looking connection code. Three hours later, the developer reports Redis connections are timing out in production. What limitation of the code-generation-only approach caused this?",
           options: {
             A: "The AI generated incorrect Redis commands",
             B: "Without Bash, the AI couldn't run `redis-cli ping` to confirm Redis is reachable, `redis-cli --stat` to check connection limits, or test the actual connection with the generated code. It generated syntactically correct code that may fail due to network, auth, or config issues only discoverable at runtime.",
@@ -240,7 +240,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 20,
-          question: "Scenario: You want to give Claude the best conditions to apply Principle 1 effectively. Your colleague suggests 'just give Claude read-only file access — it doesn't need to run commands.' What is wrong with this suggestion?",
+          question: "You want to give Claude the best conditions to apply Principle 1 effectively. Your colleague suggests 'just give Claude read-only file access — it doesn't need to run commands.' What is wrong with this suggestion?",
           options: {
             A: "Read-only access is dangerous",
             B: "Read-only file access removes the execution capability that defines P1's value. Without running commands, Claude can only read static files — it cannot run tests to verify behavior, execute queries to check database state, make HTTP requests to observe API responses, or run processes to confirm they start. File reading is observation of code; Bash access is observation of running systems.",
@@ -438,7 +438,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 6,
-          question: "Scenario: You ask Claude to 'add pagination to the user list.' It implements offset-based pagination, but you needed cursor-based. The feature ships and causes performance problems at scale. What Principle 2 practice would have prevented this miscommunication?",
+          question: "You ask Claude to 'add pagination to the user list.' It implements offset-based pagination, but you needed cursor-based. The feature ships and causes performance problems at scale. What Principle 2 practice would have prevented this miscommunication?",
           options: {
             A: "You should have asked Claude to explain its approach before implementing",
             B: "Providing a test or TypeScript interface specifying cursor-based pagination — e.g., `interface PaginationResult { nextCursor: string | null; items: User[] }` — would have made the requirement unambiguous and executable",
@@ -450,7 +450,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 7,
-          question: "Scenario: Two developers give Claude the same task — 'improve the search feature.' Developer A writes prose requirements. Developer B attaches a benchmark test showing search should return results in under 100ms for 10,000 records. After implementation, whose solution is easier to objectively verify?",
+          question: "Two developers give Claude the same task — 'improve the search feature.' Developer A writes prose requirements. Developer B attaches a benchmark test showing search should return results in under 100ms for 10,000 records. After implementation, whose solution is easier to objectively verify?",
           options: {
             A: "Developer A — prose requirements are more comprehensive",
             B: "Developer B — the benchmark test provides an objective, executable criterion: either results return in <100ms or they don't. Developer A's 'improved' is subjective and impossible to verify objectively",
@@ -462,7 +462,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 8,
-          question: "Scenario: You're reviewing a Claude-generated payment processing module. There's no specification document and the feature 'looks right.' Your manager asks 'Does it handle partial refunds?' You realize you don't know. What Principle 2 artifact would have answered this question definitively?",
+          question: "You're reviewing a Claude-generated payment processing module. There's no specification document and the feature 'looks right.' Your manager asks 'Does it handle partial refunds?' You realize you don't know. What Principle 2 artifact would have answered this question definitively?",
           options: {
             A: "A detailed README explaining the module's design",
             B: "A test suite that includes a test case for partial refunds — if the test exists and passes, the feature is supported; if the test is missing, the requirement was never specified",
@@ -474,7 +474,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 9,
-          question: "Scenario: A product manager sends Claude: 'Users should be able to log in securely.' A developer applying Principle 2 intercepts this before it reaches Claude and converts it to code. What does that conversion look like?",
+          question: "A product manager sends Claude: 'Users should be able to log in securely.' A developer applying Principle 2 intercepts this before it reaches Claude and converts it to code. What does that conversion look like?",
           options: {
             A: "A longer prose description: 'The login system must be secure in all aspects'",
             B: "Tests specifying: rate limiting after 5 failed attempts, tokens expire after 24h, passwords are bcrypt-hashed, HTTPS-only endpoints, and session invalidation on logout",
@@ -486,7 +486,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 10,
-          question: "Scenario: Claude implements a new feature using a @file reference to the actual TypeScript interface vs. your colleague who describes the interface verbally in the prompt. Three sprints later, the interface changes. Whose implementation is easier to update and why?",
+          question: "Claude implements a new feature using a @file reference to the actual TypeScript interface vs. your colleague who describes the interface verbally in the prompt. Three sprints later, the interface changes. Whose implementation is easier to update and why?",
           options: {
             A: "The verbal description — it's more flexible to changing requirements",
             B: "The @file reference — the interface file is the single source of truth. When the interface file changes, the discrepancy with Claude's implementation becomes immediately visible; Claude works against the actual current definition, not a remembered description",
@@ -498,7 +498,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: You're building a REST API endpoint that returns paginated user data. You tell Claude: 'Make it support pagination.' Claude implements offset-based pagination with `?page=2&limit=20`. Later, your team realizes this breaks with large datasets because offset pagination scans all preceding rows. What P2 practice would have prevented this costly rework?",
+          question: "You're building a REST API endpoint that returns paginated user data. You tell Claude: 'Make it support pagination.' Claude implements offset-based pagination with `?page=2&limit=20`. Later, your team realizes this breaks with large datasets because offset pagination scans all preceding rows. What P2 practice would have prevented this costly rework?",
           options: {
             A: "Asking Claude to explain its pagination approach before implementing",
             B: "Providing a TypeScript interface or test specifying cursor-based pagination — e.g., `interface PaginatedResult { cursor: string | null; items: User[] }` — making the requirement unambiguous and executable from the start",
@@ -510,7 +510,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: A junior developer asks Claude to 'make the search faster.' Claude adds a debounce to the input field and reports 'Done!' The search still takes 3 seconds per query because the database query is unindexed. What P2 approach would have given Claude an unambiguous, measurable target?",
+          question: "A junior developer asks Claude to 'make the search faster.' Claude adds a debounce to the input field and reports 'Done!' The search still takes 3 seconds per query because the database query is unindexed. What P2 approach would have given Claude an unambiguous, measurable target?",
           options: {
             A: "Telling Claude to also check the database queries",
             B: "Writing a benchmark test: `expect(searchResponseTime(query)).toBeLessThan(200)` — this makes 'faster' an objective, executable criterion rather than a subjective adjective",
@@ -522,7 +522,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: Your team is migrating from JavaScript to TypeScript. Claude has been generating TypeScript code for weeks, but inconsistencies keep appearing — some files use `any`, some use `unknown`, some use implicit types. What P2 artifact would enforce consistent type usage across all AI-generated code?",
+          question: "Your team is migrating from JavaScript to TypeScript. Claude has been generating TypeScript code for weeks, but inconsistencies keep appearing — some files use `any`, some use `unknown`, some use implicit types. What P2 artifact would enforce consistent type usage across all AI-generated code?",
           options: {
             A: "A verbal reminder at the start of each session to use `unknown` instead of `any`",
             B: "A TypeScript ESLint rule banning `any` plus a test file demonstrating the expected typing patterns — making the convention both machine-enforceable and exemplified in code",
@@ -534,7 +534,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: You ask Claude to 'add error handling to the payment service.' It wraps every function in try-catch blocks and swallows all errors with `console.error`. The code 'has error handling' but errors are silently lost. What P2 specification would have prevented this over-engineered but ineffective solution?",
+          question: "You ask Claude to 'add error handling to the payment service.' It wraps every function in try-catch blocks and swallows all errors with `console.error`. The code 'has error handling' but errors are silently lost. What P2 specification would have prevented this over-engineered but ineffective solution?",
           options: {
             A: "A longer prompt describing exactly which errors to catch and how to handle each one",
             B: "Tests specifying: `expect(paymentService.charge(invalidCard)).rejects.toThrow(PaymentError)` and `expect(errorLogger).toHaveBeenCalledWith(expectedError)` — making error propagation and logging explicit, verifiable requirements",
@@ -546,7 +546,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: A product manager writes a user story: 'As a user, I want to reset my password so I can regain access to my account.' Before giving this to Claude, a developer applying P2 converts it into code. What does that conversion include?",
+          question: "A product manager writes a user story: 'As a user, I want to reset my password so I can regain access to my account.' Before giving this to Claude, a developer applying P2 converts it into code. What does that conversion include?",
           options: {
             A: "A longer user story with more technical details",
             B: "Tests specifying: POST /auth/forgot-password accepts email and sends reset link, POST /auth/reset-password validates token expiry (24h), validates password strength, hashes new password with bcrypt, invalidates all existing sessions, and returns appropriate error codes for each failure mode",
@@ -558,7 +558,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 16,
-          question: "Scenario: You ask Claude to 'implement the UserService to match the interface.' Claude implements it, but uses different parameter names and return types from what your codebase expects, causing type errors throughout. What P2 practice would have given Claude an unambiguous target?",
+          question: "You ask Claude to 'implement the UserService to match the interface.' Claude implements it, but uses different parameter names and return types from what your codebase expects, causing type errors throughout. What P2 practice would have given Claude an unambiguous target?",
           options: {
             A: "A longer prose description of the UserService",
             B: "Using `@src/types/UserService.ts` — the @file reference grounds Claude's implementation in the actual TypeScript interface definition. Claude cannot choose different parameter names or return types when working against the exact interface file.",
@@ -570,7 +570,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 17,
-          question: "Scenario: Your team is building an SDK for an internal API. Two different engineers give Claude the task 'add authentication to the API client.' One provides a test file showing the expected auth behavior; the other provides a three-paragraph prose description. Which approach produces a more reliable implementation and why?",
+          question: "Your team is building an SDK for an internal API. Two different engineers give Claude the task 'add authentication to the API client.' One provides a test file showing the expected auth behavior; the other provides a three-paragraph prose description. Which approach produces a more reliable implementation and why?",
           options: {
             A: "The prose description — more detail means better output",
             B: "The test file — it encodes the exact expected behavior as executable, verifiable code. Claude knows precisely what 'done' means: make these tests pass. The prose description allows multiple valid interpretations of 'authentication.'",
@@ -582,7 +582,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 18,
-          question: "Scenario: You tell Claude 'the CSV export should handle special characters.' Claude adds UTF-8 encoding. But your stakeholders later complain about Excel not opening the file correctly because it needs a BOM (Byte Order Mark). What P2 practice would have specified this requirement precisely?",
+          question: "You tell Claude 'the CSV export should handle special characters.' Claude adds UTF-8 encoding. But your stakeholders later complain about Excel not opening the file correctly because it needs a BOM (Byte Order Mark). What P2 practice would have specified this requirement precisely?",
           options: {
             A: "A longer description of CSV requirements",
             B: "A test: `expect(csvContent.slice(0, 3)).toEqual('\\uFEFF...')` — specifying the exact bytes that must appear at the start of the file. This makes the BOM requirement verifiable and unambiguous, rather than buried in the ambiguous phrase 'handle special characters.'",
@@ -594,7 +594,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 19,
-          question: "Scenario: A team writes comprehensive tests for their authentication module. Claude implements authentication against these tests, and all tests pass. Six months later, a security audit finds the implementation stores JWT secrets in environment variables but the tests never checked secret storage. What P2 lesson does this demonstrate?",
+          question: "A team writes comprehensive tests for their authentication module. Claude implements authentication against these tests, and all tests pass. Six months later, a security audit finds the implementation stores JWT secrets in environment variables but the tests never checked secret storage. What P2 lesson does this demonstrate?",
           options: {
             A: "Tests as specs don't work for security requirements",
             B: "Tests as specs are only as complete as the tests themselves. If the test suite doesn't encode a requirement (secret storage in environment variables, not hardcoded), that requirement doesn't exist for the AI. Complete P2 practice requires comprehensive tests that encode ALL requirements — including security constraints.",
@@ -606,7 +606,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 20,
-          question: "Scenario: Claude is implementing a sorting algorithm. You provide a TypeScript type `type SortFn<T> = (arr: T[], compare: (a: T, b: T) => number) => T[]` and a test: `expect(sort([3,1,2], (a,b) => a-b)).toEqual([1,2,3])`. The implementation passes the test. Your colleague says 'but we also need stability — equal elements should maintain original order.' What P2 practice was missing?",
+          question: "Claude is implementing a sorting algorithm. You provide a TypeScript type `type SortFn<T> = (arr: T[], compare: (a: T, b: T) => number) => T[]` and a test: `expect(sort([3,1,2], (a,b) => a-b)).toEqual([1,2,3])`. The implementation passes the test. Your colleague says 'but we also need stability — equal elements should maintain original order.' What P2 practice was missing?",
           options: {
             A: "The TypeScript type was insufficient — it should be more detailed",
             B: "A test encoding the stability requirement: `expect(sort([{v:1,i:0},{v:1,i:1}], (a,b)=>a.v-b.v)).toEqual([{v:1,i:0},{v:1,i:1}])` — using index to verify original order is preserved for equal elements. Without this test, 'sort correctly' and 'sort stably' are indistinguishable.",
@@ -804,7 +804,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 6,
-          question: "Scenario: Claude fixes a bug and reports 'Done!' You accept it without running tests. Two days later, a user reports the exact same bug. What single verification step, if taken immediately after Claude's fix, would most likely have caught this?",
+          question: "Claude fixes a bug and reports 'Done!' You accept it without running tests. Two days later, a user reports the exact same bug. What single verification step, if taken immediately after Claude's fix, would most likely have caught this?",
           options: {
             A: "Reading the diff to see what lines changed",
             B: "Running the specific test that reproduces the original bug — if the fix works, the test passes; if the bug persists, the test fails immediately",
@@ -816,7 +816,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 7,
-          question: "Scenario: You're building a payment processing service. Claude has just implemented the charge endpoint. Which verification sequence correctly applies the verification hierarchy (cheapest to most expensive)?",
+          question: "You're building a payment processing service. Claude has just implemented the charge endpoint. Which verification sequence correctly applies the verification hierarchy (cheapest to most expensive)?",
           options: {
             A: "Deploy to production, then test with real charges, then add unit tests",
             B: "TypeScript compilation (syntax) → unit test for charge logic → integration test with Stripe sandbox → manual end-to-end charge in staging environment",
@@ -828,7 +828,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 8,
-          question: "Scenario: Claude adds a database index claiming 'query performance should improve significantly.' You accept this. A week later, users still report slow queries. What verification was missing, and what would it have looked like?",
+          question: "Claude adds a database index claiming 'query performance should improve significantly.' You accept this. A week later, users still report slow queries. What verification was missing, and what would it have looked like?",
           options: {
             A: "You should have read the index definition more carefully",
             B: "Running `EXPLAIN ANALYZE` on the slow query before AND after adding the index — comparing actual execution time and query plan would have confirmed whether the index was actually used and by how much",
@@ -840,7 +840,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 9,
-          question: "Scenario: During a verification loop, tests fail after Claude's first fix attempt. Claude immediately makes a second change without reading the test failure output. What two principles are being violated?",
+          question: "During a verification loop, tests fail after Claude's first fix attempt. Claude immediately makes a second change without reading the test failure output. What two principles are being violated?",
           options: {
             A: "P1 and P5",
             B: "P7 (Observability — failure output not analyzed) and P4 (Decomposition — the second change compounds on an undiagnosed first change instead of cleanly reverting and trying fresh)",
@@ -852,7 +852,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 10,
-          question: "Scenario: You ask Claude to verify it fixed the authentication bug. Claude responds: 'I reviewed the implementation carefully and the fix looks logically correct.' You accept this. Which level of verification did Claude provide, and what level was needed?",
+          question: "You ask Claude to verify it fixed the authentication bug. Claude responds: 'I reviewed the implementation carefully and the fix looks logically correct.' You accept this. Which level of verification did Claude provide, and what level was needed?",
           options: {
             A: "Claude provided integration-level verification; unit testing was needed",
             B: "Claude provided zero-level verification (self-review/visual inspection); at minimum, unit tests running and passing were needed to confirm the fix",
@@ -864,7 +864,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: Claude implements a new email notification feature and reports 'Done! Tests pass.' You check and see: TypeScript compilation passed, but no unit or integration tests were run — only the linter ran. According to the verification hierarchy, what level of verification was actually completed?",
+          question: "Claude implements a new email notification feature and reports 'Done! Tests pass.' You check and see: TypeScript compilation passed, but no unit or integration tests were run — only the linter ran. According to the verification hierarchy, what level of verification was actually completed?",
           options: {
             A: "Full verification — the linter covers all necessary checks",
             B: "Only syntax-level verification (TypeScript compilation + linting). Unit tests (does the email function work?), integration tests (does it connect to the email service?), and manual tests (does the email actually arrive?) were all skipped — the feature is unverified at every behavioral level",
@@ -876,7 +876,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: You're building a checkout flow for an e-commerce site. Claude implements the payment step and says 'It works!' You need to verify before launch. Which verification sequence correctly applies the trust zone concept from P3?",
+          question: "You're building a checkout flow for an e-commerce site. Claude implements the payment step and says 'It works!' You need to verify before launch. Which verification sequence correctly applies the trust zone concept from P3?",
           options: {
             A: "Deploy to production and monitor for errors — real user traffic is the best test",
             B: "Unit test the payment calculation with mock data (high trust zone: your logic), then integration test with Stripe's test API (trust boundary: external service), then manual test in staging with a real test card (lowest trust: full system with real dependencies)",
@@ -888,7 +888,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: Claude fixes a bug in the user registration flow. The fix involves changes to 3 files. Claude reports 'Fixed!' but you notice the test suite has 2 failing tests that were passing before the fix. What does the verification loop dictate Claude should do next?",
+          question: "Claude fixes a bug in the user registration flow. The fix involves changes to 3 files. Claude reports 'Fixed!' but you notice the test suite has 2 failing tests that were passing before the fix. What does the verification loop dictate Claude should do next?",
           options: {
             A: "Ignore the failing tests — the bug fix is more important",
             B: "Read the test failure output, identify which change caused the regression, revert that specific change, and develop a new approach that fixes the original bug without breaking existing tests",
@@ -900,7 +900,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: A team lead asks you to verify that Claude's implementation of a new search algorithm is correct. The algorithm claims O(log n) performance. You have 30 seconds for verification. What single check gives you the most confidence?",
+          question: "A team lead asks you to verify that Claude's implementation of a new search algorithm is correct. The algorithm claims O(log n) performance. You have 30 seconds for verification. What single check gives you the most confidence?",
           options: {
             A: "Reading the algorithm's code to verify it uses binary search logic",
             B: "Running the existing search test suite — if all tests pass, the implementation satisfies the known behavioral requirements; if any fail, the implementation is definitively wrong regardless of how elegant the code looks",
@@ -912,7 +912,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: Claude implements a database migration and reports 'Migration applied successfully.' You want to verify. Which approach applies P3's verification hierarchy most effectively?",
+          question: "Claude implements a database migration and reports 'Migration applied successfully.' You want to verify. Which approach applies P3's verification hierarchy most effectively?",
           options: {
             A: "Trust Claude's report — it wouldn't say 'successfully' if it failed",
             B: "Run `SELECT COUNT(*) FROM migrated_table` to verify row count matches expectation, check the migration log table for the migration version, and run the application's test suite to confirm the schema change didn't break existing queries",
@@ -924,7 +924,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 16,
-          question: "Scenario: Claude adds a new function `sanitizeInput()` and says 'Done! The function is implemented.' You run the test suite — all 47 tests pass. Three days later, a user submits malformed input that crashes the application. What does this situation reveal about the verification hierarchy?",
+          question: "Claude adds a new function `sanitizeInput()` and says 'Done! The function is implemented.' You run the test suite — all 47 tests pass. Three days later, a user submits malformed input that crashes the application. What does this situation reveal about the verification hierarchy?",
           options: {
             A: "The tests were wrong and need to be rewritten",
             B: "The existing tests (syntax + unit level) verified what existed, but didn't include a test for the specific malformed input case. P3 requires verification against the complete requirement set — if malformed input handling is a requirement, a test for it must exist. Test gaps produce coverage gaps.",
@@ -936,7 +936,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 17,
-          question: "Scenario: Claude fixes an authentication bug. You run `npm test` — all tests pass. But you notice the fix uses a synchronous bcrypt comparison in an async handler. This will block the event loop under load. Is this a P3 failure, and at what verification level was it missed?",
+          question: "Claude fixes an authentication bug. You run `npm test` — all tests pass. But you notice the fix uses a synchronous bcrypt comparison in an async handler. This will block the event loop under load. Is this a P3 failure, and at what verification level was it missed?",
           options: {
             A: "Not a P3 failure — tests passed, so verification was complete",
             B: "P3 failure at the performance/integration level: unit tests verified functional correctness (right password accepted, wrong rejected) but didn't catch the async/blocking issue. A load test or async-specific unit test (`expect(compareSync).not.toHaveBeenCalled()`) would have caught this at a lower level before staging.",
@@ -948,7 +948,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 18,
-          question: "Scenario: You apply the 2-Minute Audit after Claude completes a database schema migration: git diff shows 3 new files (migration, rollback, seed data). Claude's summary says 'Migration complete, added 2 files.' There's a discrepancy. What does P3 require you to do?",
+          question: "You apply the 2-Minute Audit after Claude completes a database schema migration: git diff shows 3 new files (migration, rollback, seed data). Claude's summary says 'Migration complete, added 2 files.' There's a discrepancy. What does P3 require you to do?",
           options: {
             A: "Trust Claude's summary — it worked on the files directly",
             B: "Investigate all 3 files in the diff (not just the 2 mentioned). The 2-Minute Audit specifically exists to catch this divergence: diff is ground truth, AI summary is the AI's belief. Investigate the 3rd unreported file — it may be an intentional addition (seed data Claude forgot to mention) or an unintended modification.",
@@ -960,7 +960,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 19,
-          question: "Scenario: You're applying the verification loop to a complex refactoring. After Step 1 (extract shared utilities), tests pass. After Step 2 (update imports), 3 tests fail. Claude immediately starts Step 3 without reading the failure messages. What P3 (and which other principle) violation is this?",
+          question: "You're applying the verification loop to a complex refactoring. After Step 1 (extract shared utilities), tests pass. After Step 2 (update imports), 3 tests fail. Claude immediately starts Step 3 without reading the failure messages. What P3 (and which other principle) violation is this?",
           options: {
             A: "Only P3 is violated — Claude should have run tests again",
             B: "P3 (Verification): failed tests must be addressed before proceeding, not ignored. P7 (Observability): test failure output is critical information — it tells you WHAT failed and WHY. Running the next step without reading failure messages means compounding unknown failures. The verification loop requires: act → verify → read results → only proceed if passing.",
@@ -972,7 +972,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 20,
-          question: "Scenario: Claude says 'I've implemented the email sending feature.' You ask for verification evidence. Claude responds: 'I reviewed the implementation carefully and the logic looks correct.' According to P3's verification hierarchy, what level is this and what's the minimum acceptable verification?",
+          question: "Claude says 'I've implemented the email sending feature.' You ask for verification evidence. Claude responds: 'I reviewed the implementation carefully and the logic looks correct.' According to P3's verification hierarchy, what level is this and what's the minimum acceptable verification?",
           options: {
             A: "This is level 3 (integration) — Claude reviewed it comprehensively",
             B: "This is level 0 (self-review / looks correct) — the weakest form. Minimum acceptable: run the unit tests for the email function (level 2). Better: integration test with a mock email service (level 3). For production: verify an email actually arrives in a test inbox (level 4). 'Looks correct' is an opinion, not evidence.",
@@ -1170,7 +1170,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 6,
-          question: "Scenario: You ask Claude to 'refactor the entire authentication system.' It makes 47 changes across 15 files in one session and creates a single commit. When a login bug appears two days later, what is the core P4 problem you're now facing?",
+          question: "You ask Claude to 'refactor the entire authentication system.' It makes 47 changes across 15 files in one session and creates a single commit. When a login bug appears two days later, what is the core P4 problem you're now facing?",
           options: {
             A: "The commit message is probably unclear",
             B: "With 47 changes in one commit you cannot isolate which change introduced the bug — you must either revert everything (losing all refactoring) or binary-search through 47 changes manually to find the culprit",
@@ -1182,7 +1182,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 7,
-          question: "Scenario: Halfway through implementing a new API endpoint with Claude, you realize the database schema approach is fundamentally wrong. You've been working for 45 minutes and made 3 atomic commits. What does good P4 practice enable you to do?",
+          question: "Halfway through implementing a new API endpoint with Claude, you realize the database schema approach is fundamentally wrong. You've been working for 45 minutes and made 3 atomic commits. What does good P4 practice enable you to do?",
           options: {
             A: "You must continue with the wrong approach since too much work is done",
             B: "Run `git reset --hard HEAD~3` to cleanly revert all 3 commits, returning to the state before the wrong approach — losing 45 minutes but not the entire session, then start fresh with the correct schema",
@@ -1194,7 +1194,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 8,
-          question: "Scenario: Claude is implementing a new notification system and proposes to 'create the notification service, add email templates, integrate with SendGrid, write all tests, and update the docs in one step.' Using P4, how should you redirect Claude?",
+          question: "Claude is implementing a new notification system and proposes to 'create the notification service, add email templates, integrate with SendGrid, write all tests, and update the docs in one step.' Using P4, how should you redirect Claude?",
           options: {
             A: "Accept the plan — doing everything at once is more efficient",
             B: "Break it into atomic steps: Step 1: notification service interface and unit tests (commit). Step 2: email template logic (commit). Step 3: SendGrid integration with sandbox (commit). Step 4: integration tests (commit). Step 5: documentation (commit).",
@@ -1206,7 +1206,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 9,
-          question: "Scenario: You're using Plan Mode and Claude presents a 12-step plan. Step 7 says: 'Refactor the user module AND update all API routes that use it.' You notice this before execution. What's wrong with Step 7 and how should you fix it?",
+          question: "You're using Plan Mode and Claude presents a 12-step plan. Step 7 says: 'Refactor the user module AND update all API routes that use it.' You notice this before execution. What's wrong with Step 7 and how should you fix it?",
           options: {
             A: "Nothing is wrong — combining related changes is efficient",
             B: "Step 7 violates atomicity by bundling two separate concerns. Split it: Step 7a: Refactor user module (tests pass), Step 7b: Update API routes (tests pass). If 7b breaks, you can revert routes without touching the refactoring.",
@@ -1218,7 +1218,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 10,
-          question: "Scenario: A developer argues: 'I don't use feature branches — I commit directly to main with small commits.' Is this consistent with Principle 4, and what risk remains?",
+          question: "A developer argues: 'I don't use feature branches — I commit directly to main with small commits.' Is this consistent with Principle 4, and what risk remains?",
           options: {
             A: "This is fully consistent with P4 — branch strategy is irrelevant",
             B: "Small commits to main are better than big commits, but feature branches add an important layer: experimentation safety. On main, even small commits are immediately shared with teammates; a branch lets you try an approach, realize it's wrong, and `git branch -D` it without polluting shared history",
@@ -1230,7 +1230,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: You ask Claude to 'add user profile pictures' to your application. Claude proposes a plan: Step 1: Add avatar_url column to users table. Step 2: Create upload endpoint. Step 3: Build UI component. Step 4: Add image resizing service. Step 5: Write integration tests. Step 6: Update user API responses. Which P4 critique applies to this plan?",
+          question: "You ask Claude to 'add user profile pictures' to your application. Claude proposes a plan: Step 1: Add avatar_url column to users table. Step 2: Create upload endpoint. Step 3: Build UI component. Step 4: Add image resizing service. Step 5: Write integration tests. Step 6: Update user API responses. Which P4 critique applies to this plan?",
           options: {
             A: "The plan is well-structured — each step is atomic and in the right order",
             B: "Steps 2 and 4 are bundled concerns — the upload endpoint (Step 2) and image resizing (Step 4) should be one atomic step since they're tightly coupled. Better: Step 2: Upload endpoint with resizing (commit, verify), Step 3: UI component (commit, verify), Step 5: Integration tests (commit), Step 6: API updates (commit)",
@@ -1242,7 +1242,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: Claude is refactoring a 2,000-line authentication module. It proposes to extract 8 functions into separate files, update 15 import statements, and rename 12 variables — all in one commit on the main branch. What P4 risks does this create?",
+          question: "Claude is refactoring a 2,000-line authentication module. It proposes to extract 8 functions into separate files, update 15 import statements, and rename 12 variables — all in one commit on the main branch. What P4 risks does this create?",
           options: {
             A: "No risks — refactoring is safe as long as tests pass",
             B: "Three risks: (1) One giant commit means you can't isolate which extraction introduced a bug, (2) Working on main pollutes shared history if something goes wrong, (3) 15 import updates + 12 renames + 8 extractions bundled together makes code review nearly impossible. Correct approach: feature branch + one extraction per commit",
@@ -1254,7 +1254,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: You're implementing a notification system with Claude. After Step 1 (notification service interface) and Step 2 (email template logic), both committed and tested, Claude proposes Step 3: 'Integrate with SendGrid AND Slack AND SMS provider Twilio.' How should you apply P4 to redirect this?",
+          question: "You're implementing a notification system with Claude. After Step 1 (notification service interface) and Step 2 (email template logic), both committed and tested, Claude proposes Step 3: 'Integrate with SendGrid AND Slack AND SMS provider Twilio.' How should you apply P4 to redirect this?",
           options: {
             A: "Accept the plan — integrating all three at once is more efficient",
             B: "Split into three atomic steps: Step 3a: SendGrid integration with sandbox tests (commit, verify). Step 3b: Slack webhook integration (commit, verify). Step 3c: Twilio SMS integration (commit, verify). If Step 3b fails, Steps 3a is safe and doesn't need re-doing",
@@ -1266,7 +1266,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: Claude is halfway through a 6-step plan to add a caching layer. Step 3 introduced a subtle bug that breaks 4 tests. Claude has already completed Steps 4, 5, and 6 on top of the buggy Step 3. What does good P4 practice recommend for this situation?",
+          question: "Claude is halfway through a 6-step plan to add a caching layer. Step 3 introduced a subtle bug that breaks 4 tests. Claude has already completed Steps 4, 5, and 6 on top of the buggy Step 3. What does good P4 practice recommend for this situation?",
           options: {
             A: "Fix the bug inline while keeping Steps 4-6 changes",
             B: "Revert to the checkpoint before Step 3 (`git reset --hard` to the Step 2 commit), fix Step 3's approach, then re-implement Steps 4-6 on the corrected foundation. Building on a buggy foundation compounds errors and makes debugging exponentially harder",
@@ -1278,7 +1278,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: A team uses Plan Mode for a feature addition. Claude presents a 4-step plan. The team lead notices Step 2 says 'Update the database schema and migrate all existing data.' The dataset has 2 million rows. What P4 concern should the team raise?",
+          question: "A team uses Plan Mode for a feature addition. Claude presents a 4-step plan. The team lead notices Step 2 says 'Update the database schema and migrate all existing data.' The dataset has 2 million rows. What P4 concern should the team raise?",
           options: {
             A: "No concern — database migrations are routine",
             B: "Step 2 bundles two separate concerns with different risk profiles: schema change (low risk, fast) and data migration of 2M rows (high risk, slow, potentially requiring downtime). These should be separate steps: Step 2a: schema migration (commit, verify), Step 2b: data migration with progress monitoring and rollback plan (separate commit). If the migration fails, the schema change is already safe",
@@ -1290,7 +1290,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 16,
-          question: "Scenario: A developer has been working on a feature for 3 weeks on a local branch. They finally merge it to main — the merge commit contains 2,847 changed lines across 45 files. The day after merging, a production bug is traced to this feature. The lead developer says 'we need to revert it.' What P4 problem does this situation reveal?",
+          question: "A developer has been working on a feature for 3 weeks on a local branch. They finally merge it to main — the merge commit contains 2,847 changed lines across 45 files. The day after merging, a production bug is traced to this feature. The lead developer says 'we need to revert it.' What P4 problem does this situation reveal?",
           options: {
             A: "The developer should have used a different branching strategy",
             B: "P4 was violated: no atomic commits within the feature branch. A single mega-commit (3 weeks of work) makes surgical reversion impossible — the entire 3-week effort must be reverted to fix the bug. Small commits within the branch would allow reverting just the buggy change while keeping the rest of the feature",
@@ -1302,7 +1302,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 17,
-          question: "Scenario: Claude is about to refactor a core authentication module that 12 other services depend on. Without using Plan Mode, Claude begins making changes directly. After 30 minutes, you notice authentication is broken across all services, and the changes span 8 files with no clear rollback path. What P4 practice should have been followed?",
+          question: "Claude is about to refactor a core authentication module that 12 other services depend on. Without using Plan Mode, Claude begins making changes directly. After 30 minutes, you notice authentication is broken across all services, and the changes span 8 files with no clear rollback path. What P4 practice should have been followed?",
           options: {
             A: "Claude should have asked for permission before starting",
             B: "Plan Mode first: Claude should have outlined the decomposed approach (which files in what order, each as a separate verified step) before executing. High-risk refactors require explicit decomposition into reviewable, reversible stages before any code changes",
@@ -1314,7 +1314,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 18,
-          question: "Scenario: You ask Claude to 'add user authentication to the app.' Claude responds: 'I'll set up the database schema, implement the auth library, build the login/register UI, add middleware, write tests, and update documentation — all in this session.' According to P4, what should Claude (or you) do instead?",
+          question: "You ask Claude to 'add user authentication to the app.' Claude responds: 'I'll set up the database schema, implement the auth library, build the login/register UI, add middleware, write tests, and update documentation — all in this session.' According to P4, what should Claude (or you) do instead?",
           options: {
             A: "Proceed as Claude described — completing everything in one session is efficient",
             B: "Decompose into separately verified phases: Phase 1 (schema + migration, verify DB), Phase 2 (auth library, verify with unit tests), Phase 3 (middleware, verify with integration tests), Phase 4 (UI, verify with E2E tests), Phase 5 (documentation). Each phase completes, is verified, and committed before the next begins",
@@ -1326,7 +1326,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 19,
-          question: "Scenario: Claude implements Step 3 of a decomposed plan: 'Update the payment API to use the new billing library.' After committing, you run integration tests — 3 tests fail in ways that suggest the new billing library has a subtle compatibility issue. What does proper P4 execution enable you to do?",
+          question: "Claude implements Step 3 of a decomposed plan: 'Update the payment API to use the new billing library.' After committing, you run integration tests — 3 tests fail in ways that suggest the new billing library has a subtle compatibility issue. What does proper P4 execution enable you to do?",
           options: {
             A: "Nothing — you must debug forward from the current state",
             B: "`git revert` the Step 3 commit (which is isolated and atomic), restoring the known-good Step 2 state. You can now investigate the billing library compatibility in isolation without affecting other in-progress work, and attempt Step 3 again with a fix — or defer it while continuing other phases",
@@ -1338,7 +1338,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 20,
-          question: "Scenario: The P4 decomposition plan includes: 'Step 4: Run data migration to populate new columns from legacy table (DROP old table after completion).' According to P4's reversibility principle, what flag should you raise before executing Step 4?",
+          question: "The P4 decomposition plan includes: 'Step 4: Run data migration to populate new columns from legacy table (DROP old table after completion).' According to P4's reversibility principle, what flag should you raise before executing Step 4?",
           options: {
             A: "No concern — data migrations are normal operations",
             B: "The DROP command makes Step 4 irreversible. P4 requires identifying irreversible steps and adding explicit safety measures: backup the table before dropping (pg_dump or RENAME instead of DROP), verify migration success completely before the DROP, and get explicit confirmation. Or separate: Step 4a = migrate + verify, Step 4b = drop (with rollback window). The irreversible part deserves its own step",
@@ -1536,7 +1536,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 6,
-          question: "Scenario: You start a new Claude Code session and type 'Continue working on the payment feature.' Claude responds: 'I don't have context about your payment feature. Could you describe it?' What Principle 5 artifact was missing?",
+          question: "You start a new Claude Code session and type 'Continue working on the payment feature.' Claude responds: 'I don't have context about your payment feature. Could you describe it?' What Principle 5 artifact was missing?",
           options: {
             A: "A README.md explaining the project",
             B: "CLAUDE.md containing: project description, current payment feature status, tech stack, architectural decisions made, and next steps — so Claude reads the file and is immediately oriented without re-explanation",
@@ -1548,7 +1548,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 7,
-          question: "Scenario: Your team chose PostgreSQL six months ago for complex reporting needs. A new developer (with Claude) adds a user preferences feature using MongoDB 'because it's more flexible.' An ADR would have prevented this. What should the ADR document?",
+          question: "Your team chose PostgreSQL six months ago for complex reporting needs. A new developer (with Claude) adds a user preferences feature using MongoDB 'because it's more flexible.' An ADR would have prevented this. What should the ADR document?",
           options: {
             A: "PostgreSQL installation instructions",
             B: "Decision, Context (complex reporting requires multi-table JOINs), Rationale (MongoDB rejected for JOIN performance), Alternatives considered, and Consequence (all new features must use PostgreSQL)",
@@ -1560,7 +1560,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 8,
-          question: "Scenario: After a productive two-hour session that resolved a major architectural decision, you /clear to start fresh for a new task. The next day a teammate asks about the architectural decision. It's gone. What should have happened before /clear?",
+          question: "After a productive two-hour session that resolved a major architectural decision, you /clear to start fresh for a new task. The next day a teammate asks about the architectural decision. It's gone. What should have happened before /clear?",
           options: {
             A: "Nothing — chat history is always preserved",
             B: "Document the decision in an ADR or update CLAUDE.md BEFORE /clear — session memory must be converted to file memory before it is discarded. /clear is only safe after state has been persisted.",
@@ -1572,7 +1572,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 9,
-          question: "Scenario: Claude uses callback-style async code in every session despite repeated corrections. You've fixed this in 5 different sessions. What is the P5 solution?",
+          question: "Claude uses callback-style async code in every session despite repeated corrections. You've fixed this in 5 different sessions. What is the P5 solution?",
           options: {
             A: "Accept callbacks and adapt your style",
             B: "Add to CLAUDE.md: 'Async Convention: Always use async/await. NEVER use callbacks or .then()/.catch() chains.' Claude reads this at every session start — one file edit permanently replaces 5+ repeated corrections.",
@@ -1584,7 +1584,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 10,
-          question: "Scenario: A developer re-explains their project architecture at the start of every Claude session (2-3 minutes each). They work with Claude daily, 5 days/week. What is the monthly waste and what does Principle 5 save?",
+          question: "A developer re-explains their project architecture at the start of every Claude session (2-3 minutes each). They work with Claude daily, 5 days/week. What is the monthly waste and what does Principle 5 save?",
           options: {
             A: "The 2-3 minutes is worth it for accuracy",
             B: "~50 minutes/month of pure re-establishment (2.5 min × 20 days). P5 (CLAUDE.md) reduces this to 0. Bonus: verbal re-descriptions vary session to session introducing subtle inconsistencies; file memory is identical every time",
@@ -1596,7 +1596,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: Your team has been using Claude Code for 3 months. The CLAUDE.md file has grown to 200 lines covering project history, coding conventions, deployment procedures, team contact info, and detailed architecture diagrams. New Claude sessions take 30 seconds just to read the file. What P5 improvement should you make?",
+          question: "Your team has been using Claude Code for 3 months. The CLAUDE.md file has grown to 200 lines covering project history, coding conventions, deployment procedures, team contact info, and detailed architecture diagrams. New Claude sessions take 30 seconds just to read the file. What P5 improvement should you make?",
           options: {
             A: "Nothing — more context is always better",
             B: "Trim CLAUDE.md to under 60 lines of essential facts (tech stack, key constraints, current status). Move domain-specific knowledge into skill files in .claude/skills/ — conventions into a coding-conventions skill, deployment steps into a deployment skill. CLAUDE.md should be a quick-start guide, not an encyclopedia",
@@ -1608,7 +1608,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: You finish a 2-hour session where you and Claude made a critical architectural decision: the notification system will use an event-driven pub/sub pattern instead of direct function calls. You're about to /clear to start a new task. What P5 step must you complete first?",
+          question: "You finish a 2-hour session where you and Claude made a critical architectural decision: the notification system will use an event-driven pub/sub pattern instead of direct function calls. You're about to /clear to start a new task. What P5 step must you complete first?",
           options: {
             A: "Nothing — Claude will remember the decision in future sessions",
             B: "Document the decision in an ADR (or update CLAUDE.md) capturing: the context (why direct calls were problematic), the decision (pub/sub pattern), alternatives considered (direct calls, message queue, webhooks), and consequences (all new features must publish events, not call handlers directly). Only THEN is /clear safe",
@@ -1620,7 +1620,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: A new developer joins the team and starts working with Claude on the payment module. Claude keeps suggesting MongoDB for new features despite the team's documented decision to use PostgreSQL. The team has an ADR-003 explaining the PostgreSQL decision, but Claude doesn't reference it. What is the most likely P5 failure?",
+          question: "A new developer joins the team and starts working with Claude on the payment module. Claude keeps suggesting MongoDB for new features despite the team's documented decision to use PostgreSQL. The team has an ADR-003 explaining the PostgreSQL decision, but Claude doesn't reference it. What is the most likely P5 failure?",
           options: {
             A: "Claude is intentionally ignoring the ADR",
             B: "The ADR exists but Claude doesn't know to read it — CLAUDE.md should reference the ADR location or include the key constraint ('All new features use PostgreSQL — see ADR-003 for rationale'). Without this pointer in CLAUDE.md, the ADR is invisible to Claude",
@@ -1632,7 +1632,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: Your team uses Claude Code across 4 different projects. Each project has its own CLAUDE.md. A developer working on Project A asks Claude about Project B's architecture. Claude has no knowledge. What P5 approach would enable cross-project context sharing?",
+          question: "Your team uses Claude Code across 4 different projects. Each project has its own CLAUDE.md. A developer working on Project A asks Claude about Project B's architecture. Claude has no knowledge. What P5 approach would enable cross-project context sharing?",
           options: {
             A: "Merge all 4 CLAUDE.md files into one mega-file",
             B: "Each project's CLAUDE.md should be project-specific (as designed). For cross-project questions, the developer should reference the other project's files directly using @file paths or ask Claude to read the relevant project's CLAUDE.md. P5 is about persisting state within a project's context, not creating a universal knowledge base",
@@ -1644,7 +1644,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: You've been working with Claude on a feature for a week. The CLAUDE.md file was written at the project's start and hasn't been updated. Claude now keeps suggesting approaches that conflict with decisions you made during the week (e.g., using Redis for caching, which you decided against on Day 3). What P5 practice has been neglected?",
+          question: "You've been working with Claude on a feature for a week. The CLAUDE.md file was written at the project's start and hasn't been updated. Claude now keeps suggesting approaches that conflict with decisions you made during the week (e.g., using Redis for caching, which you decided against on Day 3). What P5 practice has been neglected?",
           options: {
             A: "Claude should have better memory",
             B: "CLAUDE.md must be updated as decisions are made — it's a living document, not a one-time setup. The 'never use Redis' decision from Day 3 should have been added to CLAUDE.md immediately. Stale context files are worse than no context files because they give false confidence",
@@ -1656,7 +1656,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 16,
-          question: "Scenario: You spend 2 hours in a Claude Code session establishing that the project uses a custom authentication library (not passport.js), prefers PostgreSQL over SQLite, and follows a specific error handling pattern. You close the session. Next day, a new session begins — Claude immediately suggests passport.js for auth, SQLite for a new microservice, and a different error pattern. What P5 practice was missing?",
+          question: "You spend 2 hours in a Claude Code session establishing that the project uses a custom authentication library (not passport.js), prefers PostgreSQL over SQLite, and follows a specific error handling pattern. You close the session. Next day, a new session begins — Claude immediately suggests passport.js for auth, SQLite for a new microservice, and a different error pattern. What P5 practice was missing?",
           options: {
             A: "Claude should have remembered from the previous session automatically",
             B: "The session's key decisions and conventions should have been written to CLAUDE.md during the session: '- Auth: use CustomAuthLib, never passport.js. - DB: PostgreSQL only, no SQLite. - Errors: use AppError class with error codes.' P5: persist every meaningful decision to files because context does not survive session boundaries",
@@ -1668,7 +1668,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 17,
-          question: "Scenario: Three months into a project, the team debates switching the message queue from RabbitMQ to Kafka. A developer asks: 'Why did we even choose RabbitMQ originally?' Nobody remembers. Hours are lost reconstructing the reasoning. According to P5, what should have happened when RabbitMQ was initially chosen?",
+          question: "Three months into a project, the team debates switching the message queue from RabbitMQ to Kafka. A developer asks: 'Why did we even choose RabbitMQ originally?' Nobody remembers. Hours are lost reconstructing the reasoning. According to P5, what should have happened when RabbitMQ was initially chosen?",
           options: {
             A: "The decision should have been committed to git with a detailed commit message",
             B: "An ADR (Architectural Decision Record) file should have been created: ADR-003-message-queue.md documenting the decision, the alternatives considered (Kafka, SQS, RabbitMQ), the criteria (latency, team expertise, cost), and the reasoning. P5 persists decisions with their context so future conversations — human or AI — can understand why",
@@ -1680,7 +1680,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 18,
-          question: "Scenario: Claude is implementing a 12-step database migration plan. At Step 7, the session hits its context limit and must end. You start a new session next day. You say 'continue the database migration.' Claude has no context of which steps are done. According to P5, what should Claude have been doing throughout the session?",
+          question: "Claude is implementing a 12-step database migration plan. At Step 7, the session hits its context limit and must end. You start a new session next day. You say 'continue the database migration.' Claude has no context of which steps are done. According to P5, what should Claude have been doing throughout the session?",
           options: {
             A: "Claude should have worked faster to complete all 12 steps in one session",
             B: "Maintaining a progress checklist file (migration-progress.md): '- [x] Step 1: Create tables... - [x] Step 2: Add indexes... - [ ] Step 8: Migrate foreign keys...' P5: for multi-step tasks, write progress to files so that any new session can immediately resume from where the previous one stopped",
@@ -1692,7 +1692,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 19,
-          question: "Scenario: During a debugging session, Claude discovers three important things: (1) the test database is at localhost:5433 (not 5432), (2) the main branch has a known broken test that's being ignored, and (3) there's a commented-out code block that must never be deleted (it documents a resolved security issue). Where should each of these be persisted according to P5?",
+          question: "During a debugging session, Claude discovers three important things: (1) the test database is at localhost:5433 (not 5432), (2) the main branch has a known broken test that's being ignored, and (3) there's a commented-out code block that must never be deleted (it documents a resolved security issue). Where should each of these be persisted according to P5?",
           options: {
             A: "All three should go in CLAUDE.md",
             B: "Context-appropriate persistence: (1) DB port → CLAUDE.md (project config/conventions). (2) Broken test → CLAUDE.md (known issue + ignore reason). (3) Never-delete comment → CLAUDE.md OR a comment in the code itself (closest to the code). P5: different facts have different natural homes — CLAUDE.md for project context, inline comments for code-level context. All three should be written down before the session ends",
@@ -1704,7 +1704,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 20,
-          question: "Scenario: You use Claude Code for 2 hours on a complex refactoring task. At the end, you're not done — you need to continue tomorrow. Claude says: 'We've made good progress.' According to P5's session handoff practice, what should happen before closing the session?",
+          question: "You use Claude Code for 2 hours on a complex refactoring task. At the end, you're not done — you need to continue tomorrow. Claude says: 'We've made good progress.' According to P5's session handoff practice, what should happen before closing the session?",
           options: {
             A: "Save the chat log and paste it into the next session's context",
             B: "Write a SESSION-HANDOFF.md (or update CLAUDE.md): current state summary, what was changed and why, what remains to be done (with specific next steps), any decisions made, and any blockers encountered. P5: end-of-session notes convert session memory into file memory, making the next session immediately productive without context reconstruction",
@@ -1962,7 +1962,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: You give Claude unrestricted access to your codebase. While implementing a feature, it runs `rm -rf node_modules && npm install` — but the working directory was accidentally your home folder, deleting irreplaceable personal files. Which safety layer would have prevented this?",
+          question: "You give Claude unrestricted access to your codebase. While implementing a feature, it runs `rm -rf node_modules && npm install` — but the working directory was accidentally your home folder, deleting irreplaceable personal files. Which safety layer would have prevented this?",
           options: {
             A: "Layer 5 (Human Verification) — you should have been watching",
             B: "Layer 2 (Permission Controls) — `rm` on any directory should require explicit approval, and Layer 1 (Technical Limits) — a whitelist of allowed commands excluding destructive operations outside the project directory",
@@ -1974,7 +1974,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: You've been working with Claude for 3 months on a familiar codebase with a track record of reliable work. Claude asks permission before every `git status` and `ls` command. This is slowing you down. What permission model adjustment is appropriate?",
+          question: "You've been working with Claude for 3 months on a familiar codebase with a track record of reliable work. Claude asks permission before every `git status` and `ls` command. This is slowing you down. What permission model adjustment is appropriate?",
           options: {
             A: "Disable all permission prompts with --dangerously-skip-permissions",
             B: "Upgrade to the Permissive model: auto-approve read operations (ls, cat, grep, git status/diff/log) and test execution; require approval only for writes, git push, deletions, and package installation",
@@ -1986,7 +1986,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: Claude is implementing a database migration and generates SQL: `DELETE FROM users WHERE last_login < '2022-01-01'`. It asks if you want to proceed. How should you apply the Constraints and Safety principle before approving?",
+          question: "Claude is implementing a database migration and generates SQL: `DELETE FROM users WHERE last_login < '2022-01-01'`. It asks if you want to proceed. How should you apply the Constraints and Safety principle before approving?",
           options: {
             A: "Approve immediately — Claude generated the SQL, so it must be correct",
             B: "First run `SELECT COUNT(*) FROM users WHERE last_login < '2022-01-01'` to see the affected row count, verify you have a backup, review the WHERE clause, then approve only if the count and criteria match your expectation",
@@ -1998,7 +1998,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: Your team is starting to use Claude Code for the first time. Nobody has used AI coding tools before. According to Trust Gradualism, what Phase should you start in and what should the first week look like?",
+          question: "Your team is starting to use Claude Code for the first time. Nobody has used AI coding tools before. According to Trust Gradualism, what Phase should you start in and what should the first week look like?",
           options: {
             A: "Phase 4 (Calibrated Autonomy) — trust the AI fully from day one",
             B: "Phase 1 (Observation Only) — Claude reads files and explains code, you manually apply any suggestions. This builds intuition about AI behavior before granting any write access",
@@ -2010,7 +2010,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: Claude is mid-task implementing a complex feature. You notice it's reading from the production database instead of the staging database. You haven't approved any production database writes yet, but reads are happening. What should you do immediately?",
+          question: "Claude is mid-task implementing a complex feature. You notice it's reading from the production database instead of the staging database. You haven't approved any production database writes yet, but reads are happening. What should you do immediately?",
           options: {
             A: "Let it continue — reads from production are harmless",
             B: "Press Ctrl+C immediately (stop the AI), then run `git status` and `git diff` to assess what's happened, verify no writes occurred, then restart the session pointing to the staging database",
@@ -2022,7 +2022,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 16,
-          question: "Scenario: Claude is mid-way through implementing a 200-line database migration when you notice it's modifying a table you didn't intend to change. You have no permission controls configured. What is your only option, and what P6 safeguard was missing?",
+          question: "Claude is mid-way through implementing a 200-line database migration when you notice it's modifying a table you didn't intend to change. You have no permission controls configured. What is your only option, and what P6 safeguard was missing?",
           options: {
             A: "Wait for Claude to finish and then revert the migration",
             B: "Press Ctrl+C immediately (emergency stop). Missing P6 safeguards: Permission Controls (requiring approval before modifying database schemas) and Technical Limits (whitelisting which tables Claude can modify). With these, Claude would have asked permission before touching the unintended table.",
@@ -2034,7 +2034,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 17,
-          question: "Scenario: You're starting a new project and want to use Claude Code autonomously. Your tech lead suggests starting with full autonomy to maximize speed. According to Trust Gradualism, why is this dangerous and what should you do instead?",
+          question: "You're starting a new project and want to use Claude Code autonomously. Your tech lead suggests starting with full autonomy to maximize speed. According to Trust Gradualism, why is this dangerous and what should you do instead?",
           options: {
             A: "Full autonomy is fine if the codebase is small",
             B: "Trust Gradualism says start at Phase 1 (Observation Only): Claude reads and explains, you apply changes manually. Full autonomy on an unfamiliar tool and codebase maximizes both risk and trust simultaneously — you've granted maximum permissions without any calibration of Claude's behavior in your specific context. Build trust incrementally.",
@@ -2046,7 +2046,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 18,
-          question: "Scenario: Claude generates code that includes `const API_KEY = 'sk-prod-abc123'` hardcoded in a source file. You catch it before committing. What P6 controls would have prevented this from reaching the repository?",
+          question: "Claude generates code that includes `const API_KEY = 'sk-prod-abc123'` hardcoded in a source file. You catch it before committing. What P6 controls would have prevented this from reaching the repository?",
           options: {
             A: "Code review — always catch it manually",
             B: "Layer 1 (Technical Limits): a pre-commit hook scanning for secret patterns (`sk-prod-`, API keys, passwords) that rejects commits containing credentials. Layer 4 (Process Controls): a diff review step before committing where you verify no secrets are introduced. Layer 2 (Permission Controls): requiring approval for any new environment variable or string that looks like a credential.",
@@ -2058,7 +2058,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 19,
-          question: "Scenario: You're working with Claude on a production database. Claude asks: 'Should I proceed with `UPDATE users SET role = \"admin\" WHERE email LIKE \"%@company.com\"`?' According to P6, what specific checks should you perform before approving?",
+          question: "You're working with Claude on a production database. Claude asks: 'Should I proceed with `UPDATE users SET role = \"admin\" WHERE email LIKE \"%@company.com\"`?' According to P6, what specific checks should you perform before approving?",
           options: {
             A: "Approve if the SQL looks syntactically correct",
             B: "Run `SELECT COUNT(*) FROM users WHERE email LIKE '%@company.com'` to see how many rows will be affected, verify the LIKE pattern is correct (are there non-company emails that match?), confirm this is the intended scope, and ensure a rollback backup exists. The Safety Mantra applies: understand the blast radius before approving.",
@@ -2070,7 +2070,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 20,
-          question: "Scenario: After 3 months of productive work with Claude, you realize you've been in Phase 2 (Supervised Autonomy — approving every diff). Tests always pass, diffs are always reasonable, and no issues have occurred. Your colleague says 'move to Phase 3 now.' How do you decide if Phase 3 is appropriate?",
+          question: "After 3 months of productive work with Claude, you realize you've been in Phase 2 (Supervised Autonomy — approving every diff). Tests always pass, diffs are always reasonable, and no issues have occurred. Your colleague says 'move to Phase 3 now.' How do you decide if Phase 3 is appropriate?",
           options: {
             A: "Always stay in Phase 2 — maximum safety requires maximum oversight",
             B: "Trust Gradualism: 3 months of Phase 2 with consistent reliability (tests always pass, reasonable diffs, no incidents) provides the evidence needed for Phase 3. Transition to Selective Autonomy: auto-approve tests, linting, and routine refactors within established patterns; retain approval for novel changes, new files, and deployments.",
@@ -2328,7 +2328,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: Claude says 'I've added the password reset feature.' Your `git diff` shows 15 files changed. Claude's summary mentions only 3 files. What does this discrepancy reveal, and what should you do?",
+          question: "Claude says 'I've added the password reset feature.' Your `git diff` shows 15 files changed. Claude's summary mentions only 3 files. What does this discrepancy reveal, and what should you do?",
           options: {
             A: "The diff is wrong — trust Claude's summary",
             B: "This is a 'silent failure' of P7 — the summary does not match reality. You must review ALL 15 changed files to understand what actually changed. The 12 unmentioned files may contain important (possibly unintended) modifications.",
@@ -2340,7 +2340,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: You're debugging why a feature isn't working. The activity log shows: READ auth.js → EDIT auth.js → EDIT auth.js → EDIT auth.js → COMPLETE. No TEST entries. What does this log pattern tell you?",
+          question: "You're debugging why a feature isn't working. The activity log shows: READ auth.js → EDIT auth.js → EDIT auth.js → EDIT auth.js → COMPLETE. No TEST entries. What does this log pattern tell you?",
           options: {
             A: "Claude worked efficiently by making multiple targeted edits",
             B: "This is the Warning Pattern: multiple EDITs without any VERIFY step means Claude kept changing code without checking if changes worked. The feature was never tested — 'looks done' is the likely state.",
@@ -2352,7 +2352,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: You asked Claude to 'add input validation to the signup form.' It says 'Done!' You run the 2-Minute Audit: git diff shows a new validateEmail() function was added to utils.js. But users can still submit invalid emails. What does this tell you about where to look?",
+          question: "You asked Claude to 'add input validation to the signup form.' It says 'Done!' You run the 2-Minute Audit: git diff shows a new validateEmail() function was added to utils.js. But users can still submit invalid emails. What does this tell you about where to look?",
           options: {
             A: "The validateEmail function has a bug",
             B: "The validateEmail function exists but is never called in the signup form's submit handler — it was created but not integrated. Rationale Visibility (WHY it was placed in utils.js vs. called inline) would have revealed the integration gap.",
@@ -2364,7 +2364,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: Claude implements a performance optimization and gives confident rationale: 'I used a hash map lookup (O(1)) instead of array search (O(n)) which will dramatically improve performance.' But your benchmarks show no improvement. What does Principle 7 say about this situation?",
+          question: "Claude implements a performance optimization and gives confident rationale: 'I used a hash map lookup (O(1)) instead of array search (O(n)) which will dramatically improve performance.' But your benchmarks show no improvement. What does Principle 7 say about this situation?",
           options: {
             A: "Claude's analysis must be correct — check your benchmark setup",
             B: "Trust the benchmark over the rationale. This is AI Rationalization — the explanation sounds authoritative but the Result Visibility (benchmark data) contradicts it. Investigate: maybe the bottleneck was elsewhere, or the data set is too small to show O(n) vs O(1) difference.",
@@ -2376,7 +2376,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: You want Claude to implement a complex multi-step data pipeline. Which observability pattern should you establish at the start of the session to ensure maximum visibility?",
+          question: "You want Claude to implement a complex multi-step data pipeline. Which observability pattern should you establish at the start of the session to ensure maximum visibility?",
           options: {
             A: "Tell Claude to work as fast as possible and show results at the end",
             B: "Explain Before Executing (Claude describes each step's plan before acting) + Checkpoint After Major Steps (Claude confirms completion of each pipeline stage and awaits your go-ahead) + Summary After Completion (files changed, test results, data samples)",
@@ -2388,7 +2388,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 16,
-          question: "Scenario: You ask Claude to refactor a large codebase — 'update all API calls to use the new SDK.' Twenty minutes pass. Claude is running commands in the background. You have no idea what's happening, whether it's making progress, or what files it's modifying. This is a P7 failure. What observability instruction should you have given at the start?",
+          question: "You ask Claude to refactor a large codebase — 'update all API calls to use the new SDK.' Twenty minutes pass. Claude is running commands in the background. You have no idea what's happening, whether it's making progress, or what files it's modifying. This is a P7 failure. What observability instruction should you have given at the start?",
           options: {
             A: "Tell Claude to work faster",
             B: "Establish an observability contract: 'Before each file group you modify, tell me: what files, what changes. After each group, confirm what changed. If you hit something unexpected, stop and ask.' P7: observability must be set up proactively — you can't add it retroactively to an already-running session without disrupting it",
@@ -2400,7 +2400,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 17,
-          question: "Scenario: Claude completes a task: 'I've updated the authentication system as requested.' You ask 'what exactly changed?' Claude responds with a vague summary. You run `git diff` and find 23 files modified, some in areas you didn't expect (config files, environment variables, a deployment script). What P7 practice failure occurred?",
+          question: "Claude completes a task: 'I've updated the authentication system as requested.' You ask 'what exactly changed?' Claude responds with a vague summary. You run `git diff` and find 23 files modified, some in areas you didn't expect (config files, environment variables, a deployment script). What P7 practice failure occurred?",
           options: {
             A: "Claude made too many changes",
             B: "The post-task Summary After Completion was missing or inadequate. P7 requires Claude to proactively provide: specific files changed, nature of each change, any unexpected discoveries, and test results — not wait to be asked. The deployment script change especially should have been surfaced as a checkpoint, not buried in the final diff",
@@ -2412,7 +2412,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 18,
-          question: "Scenario: Claude is executing Step 4 of a 10-step plan. At Step 4, it announces: 'Updating database configuration — this will reset all connection pools.' You realize this will break 3 active background jobs running in production. You need to stop Claude immediately. What P7-aligned capability should be available?",
+          question: "Claude is executing Step 4 of a 10-step plan. At Step 4, it announces: 'Updating database configuration — this will reset all connection pools.' You realize this will break 3 active background jobs running in production. You need to stop Claude immediately. What P7-aligned capability should be available?",
           options: {
             A: "Close the terminal and reopen it",
             B: "Claude's Explain Before Executing practice means Step 4 was announced before execution — you can now intervene with Ctrl+C or a 'STOP — do not execute this step' message before the destructive action runs. P7's interrupt capability requires that high-impact steps are announced with enough lead time for human intervention",
@@ -2424,7 +2424,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 19,
-          question: "Scenario: You're about to have Claude autonomously manage a 2-hour data processing pipeline (reading from S3, transforming records, writing to multiple databases). You want maximum visibility while not micromanaging. What P7 observability setup balances visibility with autonomy?",
+          question: "You're about to have Claude autonomously manage a 2-hour data processing pipeline (reading from S3, transforming records, writing to multiple databases). You want maximum visibility while not micromanaging. What P7 observability setup balances visibility with autonomy?",
           options: {
             A: "Tell Claude to complete the full pipeline and give a final report",
             B: "Structured visibility contract: (1) Announce each stage before starting (S3 read, transform, DB writes). (2) Progress checkpoints every 10,000 records with counts and sample outputs. (3) Immediate escalation if error rate exceeds 1% or unexpected schema encountered. (4) Final summary with record counts, file list, error summary. This gives insight at key moments without requiring approval for every record",
@@ -2436,7 +2436,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 20,
-          question: "Scenario: After Claude completes a 'clean up technical debt' session, you ask your team lead to review the changes. They ask: 'What was the scope? What did it change? Was anything risky?' You find yourself unable to answer without reading every diff. This represents a P7 failure. What should Claude have produced?",
+          question: "After Claude completes a 'clean up technical debt' session, you ask your team lead to review the changes. They ask: 'What was the scope? What did it change? Was anything risky?' You find yourself unable to answer without reading every diff. This represents a P7 failure. What should Claude have produced?",
           options: {
             A: "Claude should have written a test for every change",
             B: "A structured Session Summary: scope of the cleanup (which files/modules), categories of changes (dead code removed, variable renames, pattern consolidations), risk assessment (any behavioral changes vs. pure refactors), test coverage status before and after. P7 observability extends to accountability artifacts — the session's output should be auditable by someone who wasn't present",
@@ -2670,7 +2670,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 9,
-          question: "Scenario: You're starting a Claude session to add a user profile feature. You have no CLAUDE.md and plan to describe the project at the start. A colleague suggests using the four-phase workflow instead. What does Phase 1 (Explore) accomplish that your description cannot?",
+          question: "You're starting a Claude session to add a user profile feature. You have no CLAUDE.md and plan to describe the project at the start. A colleague suggests using the four-phase workflow instead. What does Phase 1 (Explore) accomplish that your description cannot?",
           options: {
             A: "Phase 1 is just a longer way to do the same thing",
             B: "In Plan Mode during Explore, Claude reads the ACTUAL code files — discovering real database schema, actual component structure, existing patterns. Your verbal description is your mental model; the actual code may differ in important ways Claude will discover during exploration.",
@@ -2682,7 +2682,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 10,
-          question: "Scenario: Claude is implementing a complex refactoring and at step 5 of 10 proposes something you disagree with. You want to stop and redirect without losing the context of steps 1-4. What's the correct tool to use?",
+          question: "Claude is implementing a complex refactoring and at step 5 of 10 proposes something you disagree with. You want to stop and redirect without losing the context of steps 1-4. What's the correct tool to use?",
           options: {
             A: "/clear — start a completely fresh session",
             B: "Single Esc — stops Claude's current response while preserving the full conversation context (including steps 1-4), letting you redirect with a corrective message",
@@ -2694,7 +2694,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: You give Claude a task and it produces something wrong. You correct it. It produces something wrong again (same misunderstanding). You correct it again. On the fourth attempt it finally gets it right. According to operational best practices, what should you have done differently?",
+          question: "You give Claude a task and it produces something wrong. You correct it. It produces something wrong again (same misunderstanding). You correct it again. On the fourth attempt it finally gets it right. According to operational best practices, what should you have done differently?",
           options: {
             A: "Been more patient — four attempts is normal",
             B: "Applied the Rule of Two: after the second miss, /clear and start a fresh session with a better prompt incorporating what you learned from the two failures. Continuing to correct a corrupt context produces diminishing returns.",
@@ -2706,7 +2706,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: A developer says 'I always use the Interview Pattern for every task, even simple bug fixes.' Is this appropriate, and what does the operational best practice say?",
+          question: "A developer says 'I always use the Interview Pattern for every task, even simple bug fixes.' Is this appropriate, and what does the operational best practice say?",
           options: {
             A: "Yes — more requirements gathering always produces better results",
             B: "No — the Interview Pattern is for complex features where requirements are unclear. For simple, well-defined tasks (typo fix, config value change, single log statement), it adds overhead without value. Rule: if you're unsure whether to plan, plan. Typo fixes don't meet that bar.",
@@ -2718,7 +2718,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: You finish a complex exploratory session that surfaced a great technical approach. Before starting a new implementation session, a colleague suggests the Golden Reset. You're not sure why — can't you just continue in the same session? What's the key difference?",
+          question: "You finish a complex exploratory session that surfaced a great technical approach. Before starting a new implementation session, a colleague suggests the Golden Reset. You're not sure why — can't you just continue in the same session? What's the key difference?",
           options: {
             A: "The Golden Reset is mandatory — Claude Code requires it between sessions",
             B: "The current session's context contains exploratory noise (failed attempts, tangents, corrections). A new session gets ONLY the refined spec — Claude's full attention on implementation with no competing signals from the messy exploration. Cleaner context = more focused output.",
@@ -2730,7 +2730,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: Your team's CLAUDE.md has grown to 150 lines with detailed domain knowledge, API patterns, database schemas, and business rules. Claude is becoming slower and less focused. What operational anti-pattern is this and how do you fix it?",
+          question: "Your team's CLAUDE.md has grown to 150 lines with detailed domain knowledge, API patterns, database schemas, and business rules. Claude is becoming slower and less focused. What operational anti-pattern is this and how do you fix it?",
           options: {
             A: "The Bloated CLAUDE.md anti-pattern — keep CLAUDE.md under 60 lines with core norms only, and move domain-specific knowledge into skills (.claude/skills/) for on-demand loading",
             B: "There's no problem — more context is always better",
@@ -2742,7 +2742,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: You're debugging a production issue and Claude keeps exploring tangential possibilities — checking unrelated modules, suggesting alternative architectures, reading files that aren't connected to the bug. According to operational best practices, how should you handle this?",
+          question: "You're debugging a production issue and Claude keeps exploring tangential possibilities — checking unrelated modules, suggesting alternative architectures, reading files that aren't connected to the bug. According to operational best practices, how should you handle this?",
           options: {
             A: "Let Claude explore — it might find something useful",
             B: "Scope exploration narrowly: 'Find where authentication is configured — just that, nothing else.' Use subagents for broader research. The Infinite Exploration Spiral anti-pattern wastes time on unfocused investigation.",
@@ -2754,7 +2754,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 16,
-          question: "Scenario: You've been in a Claude Code session for 4 hours. The conversation context is very long. You notice Claude's responses becoming slightly less precise — it references an earlier decision incorrectly and seems to mix up two file names. What operational best practice should you apply?",
+          question: "You've been in a Claude Code session for 4 hours. The conversation context is very long. You notice Claude's responses becoming slightly less precise — it references an earlier decision incorrectly and seems to mix up two file names. What operational best practice should you apply?",
           options: {
             A: "Continue the session — Claude will recalibrate",
             B: "Apply context hygiene: before the session degrades further, use /compact or start a fresh session. First, ensure all important context is persisted to files (P5): update CLAUDE.md with decisions made, save any in-progress state. Then: '/compact [summary of what to retain]' or fresh session with CLAUDE.md as context. Long sessions accumulate noise that degrades precision — recognizing the signs and resetting proactively is an operational best practice",
@@ -2766,7 +2766,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 17,
-          question: "Scenario: You need to add a simple null check to a utility function. You open Claude Code, write a detailed spec, enter Plan Mode, create an ADR, and set up a feature branch with CI/CD gates. The change takes 45 minutes. Your colleague makes the same type of change in 3 minutes. According to operational best practices, what went wrong?",
+          question: "You need to add a simple null check to a utility function. You open Claude Code, write a detailed spec, enter Plan Mode, create an ADR, and set up a feature branch with CI/CD gates. The change takes 45 minutes. Your colleague makes the same type of change in 3 minutes. According to operational best practices, what went wrong?",
           options: {
             A: "Nothing — more process is always better",
             B: "Over-engineering the approach: operational best practices match process overhead to task risk and complexity. A null check to a utility function = low risk, low complexity, no architectural impact. The right approach: read the file, make the edit, run the specific test, commit. Process overhead (specs, ADRs, Plan Mode) is for high-risk, high-complexity decisions — not every change",
@@ -2778,7 +2778,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 18,
-          question: "Scenario: You need to investigate: (1) how the payment module works, (2) what tests exist for billing, and (3) what the deployment process requires. You ask Claude to research all three in the main session, which takes 30 minutes of file-reading. This bloats your main context. What operational practice would have been more efficient?",
+          question: "You need to investigate: (1) how the payment module works, (2) what tests exist for billing, and (3) what the deployment process requires. You ask Claude to research all three in the main session, which takes 30 minutes of file-reading. This bloats your main context. What operational practice would have been more efficient?",
           options: {
             A: "Research everything upfront is the right approach",
             B: "Use parallel subagents for independent research: spawn 3 subagents simultaneously (each with a specific research question) while the main session plans. Subagents return findings; main session acts on them. Parallel research (multiple agents simultaneously) vs. sequential research (one agent, then another) can reduce research phase from 30 minutes to 10 minutes while keeping main context clean",
@@ -2790,7 +2790,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 19,
-          question: "Scenario: Claude is trying to fix a test but has been in a loop for 20 minutes: tries fix A → test fails → tries fix B → different error → tries fix C → back to original error. The session has 15+ attempts and the context is filled with failed experiments. What operational practice should you apply?",
+          question: "Claude is trying to fix a test but has been in a loop for 20 minutes: tries fix A → test fails → tries fix B → different error → tries fix C → back to original error. The session has 15+ attempts and the context is filled with failed experiments. What operational practice should you apply?",
           options: {
             A: "Let Claude continue — it will eventually converge",
             B: "Apply the Debugging Loop Anti-Pattern intervention: stop the session, use /compact or restart. Before restarting, read the error messages directly and diagnose the root cause yourself (or with a fresh Claude session focused only on diagnosis). Then bring a specific hypothesis to a new session: 'The error is X, the root cause appears to be Y — implement fix Z.' Fresh context + specific direction breaks the loop",
@@ -2802,7 +2802,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 20,
-          question: "Scenario: You start a new Claude Code session on a project. Instead of reading CLAUDE.md or recent git history, Claude immediately begins asking 'what would you like to do today?' and then starts work based only on your current request, unaware of project conventions. What operational practice improves session startup?",
+          question: "You start a new Claude Code session on a project. Instead of reading CLAUDE.md or recent git history, Claude immediately begins asking 'what would you like to do today?' and then starts work based only on your current request, unaware of project conventions. What operational practice improves session startup?",
           options: {
             A: "Always paste the last session's transcript as context",
             B: "Establish a session initialization protocol: at session start, Claude reads CLAUDE.md (project context), scans recent git log (what changed recently), and checks any active progress files (ongoing tasks). This takes 2 minutes but prevents suggesting approaches that violate project conventions, duplicating recently-completed work, and missing project-specific context that affects every decision",
@@ -3024,7 +3024,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 8,
-          question: "Scenario: Your team just onboarded and scores 2/7 on the Project Health Score (Cowboy Coder). You want to improve quickly. What is the recommended first principle to implement and why?",
+          question: "Your team just onboarded and scores 2/7 on the Project Health Score (Cowboy Coder). You want to improve quickly. What is the recommended first principle to implement and why?",
           options: {
             A: "P5 (State Persistence) — create CLAUDE.md immediately",
             B: "P3 (Verification) — establish a testing baseline first. Without verification, you cannot trust any AI output; all other principles build on knowing whether things work. Then add P7 (Observability) to understand why things fail.",
@@ -3036,7 +3036,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 9,
-          question: "Scenario: You're debugging a production authentication issue. Which workflow template applies, and in what specific order should you apply the principles?",
+          question: "You're debugging a production authentication issue. Which workflow template applies, and in what specific order should you apply the principles?",
           options: {
             A: "Feature Development Template — write a spec first",
             B: "Quick Fix/Debug Template: P1 (Bash — investigate with terminal: tail logs, grep errors) → P7 (Observability — trace the failure chain through logs) → P3 (Verification — propose fix, verify it solves the issue) → P4 (Decomposition — implement fix atomically) → P6 (Safety — confirm rollback plan before deploying to production)",
@@ -3048,7 +3048,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 10,
-          question: "Scenario: A junior developer asks 'Why do I need all 7 principles? Can I just use P1 (Bash) and get most of the benefit?' How do you respond based on the Director's Loop?",
+          question: "A junior developer asks 'Why do I need all 7 principles? Can I just use P1 (Bash) and get most of the benefit?' How do you respond based on the Director's Loop?",
           options: {
             A: "Yes — P1 is the most important and covers most cases",
             B: "P1 enables action; but without P2 (precise specs), you act on vague requirements. Without P3, you don't know if actions worked. Without P4, mistakes compound. Without P5, context is lost between sessions. Without P6, actions could be irreversible. Without P7, you can't debug. P1 underlies everything, but the principles are complementary — each covers a failure mode the others don't.",
@@ -3060,7 +3060,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: You're implementing a new payment feature. Your colleague suggests: 'Just tell Claude to add Stripe integration and let it handle everything.' According to the Director's Loop and principle integration, what's the risk of this approach?",
+          question: "You're implementing a new payment feature. Your colleague suggests: 'Just tell Claude to add Stripe integration and let it handle everything.' According to the Director's Loop and principle integration, what's the risk of this approach?",
           options: {
             A: "No risk — Claude can handle payment integration autonomously",
             B: "Missing multiple principles: no P2 (precise spec as code), no P6 (safety controls for payment data), no P3 (verification plan for payment flows), no P7 (observability for debugging payment failures). The Director provides direction, context, guardrails, and verification — not just a vague instruction.",
@@ -3072,7 +3072,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: A team implements a feature using all 7 principles but skips P4 (Small, Reversible Decomposition) — they make one giant commit with all changes. The feature has a bug. What specific capability did they lose by skipping P4?",
+          question: "A team implements a feature using all 7 principles but skips P4 (Small, Reversible Decomposition) — they make one giant commit with all changes. The feature has a bug. What specific capability did they lose by skipping P4?",
           options: {
             A: "The ability to verify the feature works",
             B: "Surgical rollback — with atomic commits per decomposition step, they could git revert the specific buggy change. With one giant commit, they must either fix forward (harder with mixed concerns) or revert the entire feature (losing working parts).",
@@ -3084,7 +3084,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: You're reviewing a PR where Claude implemented a database migration. The diff looks correct, tests pass, but there's no SQL preview or staging verification. Which principle(s) were insufficiently applied?",
+          question: "You're reviewing a PR where Claude implemented a database migration. The diff looks correct, tests pass, but there's no SQL preview or staging verification. Which principle(s) were insufficiently applied?",
           options: {
             A: "P1 (Bash) — Claude should have run the migration directly",
             B: "P3 (Verification) — migration should be verified in staging first, and P6 (Safety) — SQL should be reviewed before applying to production. P7 (Observability) — the migration's effect should be observable in staging logs.",
@@ -3096,7 +3096,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: A developer says 'I use Claude for code generation but review everything manually before committing.' Which principles are they applying, and which are they missing?",
+          question: "A developer says 'I use Claude for code generation but review everything manually before committing.' Which principles are they applying, and which are they missing?",
           options: {
             A: "Applying P7 (Observability — manual review); Missing P1 (not using terminal), P3 (no automated verification), P4 (no decomposition), P5 (no persistent context), P6 (no safety controls)",
             B: "Applying all principles — manual review covers everything",
@@ -3108,7 +3108,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: Your team has been using Claude Code for 3 months. You can identify which principles apply to scenarios (recognition) and use them for simple tasks (application), but when complex multi-principle failures occur, you struggle to diagnose which principles were violated. According to the Assessment Rubric, what's your level and what should you focus on?",
+          question: "Your team has been using Claude Code for 3 months. You can identify which principles apply to scenarios (recognition) and use them for simple tasks (application), but when complex multi-principle failures occur, you struggle to diagnose which principles were violated. According to the Assessment Rubric, what's your level and what should you focus on?",
           options: {
             A: "Beginner — focus on learning all 7 principles from scratch",
             B: "Developing — focus on Workflow Diagnosis practice: when things break, work backwards from the failure to identify which principle(s) were violated. Use the 'Compare' step: what would have happened WITH the principle applied?",
@@ -3120,7 +3120,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 16,
-          question: "Scenario: You need Claude to add a new payment provider integration. The feature requires: database changes, API client implementation, webhook handling, and documentation. Which combination of principles should guide your approach?",
+          question: "You need Claude to add a new payment provider integration. The feature requires: database changes, API client implementation, webhook handling, and documentation. Which combination of principles should guide your approach?",
           options: {
             A: "Just P1 (Bash) — run the tests after Claude is done",
             B: "P2 (design interface/tests first), P4 (decompose into DB → API → webhook → docs phases, each committed separately), P3 (verify each phase before proceeding), P5 (CLAUDE.md updated with payment provider constraints), P6 (approve DB schema before migration runs), P7 (explain before each phase, checkpoint after). Multiple principles applied in concert",
@@ -3132,7 +3132,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 17,
-          question: "Scenario: P6 says 'require explicit approval before irreversible actions.' P7 says 'maintain forward momentum with minimal interruption.' You're running a 50-step automated pipeline. Requiring approval at each irreversible step would create 15 approval gates, killing momentum. How do you resolve this apparent tension?",
+          question: "P6 says 'require explicit approval before irreversible actions.' P7 says 'maintain forward momentum with minimal interruption.' You're running a 50-step automated pipeline. Requiring approval at each irreversible step would create 15 approval gates, killing momentum. How do you resolve this apparent tension?",
           options: {
             A: "Choose one principle and ignore the other",
             B: "Resolve through pre-negotiation: before the pipeline starts, review and approve the list of all 15 irreversible steps upfront (P6 batch approval). This satisfies P6 (irreversible actions were explicitly reviewed) while enabling P7 (pipeline runs with minimal interruption after the initial review). The principles aren't in conflict — they're resolved by shifting the approval to plan time rather than execution time",
@@ -3144,7 +3144,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 18,
-          question: "Scenario: You assess your AI collaboration workflow. Your P3 (Verification) score is 1 — you almost never verify Claude's outputs before moving on. In the last month, you've had 3 incidents where unverified changes caused production issues that took hours to fix. According to the 'Putting It All Together' framework, what is the most impactful improvement you can make?",
+          question: "You assess your AI collaboration workflow. Your P3 (Verification) score is 1 — you almost never verify Claude's outputs before moving on. In the last month, you've had 3 incidents where unverified changes caused production issues that took hours to fix. According to the 'Putting It All Together' framework, what is the most impactful improvement you can make?",
           options: {
             A: "Improve P7 (Observability) — add more logging",
             B: "Improve P3 specifically: establish a verification habit before every commit. 'Run the relevant tests, inspect the key output, confirm the change does what was intended.' P3 at score 1 with 3 production incidents is a direct causal link. The highest ROI fix is the lowest-scored principle causing active problems — start there, not with principles already working",
@@ -3156,7 +3156,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 19,
-          question: "Scenario: You want to introduce the seven principles to your 8-person development team. Some developers are skeptical ('this is just common sense'), others are overwhelmed ('I have to remember 7 things for every task'). What's the most effective adoption strategy?",
+          question: "You want to introduce the seven principles to your 8-person development team. Some developers are skeptical ('this is just common sense'), others are overwhelmed ('I have to remember 7 things for every task'). What's the most effective adoption strategy?",
           options: {
             A: "Require all 7 principles in every task from day one",
             B: "Start with P3 (Verification) and P6 (Safety) — the two principles with the highest immediate risk-reduction value and clearest application. Run a team retrospective on recent AI-collaboration incidents and map them to which principle was missing. Let the team experience the value before introducing the full framework. Add principles incrementally as understanding deepens",
@@ -3168,7 +3168,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 20,
-          question: "Scenario: A developer claims mastery of all seven principles. They correctly explain each principle when asked. However, when given a complex real task, they apply principles in a rigid sequential checklist: 'check P1, check P2, check P3...' regardless of task type. Tasks take much longer than necessary. According to the Assessment Rubric, what level are they actually at?",
+          question: "A developer claims mastery of all seven principles. They correctly explain each principle when asked. However, when given a complex real task, they apply principles in a rigid sequential checklist: 'check P1, check P2, check P3...' regardless of task type. Tasks take much longer than necessary. According to the Assessment Rubric, what level are they actually at?",
           options: {
             A: "Master Director — they correctly applied all principles",
             B: "Proficient (not Master). Master Director level requires fluid, contextual application: principles activate automatically when relevant, not mechanically. The checklist approach indicates understanding but not internalization. True mastery: starting a feature, P2 activates naturally ('I should define the interface first'). P4 activates based on risk level. Rigid sequential checklisting is 'Proficient' applying rules; fluid contextual activation is 'Master' with internalized judgment",
@@ -3366,7 +3366,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 6,
-          question: "Scenario: You're doing the Capstone C exercise (audit your own workflow). You rate yourself: P1=3, P2=2, P3=4, P4=2, P5=1, P6=3, P7=4. Your total is 19/28 (~6.8, rounding to 7). But wait — the Health Score is 0-7 based on count of principles actively applied, not average. Which principles are your specific gaps and what's your actual Health Score?",
+          question: "You're doing the Capstone C exercise (audit your own workflow). You rate yourself: P1=3, P2=2, P3=4, P4=2, P5=1, P6=3, P7=4. Your total is 19/28 (~6.8, rounding to 7). But wait — the Health Score is 0-7 based on count of principles actively applied, not average. Which principles are your specific gaps and what's your actual Health Score?",
           options: {
             A: "Health Score 7 — you're a Master Director",
             B: "Health Score 5 (Agent Architect) — your gaps are P2 (Code as Interface, score 2) and P5 (Persisting State, score 1). Focus improvement on writing tests as specs and maintaining CLAUDE.md/ADRs.",
@@ -3378,7 +3378,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 7,
-          question: "Scenario: During the Module 5 exercise (Constraints and Permission Models), you set Claude to 'Confirming' mode for a routine task (renaming a variable across 3 files). Your instructor says this is overkill. According to the permission model guidance, when should you use 'Confirming' vs. 'Permissive'?",
+          question: "During the Module 5 exercise (Constraints and Permission Models), you set Claude to 'Confirming' mode for a routine task (renaming a variable across 3 files). Your instructor says this is overkill. According to the permission model guidance, when should you use 'Confirming' vs. 'Permissive'?",
           options: {
             A: "Always use Confirming — it's the safest",
             B: "Confirming for: new AI collaboration, unfamiliar codebase, learning phase, production systems. Permissive for: routine work on familiar projects, trusted AI, experienced users. Variable renaming across 3 files in a familiar codebase = Permissive is appropriate.",
@@ -3390,7 +3390,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 8,
-          question: "Scenario: You complete the Module 7 exercise (Full Cycle: Debug Production Issue). You investigated with Bash (P1), traced through logs (P7), proposed a fix, verified it in staging (P3), made an atomic commit (P4), and showed the diff before applying (P6). Your instructor asks: 'What about P2 and P5?' How were those principles implicitly applied?",
+          question: "You complete the Module 7 exercise (Full Cycle: Debug Production Issue). You investigated with Bash (P1), traced through logs (P7), proposed a fix, verified it in staging (P3), made an atomic commit (P4), and showed the diff before applying (P6). Your instructor asks: 'What about P2 and P5?' How were those principles implicitly applied?",
           options: {
             A: "They weren't applied — you missed two principles",
             B: "P2 (Code as Interface): your fix was a specific code change, not a vague description. P5 (Persisting State): you documented the incident and fix in an ADR or runbook for future reference. Both were applied even if not explicitly named.",
@@ -3402,7 +3402,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 9,
-          question: "Scenario: After a month of applying the 7 principles, you re-assess your Capstone C Health Score. It went from 4 to 6. According to the exercise guidance, what changed and what's your next step?",
+          question: "After a month of applying the 7 principles, you re-assess your Capstone C Health Score. It went from 4 to 6. According to the exercise guidance, what changed and what's your next step?",
           options: {
             A: "You went from Collaborator to Agent Architect — you're now managing AI effectively with professional-grade workflows. Next step: optimize further and work toward 7 (Master Director) by teaching others and refining judgment.",
             B: "Nothing changed — 4 and 6 are both passing scores",
@@ -3414,7 +3414,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 10,
-          question: "Scenario: Your team completes all 17 exercises. One developer says 'I can name all 7 principles but still struggle to apply them in real work.' According to the Assessment Rubric, what level are they at and what's the gap?",
+          question: "Your team completes all 17 exercises. One developer says 'I can name all 7 principles but still struggle to apply them in real work.' According to the Assessment Rubric, what level are they at and what's the gap?",
           options: {
             A: "Advanced — naming principles is the highest level",
             B: "Beginner/Developing gap — they have Recognition (can name principles) but lack Application (using them to solve concrete problems). The gap is practice: exercises build recognition; real work builds application. They need to deliberately apply one principle per task until it becomes habit.",
@@ -3426,7 +3426,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: You're doing the Capstone C exercise (audit your own workflow). You rate yourself: P1=3, P2=2, P3=4, P4=2, P5=1, P6=3, P7=4. Your total is 19/28 (~6.8, rounding to 7). But wait — the Health Score is 0-7 based on count of principles actively applied, not average. Which principles are your specific gaps and what's your actual Health Score?",
+          question: "You're doing the Capstone C exercise (audit your own workflow). You rate yourself: P1=3, P2=2, P3=4, P4=2, P5=1, P6=3, P7=4. Your total is 19/28 (~6.8, rounding to 7). But wait — the Health Score is 0-7 based on count of principles actively applied, not average. Which principles are your specific gaps and what's your actual Health Score?",
           options: {
             A: "Health Score 7 — you're a Master Director",
             B: "Health Score 4 (Collaborator) — your gaps are P2 (Code as Interface, score 2), P4 (Decomposition, score 2), and P5 (Persisting State, score 1). Focus improvement on writing tests as specs, atomic commits, and maintaining CLAUDE.md/ADRs.",
@@ -3438,7 +3438,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: Exercise B — Workflow Diagnosis. Claude was asked to refactor a set of data models. The result: (1) 3 models were refactored, (2) existing tests were deleted instead of updated, (3) no new tests were added, (4) all changes were in one large commit, (5) no status updates were given during the 40-minute session. Identify which principles were violated.",
+          question: "Exercise B — Workflow Diagnosis. Claude was asked to refactor a set of data models. The result: (1) 3 models were refactored, (2) existing tests were deleted instead of updated, (3) no new tests were added, (4) all changes were in one large commit, (5) no status updates were given during the 40-minute session. Identify which principles were violated.",
           options: {
             A: "No principles were violated — the refactoring was completed",
             B: "P2 violated (tests deleted/not updated — Code as Interface requires tests as specs). P3 violated (no verification — refactored models were never tested). P4 violated (one large commit — no atomic commits for granular reversibility). P7 violated (no status updates during 40 minutes — observability requires progress visibility). 4 principle violations in one task",
@@ -3450,7 +3450,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: Exercise C — Principle Application. You want Claude to investigate why your Next.js build is 40% slower than last week. Using Principle 1 (Bash as Key), what specific terminal-based investigation would ground the diagnosis in reality rather than speculation?",
+          question: "Exercise C — Principle Application. You want Claude to investigate why your Next.js build is 40% slower than last week. Using Principle 1 (Bash as Key), what specific terminal-based investigation would ground the diagnosis in reality rather than speculation?",
           options: {
             A: "Ask Claude to read all modified files from last week and reason about performance",
             B: "Run targeted bash commands to gather ground truth: `time npm run build` (measure actual build time), `git log --oneline --since='1 week ago'` (identify recent changes), `npm run build -- --profile` (turbopack/webpack profiling output), `du -sh .next/` (output size), `git diff HEAD~N -- package.json` (dependency changes). P1: each command provides verified data — not hypotheses about what might be slower",
@@ -3462,7 +3462,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: Exercise C — You're building a notification system. Using P2 (Code as Universal Interface), what should be the FIRST artifact Claude produces before writing any implementation?",
+          question: "Exercise C — You're building a notification system. Using P2 (Code as Universal Interface), what should be the FIRST artifact Claude produces before writing any implementation?",
           options: {
             A: "A database schema for storing notifications",
             B: "A test file (or interface definition) that defines how the notification system will be used from the consumer's perspective: `sendNotification(userId, type, payload)`, `getNotificationHistory(userId, opts)`, `markAsRead(notificationId)` — with test cases that specify behavior for each function. P2: the interface (defined by tests) precedes the implementation",
@@ -3474,7 +3474,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: Exercise C — Claude implements a new caching layer in 3 steps: Step 1 (cache interface), Step 2 (Redis adapter), Step 3 (integration with existing services). Using P3 (Verification as Core Step), what should happen between each step?",
+          question: "Exercise C — Claude implements a new caching layer in 3 steps: Step 1 (cache interface), Step 2 (Redis adapter), Step 3 (integration with existing services). Using P3 (Verification as Core Step), what should happen between each step?",
           options: {
             A: "Proceed directly — verify everything at the end after all 3 steps",
             B: "P3 verification between every step: After Step 1: run unit tests for the cache interface. After Step 2: run Redis adapter tests (connect, read, write, handle failures). After Step 3: run integration tests confirming existing services use the cache correctly. Plus: end-to-end test showing cache hit/miss behavior. Each verification gate catches problems while context is local",
@@ -3486,7 +3486,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 16,
-          question: "Scenario: Exercise C — You're migrating an Express.js API to FastAPI. The migration involves: authentication, data models, endpoints (×23), business logic, tests, and deployment configuration. Using P4 (Small, Reversible Decomposition), what is the correct approach?",
+          question: "Exercise C — You're migrating an Express.js API to FastAPI. The migration involves: authentication, data models, endpoints (×23), business logic, tests, and deployment configuration. Using P4 (Small, Reversible Decomposition), what is the correct approach?",
           options: {
             A: "Migrate everything in parallel to complete faster",
             B: "Ordered phase decomposition: Phase 1 (data models → commit + verify). Phase 2 (authentication → commit + verify, most critical dependency). Phase 3 (batch endpoints by risk: health/read-only first → commit, then write endpoints → commit, then admin endpoints → commit). Phase 4 (business logic → commit + integration tests). Phase 5 (tests). Phase 6 (deployment config). Each commit is independently deployable progress, each failure is isolated",
@@ -3498,7 +3498,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 17,
-          question: "Scenario: Capstone Exercise — you're leading a 6-week AI-assisted development project with 4 developers. After 3 weeks, you notice: (1) different developers get different answers from Claude about project conventions, (2) the same architectural decisions are debated multiple times, (3) new team members take 3 days to onboard. What P5 practices are missing?",
+          question: "Capstone Exercise — you're leading a 6-week AI-assisted development project with 4 developers. After 3 weeks, you notice: (1) different developers get different answers from Claude about project conventions, (2) the same architectural decisions are debated multiple times, (3) new team members take 3 days to onboard. What P5 practices are missing?",
           options: {
             A: "The team needs better communication, not better documentation",
             B: "Shared P5 infrastructure: (1) Central CLAUDE.md in the repo — all conventions in one place, updated when decisions are made (consistency across developers). (2) ADR directory — every architectural decision documented (prevents re-debate). (3) Onboarding checklist — new developer reads CLAUDE.md + ADRs + gets oriented in 2 hours, not 3 days. P5 at team scale requires making file-persisted knowledge accessible and maintained by everyone",
@@ -3510,7 +3510,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 18,
-          question: "Scenario: Capstone Exercise — Claude is autonomously running database maintenance: cleaning up orphaned records, archiving old data, and rebuilding indexes. This is a 45-minute operation. Design a P6 + P7 combined protocol for this operation.",
+          question: "Capstone Exercise — Claude is autonomously running database maintenance: cleaning up orphaned records, archiving old data, and rebuilding indexes. This is a 45-minute operation. Design a P6 + P7 combined protocol for this operation.",
           options: {
             A: "Let Claude run with full autonomy and review the results after",
             B: "P6 gates: (1) Pre-run: review and approve the list of all DELETE/archive operations before starting. (2) Include an automatic STOP if deletion count exceeds expected by >5% (anomaly detection). P7 visibility: (3) Progress report every 5 minutes: records processed, deletion counts, index rebuild status. (4) Immediate escalation for any unexpected row count or error. (5) Final summary confirming data integrity. Combined: P6 prevents accidents; P7 ensures you can detect and intervene if something unexpected occurs",
@@ -3522,7 +3522,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 19,
-          question: "Scenario: Capstone — You are an 'Agent Architect.' For a new feature (OAuth2 integration), map each of the 7 principles to a concrete action you take BEFORE asking Claude to write any code.",
+          question: "Capstone — You are an 'Agent Architect.' For a new feature (OAuth2 integration), map each of the 7 principles to a concrete action you take BEFORE asking Claude to write any code.",
           options: {
             A: "Agent Architects don't need to pre-plan — they guide Claude in real-time",
             B: "P1: verify the oauth2 library is installed (bash: `npm list`). P2: write tests for the OAuth flow before implementation. P3: define verification criteria for each OAuth step. P4: decompose into phases (library setup → auth URL generation → token exchange → session → UI). P5: add OAuth constraints to CLAUDE.md. P6: identify irreversible actions (DB schema for sessions, production redirect URIs). P7: set up 'explain before each phase, checkpoint after.' These 7 pre-actions create a ready environment before Claude writes a line",
@@ -3534,7 +3534,7 @@ export const chapter17: Chapter = {
         },
         {
           id: 20,
-          question: "Scenario: Capstone — Final assessment. You've been using the seven principles for 6 months. You encounter a novel situation: Claude is helping you analyze a competitor's public API (no code changes, pure research). Which subset of principles is active, and which can be relaxed?",
+          question: "Capstone — Final assessment. You've been using the seven principles for 6 months. You encounter a novel situation: Claude is helping you analyze a competitor's public API (no code changes, pure research). Which subset of principles is active, and which can be relaxed?",
           options: {
             A: "All 7 principles must always be applied to every task",
             B: "Active: P1 (Bash for curl/jq to actually query the API endpoints and get real responses), P3 (verify analysis conclusions by running the API calls), P7 (progress updates as endpoints are analyzed). Relaxed: P2 (no code interface being built), P4 (research doesn't need atomic commits), P5 (CLAUDE.md update optional unless findings affect project decisions), P6 (no irreversible actions in read-only research). Principle activation is task-contextual",

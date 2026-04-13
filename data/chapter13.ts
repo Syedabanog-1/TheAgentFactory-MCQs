@@ -132,7 +132,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: You're writing a specification for a new team member who will use AI to implement a feature. You write the requirements in plain text paragraphs without any Markdown structure. The AI generates incomplete code missing key features. What Markdown principle would have prevented this?",
+          question: "You're writing a specification for a new team member who will use AI to implement a feature. You write the requirements in plain text paragraphs without any Markdown structure. The AI generates incomplete code missing key features. What Markdown principle would have prevented this?",
           options: {
             A: "Using more descriptive adjectives in your plain text",
             B: "Adding Markdown structure (headings, lists) to provide 'attention cues' that help AI parse requirements as distinct items rather than a continuous text stream",
@@ -144,7 +144,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: Your team is choosing a format for AI-facing specifications. A developer suggests using a proprietary Word document format because 'it looks more professional.' You recommend Markdown instead. What is the strongest argument based on Chapter 13 Lesson 1?",
+          question: "Your team is choosing a format for AI-facing specifications. A developer suggests using a proprietary Word document format because 'it looks more professional.' You recommend Markdown instead. What is the strongest argument based on Chapter 13 Lesson 1?",
           options: {
             A: "Markdown files are smaller in size than Word documents",
             B: "Markdown requires no special software, is a stable standard, and AI can parse its structure meaningfully — Word documents are opaque to AI without conversion and may become unreadable if the format changes",
@@ -156,7 +156,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: You ask an AI to 'build a dashboard' using a vague natural language prompt. The AI generates a basic layout but misses critical features like error handling and data validation. You rewrite the request using structured Markdown with headings for 'Features,' 'Error Handling,' and 'Data Validation' as bullet lists. The new output is complete. What does this demonstrate?",
+          question: "You ask an AI to 'build a dashboard' using a vague natural language prompt. The AI generates a basic layout but misses critical features like error handling and data validation. You rewrite the request using structured Markdown with headings for 'Features,' 'Error Handling,' and 'Data Validation' as bullet lists. The new output is complete. What does this demonstrate?",
           options: {
             A: "AI models perform better in the afternoon than in the morning",
             B: "Markdown structure transforms vague intentions into explicit, parseable requirements — headings signal topical boundaries and lists create item separation that AI attention mechanisms can focus on",
@@ -168,7 +168,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: A startup is building an AI-native product and wants specifications that will remain usable for 5+ years. They're considering Markdown vs. a new AI-specific format that 'optimizes token usage.' Based on Chapter 13 Lesson 1, what should they choose and why?",
+          question: "A startup is building an AI-native product and wants specifications that will remain usable for 5+ years. They're considering Markdown vs. a new AI-specific format that 'optimizes token usage.' Based on Chapter 13 Lesson 1, what should they choose and why?",
           options: {
             A: "The new AI-specific format — it's designed for AI and will be more efficient",
             B: "Markdown — the CommonMark specification is stable and won't undergo breaking changes, ensuring specs written today remain readable by AI tools 5+ years from now; new formats may become obsolete",
@@ -180,7 +180,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: You're onboarding a new developer to an AI-driven project. They ask why the team uses Markdown for specifications instead of just talking to the AI. You explain using the Layer 1 (Intent Layer) concept from Chapter 13 Lesson 1. What do you say?",
+          question: "You're onboarding a new developer to an AI-driven project. They ask why the team uses Markdown for specifications instead of just talking to the AI. You explain using the Layer 1 (Intent Layer) concept from Chapter 13 Lesson 1. What do you say?",
           options: {
             A: "'Markdown is Layer 1 — it's how we humans write what we want. The AI reads our Markdown spec (Layer 1), plans implementation (Layer 2), and generates code (Layer 3). Without Markdown, we have no bridge between our intent and the AI's output.'",
             B: "'Markdown makes the documents look professional for stakeholders.'",
@@ -252,7 +252,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 21,
-          question: "Scenario: A developer argues that Markdown is 'just cosmetic formatting' and AI doesn't care about structure. What is the strongest counter-argument from Lesson 1?",
+          question: "A developer argues that Markdown is 'just cosmetic formatting' and AI doesn't care about structure. What is the strongest counter-argument from Lesson 1?",
           options: {
             A: "Markdown files are smaller, so AI processes them faster",
             B: "Markdown structure provides 'attention cues' — headings signal topical boundaries and lists create item separation that help AI focus on relevant sections; the weather app example demonstrates structured input produces demonstrably better and more complete output",
@@ -264,7 +264,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 22,
-          question: "Scenario: You're choosing between Markdown and a word processor for AI agent specifications that must remain usable for 5+ years. What advantage does the 'stable standard' principle from Lesson 1 give Markdown?",
+          question: "You're choosing between Markdown and a word processor for AI agent specifications that must remain usable for 5+ years. What advantage does the 'stable standard' principle from Lesson 1 give Markdown?",
           options: {
             A: "Word processors cannot handle code examples or technical content",
             B: "Markdown uses the finalized CommonMark specification that won't undergo breaking changes — specifications written today remain readable by AI tools years from now; word processor formats may change versions or become proprietary",
@@ -276,7 +276,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 23,
-          question: "Scenario: Your project requires specifications that both junior developers and AI agents must understand without any conversion step. Which Markdown property makes it ideal?",
+          question: "Your project requires specifications that both junior developers and AI agents must understand without any conversion step. Which Markdown property makes it ideal?",
           options: {
             A: "Markdown supports a maximum of 5 font sizes making it simpler for beginners",
             B: "Markdown is 'structured text readable by humans AND parseable by computers' — making it simultaneously comprehensible to human readers and meaningfully processable by AI agents without conversion or special software",
@@ -288,7 +288,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 24,
-          question: "Scenario: An AI consistently misses requirements in your 3-paragraph plain-text specification. You restructure it with Markdown headings and lists. The AI then implements all requirements. What Lesson 1 principle explains this improvement?",
+          question: "An AI consistently misses requirements in your 3-paragraph plain-text specification. You restructure it with Markdown headings and lists. The AI then implements all requirements. What Lesson 1 principle explains this improvement?",
           options: {
             A: "The restructured specification used more words, giving AI more data to work with",
             B: "Markdown structure provides 'attention cues' — headings signal where requirement sections begin, and lists make individual requirements distinct countable items rather than buried in continuous prose",
@@ -300,7 +300,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 25,
-          question: "Scenario: You're choosing between Markdown and HTML for AI specifications. HTML provides more formatting control. Based on Lesson 1, why should you choose Markdown?",
+          question: "You're choosing between Markdown and HTML for AI specifications. HTML provides more formatting control. Based on Lesson 1, why should you choose Markdown?",
           options: {
             A: "HTML is not supported by any current AI tool or coding agent",
             B: "Markdown requires no special software, is stable plain text AI reads directly, and its syntax is human-readable without rendering; HTML is verbose for specifications and requires parsing infrastructure to extract structural meaning",
@@ -312,7 +312,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 26,
-          question: "Scenario: A project manager suggests writing AI specs in a proprietary project management tool's native format. What risk does this create based on Lesson 1?",
+          question: "A project manager suggests writing AI specs in a proprietary project management tool's native format. What risk does this create based on Lesson 1?",
           options: {
             A: "The project management tool will block AI from accessing its files",
             B: "Proprietary formats create lock-in and instability — if the tool changes its format, specifications become unreadable; AI cannot parse proprietary binary formats directly; Markdown's stability as an open standard ensures specifications remain accessible regardless of tool changes",
@@ -324,7 +324,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 27,
-          question: "Scenario: You're building a Docusaurus documentation site where AI agents will read specifications to understand project architecture. What does Lesson 1 say about Markdown's suitability?",
+          question: "You're building a Docusaurus documentation site where AI agents will read specifications to understand project architecture. What does Lesson 1 say about Markdown's suitability?",
           options: {
             A: "Docusaurus requires proprietary XML format, not Markdown",
             B: "Documentation sites (Docusaurus) are explicitly listed as one of the four real-world Markdown applications — sites built with Markdown have structured content AI agents parse through headings and hierarchies meaningfully",
@@ -336,7 +336,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 28,
-          question: "Scenario: Your team writes high-quality Markdown specifications but finds AI generates different results each time even from identical specs. Based on LLM behavior principles from Lesson 1, what is the root cause?",
+          question: "Your team writes high-quality Markdown specifications but finds AI generates different results each time even from identical specs. Based on LLM behavior principles from Lesson 1, what is the root cause?",
           options: {
             A: "Markdown processing is randomized within LLMs by design",
             B: "LLMs are probabilistic — they sample from probability distributions, so identical inputs can produce different outputs; Markdown structure reduces variation by providing clear attention cues but cannot eliminate the fundamental probabilistic nature of LLMs",
@@ -348,7 +348,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 29,
-          question: "Scenario: A startup wants to create a 'universal specification format' to replace Markdown for AI, claiming superior efficiency. Based on Lesson 1's 'stable standard' principle, what risk should they consider?",
+          question: "A startup wants to create a 'universal specification format' to replace Markdown for AI, claiming superior efficiency. Based on Lesson 1's 'stable standard' principle, what risk should they consider?",
           options: {
             A: "Their new format will definitely outperform Markdown in all benchmarks",
             B: "A new proprietary format lacks Markdown's stability advantage — CommonMark is finalized and won't break; a new format may evolve, break, or become unsupported, causing specifications to become unreadable by future AI tools trained on Markdown",
@@ -360,7 +360,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 30,
-          question: "Scenario: A technical writer asks how to make AI chat prompts more effective using Lesson 1 concepts. What is the most actionable advice?",
+          question: "A technical writer asks how to make AI chat prompts more effective using Lesson 1 concepts. What is the most actionable advice?",
           options: {
             A: "Write longer prompts to give AI more context and data to work with",
             B: "Structure chat prompts with Markdown — use ## headings for major sections of your request, bullet lists for distinct requirements, and code blocks for examples; this provides 'attention cues' helping AI focus on each requirement distinctly",
@@ -498,7 +498,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: You're writing a specification for a new feature. You use Level 1 headings (#) for each major section (Problem, Features, Installation) because 'they stand out more.' The AI seems confused about the document structure. What heading hierarchy mistake did you make?",
+          question: "You're writing a specification for a new feature. You use Level 1 headings (#) for each major section (Problem, Features, Installation) because 'they stand out more.' The AI seems confused about the document structure. What heading hierarchy mistake did you make?",
           options: {
             A: "You should have used Level 4 headings for all sections",
             B: "Level 1 headings should only be used once for the document title; Level 2 (##) should be used for main sections like Problem, Features, Installation",
@@ -510,7 +510,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: Your team's specification jumps from Level 1 (title) directly to Level 3 (### Features) because 'Level 2 feels unnecessary.' A new developer complains the document structure is confusing. What principle from Chapter 13 Lesson 2 explains why this is problematic?",
+          question: "Your team's specification jumps from Level 1 (title) directly to Level 3 (### Features) because 'Level 2 feels unnecessary.' A new developer complains the document structure is confusing. What principle from Chapter 13 Lesson 2 explains why this is problematic?",
           options: {
             A: "Level 3 headings are harder to read than Level 2",
             B: "Skipping heading levels breaks the logical hierarchy — just as you wouldn't place 'Vacation Photos' directly under 'Main Folder' without a 'Photos' folder, you shouldn't jump from Level 1 to Level 3 without Level 2",
@@ -522,7 +522,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: You're reviewing a specification where the author used Level 5 and Level 6 headings (##### and ######) for 'extra detailed subsections.' The AI seems to miss content in these deeply nested sections. What does Chapter 13 Lesson 2 recommend?",
+          question: "You're reviewing a specification where the author used Level 5 and Level 6 headings (##### and ######) for 'extra detailed subsections.' The AI seems to miss content in these deeply nested sections. What does Chapter 13 Lesson 2 recommend?",
           options: {
             A: "Level 5 and 6 are fine — more levels provide better organization",
             B: "Avoid Levels 5 and 6 in specifications — deep nesting makes documents harder to read and process; Level 4 is sufficient for deep technical details, constraints, and edge cases",
@@ -534,7 +534,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: An AI agent is processing your specification and seems to miss important information in the middle sections. You realize all your critical constraints are buried in Level 3 subsections within long Level 2 sections. Based on Chapter 13 Lesson 2's guidance on how AI processes headings, what should you do?",
+          question: "An AI agent is processing your specification and seems to miss important information in the middle sections. You realize all your critical constraints are buried in Level 3 subsections within long Level 2 sections. Based on Chapter 13 Lesson 2's guidance on how AI processes headings, what should you do?",
           options: {
             A: "Move critical constraints to Level 1 headings",
             B: "Restructure so critical constraints are in their own Level 2 sections rather than buried as Level 3 subsections — clear headings help AI parse structure, find specific information, and validate completeness",
@@ -546,7 +546,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: You're creating a specification template for your team. You want to ensure consistent heading hierarchy across all documents. Based on Chapter 13 Lesson 2, what template structure should you provide?",
+          question: "You're creating a specification template for your team. You want to ensure consistent heading hierarchy across all documents. Based on Chapter 13 Lesson 2, what template structure should you provide?",
           options: {
             A: "# Document Title\n## Problem\n## Features\n### Feature 1\n### Feature 2\n## Installation\n## Expected Output",
             B: "# Document Title\n# Problem\n# Features\n# Installation",
@@ -606,7 +606,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 20,
-          question: "Scenario: A colleague's specification has this structure: # App Spec → ### User Authentication → ##### Password Reset. What error has been made?",
+          question: "A colleague's specification has this structure: # App Spec → ### User Authentication → ##### Password Reset. What error has been made?",
           options: {
             A: "Level 1 is too short for an app specification title",
             B: "Heading levels are skipped — jumping from Level 1 to Level 3, then to Level 5, violates the logical progression requirement; each level must follow the previous without skipping (1→2→3→4)",
@@ -618,7 +618,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 21,
-          question: "Scenario: Critical security constraints are buried as Level 4 headings under several Level 3 subsections. The AI consistently misses implementing them. Based on Lesson 2, what should you do?",
+          question: "Critical security constraints are buried as Level 4 headings under several Level 3 subsections. The AI consistently misses implementing them. Based on Lesson 2, what should you do?",
           options: {
             A: "Bold all text within the Level 4 headings to make them more visible to AI",
             B: "Promote critical constraints to Level 2 headings — clear headings help AI 'Find specific information' and 'Validate completeness'; burying critical content in deep nesting reduces its prominence and likelihood of being processed",
@@ -630,7 +630,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 22,
-          question: "Scenario: A developer uses ## (Level 2) headings for everything — main features, sub-features, and edge cases are all at the same heading level. Based on the folder analogy from Lesson 2, what problem does this create?",
+          question: "A developer uses ## (Level 2) headings for everything — main features, sub-features, and edge cases are all at the same heading level. Based on the folder analogy from Lesson 2, what problem does this create?",
           options: {
             A: "Level 2 is reserved for document metadata only, not feature documentation",
             B: "Flat hierarchy lacks structure — like placing individual photos, tax returns, and album names all directly in one folder; AI cannot understand parent-child relationships; sub-features and edge cases should be nested under parent sections using Level 3 or Level 4",
@@ -642,7 +642,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 23,
-          question: "Scenario: Junior developers ask: 'Can we skip from Level 2 to Level 4 if Level 3 would be empty?' Based on Lesson 2, what do you say?",
+          question: "Junior developers ask: 'Can we skip from Level 2 to Level 4 if Level 3 would be empty?' Based on Lesson 2, what do you say?",
           options: {
             A: "'Yes — skipping empty levels is clean practice and makes specifications more readable'",
             B: "'No — logical progression without skipping is required. If Level 3 has nothing to contain, that signals the content may need restructuring; if Level 4 content genuinely belongs under Level 2, reconsider your organization rather than violating hierarchy'",
@@ -666,7 +666,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 25,
-          question: "Scenario: You're writing a CLAUDE.md file with 'Important Security Constraints' at Level 3 under 'Project Notes' at Level 2. Claude consistently misses security constraints. Based on Lesson 2 and context engineering, what should you do?",
+          question: "You're writing a CLAUDE.md file with 'Important Security Constraints' at Level 3 under 'Project Notes' at Level 2. Claude consistently misses security constraints. Based on Lesson 2 and context engineering, what should you do?",
           options: {
             A: "Write all security constraints in UPPERCASE for emphasis throughout the file",
             B: "Promote 'Important Security Constraints' to a Level 2 heading — critical content needs prominent heading level so AI treats it as a required main section to validate and implement, not an optional subsection note",
@@ -678,7 +678,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 26,
-          question: "Scenario: An AI implements Features correctly but completely ignores Error Handling. Both are Level 2 sections. Based on Lesson 2's 'benefits of clear headings' principle, what additional strategy helps?",
+          question: "An AI implements Features correctly but completely ignores Error Handling. Both are Level 2 sections. Based on Lesson 2's 'benefits of clear headings' principle, what additional strategy helps?",
           options: {
             A: "Rename 'Error Handling' to '### Error Handling Details' at Level 3 under Features",
             B: "The heading structure is correct — ensure Error Handling section contains concrete requirements (not just a heading); AI uses headings to 'Find specific information' and 'Validate completeness' but content within sections must also be present and detailed",
@@ -690,7 +690,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 27,
-          question: "Scenario: A specification uses Level 5 and Level 6 headings for detailed implementation notes. The AI seems confused about the document structure. Based on Lesson 2, what is the likely cause?",
+          question: "A specification uses Level 5 and Level 6 headings for detailed implementation notes. The AI seems confused about the document structure. Based on Lesson 2, what is the likely cause?",
           options: {
             A: "Level 5 and Level 6 headings use incorrect # syntax that AI cannot parse",
             B: "Lesson 2 advises avoiding Levels 5 and 6 in specifications — deep nesting (5+ levels) makes specifications harder to read and process; AI parsing the excessive nesting cannot easily determine what's primary vs. secondary information",
@@ -702,7 +702,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 28,
-          question: "Scenario: You're building a specification template for your organization. Based on Lesson 2, what should be the ONLY content at Level 1?",
+          question: "You're building a specification template for your organization. Based on Lesson 2, what should be the ONLY content at Level 1?",
           options: {
             A: "Every major topic area should have a Level 1 heading for maximum navigational visibility",
             B: "The document title only — used exactly once at the very top (e.g., '# Task Tracker App — Technical Specification'); all other sections use Level 2 and below",
@@ -714,7 +714,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 29,
-          question: "Scenario: Your AI implements Features but ignores Error Handling. You move Error Handling from Level 3 to Level 2. The AI now implements error handling. This demonstrates which Lesson 2 principle?",
+          question: "Your AI implements Features but ignores Error Handling. You move Error Handling from Level 3 to Level 2. The AI now implements error handling. This demonstrates which Lesson 2 principle?",
           options: {
             A: "Bold text is more important than heading level for determining AI implementation priority",
             B: "Heading level communicates priority and required completeness — Level 2 headings represent main sections AI validates; promoting Error Handling to Level 2 signals it is a required section, not an optional detail",
@@ -726,7 +726,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 30,
-          question: "Scenario: You forget the space after the hash in a heading (writing '#Features' instead of '# Features'). Based on Lesson 2's common mistakes, what is the likely result?",
+          question: "You forget the space after the hash in a heading (writing '#Features' instead of '# Features'). Based on Lesson 2's common mistakes, what is the likely result?",
           options: {
             A: "Markdown ignores this error and renders correctly anyway",
             B: "The heading fails to render as a heading — '#Features' is treated as plain text rather than a Level 2 heading; AI agents parsing the raw Markdown also lose the structural signal, treating that line as content rather than a section boundary",
@@ -864,7 +864,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: You're writing installation instructions for your project. You use bullet points (-) for all steps because 'bullets look cleaner.' A new developer runs step 3 before step 2 and the installation fails. What list mistake caused this confusion?",
+          question: "You're writing installation instructions for your project. You use bullet points (-) for all steps because 'bullets look cleaner.' A new developer runs step 3 before step 2 and the installation fails. What list mistake caused this confusion?",
           options: {
             A: "You should have used numbered lists starting at 0 instead of 1",
             B: "You used unordered lists (bullets) for sequential steps — bullets don't communicate dependency order, so the developer didn't know steps must be executed in sequence",
@@ -876,7 +876,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: Your specification lists project features using a numbered list (1. 2. 3.) because 'numbering makes them look prioritized.' The AI implements Feature 3 before Feature 1, causing integration issues. What lesson from Chapter 13 Lesson 3 explains this problem?",
+          question: "Your specification lists project features using a numbered list (1. 2. 3.) because 'numbering makes them look prioritized.' The AI implements Feature 3 before Feature 1, causing integration issues. What lesson from Chapter 13 Lesson 3 explains this problem?",
           options: {
             A: "Numbered lists are only for technical content",
             B: "Ordered lists imply sequence/dependency — using them for independent features suggests false ordering. Features should use unordered lists (bullets) since they can be implemented in any order",
@@ -888,7 +888,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: You're creating a specification with nested requirements. You write:\n- User authentication\n  - Login functionality\n  - Password reset\n- Dashboard\n  - User metrics\n  - Reports\n\nThe AI correctly understands that Login and Password reset are sub-features of authentication. What Markdown syntax enables this hierarchy?",
+          question: "You're creating a specification with nested requirements. You write:\n- User authentication\n  - Login functionality\n  - Password reset\n- Dashboard\n  - User metrics\n  - Reports\n\nThe AI correctly understands that Login and Password reset are sub-features of authentication. What Markdown syntax enables this hierarchy?",
           options: {
             A: "Using different bullet characters (- for parent, * for child)",
             B: "Indenting sub-items with 2 spaces before the bullet character creates parent-child relationships that AI can parse as hierarchical structure",
@@ -900,7 +900,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: Your team's specification uses sequential numbers (1. 2. 3.) correctly, but a new developer rewrites it using '1.' for every item because 'Markdown auto-numbers anyway.' The AI now implements steps out of order. What principle from Lesson 3 explains why the original sequential numbering was important?",
+          question: "Your team's specification uses sequential numbers (1. 2. 3.) correctly, but a new developer rewrites it using '1.' for every item because 'Markdown auto-numbers anyway.' The AI now implements steps out of order. What principle from Lesson 3 explains why the original sequential numbering was important?",
           options: {
             A: "Auto-numbering is a GitHub feature that doesn't work in raw Markdown",
             B: "AI agents often read the raw source file directly, not the rendered HTML — sequential numbers (1. 2. 3.) in the source communicate order to AI even if renderers auto-number repeated '1.' entries",
@@ -912,7 +912,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: You're writing a troubleshooting guide for your API. The guide has steps like '1. Check server logs, 2. Verify database connection, 3. Test API endpoint, 4. Review rate limits.' A colleague suggests converting to bullet points for 'cleaner appearance.' Based on Chapter 13 Lesson 3, what should you respond?",
+          question: "You're writing a troubleshooting guide for your API. The guide has steps like '1. Check server logs, 2. Verify database connection, 3. Test API endpoint, 4. Review rate limits.' A colleague suggests converting to bullet points for 'cleaner appearance.' Based on Chapter 13 Lesson 3, what should you respond?",
           options: {
             A: "Agree — bullet points always look more professional",
             B: "Disagree — troubleshooting follows dependent diagnostic steps where order matters. Each step may depend on the previous step's results, so ordered lists (numbered) are required to communicate the sequential dependency",
@@ -984,7 +984,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 21,
-          question: "Scenario: A developer argues that using `1.` for every item in an ordered list is fine because 'Markdown auto-numbers anyway.' Why is this a problem per Lesson 3?",
+          question: "A developer argues that using `1.` for every item in an ordered list is fine because 'Markdown auto-numbers anyway.' Why is this a problem per Lesson 3?",
           options: {
             A: "Markdown renderers don't support repeated 1. — it creates a syntax error",
             B: "AI agents often read the raw source file directly, not rendered HTML — sequential numbers (1. 2. 3.) in source communicate order to AI even if renderers auto-number repeated '1.' entries",
@@ -996,7 +996,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 22,
-          question: "Scenario: Your specification has requirements listed as a paragraph: 'The app must support user authentication, password reset, email verification, and social login.' An AI implements only user authentication. Based on Lesson 3, what should you do?",
+          question: "Your specification has requirements listed as a paragraph: 'The app must support user authentication, password reset, email verification, and social login.' An AI implements only user authentication. Based on Lesson 3, what should you do?",
           options: {
             A: "Bold each requirement name within the paragraph to make them stand out",
             B: "Convert requirements to an unordered list — four separate bullet items rather than comma-separated items in a paragraph; this makes each requirement a countable, trackable item AI processes individually",
@@ -1008,7 +1008,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 23,
-          question: "Scenario: You're writing deployment instructions with steps: check environment variables, install dependencies, run database migrations, start the server, verify health check. What list type should you use and why?",
+          question: "You're writing deployment instructions with steps: check environment variables, install dependencies, run database migrations, start the server, verify health check. What list type should you use and why?",
           options: {
             A: "Unordered list — deployment steps are technical items that don't require ordering",
             B: "Ordered list — these steps must be done in sequence (you can't run migrations before installing dependencies); each step depends on the previous step completing successfully",
@@ -1020,7 +1020,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 24,
-          question: "Scenario: You have a list of authentication features: OAuth2 login, JWT tokens, refresh token rotation, and session management. None has a required implementation order. What list type is appropriate?",
+          question: "You have a list of authentication features: OAuth2 login, JWT tokens, refresh token rotation, and session management. None has a required implementation order. What list type is appropriate?",
           options: {
             A: "Ordered list — authentication features are security-critical and must be numbered",
             B: "Unordered list — these are independent features with no required sequence; a developer can implement OAuth2 before JWT or JWT before OAuth2 without dependency issues",
@@ -1032,7 +1032,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 25,
-          question: "Scenario: You're writing a 'System Requirements' section for an AI agent specification. The requirements include: Node.js v18+, PostgreSQL 14+, Redis 7+, and 4GB RAM minimum. What is the correct format?",
+          question: "You're writing a 'System Requirements' section for an AI agent specification. The requirements include: Node.js v18+, PostgreSQL 14+, Redis 7+, and 4GB RAM minimum. What is the correct format?",
           options: {
             A: "Ordered list 1-4 because each requirement must be verified in sequence",
             B: "Unordered list — these are independent requirements with no sequence dependency; checking Node.js version before PostgreSQL version doesn't affect anything",
@@ -1044,7 +1044,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 26,
-          question: "Scenario: A junior developer writes a specification where both independent features AND sequential installation steps use unordered bullet lists. Based on Lesson 3, what is the problem with the installation steps being bullets?",
+          question: "A junior developer writes a specification where both independent features AND sequential installation steps use unordered bullet lists. Based on Lesson 3, what is the problem with the installation steps being bullets?",
           options: {
             A: "Bullet lists cannot contain technical commands like npm install",
             B: "Using unordered lists for sequential installation steps loses the sequence signal — AI and developers may execute steps in the wrong order; ordered lists (1. 2. 3.) explicitly communicate that each step must follow the previous",
@@ -1056,7 +1056,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 27,
-          question: "Scenario: Your API specification has authentication steps listed with random numbers (1. Setup OAuth, 3. Test tokens, 2. Configure scopes). What does Lesson 3 say about the impact on AI processing?",
+          question: "Your API specification has authentication steps listed with random numbers (1. Setup OAuth, 3. Test tokens, 2. Configure scopes). What does Lesson 3 say about the impact on AI processing?",
           options: {
             A: "Random numbers have no impact — AI understands intent regardless of numbering",
             B: "Incorrect sequential numbers in raw Markdown confuse AI agents reading the source — AI agents read source directly where numbers signal sequence; random numbers (1, 3, 2) imply a non-sequential order that may cause AI to implement steps in the wrong order",
@@ -1068,7 +1068,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 28,
-          question: "Scenario: You need to specify that a 'Deploy' step should be 'Wait for health check, then notify team' as sequential sub-steps within a larger ordered list. How would you structure this using Lesson 3 principles?",
+          question: "You need to specify that a 'Deploy' step should be 'Wait for health check, then notify team' as sequential sub-steps within a larger ordered list. How would you structure this using Lesson 3 principles?",
           options: {
             A: "Create a separate numbered list just for the Deploy step",
             B: "Use a nested ordered list: '4. Deploy' as a parent item, then '  1. Wait for health check' and '  2. Notify team' as 2-space-indented sub-items within the same ordered list",
@@ -1080,7 +1080,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 29,
-          question: "Scenario: A specification contains 15 requirements listed in a single unordered list. A developer suggests adding numbers '1-15' to 'make it easier to reference.' Based on Lesson 3's list type guidance, when is this appropriate?",
+          question: "A specification contains 15 requirements listed in a single unordered list. A developer suggests adding numbers '1-15' to 'make it easier to reference.' Based on Lesson 3's list type guidance, when is this appropriate?",
           options: {
             A: "Always use numbers when there are more than 10 items for organizational clarity",
             B: "Only convert to numbered list if the requirements have a sequential dependency — if they remain independent, the numbered format would imply sequence that doesn't exist, creating a false understanding of dependencies",
@@ -1092,7 +1092,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 30,
-          question: "Scenario: An AI implements only 3 out of 8 features listed in your specification. The features were written as a paragraph with commas separating them. Based on Lesson 3, what is the most likely cause and fix?",
+          question: "An AI implements only 3 out of 8 features listed in your specification. The features were written as a paragraph with commas separating them. Based on Lesson 3, what is the most likely cause and fix?",
           options: {
             A: "The AI hit its output token limit — increase the max_tokens parameter",
             B: "Prose paragraphs bury requirements as a continuous stream — AI may interpret comma-separated items as a single grouped concept rather than 8 distinct requirements; convert to an 8-item unordered list to make each feature a distinct, countable, trackable requirement",
@@ -1230,7 +1230,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: You're writing a specification with a code example. You open a code block with ``` but forget to close it. The rest of your specification (headings, lists, paragraphs) all render as code. What critical mistake from Chapter 13 Lesson 4 did you make?",
+          question: "You're writing a specification with a code example. You open a code block with ``` but forget to close it. The rest of your specification (headings, lists, paragraphs) all render as code. What critical mistake from Chapter 13 Lesson 4 did you make?",
           options: {
             A: "You should have used inline code instead of fenced code blocks",
             B: "Forgetting closing backticks — everything after the opening ``` becomes part of the code block, corrupting the entire rest of the document",
@@ -1242,7 +1242,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: Your specification shows a command like 'npm install' within a sentence. You use triple backticks (```) around it because 'it's code.' The rendered output looks awkward and breaks the paragraph flow. What should you have used instead?",
+          question: "Your specification shows a command like 'npm install' within a sentence. You use triple backticks (```) around it because 'it's code.' The rendered output looks awkward and breaks the paragraph flow. What should you have used instead?",
           options: {
             A: "Nothing — triple backticks are correct for all code",
             B: "Single backticks (`npm install`) for brief inline references within prose; triple backticks are for multi-line code blocks",
@@ -1254,7 +1254,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: You include a Python code example in your specification without a language tag. The AI generates TypeScript code instead when implementing the feature. What mistake caused this confusion?",
+          question: "You include a Python code example in your specification without a language tag. The AI generates TypeScript code instead when implementing the feature. What mistake caused this confusion?",
           options: {
             A: "The AI doesn't understand Python",
             B: "Omitting the language tag (```python) — without it, AI loses context about which language's syntax rules to apply, potentially generating code in the wrong language",
@@ -1266,7 +1266,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: You're documenting an API response format. You write the expected JSON response inside a code block with the ```json language tag. The AI correctly implements the response format matching your example. What 'Specification by Example' principle does this demonstrate?",
+          question: "You're documenting an API response format. You write the expected JSON response inside a code block with the ```json language tag. The AI correctly implements the response format matching your example. What 'Specification by Example' principle does this demonstrate?",
           options: {
             A: "Every specification must include at least 5 code examples",
             B: "Code blocks show exact output format, language context, and example data — allowing AI to understand precise expectations and match them in implementation",
@@ -1278,7 +1278,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: Your specification includes both a function name 'calculateTotal' mentioned in prose and a multi-line implementation example. How should you format each according to Chapter 13 Lesson 4?",
+          question: "Your specification includes both a function name 'calculateTotal' mentioned in prose and a multi-line implementation example. How should you format each according to Chapter 13 Lesson 4?",
           options: {
             A: "Both should use triple backtick fenced blocks for consistency",
             B: "Use inline code for the function name in prose (`calculateTotal`) and a fenced code block for the multi-line implementation — inline for brief references, fenced for multi-line content",
@@ -1338,7 +1338,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 20,
-          question: "Scenario: A specification describes an API response as 'return JSON with user ID, name, email, and a boolean for admin status.' The AI generates different field names each run. What Lesson 4 principle would fix this?",
+          question: "A specification describes an API response as 'return JSON with user ID, name, email, and a boolean for admin status.' The AI generates different field names each run. What Lesson 4 principle would fix this?",
           options: {
             A: "Add a comment inside the specification saying 'use consistent field names'",
             B: "Use a ```json fenced code block showing the exact response format with actual field names (user_id, name, email, is_admin) — making the format concrete through 'Specification by Example' rather than descriptive prose",
@@ -1350,7 +1350,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 21,
-          question: "Scenario: Your specification says 'run the tests using npm'. An AI tries to run 'npm run test', then 'npx test', then 'node test'. What Lesson 4 principle would have prevented this?",
+          question: "Your specification says 'run the tests using npm'. An AI tries to run 'npm run test', then 'npx test', then 'node test'. What Lesson 4 principle would have prevented this?",
           options: {
             A: "Providing more context about the project type",
             B: "Using inline code or a ```bash code block for the exact command ('npm test') — code formatting distinguishes literal commands from descriptive text, preventing AI from generating variations of the command",
@@ -1362,7 +1362,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 22,
-          question: "Scenario: You're writing a specification for a YAML configuration file format. You need to show the expected configuration structure. Which format should you use?",
+          question: "You're writing a specification for a YAML configuration file format. You need to show the expected configuration structure. Which format should you use?",
           options: {
             A: "Describe the YAML structure in plain text paragraphs for maximum flexibility",
             B: "Use a ```yaml fenced code block showing the exact configuration structure — the yaml tag tells AI to generate correct YAML syntax (proper indentation, colons, quotes) and shows the literal configuration expected",
@@ -1374,7 +1374,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 23,
-          question: "Scenario: Your specification mentions the function `calculateTax()` in a paragraph and also shows a 10-line implementation example. Which Lesson 4 format applies to each?",
+          question: "Your specification mentions the function `calculateTax()` in a paragraph and also shows a 10-line implementation example. Which Lesson 4 format applies to each?",
           options: {
             A: "Both should use triple backticks — always prefer fenced blocks for consistency",
             B: "Function name in prose uses inline code (`calculateTax()`) — a brief reference within text; the 10-line implementation uses a fenced code block (```typescript...```) for multi-line display",
@@ -1386,7 +1386,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 24,
-          question: "Scenario: A specification uses inline code for a 5-line bash script. The formatting looks cluttered. Based on Lesson 4, what mistake was made?",
+          question: "A specification uses inline code for a 5-line bash script. The formatting looks cluttered. Based on Lesson 4, what mistake was made?",
           options: {
             A: "Bash scripts require Python syntax highlighting, not bash",
             B: "Using inline code for multiple lines — inline code is for brief references; multi-line content like a 5-line bash script requires a fenced code block (```bash...```) to display properly without formatting issues",
@@ -1398,7 +1398,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 25,
-          question: "Scenario: A developer omits language tags from all code blocks in a specification: just ``` without any language identifier. What is the impact?",
+          question: "A developer omits language tags from all code blocks in a specification: just ``` without any language identifier. What is the impact?",
           options: {
             A: "No impact — AI models determine the language automatically from content",
             B: "AI loses language context and may generate code in an unexpected language or with wrong syntax conventions; language tags enable AI to apply correct rules (Python indentation, TypeScript types, bash quoting, JSON structure)",
@@ -1410,7 +1410,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 26,
-          question: "Scenario: Your specification for a TypeScript API shows a response type using inline code: `{ id: string; name: string; email: string; }`. Is this correct?",
+          question: "Your specification for a TypeScript API shows a response type using inline code: `{ id: string; name: string; email: string; }`. Is this correct?",
           options: {
             A: "Yes — inline code is always preferred for type definitions in specifications",
             B: "This is borderline — for a brief type definition on one line, inline code is acceptable; but for complex multi-field types or multi-line type definitions, a ```typescript fenced block is preferable for clarity and proper language context",
@@ -1422,7 +1422,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 27,
-          question: "Scenario: You add a language tag ```python to a code block containing JavaScript. What is the likely outcome for AI processing?",
+          question: "You add a language tag ```python to a code block containing JavaScript. What is the likely outcome for AI processing?",
           options: {
             A: "AI ignores the tag mismatch and correctly identifies the content as JavaScript",
             B: "AI applies Python-specific interpretation to JavaScript code — potentially interpreting indentation as block structure, missing semicolons as errors, and generating Python-style output rather than JavaScript",
@@ -1434,7 +1434,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 28,
-          question: "Scenario: A specification shows expected terminal output for a test command inside prose: 'The output should be: 5 tests passed, 0 failed.' An AI generates different output format. What Lesson 4 principle helps?",
+          question: "A specification shows expected terminal output for a test command inside prose: 'The output should be: 5 tests passed, 0 failed.' An AI generates different output format. What Lesson 4 principle helps?",
           options: {
             A: "Bold the expected output so AI treats it as a requirement",
             B: "Use a fenced code block (without a language tag or with ```text) to show the exact expected output — code blocks display literal content; AI recognizes it as expected output format rather than descriptive prose",
@@ -1446,7 +1446,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 29,
-          question: "Scenario: Your specification file has an unclosed code block — the opening ``` appears but the closing ``` was forgotten. What happens to the rest of the specification?",
+          question: "Your specification file has an unclosed code block — the opening ``` appears but the closing ``` was forgotten. What happens to the rest of the specification?",
           options: {
             A: "The unclosed block only affects the current section; other sections render normally",
             B: "Everything after the unclosed opening ``` is treated as part of the code block — all headings, lists, and text appear as raw code content rather than rendered Markdown; the specification loses all structure below the unclosed block",
@@ -1458,7 +1458,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 30,
-          question: "Scenario: You write a bash command inside your specification: 'To start the server, run: npm start --port 3000 --env production'. An AI generates code that starts the server differently each time. What is the most effective Lesson 4 fix?",
+          question: "You write a bash command inside your specification: 'To start the server, run: npm start --port 3000 --env production'. An AI generates code that starts the server differently each time. What is the most effective Lesson 4 fix?",
           options: {
             A: "Bold the command: '**npm start --port 3000 --env production**'",
             B: "Use a ```bash fenced code block containing the exact command: npm start --port 3000 --env production — code blocks signal 'execute this literally' rather than 'describe this conceptually,' eliminating AI interpretation of the command",
@@ -1596,7 +1596,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 11,
-          question: "Scenario: You embed an architecture diagram in your specification using `[architecture.png](architecture.png)`. The image doesn't display — it shows as a clickable link instead. What syntax mistake did you make?",
+          question: "You embed an architecture diagram in your specification using `[architecture.png](architecture.png)`. The image doesn't display — it shows as a clickable link instead. What syntax mistake did you make?",
           options: {
             A: "You should have used double brackets [[architecture.png]](architecture.png)",
             B: "You forgot the exclamation mark prefix — image syntax is `![alt text](image-url)` not `[text](url)`. Without the !, it creates a hyperlink instead of embedding the image",
@@ -1608,7 +1608,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 12,
-          question: "Scenario: Your specification includes a screenshot of the dashboard. You write alt text as 'dashboard.png'. A screen reader user complains they don't understand what the image shows. What alt text principle from Chapter 13 Lesson 5 did you violate?",
+          question: "Your specification includes a screenshot of the dashboard. You write alt text as 'dashboard.png'. A screen reader user complains they don't understand what the image shows. What alt text principle from Chapter 13 Lesson 5 did you violate?",
           options: {
             A: "Alt text should always be one word for brevity",
             B: "Alt text should describe what the image SHOWS, not just what it IS — 'Dashboard showing user metrics with 94% uptime' not 'dashboard.png'",
@@ -1620,7 +1620,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 13,
-          question: "Scenario: You're writing a specification with critical requirements that must be implemented and optional suggestions that would be nice to have. How should you use text emphasis to signal this priority to AI agents?",
+          question: "You're writing a specification with critical requirements that must be implemented and optional suggestions that would be nice to have. How should you use text emphasis to signal this priority to AI agents?",
           options: {
             A: "Use ALL CAPS for critical requirements and lowercase for optional items",
             B: "Use bold (**must**, **required**) for critical/non-negotiable requirements; use italic (*recommended*, *optional*) for nice-to-have items",
@@ -1632,7 +1632,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 14,
-          question: "Scenario: Your specification links to the Stripe API documentation multiple times. You use inline links like `[Stripe API](https://stripe.com/docs/api)` throughout, making the prose hard to read with long URLs. What Markdown feature from Lesson 5 would improve readability?",
+          question: "Your specification links to the Stripe API documentation multiple times. You use inline links like `[Stripe API](https://stripe.com/docs/api)` throughout, making the prose hard to read with long URLs. What Markdown feature from Lesson 5 would improve readability?",
           options: {
             A: "Short URLs using a URL shortener",
             B: "Reference-style links — define the URL once at the document bottom as `[stripe-api]: https://stripe.com/docs/api` and use `[Stripe API][stripe-api]` in the text",
@@ -1644,7 +1644,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 15,
-          question: "Scenario: You're creating a feature checklist for your specification. You want AI to track which features are implemented and which are pending. What GFM syntax from Chapter 13 Lesson 5 enables interactive checkboxes?",
+          question: "You're creating a feature checklist for your specification. You want AI to track which features are implemented and which are pending. What GFM syntax from Chapter 13 Lesson 5 enables interactive checkboxes?",
           options: {
             A: "[ ] Pending feature and [x] Completed feature",
             B: "- [ ] Pending feature and - [x] Completed feature",
@@ -1716,7 +1716,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 21,
-          question: "Scenario: A specification document links to the Stripe API documentation 8 times. Each instance uses an inline link with the full URL. The document is hard to read. What Lesson 5 technique improves this?",
+          question: "A specification document links to the Stripe API documentation 8 times. Each instance uses an inline link with the full URL. The document is hard to read. What Lesson 5 technique improves this?",
           options: {
             A: "Use URL shorteners to make the Stripe URL shorter for embedding",
             B: "Switch to reference-style links — define [stripe-api]: https://stripe.com/docs/api once at the document bottom, then use [Stripe API][stripe-api] throughout; when the URL changes, update it in one place",
@@ -1728,7 +1728,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 22,
-          question: "Scenario: You're writing a specification that shows a UI wireframe screenshot. The alt text is set to 'screenshot'. Based on Lesson 5's alt text guidance, what should you change it to?",
+          question: "You're writing a specification that shows a UI wireframe screenshot. The alt text is set to 'screenshot'. Based on Lesson 5's alt text guidance, what should you change it to?",
           options: {
             A: "Leave it as 'screenshot' — it correctly identifies what the file is",
             B: "Write alt text describing what the screenshot SHOWS: e.g., 'Login screen with email input, password field, Remember Me checkbox, and Submit button in blue' — AI processes this text to understand the interface requirement",
@@ -1740,7 +1740,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 23,
-          question: "Scenario: You forget the ! in an image reference: [UI mockup](./mockup.png) instead of ![UI mockup](./mockup.png). What is the result?",
+          question: "You forget the ! in an image reference: [UI mockup](./mockup.png) instead of ![UI mockup](./mockup.png). What is the result?",
           options: {
             A: "Markdown ignores the missing ! and embeds the image anyway",
             B: "Without !, it renders as a clickable link to the image file rather than an embedded image — the image is not displayed inline in the specification",
@@ -1752,7 +1752,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 24,
-          question: "Scenario: Your specification has a link with 'click here' as the link text: [click here](https://docs.example.com/api). Based on Lesson 5's link text guidance, what is wrong and how should you fix it?",
+          question: "Your specification has a link with 'click here' as the link text: [click here](https://docs.example.com/api). Based on Lesson 5's link text guidance, what is wrong and how should you fix it?",
           options: {
             A: "'Click here' is standard web convention — it's the correct format for hyperlinks",
             B: "'Click here' is non-descriptive — Lesson 5 states link text 'should describe what the destination provides without following the link'; fix to [API Reference Documentation](https://docs.example.com/api) so AI and humans understand the destination",
@@ -1764,7 +1764,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 25,
-          question: "Scenario: A specification uses the triple-asterisk (***) emphasis around a requirement. Based on Lesson 5's emphasis types, what does this signal?",
+          question: "A specification uses the triple-asterisk (***) emphasis around a requirement. Based on Lesson 5's emphasis types, what does this signal?",
           options: {
             A: "Triple-asterisk means deprecated or removed features",
             B: "***text*** applies both bold and italic simultaneously — signaling absolute requirements or the highest-priority items that are both non-negotiable (bold) and specifically called out (italic)",
@@ -1776,7 +1776,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 26,
-          question: "Scenario: A specification for a web app includes the entire Stripe API reference documentation embedded inline in the document. Based on Lesson 5's guidance on 'excessive images' and similar content, what is the problem?",
+          question: "A specification for a web app includes the entire Stripe API reference documentation embedded inline in the document. Based on Lesson 5's guidance on 'excessive images' and similar content, what is the problem?",
           options: {
             A: "External API docs should always be included for completeness",
             B: "Including excessive reference material inline wastes context tokens and buries the actual specification requirements; Lesson 5 advocates for descriptive link text to reference materials rather than embedding entire external documentation",
@@ -1788,7 +1788,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 27,
-          question: "Scenario: Your specification uses a table to show API endpoints. The table has columns: Method, Endpoint, Description, Required Auth. Based on Lesson 5's table syntax, how should you format the header separator?",
+          question: "Your specification uses a table to show API endpoints. The table has columns: Method, Endpoint, Description, Required Auth. Based on Lesson 5's table syntax, how should you format the header separator?",
           options: {
             A: "Use ===== (equals signs) as the separator row between headers and data",
             B: "Use --- (three or more hyphens) per column under the header row, separated by | characters: | Method | Endpoint | Description | Required Auth |\\n|--------|----------|-------------|--------------|",
@@ -1800,7 +1800,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 28,
-          question: "Scenario: You write a specification for a feature checklist and want AI to track which features are implemented. You use: '• Login, • Registration, • Profile Update' as plain bullet points. What Lesson 5 feature better serves this use case?",
+          question: "You write a specification for a feature checklist and want AI to track which features are implemented. You use: '• Login, • Registration, • Profile Update' as plain bullet points. What Lesson 5 feature better serves this use case?",
           options: {
             A: "Replace bullets with checkboxes using Unicode: ☐ Login, ☐ Registration",
             B: "Use GFM task lists: '- [ ] Login', '- [ ] Registration', '- [ ] Profile Update' — these render as interactive checkboxes that can be marked - [x] when complete, enabling visual progress tracking",
@@ -1812,7 +1812,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 29,
-          question: "Scenario: Your specification has a local image reference: ![System Architecture](../diagrams/arch.png). The specification is moved to a different directory. What Lesson 5 principle about images applies?",
+          question: "Your specification has a local image reference: ![System Architecture](../diagrams/arch.png). The specification is moved to a different directory. What Lesson 5 principle about images applies?",
           options: {
             A: "Always use absolute paths to avoid path dependency issues",
             B: "Local images use relative paths — when the specification moves, the relative path (../diagrams/arch.png) changes relative to the new location; the image link breaks and shows as broken in both rendered views and AI processing",
@@ -1824,7 +1824,7 @@ export const chapter13: Chapter = {
         },
         {
           id: 30,
-          question: "Scenario: You're writing a complete specification for a Task Manager API using all Chapter 13 Markdown elements. What is the ideal structure combining headings, lists, code blocks, links, and emphasis?",
+          question: "You're writing a complete specification for a Task Manager API using all Chapter 13 Markdown elements. What is the ideal structure combining headings, lists, code blocks, links, and emphasis?",
           options: {
             A: "One large code block containing everything — code blocks show exact content most clearly",
             B: "# API Title → ## Sections with headings → features as - bullet lists → endpoints as | tables | → example requests in ```json blocks → **required** fields in bold → *optional* fields in italic → [API Docs](url) as links — each element serving its distinct purpose",
