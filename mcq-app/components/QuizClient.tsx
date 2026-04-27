@@ -309,7 +309,7 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
             <button
               onClick={goNext}
               disabled={isLastQuestion}
-              className={`flex-1 py-3 rounded-xl font-semibold text-sm text-white ${c.progress} hover:opacity-90 transition-all shadow-lg disabled:opacity-40 disabled:cursor-not-allowed`}
+              className={`flex-1 py-3 rounded-xl font-semibold text-sm text-white bg-purple-400 hover:bg-purple-300 transition-all shadow-lg disabled:opacity-40 disabled:cursor-not-allowed`}
             >
               Next →
             </button>
