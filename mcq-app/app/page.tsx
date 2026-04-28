@@ -58,7 +58,7 @@ export default function HomePage() {
                   Study Material — Exam Preparation
                 </div>
                 <div className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors mt-0.5">
-                  agentfactory.panaversity.org/docs →
+                  agentfactory.panaversity.org →
                 </div>
               </div>
             </a>
