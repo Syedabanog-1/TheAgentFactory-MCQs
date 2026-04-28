@@ -245,7 +245,7 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
         {/* Question Card */}
         <div className="bg-slate-900 border border-slate-700/50 rounded-2xl p-6 mb-5 shadow-xl">
           <div className="flex items-start gap-3 mb-1">
-            <span className={`text-xs font-bold px-2 py-0.5 rounded ${c.badge} flex-shrink-0 mt-0.5`}>Q{mcq.id}</span>
+            <span className={`text-xs font-bold px-2 py-0.5 rounded ${c.badge} shrink-0 mt-0.5`}>Q{mcq.id}</span>
           </div>
           <p className="text-slate-100 text-base leading-relaxed font-medium">{mcq.question}</p>
         </div>

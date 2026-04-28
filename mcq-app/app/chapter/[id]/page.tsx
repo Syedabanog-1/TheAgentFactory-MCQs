@@ -29,7 +29,7 @@ export default async function ChapterPage({ params }: Props) {
   return (
     <main className="min-h-screen">
       {/* Header */}
-      <div className={`relative overflow-hidden border-b border-slate-800/60 bg-gradient-to-br ${c.headerBg}`}>
+      <div className={`relative overflow-hidden border-b border-slate-800/60 bg-linear-to-br ${c.headerBg}`}>
         <div className="max-w-4xl mx-auto px-6 py-12">
           <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-200 text-sm mb-6 transition-colors">
             ← Back to Chapters

@@ -22,17 +22,17 @@ export default function HomePage() {
     <main className="min-h-screen">
       {/* Hero */}
       <div className="relative overflow-hidden border-b border-slate-800/60">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-950 to-violet-950" />
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/8 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-violet-600/8 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-linear-to-br from-indigo-950 via-slate-950 to-violet-950" />
+        <div className="absolute top-0 left-1/4  w-125 h-125 bg-indigo-600/8 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-100 h-100 bg-violet-600/8 rounded-full blur-3xl" />
         <div className="relative max-w-5xl mx-auto px-6 py-20 text-center">
           <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/25 rounded-full px-4 py-1.5 text-sm text-indigo-300 mb-8">
             <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse inline-block" />
-            Panaversity · General Agents Foundations · Parts 1 &amp; 5
+            Panaversity · General Agents Foundations · Parts 1 &amp; 5 
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-5 text-white tracking-tight">
             AgentFactory{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 via-violet-400 to-purple-400">
               MCQ Prep
             </span>
           </h1>
@@ -47,7 +47,7 @@ export default function HomePage() {
           {/* Study Material Banner */}
           <div className="flex justify-center mb-10">
             <a
-              href="https://agentfactory.panaversity.org/docs"
+              href="https://agentfactory.panaversity.org"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 hover:border-indigo-400/50 rounded-2xl px-6 py-4 transition-all duration-300 hover:scale-[1.02]"
