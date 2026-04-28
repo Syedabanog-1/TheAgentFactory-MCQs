@@ -33,7 +33,7 @@ function getScoreLabel(correct: number, total: number) {
   return { label: "Keep Practicing", color: "text-rose-400", emoji: "📚" };
 }
 
-export default function QuizClient({ chapterId, chapterTitle, chapterColor, lessonId, lessonTitle, mcqs }: Props) {
+export default function QuizClient({ chapterId, chapterTitle, chapterColor, lessonTitle, mcqs }: Props) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selected, setSelected] = useState<AnswerKey | null>(null);
   const [revealed, setRevealed] = useState(false);

@@ -47,7 +47,7 @@ export default function HomePage() {
           {/* Study Material Banner */}
           <div className="flex justify-center mb-10">
             <a
-              href="https://agentfactory.panaversity.org"
+              href="https://agentfactory.panaversity.org/"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 hover:border-indigo-400/50 rounded-2xl px-6 py-4 transition-all duration-300 hover:scale-[1.02]"
@@ -58,7 +58,7 @@ export default function HomePage() {
                   Study Material — Exam Preparation
                 </div>
                 <div className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors mt-0.5">
-                  agentfactory.panaversity.org →
+                  agentfactory.panaversity.org
                 </div>
               </div>
             </a>
@@ -118,7 +118,7 @@ export default function HomePage() {
       </div>
 
       <footer className="border-t border-slate-800/60 py-6 text-center text-slate-600 text-sm">
-        Panaversity · AgentFactory MCQ Prep · Chapters 12–17 &amp; 56–60
+        Panaversity · AgentFactory MCQ Prep · Chapters 12–18 &amp; 56–60
       </footer>
     </main>
   );

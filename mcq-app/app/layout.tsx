@@ -9,7 +9,7 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   title: "AgentFactory MCQ — Exam Prep",
-  description: "Master AI Agent development with comprehensive MCQ practice for Chapters 12–17",
+  description: "Master AI Agent development with comprehensive MCQ practice for Chapters 12–18",
 };
 
 export default function RootLayout({
