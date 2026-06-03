@@ -28,7 +28,7 @@ export default function HomePage() {
         <div className="relative max-w-5xl mx-auto px-4 py-16 md:py-24 text-center">
           <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/25 rounded-full px-3 py-1.5 md:px-4 md:py-1.5 text-[10px] md:text-sm text-indigo-300 mb-6 md:mb-8 mx-auto">
             <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse inline-block" />
-            Panaversity · General Agents Foundations · Parts 1 &amp; 5 
+            Panaversity
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-5 text-white tracking-tight px-2">
             AgentFactory{" "}
