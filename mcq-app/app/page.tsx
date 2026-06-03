@@ -120,7 +120,7 @@ export default function HomePage() {
 
       <footer className="border-t border-slate-800/60 py-8 text-center text-slate-600 text-[10px] md:text-sm px-4">
         <p>Panaversity · AgentFactory MCQ Prep</p>
-        <p className="mt-1 opacity-60">Chapters 12–18 &amp; 56–60</p>
+        <p className="mt-1 opacity-60">Crash Course (Ch 1–3) · Chapters 12–18 &amp; 56–60</p>
       </footer>
     </main>
   );

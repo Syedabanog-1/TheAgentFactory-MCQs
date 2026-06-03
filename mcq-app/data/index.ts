@@ -1,4 +1,7 @@
 import type { Chapter } from "@/types";
+import { chapter1 } from "./chapter1";
+import { chapter2 } from "./chapter2";
+import { chapter3 } from "./chapter3";
 import { chapter12 } from "./chapter12";
 import { chapter13 } from "./chapter13";
 import { chapter14 } from "./chapter14";
@@ -12,7 +15,7 @@ import { chapter58 } from "./chapter58";
 import { chapter59 } from "./chapter59";
 import { chapter60 } from "./chapter60";
 
-const chapters: Chapter[] = [chapter12, chapter13, chapter14, chapter15, chapter16, chapter17, chapter18, chapter56, chapter57, chapter58, chapter59, chapter60];
+const chapters: Chapter[] = [chapter1, chapter2, chapter3, chapter12, chapter13, chapter14, chapter15, chapter16, chapter17, chapter18, chapter56, chapter57, chapter58, chapter59, chapter60];
 
 export function getAllChapters(): Chapter[] {
   return chapters;
