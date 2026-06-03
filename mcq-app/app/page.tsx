@@ -25,18 +25,18 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-linear-to-br from-indigo-950 via-slate-950 to-violet-950" />
         <div className="absolute top-0 left-1/4  w-125 h-125 bg-indigo-600/8 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-100 h-100 bg-violet-600/8 rounded-full blur-3xl" />
-        <div className="relative max-w-5xl mx-auto px-6 py-20 text-center">
-          <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/25 rounded-full px-4 py-1.5 text-sm text-indigo-300 mb-8">
+        <div className="relative max-w-5xl mx-auto px-4 py-16 md:py-24 text-center">
+          <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/25 rounded-full px-3 py-1.5 md:px-4 md:py-1.5 text-[10px] md:text-sm text-indigo-300 mb-6 md:mb-8 mx-auto">
             <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse inline-block" />
             Panaversity · General Agents Foundations · Parts 1 &amp; 5 
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-5 text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-5 text-white tracking-tight px-2">
             AgentFactory{" "}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 via-violet-400 to-purple-400">
               MCQ Prep
             </span>
           </h1>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-6 leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed px-4">
             Ace your exams with{" "}
             <span className="text-white font-semibold">{totalMCQs.toLocaleString()}+</span> questions
             across{" "}
@@ -45,33 +45,34 @@ export default function HomePage() {
           </p>
 
           {/* Study Material Banner */}
-          <div className="flex justify-center mb-10">
+          <div className="flex justify-center mb-12 px-4">
             <a
               href="https://agentfactory.panaversity.org/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 hover:border-indigo-400/50 rounded-2xl px-6 py-4 transition-all duration-300 hover:scale-[1.02]"
+              className="group w-full sm:w-auto inline-flex items-center gap-3 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 hover:border-indigo-400/50 rounded-2xl px-4 py-3 md:px-6 md:py-4 transition-all duration-300 hover:scale-[1.02]"
             >
-              <span className="text-2xl">📚</span>
+              <span className="text-xl md:text-2xl">📚</span>
               <div className="text-left">
-                <div className="text-sm font-semibold text-indigo-300 group-hover:text-indigo-200 transition-colors">
+                <div className="text-xs md:text-sm font-semibold text-indigo-300 group-hover:text-indigo-200 transition-colors">
                   Study Material — Exam Preparation
                 </div>
-                <div className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors mt-0.5">
+                <div className="text-[10px] md:text-xs text-slate-500 group-hover:text-slate-400 transition-colors mt-0.5">
                   agentfactory.panaversity.org
                 </div>
               </div>
             </a>
           </div>
-          <div className="flex justify-center gap-10">
+          
+          <div className="grid grid-cols-3 gap-2 sm:gap-6 md:gap-12 max-w-3xl mx-auto">
             {[
               { value: chapters.length, label: "Chapters" },
               { value: totalLessons, label: "Lessons" },
               { value: `${totalMCQs.toLocaleString()}+`, label: "MCQs" },
             ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-3xl font-bold text-white">{stat.value}</div>
-                <div className="text-slate-400 text-sm mt-0.5">{stat.label}</div>
+              <div key={i} className="text-center p-2 rounded-xl bg-white/5 md:bg-transparent border border-white/5 md:border-0">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stat.value}</div>
+                <div className="text-slate-500 text-[9px] sm:text-[10px] md:text-sm mt-0.5 uppercase tracking-wider font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -79,11 +80,11 @@ export default function HomePage() {
       </div>
 
       {/* Chapters Grid */}
-      <div className="max-w-5xl mx-auto px-6 py-14">
-        <h2 className="text-xl font-semibold text-slate-300 mb-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+        <h2 className="text-lg md:text-xl font-semibold text-slate-300 mb-8 px-2">
           Select a Chapter to Begin
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {chapters.map((chapter) => {
             const c = colorMap[chapter.color] ?? colorMap.blue;
             const chMCQs = chapter.lessons.reduce((a, l) => a + l.mcqs.length, 0);
@@ -91,23 +92,23 @@ export default function HomePage() {
               <Link
                 key={chapter.id}
                 href={`/chapter/${chapter.id}`}
-                className={`group block rounded-2xl border ${c.bg} ${c.border} p-6 transition-all duration-300 hover:scale-[1.015] hover:shadow-2xl ${c.glow}`}
+                className={`group block rounded-2xl border ${c.bg} ${c.border} p-5 md:p-6 transition-all duration-300 hover:scale-[1.015] hover:shadow-2xl ${c.glow}`}
               >
                 <div className="flex items-start justify-between mb-4">
-                  <span className={`text-xs font-bold px-3 py-1 rounded-full ${c.badge} tracking-wide`}>
+                  <span className={`text-[10px] md:text-xs font-bold px-3 py-1 rounded-full ${c.badge} tracking-wide`}>
                     CH {chapter.id}
                   </span>
-                  <span className="text-slate-500 text-xs">{chapter.lessons.length} lessons</span>
+                  <span className="text-slate-500 text-[10px] md:text-xs">{chapter.lessons.length} lessons</span>
                 </div>
-                <h3 className="text-base font-bold text-white mb-2 leading-snug">
+                <h3 className="text-base md:text-lg font-bold text-white mb-2 leading-snug">
                   {chapter.title}
                 </h3>
-                <p className="text-sm text-slate-400 mb-5 leading-relaxed line-clamp-2">
+                <p className="text-xs md:text-sm text-slate-400 mb-5 leading-relaxed line-clamp-2">
                   {chapter.description}
                 </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-slate-500">{chMCQs.toLocaleString()} questions</span>
-                  <span className={`text-xs font-semibold px-3 py-1.5 rounded-lg text-white ${c.btn} transition-colors`}>
+                <div className="flex items-center justify-between mt-auto">
+                  <span className="text-[10px] md:text-xs text-slate-500">{chMCQs.toLocaleString()} questions</span>
+                  <span className={`text-[10px] md:text-xs font-semibold px-3 py-1.5 rounded-lg text-white ${c.btn} transition-colors`}>
                     Start →
                   </span>
                 </div>
@@ -117,8 +118,9 @@ export default function HomePage() {
         </div>
       </div>
 
-      <footer className="border-t border-slate-800/60 py-6 text-center text-slate-600 text-sm">
-        Panaversity · AgentFactory MCQ Prep · Chapters 12–18 &amp; 56–60
+      <footer className="border-t border-slate-800/60 py-8 text-center text-slate-600 text-[10px] md:text-sm px-4">
+        <p>Panaversity · AgentFactory MCQ Prep</p>
+        <p className="mt-1 opacity-60">Chapters 12–18 &amp; 56–60</p>
       </footer>
     </main>
   );

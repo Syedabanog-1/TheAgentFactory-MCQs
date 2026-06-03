@@ -30,47 +30,47 @@ export default async function ChapterPage({ params }: Props) {
     <main className="min-h-screen">
       {/* Header */}
       <div className={`relative overflow-hidden border-b border-slate-800/60 bg-linear-to-br ${c.headerBg}`}>
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-200 text-sm mb-6 transition-colors">
-            ← Back to Chapters
+        <div className="max-w-4xl mx-auto px-4 py-8 md:py-14">
+          <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-200 text-[10px] md:text-sm mb-6 transition-colors group">
+            <span className="group-hover:-translate-x-1 transition-transform">←</span> Back to Chapters
           </Link>
           <div className="flex items-center gap-3 mb-3">
-            <span className={`text-xs font-bold px-3 py-1 rounded-full ${c.badge}`}>
+            <span className={`text-[9px] md:text-xs font-bold px-2.5 py-1 rounded-full ${c.badge} uppercase tracking-widest`}>
               Chapter {chapter.id}
             </span>
           </div>
-          <h1 className="text-3xl font-bold text-white mb-3">{chapter.title}</h1>
-          <p className="text-slate-400 mb-6">{chapter.description}</p>
-          <div className="flex gap-6 text-sm">
-            <span className="text-slate-300"><span className="font-semibold text-white">{chapter.lessons.length}</span> Lessons</span>
-            <span className="text-slate-300"><span className="font-semibold text-white">{totalMCQs.toLocaleString()}</span> Questions</span>
+          <h1 className="text-xl sm:text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight leading-tight">{chapter.title}</h1>
+          <p className="text-xs sm:text-sm md:text-base text-slate-400 mb-8 leading-relaxed max-w-2xl">{chapter.description}</p>
+          <div className="flex gap-4 md:gap-8 text-[10px] md:text-sm">
+            <span className="text-slate-400 flex items-center gap-1.5"><span className="font-bold text-white">{chapter.lessons.length}</span> Lessons</span>
+            <span className="text-slate-400 flex items-center gap-1.5"><span className="font-bold text-white">{totalMCQs.toLocaleString()}</span> Questions</span>
           </div>
         </div>
       </div>
 
       {/* Lessons List */}
-      <div className="max-w-4xl mx-auto px-6 py-10">
-        <h2 className="text-lg font-semibold text-slate-300 mb-6">Choose a Lesson</h2>
+      <div className="max-w-4xl mx-auto px-4 py-10 md:py-12">
+        <h2 className="text-sm md:text-lg font-semibold text-slate-300 mb-6 uppercase tracking-wider">Choose a Lesson</h2>
         <div className="space-y-3">
           {chapter.lessons.map((lesson, idx) => (
             <Link
               key={lesson.id}
               href={`/quiz/${chapter.id}/${lesson.id}`}
-              className={`group flex items-center justify-between rounded-xl border ${c.lessonBg} ${c.lessonBorder} px-5 py-4 transition-all duration-200 hover:scale-[1.005] hover:shadow-lg`}
+              className={`group flex items-center justify-between rounded-xl border ${c.lessonBg} ${c.lessonBorder} px-4 py-4 md:px-6 md:py-5 transition-all duration-200 hover:bg-white/5 hover:scale-[1.01] hover:shadow-xl`}
             >
-              <div className="flex items-center gap-4">
-                <span className={`w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold ${c.badge}`}>
+              <div className="flex items-center gap-3 md:gap-5 min-w-0">
+                <span className={`w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center text-xs md:text-base font-bold ${c.badge} shrink-0`}>
                   {idx + 1}
                 </span>
-                <div>
-                  <div className="font-medium text-slate-100 group-hover:text-white transition-colors">
+                <div className="min-w-0">
+                  <div className="text-sm md:text-lg font-medium text-slate-100 group-hover:text-white transition-colors truncate pr-2">
                     {lesson.title}
                   </div>
-                  <div className="text-xs text-slate-500 mt-0.5">{lesson.mcqs.length} questions</div>
+                  <div className="text-[9px] md:text-xs text-slate-500 mt-1 uppercase tracking-widest font-medium">{lesson.mcqs.length} questions</div>
                 </div>
               </div>
-              <span className={`text-xs font-semibold px-3 py-1.5 rounded-lg text-white ${c.btn} transition-colors opacity-0 group-hover:opacity-100`}>
-                Practice →
+              <span className={`text-[9px] md:text-xs font-bold px-3 py-2 rounded-lg text-white ${c.btn} transition-all md:opacity-0 md:group-hover:opacity-100 shrink-0 uppercase tracking-wider`}>
+                Practice <span className="ml-1">→</span>
               </span>
             </Link>
           ))}

@@ -147,33 +147,38 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
     const { label, color } = getScoreLabel(score.correct, total);
     const passed = total > 0 && (score.correct / total) >= 0.7;
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center px-4 bg-slate-950">
-        <div className="bg-slate-900 border border-slate-700/50 rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl">
-          <div className="text-5xl mb-4">{passed ? "🏆" : "📚"}</div>
-          <h2 className={`text-2xl font-bold mb-1 ${color}`}>{label}</h2>
-          <p className="text-slate-400 text-sm mb-6">{lessonTitle}</p>
-          <div className="flex items-end justify-center gap-1 mb-2">
-            <span className="text-6xl font-black text-white">{score.correct}</span>
-            <span className="text-2xl text-slate-500 mb-2">/{total}</span>
+      <main className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-slate-950">
+        <div className="bg-slate-900 border border-slate-700/50 rounded-2xl p-6 md:p-10 max-w-sm w-full text-center shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-indigo-500 to-transparent opacity-50" />
+          
+          <div className="text-5xl md:text-6xl mb-6">{passed ? "🏆" : "📚"}</div>
+          <h2 className={`text-xl md:text-3xl font-bold mb-2 ${color}`}>{label}</h2>
+          <p className="text-slate-400 text-[10px] md:text-sm mb-8 uppercase tracking-widest font-medium px-4 line-clamp-2">{lessonTitle}</p>
+          
+          <div className="bg-slate-800/40 rounded-2xl p-6 mb-8 border border-slate-700/30">
+            <div className="flex items-end justify-center gap-1 mb-2">
+              <span className="text-5xl md:text-7xl font-black text-white leading-none">{score.correct}</span>
+              <span className="text-xl md:text-3xl text-slate-500 mb-1.5 md:mb-3 font-bold">/{total}</span>
+            </div>
+            <p className="text-slate-300 text-xs md:text-sm font-semibold tracking-wide">{scorePercent}% Accuracy</p>
           </div>
-          <p className="text-slate-400 text-sm mb-6">{scorePercent}% correct</p>
 
           {/* Score bar */}
-          <div className="h-2 rounded-full bg-slate-800 mb-6 overflow-hidden">
+          <div className="h-2 md:h-2.5 rounded-full bg-slate-800 mb-8 overflow-hidden">
             <div
-              className={`h-full rounded-full transition-all duration-700 ${passed ? "bg-blue-500" : "bg-rose-500"}`}
+              className={`h-full rounded-full transition-all duration-1000 ease-out ${passed ? "bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.4)]" : "bg-rose-500 shadow-[0_0_12px_rgba(244,63,94,0.4)]"}`}
               style={{ width: `${scorePercent}%` }}
             />
           </div>
 
           {/* Breakdown dots */}
-          <div className="flex flex-wrap gap-1.5 justify-center mb-6">
+          <div className="flex flex-wrap gap-1.5 md:gap-2 justify-center mb-10">
             {mcqs.map((_, idx) => {
               const ans = answered[idx];
               return (
                 <div
                   key={idx}
-                  className={`w-3 h-3 rounded-full ${ans?.correct ? "bg-emerald-500" : ans ? "bg-rose-500" : "bg-slate-700"}`}
+                  className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${ans?.correct ? "bg-emerald-500" : ans ? "bg-rose-500" : "bg-slate-700"} transition-colors`}
                   title={`Q${idx + 1}: ${ans?.correct ? "Correct" : ans ? "Wrong" : "Unanswered"}`}
                 />
               );
@@ -181,24 +186,24 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
           </div>
 
           {!passed && (
-            <div className="mb-4">
-              <p className="text-rose-400 text-sm font-semibold mb-3">
-                You need 70% or higher to pass. Please re-attempt the exam.
+            <div className="mb-6">
+              <p className="text-rose-400 text-[10px] md:text-xs font-bold mb-4 uppercase tracking-wider">
+                70% required to pass
               </p>
               <button
                 onClick={resetQuiz}
-                className="block w-full py-3 rounded-xl font-semibold text-sm text-white text-center bg-rose-600 hover:bg-rose-500 transition-all mb-2"
+                className="block w-full py-3.5 md:py-4 rounded-xl font-bold text-xs md:text-sm text-white text-center bg-rose-600 hover:bg-rose-500 transition-all shadow-lg shadow-rose-900/30 active:scale-[0.98]"
               >
-                Re-attempt Exam
+                RE-ATTEMPT EXAM
               </button>
             </div>
           )}
 
           <Link
             href={`/chapter/${chapterId}`}
-            className={`block w-full py-3 rounded-xl font-semibold text-sm text-white text-center ${c.progress} hover:opacity-90 transition-all`}
+            className={`block w-full py-3.5 md:py-4 rounded-xl font-bold text-xs md:text-sm text-white text-center ${c.progress} hover:opacity-90 transition-all shadow-lg active:scale-[0.98] uppercase tracking-wider`}
           >
-            ← Back to Chapter
+            {passed ? "BACK TO CHAPTER" : "QUIT PRACTICE"}
           </Link>
         </div>
       </main>
@@ -207,55 +212,58 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
 
   // ── Quiz Screen ────────────────────────────────────────────────────────────
   return (
-    <main className="min-h-screen flex flex-col">
+    <main className="min-h-screen flex flex-col bg-slate-950">
       {/* Top Bar */}
-      <div className="border-b border-slate-800/60 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-          <Link href={`/chapter/${chapterId}`} className={`text-sm ${c.back} transition-colors flex items-center gap-1.5`}>
-            ← {chapterTitle}
+      <div className="border-b border-slate-800/60 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-20">
+        <div className="max-w-3xl mx-auto px-4 py-3 md:py-4 flex items-center justify-between gap-3">
+          <Link href={`/chapter/${chapterId}`} className={`text-[10px] md:text-sm font-bold uppercase tracking-widest ${c.back} transition-colors flex items-center gap-1.5 shrink-0 group`}>
+            <span className="group-hover:-translate-x-1 transition-transform">←</span>
+            <span className="hidden sm:inline">Chapter {chapterId}</span>
+            <span className="sm:hidden">Exit</span>
           </Link>
-          <div className="flex items-center gap-3 text-sm">
+          <div className="flex items-center gap-2 md:gap-4">
             {/* Timer */}
-            <span className={`text-xs px-2.5 py-1 rounded-full border font-mono ${timerColor} ${timerBg}`}>
+            <div className={`px-2.5 py-1 rounded-lg border font-mono text-[10px] md:text-xs flex items-center gap-1.5 ${timerColor} ${timerBg} transition-colors`}>
+              <span className="opacity-60 hidden xs:inline">TIME</span>
               {String(Math.floor(timeLeft / 60)).padStart(1, "0")}:{String(timeLeft % 60).padStart(2, "0")}
-            </span>
-            <span className={`text-xs px-2.5 py-1 rounded-full font-semibold ${c.badge}`}>
-              {currentIdx + 1} / {total}
-            </span>
-            {score.attempted > 0 && (
-              <span className="text-xs font-medium text-emerald-400">{score.correct} correct</span>
-            )}
-            {score.attempted > 0 && (
-              <span className="text-xs font-medium text-blue-400">{donePercent}% done</span>
-            )}
+            </div>
+            <div className={`px-2.5 py-1 rounded-lg font-bold text-[10px] md:text-xs ${c.badge} uppercase tracking-wider`}>
+              {currentIdx + 1} <span className="opacity-50">/</span> {total}
+            </div>
+            <div className="hidden xs:flex items-center gap-1.5 text-[10px] md:text-xs font-bold text-emerald-400 uppercase tracking-wider">
+               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+               {score.correct}
+            </div>
           </div>
         </div>
-        {/* Progress bar - shown from first attempted question, color based on score % */}
-        {score.attempted > 0 && (
-          <div className="h-1 bg-slate-800">
-            <div className={`h-full ${scorePercent >= 70 ? "bg-blue-500" : "bg-rose-500"} transition-all duration-500`} style={{ width: `${donePercent}%` }} />
-          </div>
-        )}
+        {/* Progress bar */}
+        <div className="h-1 bg-slate-800/50">
+          <div 
+            className={`h-full ${scorePercent >= 70 ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.3)]" : "bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.3)]"} transition-all duration-500 ease-out`} 
+            style={{ width: `${donePercent}%` }} 
+          />
+        </div>
       </div>
 
       {/* Quiz Body */}
-      <div className="flex-1 max-w-3xl mx-auto w-full px-4 py-8">
-        <div className="mb-2 text-xs text-slate-500 font-medium tracking-wide uppercase">{lessonTitle}</div>
+      <div className="flex-1 max-w-3xl mx-auto w-full px-4 py-6 md:py-10">
+        <div className="mb-3 text-[9px] md:text-[11px] text-slate-500 font-bold tracking-[0.2em] uppercase line-clamp-1 opacity-80">{lessonTitle}</div>
 
         {/* Question Card */}
-        <div className="bg-slate-900 border border-slate-700/50 rounded-2xl p-6 mb-5 shadow-xl">
-          <div className="flex items-start gap-3 mb-1">
-            <span className={`text-xs font-bold px-2 py-0.5 rounded ${c.badge} shrink-0 mt-0.5`}>Q{mcq.id}</span>
+        <div className="bg-slate-900 border border-slate-700/40 rounded-2xl p-5 md:p-8 mb-6 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500/30" />
+          <div className="flex items-center gap-2 mb-4">
+            <span className={`text-[9px] font-black px-2 py-1 rounded-md ${c.badge} uppercase`}>Question {mcq.id}</span>
           </div>
-          <p className="text-slate-100 text-base leading-relaxed font-medium">{mcq.question}</p>
+          <p className="text-slate-100 text-sm md:text-xl leading-relaxed font-semibold">{mcq.question}</p>
         </div>
 
         {/* Options */}
-        <div className="space-y-2.5 mb-6">
+        <div className="space-y-2.5 md:space-y-3.5 mb-8">
           {(["A", "B", "C", "D"] as AnswerKey[]).map((key) => (
             <button key={key} onClick={() => handleSelect(key)} disabled={revealed} className={getOptionStyle(key)}>
               {getOptionIcon(key)}
-              <span className="pt-0.5 leading-relaxed">{mcq.options[key]}</span>
+              <span className="pt-0.5 leading-relaxed text-xs md:text-base font-medium">{mcq.options[key]}</span>
             </button>
           ))}
         </div>
@@ -265,68 +273,68 @@ export default function QuizClient({ chapterId, chapterTitle, chapterColor, less
           <button
             onClick={handleReveal}
             disabled={!selected}
-            className={`w-full py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${
-              selected ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/40" : "bg-slate-800 text-slate-500 cursor-not-allowed"
+            className={`w-full py-4 rounded-2xl font-bold text-xs md:text-sm uppercase tracking-[0.15em] transition-all duration-300 ${
+              selected ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-xl shadow-indigo-900/40 active:scale-[0.98]" : "bg-slate-800 text-slate-500 cursor-not-allowed opacity-50"
             }`}
           >
-            {selected ? "Show Correct Answer" : "Select an option first"}
+            {selected ? "Reveal Correct Answer" : "Select an option"}
           </button>
         )}
 
         {/* Explanation */}
         {revealed && (
-          <div className="rounded-xl border border-slate-700/50 bg-slate-900/80 p-5 mb-4 slide-in">
-            <div className="flex items-center gap-2 mb-3">
-              <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${selected === mcq.correct ? "bg-emerald-600" : "bg-rose-600"} text-white flex-shrink-0`}>
+          <div className="rounded-2xl border border-slate-700/50 bg-slate-900/60 p-5 md:p-6 mb-6 slide-in backdrop-blur-sm">
+            <div className="flex items-center gap-3 mb-4">
+              <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs md:text-sm ${selected === mcq.correct ? "bg-emerald-600 shadow-emerald-900/40" : "bg-rose-600 shadow-rose-900/40"} text-white flex-shrink-0 shadow-lg`}>
                 {selected === mcq.correct ? "✓" : "✗"}
-              </span>
-              <span className={`text-sm font-semibold ${selected === mcq.correct ? "text-emerald-400" : "text-rose-400"}`}>
-                {selected === mcq.correct ? "Correct!" : `Incorrect — Correct answer is ${mcq.correct}`}
+              </div>
+              <span className={`text-xs md:text-base font-bold uppercase tracking-wider ${selected === mcq.correct ? "text-emerald-400" : "text-rose-400"}`}>
+                {selected === mcq.correct ? "Brilliant! Correct" : `Incorrect · Answer is ${mcq.correct}`}
               </span>
             </div>
-            <p className="text-slate-300 text-sm leading-relaxed">{mcq.explanation}</p>
+            <p className="text-slate-300 text-xs md:text-sm leading-relaxed border-t border-slate-700/30 pt-4">{mcq.explanation}</p>
           </div>
         )}
 
         {/* Navigation */}
-        <div className="flex items-center justify-between gap-3 mt-4">
+        <div className="flex items-center justify-between gap-3 md:gap-4 mt-4">
           <button
             onClick={goPrev}
             disabled={currentIdx === 0}
-            className="flex-1 py-3 rounded-xl border border-slate-700/60 bg-slate-800/50 text-slate-300 font-medium text-sm hover:bg-slate-700 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+            className="flex-1 py-3.5 md:py-4 rounded-2xl border border-slate-700/60 bg-slate-800/40 text-slate-400 font-bold text-[10px] md:text-xs uppercase tracking-widest hover:bg-slate-700 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-all active:scale-[0.97]"
           >
-            ← Previous
+            ← Prev
           </button>
 
           {isLastQuestion && revealed ? (
             <button
               onClick={() => setShowResult(true)}
-              className="flex-1 py-3 rounded-xl font-semibold text-sm text-white bg-indigo-600 hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-900/40"
+              className="flex-1 py-3.5 md:py-4 rounded-2xl font-bold text-[10px] md:text-xs uppercase tracking-widest text-white bg-indigo-600 hover:bg-indigo-500 transition-all shadow-xl shadow-indigo-900/40 active:scale-[0.97]"
             >
-              View Result →
+              Finish Exam →
             </button>
           ) : (
             <button
               onClick={goNext}
               disabled={isLastQuestion}
-              className={`flex-1 py-3 rounded-xl font-semibold text-sm text-white bg-purple-400 hover:bg-purple-300 transition-all shadow-lg disabled:opacity-40 disabled:cursor-not-allowed`}
+              className={`flex-1 py-3.5 md:py-4 rounded-2xl font-bold text-[10px] md:text-xs uppercase tracking-widest text-white bg-violet-600 hover:bg-violet-500 transition-all shadow-xl shadow-violet-900/40 active:scale-[0.97] disabled:opacity-20 disabled:cursor-not-allowed`}
             >
-              Next →
+              Next Question →
             </button>
           )}
         </div>
 
         {/* Quick Nav dots */}
-        <div className="mt-6 flex flex-wrap gap-1.5 justify-center">
+        <div className="mt-10 flex flex-wrap gap-2 justify-center px-4">
           {mcqs.map((_, idx) => {
             const ans = answered[idx];
-            let cls = "w-2.5 h-2.5 rounded-full transition-all duration-200 ";
-            if (idx === currentIdx) cls += `${c.progress} scale-150`;
+            let cls = "w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 cursor-pointer ";
+            if (idx === currentIdx) cls += `${c.progress} scale-150 ring-4 ring-white/10`;
             else if (ans?.correct) cls += "bg-emerald-600";
             else if (ans && !ans.correct) cls += "bg-rose-600";
-            else cls += "bg-slate-700";
+            else cls += "bg-slate-800 hover:bg-slate-700";
             return (
-              <button key={idx} onClick={() => navigate(idx)} className={cls} title={`Q${idx + 1}`} />
+              <button key={idx} onClick={() => navigate(idx)} className={cls} title={`Go to Q${idx + 1}`} />
             );
           })}
         </div>
