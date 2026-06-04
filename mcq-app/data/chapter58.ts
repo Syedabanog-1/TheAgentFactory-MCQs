@@ -27,7 +27,7 @@ export const chapter58: Chapter = {
           question: "Which grouping correctly maps TutorClaw's nine tools to their three functional categories?",
           options: {
             A: "Frontend tools (display and UI), backend tools (logic), and database tools (persistence)",
-            B: "State tools (register_learner, track_progress, get_learner_profile, upgrade_tier) → Content tools (get_chapter_content, list_chapters) → Pedagogy and Monetization tools (generate_guidance, submit_code, generate_stripe_checkout_url)",
+            B: "State tools (register_learner, get_learner_state, update_progress) → Content tools (get_chapter_content, get_exercises) → Pedagogy tools (generate_guidance, assess_response) → Code and Monetization tools (submit_code, get_upgrade_url)",
             C: "Free tier tools, paid tier tools, and admin-only tools — organized by subscription access level",
             D: "Input tools (receive data), processing tools (transform data), and output tools (deliver results)"
           },
@@ -39,12 +39,12 @@ export const chapter58: Chapter = {
           question: "What happens in TutorClaw's design when a free-tier learner requests a chapter that requires a paid tier?",
           options: {
             A: "The tool returns the first 500 words of the chapter as a free preview",
-            B: "The tool returns an access-denied response, and the agent uses this to trigger the upgrade flow — calling generate_stripe_checkout_url and sending the learner a payment link",
+            B: "The tool returns an access-denied response, and the agent uses this to trigger the upgrade flow — calling get_upgrade_url and sending the learner a payment link",
             C: "The tool silently skips to the next accessible chapter without notifying the learner",
             D: "The MCP server throws an unhandled exception because tier checking was not implemented"
           },
           correct: "B",
-          explanation: "Tier access rules are enforced at the tool level — the MCP tool checks the learner's tier before fetching content. An access failure triggers the monetization flow: the agent calls generate_stripe_checkout_url and sends the checkout link — a seamless conversion funnel embedded in the learning experience."
+          explanation: "Tier access rules are enforced at the tool level — the MCP tool checks the learner's tier before fetching content. An access failure triggers the monetization flow: the agent calls get_upgrade_url and sends the checkout link — a seamless conversion funnel embedded in the learning experience."
         },
         {
           id: 4,
@@ -68,7 +68,7 @@ export const chapter58: Chapter = {
             D: "It validates the learner's email address against Stripe's customer database"
           },
           correct: "B",
-          explanation: "register_learner is the entry point for new users — it creates the learner's record in TutorClaw's JSON state file with their identifier and initial free tier status. Without this record, no other state tool (track_progress, get_learner_profile, upgrade_tier) can function for that learner."
+          explanation: "register_learner is the entry point for new users — it creates the learner's record in TutorClaw's JSON state file with their identifier and initial free tier status. Without this record, no other state tool (update_progress, get_learner_state, upgrade_tier) can function for that learner."
         },
         {
           id: 6,
@@ -99,7 +99,7 @@ export const chapter58: Chapter = {
           question: "A TutorClaw developer defines the get_chapter_content tool contract with output: {content: string, accessible: boolean}. A teammate asks: 'Why include an accessible field when content is returned — if the content is there, isn't access obviously granted?' What architectural purpose does the accessible field serve?",
           options: {
             A: "It helps frontend developers style the UI differently for accessible versus inaccessible content",
-            B: "It gives the agent a machine-readable signal to trigger the upgrade flow — when accessible is false, the agent calls generate_stripe_checkout_url without needing to parse error messages or infer state from null content",
+            B: "It gives the agent a machine-readable signal to trigger the upgrade flow — when accessible is false, the agent calls get_upgrade_url without needing to parse error messages or infer state from null content",
             C: "It satisfies WCAG accessibility guidelines for content delivered over messaging platforms",
             D: "It prevents the JSON state file from storing unnecessary content strings when a learner is denied access"
           },
@@ -108,7 +108,7 @@ export const chapter58: Chapter = {
         },
         {
           id: 9,
-          question: "TutorClaw groups register_learner, track_progress, get_learner_profile, and upgrade_tier into a 'state tools' category. A new developer asks why these are grouped rather than treated as four independent tools. What is the correct explanation?",
+          question: "TutorClaw groups register_learner, update_progress, get_learner_state, and upgrade_tier into a 'state tools' category. A new developer asks why these are grouped rather than treated as four independent tools. What is the correct explanation?",
           options: {
             A: "These tools share the same API endpoint and must be called through the same network route",
             B: "These four tools all read from or write to the same learner state — they form a cohesive subsystem where the output of one (register_learner creates the record) enables the others to function, making their grouping architecturally meaningful",
@@ -116,19 +116,19 @@ export const chapter58: Chapter = {
             D: "The MCP protocol requires tools that touch the same database to be grouped into the same category"
           },
           correct: "B",
-          explanation: "Architectural categories reveal dependencies and data ownership. The state tools all operate on the same learner record in the JSON state file — register_learner creates it, track_progress updates it, get_learner_profile reads it, and upgrade_tier modifies it. Grouping them communicates that they share a single data concern and must be designed with consistent field names and access patterns."
+          explanation: "Architectural categories reveal dependencies and data ownership. The state tools all operate on the same learner record in the JSON state file — register_learner creates it, update_progress updates it, get_learner_state reads it, and upgrade_tier modifies it. Grouping them communicates that they share a single data concern and must be designed with consistent field names and access patterns."
         },
         {
           id: 10,
           question: "A free-tier learner in TutorClaw tries to access a premium chapter. The agent calls get_chapter_content and receives {content: null, accessible: false}. According to TutorClaw's designed flow, what should the agent do next?",
           options: {
             A: "Display an error message: 'Access denied. Please contact support.'",
-            B: "Call generate_stripe_checkout_url to create a payment link and send it to the learner as the next step toward accessing the content",
-            C: "Call list_chapters to redirect the learner to a free chapter automatically",
+            B: "Call get_upgrade_url to create a payment link and send it to the learner as the next step toward accessing the content",
+            C: "Call get_exercises to redirect the learner to a free chapter automatically",
             D: "Log the access attempt and silently move the conversation to a different topic"
           },
           correct: "B",
-          explanation: "TutorClaw's tier access design creates a conversion funnel embedded in the learning experience. An accessible: false response is not a dead end — it is a trigger for the monetization flow. The agent calls generate_stripe_checkout_url and sends the learner a direct payment link, turning a content denial into an upgrade opportunity without breaking the conversation context."
+          explanation: "TutorClaw's tier access design creates a conversion funnel embedded in the learning experience. An accessible: false response is not a dead end — it is a trigger for the monetization flow. The agent calls get_upgrade_url and sends the learner a direct payment link, turning a content denial into an upgrade opportunity without breaking the conversation context."
         },
         {
           id: 11,
@@ -144,7 +144,7 @@ export const chapter58: Chapter = {
         },
         {
           id: 12,
-          question: "A TutorClaw developer needs to handle Stripe checkout sessions. Option A: embed Stripe logic in the agent's system prompt as instructions. Option B: create a generate_stripe_checkout_url MCP tool. Which is architecturally correct and why?",
+          question: "A TutorClaw developer needs to handle Stripe checkout sessions. Option A: embed Stripe logic in the agent's system prompt as instructions. Option B: create a get_upgrade_url MCP tool. Which is architecturally correct and why?",
           options: {
             A: "Option A, because the system prompt is the natural place for all agent behavior including payment handling",
             B: "Option B, because Stripe API calls require credentials and produce side effects that must be handled in executable server-side code — system prompt instructions cannot make HTTP calls or securely access API keys",
@@ -159,7 +159,7 @@ export const chapter58: Chapter = {
           question: "A TutorClaw architect finalizes the blueprint but realizes no behavior was defined for register_learner when called with a learner_id that already exists. What should the blueprint specify for this edge case?",
           options: {
             A: "The blueprint should leave this undefined and let the implementation developer decide",
-            B: "The blueprint must specify the exact behavior: either return an error with a defined error code, or return the existing learner's profile — the choice must be explicit so all dependent tools (track_progress, get_learner_profile) handle the outcome correctly",
+            B: "The blueprint must specify the exact behavior: either return an error with a defined error code, or return the existing learner's profile — the choice must be explicit so all dependent tools (update_progress, get_learner_state) handle the outcome correctly",
             C: "The MCP protocol handles duplicate registration automatically, so no blueprint specification is needed",
             D: "The edge case only needs to be addressed after the tool is built and tested in production"
           },
@@ -168,12 +168,12 @@ export const chapter58: Chapter = {
         },
         {
           id: 14,
-          question: "TutorClaw has both a list_chapters tool and a get_chapter_content tool. A developer asks: 'Why are these separate tools? Couldn't list_chapters just return full content for all chapters?' What is the correct architectural justification?",
+          question: "TutorClaw has both a get_exercises tool and a get_chapter_content tool. A developer asks: 'Why are these separate tools? Couldn't get_exercises just return full content for all chapters?' What is the correct architectural justification?",
           options: {
             A: "The MCP protocol limits single tool responses to 1000 characters, requiring content to be split across multiple tools",
-            B: "list_chapters returns lightweight metadata (chapter IDs, titles, tier requirements) for navigation, while get_chapter_content returns the full text for a single chapter — combining them would force agents to download all chapter content just to display a menu",
+            B: "get_exercises returns lightweight metadata (chapter IDs, titles, tier requirements) for navigation, while get_chapter_content returns the full text for a single chapter — combining them would force agents to download all chapter content just to display a menu",
             C: "Having separate tools allows different developers to implement each tool independently without coordination",
-            D: "ClawHub's marketplace search indexes list_chapters separately from content tools for discoverability"
+            D: "ClawHub's marketplace search indexes get_exercises separately from content tools for discoverability"
           },
           correct: "B",
           explanation: "Separating list from get is a standard API design pattern applied to MCP tools. A learner asking 'what chapters are available?' needs titles and tier indicators — not full lesson text. Loading full content for all chapters into the context window for a navigation query is wasteful and slow. The separation matches the granularity of each use case."
@@ -195,12 +195,12 @@ export const chapter58: Chapter = {
           question: "After blueprinting all nine TutorClaw tools, a review reveals that generate_guidance needs to check the learner's tier to decide which content depth to use, but the blueprint designed it as a pedagogy tool with no access to state tools. What does this discovery reveal?",
           options: {
             A: "generate_guidance was incorrectly categorized and should be moved to the state tools category",
-            B: "The blueprint review caught a missing dependency — generate_guidance needs access to learner state, so either it must call get_learner_profile as a prerequisite or the agent orchestration layer must provide tier context when calling it",
+            B: "The blueprint review caught a missing dependency — generate_guidance needs access to learner state, so either it must call get_learner_state as a prerequisite or the agent orchestration layer must provide tier context when calling it",
             C: "This is expected behavior because pedagogy tools are always stateless by design",
             D: "The blueprint is correct and tier-specific content should be handled by a separate tool"
           },
           correct: "B",
-          explanation: "A blueprint review that catches missing dependencies before implementation is working exactly as intended. The team now has a decision: should generate_guidance take a tier parameter (agent provides it), should it internally call get_learner_profile (adding a tool dependency), or should the orchestration always pre-fetch tier context? Catching this in blueprint prevents a broken implementation."
+          explanation: "A blueprint review that catches missing dependencies before implementation is working exactly as intended. The team now has a decision: should generate_guidance take a tier parameter (agent provides it), should it internally call get_learner_state (adding a tool dependency), or should the orchestration always pre-fetch tier context? Catching this in blueprint prevents a broken implementation."
         },
         {
           id: 17,
@@ -231,16 +231,16 @@ export const chapter58: Chapter = {
           question: "A developer proposes skipping TutorClaw's blueprint phase and using test-driven development instead — writing failing tests first and letting the implementation emerge. What is the key limitation of this approach for a nine-tool MCP system?",
           options: {
             A: "TDD is incompatible with Python and cannot be used for MCP server development",
-            B: "TDD verifies individual tool behavior but does not establish the shared contracts between tools — tests for register_learner can be written without knowing what data format get_learner_profile expects, leading to tools that each pass their own tests but fail when chained together",
+            B: "TDD verifies individual tool behavior but does not establish the shared contracts between tools — tests for register_learner can be written without knowing what data format get_learner_state expects, leading to tools that each pass their own tests but fail when chained together",
             C: "Writing tests before implementation doubles the development time without improving code quality",
             D: "TDD requires a running server to write tests against, which means all nine tools must be implemented before testing can begin"
           },
           correct: "B",
-          explanation: "TDD is excellent for verifying a tool in isolation but does not replace cross-tool contract design. A test for register_learner only verifies that it creates a record — it doesn't specify that the learner_id field name and type must match what get_learner_profile expects. Nine sets of passing unit tests can coexist with a broken integrated system if the interfaces were never aligned."
+          explanation: "TDD is excellent for verifying a tool in isolation but does not replace cross-tool contract design. A test for register_learner only verifies that it creates a record — it doesn't specify that the learner_id field name and type must match what get_learner_state expects. Nine sets of passing unit tests can coexist with a broken integrated system if the interfaces were never aligned."
         },
         {
           id: 20,
-          question: "TutorClaw's blueprint specifies that get_learner_profile returns learner_id, tier, progress_summary, and registered_at. During implementation, a developer wants to add a last_active timestamp field. What should they do?",
+          question: "TutorClaw's blueprint specifies that get_learner_state returns learner_id, tier, progress_summary, and registered_at. During implementation, a developer wants to add a last_active timestamp field. What should they do?",
           options: {
             A: "Add the field silently — adding fields to outputs is always backwards-compatible and never affects callers",
             B: "Update the blueprint to formally include last_active, then implement it — the blueprint is the source of truth and adding fields without updating it creates an undocumented contract that downstream tool callers and the agent's system prompt may not handle",
@@ -252,7 +252,7 @@ export const chapter58: Chapter = {
         },
         {
           id: 21,
-          question: "TutorClaw separates get_chapter_content and list_chapters (content tools) from generate_guidance (pedagogy/monetization tool). A developer asks why content retrieval and pedagogy delivery are in different categories. What is the correct answer?",
+          question: "TutorClaw separates get_chapter_content and get_exercises (content tools) from generate_guidance (pedagogy/monetization tool). A developer asks why content retrieval and pedagogy delivery are in different categories. What is the correct answer?",
           options: {
             A: "Content tools are written in JavaScript while pedagogy tools are written in Python, requiring separation",
             B: "Content tools retrieve raw curriculum data without pedagogical logic — they return what exists. Pedagogy tools apply PRIMM-Lite methodology to that content — they transform how it is delivered. Separating them allows content to be reused across different pedagogical approaches",
@@ -269,7 +269,7 @@ export const chapter58: Chapter = {
             A: "MCP tools cannot execute code because they run in a sandboxed environment without a Python interpreter",
             B: "The PRIMM-Lite flow requires code to be executed (for the Run phase) and the submission to be available for generate_guidance to reference during Investigation — both execution and persistence are needed to support the full pedagogical sequence",
             C: "Executing code creates security risks that require the tool to only persist submissions without running them",
-            D: "Persistence should be handled by track_progress, so submit_code should only execute"
+            D: "Persistence should be handled by update_progress, so submit_code should only execute"
           },
           correct: "B",
           explanation: "PRIMM-Lite's Run phase requires actual code execution — the learner needs to see real output to compare against their Predict phase answer. The Investigate phase requires generate_guidance to reference what the code did, which requires the execution result to be accessible. Designing submit_code to do only one of these breaks the PRIMM-Lite sequence."
@@ -312,15 +312,15 @@ export const chapter58: Chapter = {
         },
         {
           id: 26,
-          question: "A developer proposes combining register_learner and get_learner_profile into one tool that either creates a new learner or returns an existing one. What architectural principle does this proposal violate?",
+          question: "A developer proposes combining register_learner and get_learner_state into one tool that either creates a new learner or returns an existing one. What architectural principle does this proposal violate?",
           options: {
             A: "The proposal violates the DRY principle because it duplicates learner lookup logic",
-            B: "The proposal violates single responsibility — register_learner performs a write operation with side effects (creates a record, fires initialization logic) while get_learner_profile is a read operation. Merging them hides write side effects inside a tool callers assume is safe to call multiple times",
+            B: "The proposal violates single responsibility — register_learner performs a write operation with side effects (creates a record, fires initialization logic) while get_learner_state is a read operation. Merging them hides write side effects inside a tool callers assume is safe to call multiple times",
             C: "The MCP protocol forbids tools from performing both read and write operations",
             D: "The proposal would make the tool name misleading but is otherwise architecturally sound"
           },
           correct: "B",
-          explanation: "Combining a write operation with a read operation into one tool creates idempotency ambiguity. Callers of get_learner_profile expect a pure read — no state change. If the merged tool silently creates a record on first call, callers using it for profile lookups may unknowingly create phantom learner accounts. Keeping write and read operations separate makes each tool's side effects predictable."
+          explanation: "Combining a write operation with a read operation into one tool creates idempotency ambiguity. Callers of get_learner_state expect a pure read — no state change. If the merged tool silently creates a record on first call, callers using it for profile lookups may unknowingly create phantom learner accounts. Keeping write and read operations separate makes each tool's side effects predictable."
         },
         {
           id: 27,
@@ -336,27 +336,27 @@ export const chapter58: Chapter = {
         },
         {
           id: 28,
-          question: "During development, a TutorClaw team discovers that generate_guidance sometimes calls get_learner_profile internally to check tier before generating content. This cross-tool dependency was not in the original blueprint. What should the team do?",
+          question: "During development, a TutorClaw team discovers that generate_guidance sometimes calls get_learner_state internally to check tier before generating content. This cross-tool dependency was not in the original blueprint. What should the team do?",
           options: {
             A: "Remove the internal call — tools should never call other tools directly",
             B: "Update the blueprint to formally document this dependency — either as a direct tool-to-tool call or by requiring the agent to always provide tier context when calling generate_guidance, then decide which pattern to standardize",
             C: "Leave the undocumented dependency in place since it works correctly",
-            D: "Move get_learner_profile into generate_guidance and remove it as a separate tool"
+            D: "Move get_learner_state into generate_guidance and remove it as a separate tool"
           },
           correct: "B",
-          explanation: "Undocumented cross-tool dependencies create hidden coupling. If the blueprint doesn't mention this dependency, another developer may refactor get_learner_profile's output format without realizing generate_guidance depends on it. The team must decide on the dependency pattern (agent-orchestrated vs. tool-internal) and formalize it in the blueprint before it becomes a maintenance liability."
+          explanation: "Undocumented cross-tool dependencies create hidden coupling. If the blueprint doesn't mention this dependency, another developer may refactor get_learner_state's output format without realizing generate_guidance depends on it. The team must decide on the dependency pattern (agent-orchestrated vs. tool-internal) and formalize it in the blueprint before it becomes a maintenance liability."
         },
         {
           id: 29,
           question: "TutorClaw's blueprint is finalized with nine tools. A new business requirement arrives: chapters should have a preview_available flag allowing free-tier learners to read the first section of paid chapters. Which existing tool contracts need to be updated in the blueprint?",
           options: {
             A: "Only register_learner needs updating to include preview preferences",
-            B: "get_chapter_content needs a new output field (preview_content) and possibly a new input flag, and list_chapters needs to expose preview_available per chapter so the agent can inform learners which chapters have previews before they attempt access",
+            B: "get_chapter_content needs a new output field (preview_content) and possibly a new input flag, and get_exercises needs to expose preview_available per chapter so the agent can inform learners which chapters have previews before they attempt access",
             C: "Only the Stripe integration tools need updating since preview affects monetization",
             D: "No blueprint changes are needed — this feature can be added during implementation without affecting contracts"
           },
           correct: "B",
-          explanation: "A preview feature changes the data model: chapters now have preview content that must be returned differently from full content. get_chapter_content must return preview_content when accessible is false but preview_available is true. list_chapters must expose preview_available so learners can see which chapters offer previews. Both contracts change, and blueprint-level changes must happen before implementation."
+          explanation: "A preview feature changes the data model: chapters now have preview content that must be returned differently from full content. get_chapter_content must return preview_content when accessible is false but preview_available is true. get_exercises must expose preview_available so learners can see which chapters offer previews. Both contracts change, and blueprint-level changes must happen before implementation."
         },
         {
           id: 30,
@@ -368,7 +368,7 @@ export const chapter58: Chapter = {
             D: "Claude cannot orchestrate tools that were not available during its training data"
           },
           correct: "B",
-          explanation: "Claude orchestrates tools based on their descriptions and the system prompt — it has no intrinsic knowledge of TutorClaw's architecture. If generate_guidance's description doesn't mention that get_learner_profile must be called first, Claude may skip that step. Tool descriptions are the blueprint's delivery mechanism to the AI layer — undocumented dependencies are invisible to the orchestrator."
+          explanation: "Claude orchestrates tools based on their descriptions and the system prompt — it has no intrinsic knowledge of TutorClaw's architecture. If generate_guidance's description doesn't mention that get_learner_state must be called first, Claude may skip that step. Tool descriptions are the blueprint's delivery mechanism to the AI layer — undocumented dependencies are invisible to the orchestrator."
         }
       ]
     },
@@ -414,7 +414,7 @@ export const chapter58: Chapter = {
         },
         {
           id: 4,
-          question: "What JSON state fields does TutorClaw's track_progress tool store for each learning interaction?",
+          question: "What JSON state fields does TutorClaw's update_progress tool store for each learning interaction?",
           options: {
             A: "Only the learner's email address and subscription plan",
             B: "The chapter_id and completion_status for each chapter attempted by the learner",
@@ -422,7 +422,7 @@ export const chapter58: Chapter = {
             D: "The learner's billing history and payment method details"
           },
           correct: "B",
-          explanation: "track_progress stores the minimal state needed to track learning progress: chapter_id (which chapter was worked on) and completion_status (whether it was completed). This lightweight approach keeps the JSON state file small and the tool fast to query, consistent with TutorClaw's minimal-infrastructure philosophy."
+          explanation: "update_progress stores the minimal state needed to track learning progress: chapter_id (which chapter was worked on) and completion_status (whether it was completed). This lightweight approach keeps the JSON state file small and the tool fast to query, consistent with TutorClaw's minimal-infrastructure philosophy."
         },
         {
           id: 5,
@@ -474,7 +474,7 @@ export const chapter58: Chapter = {
         },
         {
           id: 9,
-          question: "TutorClaw's track_progress tool updates a learner's JSON state after each chapter completion. A developer asks: 'Why store progress in JSON files instead of just tracking it in the conversation memory?' What is the correct answer?",
+          question: "TutorClaw's update_progress tool updates a learner's JSON state after each chapter completion. A developer asks: 'Why store progress in JSON files instead of just tracking it in the conversation memory?' What is the correct answer?",
           options: {
             A: "Conversation memory has a character limit that prevents storing more than three chapters of progress",
             B: "Conversation memory is session-scoped — when a learner returns to TutorClaw after a day, the previous session's context is gone. JSON persistence survives across sessions, platform restarts, and device changes, making progress genuinely durable",
@@ -582,7 +582,7 @@ export const chapter58: Chapter = {
         },
         {
           id: 18,
-          question: "TutorClaw's JSON persistence has no transaction support. A workflow requires both track_progress and upgrade_tier to succeed or both to fail atomically. How should this be handled?",
+          question: "TutorClaw's JSON persistence has no transaction support. A workflow requires both update_progress and upgrade_tier to succeed or both to fail atomically. How should this be handled?",
           options: {
             A: "Accept that partial failures are inevitable with JSON files and handle them manually",
             B: "Implement a compensating transaction pattern: write to a pending_operations log first, attempt both writes, and on failure replay or rollback from the log — this simulates transactional behavior within JSON file constraints",
@@ -610,11 +610,11 @@ export const chapter58: Chapter = {
           options: {
             A: "No impact — JSON is schema-less and tools will automatically handle the new format",
             B: "Every tool that reads completion_status must be updated to handle a number instead of a boolean, every tool that writes it must use percentages, and the agent's system prompt logic that branches on completion must be updated — plus existing records need migration from boolean to percentage values",
-            C: "Only track_progress needs updating since it is the only tool that writes this field",
+            C: "Only update_progress needs updating since it is the only tool that writes this field",
             D: "The change requires publishing a new major version of TutorClaw on ClawHub before implementation"
           },
           correct: "B",
-          explanation: "Schema type changes cascade through all consumers of that field. get_learner_profile returns completion_status to the agent — the agent's system prompt must be updated to handle a number. Conditional logic that previously checked 'if completion_status is true' now needs a threshold (is 75% complete enough to unlock the next chapter?). Each of these downstream effects must be addressed before deploying the change."
+          explanation: "Schema type changes cascade through all consumers of that field. get_learner_state returns completion_status to the agent — the agent's system prompt must be updated to handle a number. Conditional logic that previously checked 'if completion_status is true' now needs a threshold (is 75% complete enough to unlock the next chapter?). Each of these downstream effects must be addressed before deploying the change."
         },
         {
           id: 21,
@@ -694,11 +694,11 @@ export const chapter58: Chapter = {
           options: {
             A: "Minimal impact — JSON nesting is handled automatically by all tools",
             B: "Every tool that reads or writes progress must be updated to handle nested lesson arrays. The agent's system prompt logic for assessing overall chapter completion must be updated. All existing progress records need a migration script to nest current flat entries under lesson arrays. The complexity of this change should be weighed against the actual need for lesson-level tracking",
-            C: "Only track_progress needs updating since it is the sole writer of this data",
+            C: "Only update_progress needs updating since it is the sole writer of this data",
             D: "The change requires creating a new lesson_progress tool to handle the nested structure"
           },
           correct: "B",
-          explanation: "Nesting schema changes affect every reader and writer. get_learner_profile displays progress summaries — it must now aggregate across nested lesson entries. track_progress writes progress — it must target the correct lesson within the chapter. The agent's system prompt logic for 'has the learner completed chapter X?' becomes more complex. Schema changes require a full impact analysis before implementation."
+          explanation: "Nesting schema changes affect every reader and writer. get_learner_state displays progress summaries — it must now aggregate across nested lesson entries. update_progress writes progress — it must target the correct lesson within the chapter. The agent's system prompt logic for 'has the learner completed chapter X?' becomes more complex. Schema changes require a full impact analysis before implementation."
         },
         {
           id: 28,
@@ -927,7 +927,7 @@ export const chapter58: Chapter = {
           question: "A TutorClaw operator wants to add a new behavioral rule: 'Always ask for learner consent before storing progress data.' Where should this instruction be placed — SOUL.md, IDENTITY.md, or a different location?",
           options: {
             A: "IDENTITY.md — because consent is part of TutorClaw's user-facing persona",
-            B: "SOUL.md — because data consent is a value and behavioral principle that governs how TutorClaw interacts with learners, fitting the soul/values domain. However, if this must be enforced mechanically rather than just aspirationally, it should also be implemented in the track_progress tool logic itself",
+            B: "SOUL.md — because data consent is a value and behavioral principle that governs how TutorClaw interacts with learners, fitting the soul/values domain. However, if this must be enforced mechanically rather than just aspirationally, it should also be implemented in the update_progress tool logic itself",
             C: "A separate CONSENT.md file should be created for legal and compliance instructions",
             D: "The Claude API terms of service file — because this is a legal requirement"
           },
@@ -1118,7 +1118,7 @@ export const chapter58: Chapter = {
             D: "A separate billing microservice that runs independently and syncs with the MCP server via REST calls"
           },
           correct: "B",
-          explanation: "In TutorClaw's architecture, the MCP server hosts both tools and the webhook endpoint. When Stripe fires a payment event, the webhook handler processes it and updates the JSON state file directly. The agent doesn't need to know about payments — it just calls get_learner_profile and sees the current tier."
+          explanation: "In TutorClaw's architecture, the MCP server hosts both tools and the webhook endpoint. When Stripe fires a payment event, the webhook handler processes it and updates the JSON state file directly. The agent doesn't need to know about payments — it just calls get_learner_state and sees the current tier."
         },
         {
           id: 2,
@@ -1146,7 +1146,7 @@ export const chapter58: Chapter = {
         },
         {
           id: 4,
-          question: "What does TutorClaw's generate_stripe_checkout_url tool do when invoked by the agent?",
+          question: "What does TutorClaw's get_upgrade_url tool do when invoked by the agent?",
           options: {
             A: "It processes a payment directly using a stored payment method on file",
             B: "It creates a Stripe Checkout session for the appropriate tier upgrade and returns the hosted payment URL for the agent to send to the learner",
@@ -1154,14 +1154,14 @@ export const chapter58: Chapter = {
             D: "It generates a discount coupon code and applies it to the learner's next payment"
           },
           correct: "B",
-          explanation: "generate_stripe_checkout_url creates a Stripe Checkout session for the learner's target tier upgrade and returns the hosted payment URL. The agent then sends this URL to the learner via WhatsApp — the learner clicks it, completes payment on Stripe's hosted page, and the webhook fires to upgrade their tier."
+          explanation: "get_upgrade_url creates a Stripe Checkout session for the learner's target tier upgrade and returns the hosted payment URL. The agent then sends this URL to the learner via WhatsApp — the learner clicks it, completes payment on Stripe's hosted page, and the webhook fires to upgrade their tier."
         },
         {
           id: 5,
           question: "What is the correct sequence of events in TutorClaw's complete Stripe payment flow when a learner upgrades to the paid tier?",
           options: {
             A: "Learner pays → Agent detects payment → Agent calls upgrade_tier → JSON state is updated",
-            B: "Agent calls generate_stripe_checkout_url → Learner pays on Stripe → Stripe webhook fires → Webhook handler calls upgrade_tier → JSON state updates → Future tool calls see new tier",
+            B: "Agent calls get_upgrade_url → Learner pays on Stripe → Stripe webhook fires → Webhook handler calls upgrade_tier → JSON state updates → Future tool calls see new tier",
             C: "Learner requests upgrade → Admin manually approves → Stripe sends invoice → Learner pays → Tier activates",
             D: "Stripe subscription is created first → Tier is pre-activated → First payment confirms access"
           },
@@ -1182,7 +1182,7 @@ export const chapter58: Chapter = {
         },
         {
           id: 7,
-          question: "A TutorClaw developer is writing a pytest test for generate_stripe_checkout_url that verifies a valid checkout session is created. Should the test call Stripe's live API? What is the correct testing approach?",
+          question: "A TutorClaw developer is writing a pytest test for get_upgrade_url that verifies a valid checkout session is created. Should the test call Stripe's live API? What is the correct testing approach?",
           options: {
             A: "Yes — live API testing ensures the integration is actually working",
             B: "No — tests should use Stripe's test mode API keys and test card numbers. Test mode produces real Stripe Checkout sessions in a sandboxed environment that never charges real money, exercises the actual Stripe SDK code path, and can be run in CI without billing concerns",
@@ -1194,7 +1194,7 @@ export const chapter58: Chapter = {
         },
         {
           id: 8,
-          question: "TutorClaw's spec audit reveals that track_progress stores an extra field: time_spent_seconds, which was added during implementation but was never in the original blueprint. What should happen during the audit?",
+          question: "TutorClaw's spec audit reveals that update_progress stores an extra field: time_spent_seconds, which was added during implementation but was never in the original blueprint. What should happen during the audit?",
           options: {
             A: "Remove the field immediately — the implementation must match the spec exactly",
             B: "Make an explicit decision: if time_spent_seconds is valuable, update the blueprint to formally include it with documented semantics. If it was added speculatively without a clear use case, remove it from the implementation — either way, the spec and implementation must be brought into alignment",
@@ -1242,7 +1242,7 @@ export const chapter58: Chapter = {
         },
         {
           id: 12,
-          question: "TutorClaw's spec audit reveals that list_chapters returns chapters in alphabetical order instead of the curriculum sequence order specified in the blueprint. Is this a bug or an enhancement?",
+          question: "TutorClaw's spec audit reveals that get_exercises returns chapters in alphabetical order instead of the curriculum sequence order specified in the blueprint. Is this a bug or an enhancement?",
           options: {
             A: "Enhancement — alphabetical order is objectively better than curriculum order",
             B: "Bug — curriculum order is a deliberate pedagogical decision in the blueprint (earlier chapters build foundational skills for later ones). Alphabetical order disrupts the intended learning path. The implementation must be corrected to return curriculum order, and if alphabetical order is also desired, an optional sort parameter should be added to the spec",
@@ -1293,7 +1293,7 @@ export const chapter58: Chapter = {
           question: "Generating a TutorClaw Stripe checkout URL takes 2 seconds due to API latency. A learner waiting in WhatsApp receives no feedback during this wait. What should TutorClaw's agent behavior be during this 2-second window?",
           options: {
             A: "Do nothing — 2 seconds is fast enough that no feedback is needed",
-            B: "Send an immediate acknowledgment message before calling generate_stripe_checkout_url: 'Creating your upgrade link, one moment...' — this prevents the learner from thinking the message was lost or TutorClaw has stopped responding, then follow with the actual link once generated",
+            B: "Send an immediate acknowledgment message before calling get_upgrade_url: 'Creating your upgrade link, one moment...' — this prevents the learner from thinking the message was lost or TutorClaw has stopped responding, then follow with the actual link once generated",
             C: "Cancel the Stripe call if it takes longer than 1 second and retry",
             D: "Display a typing indicator in WhatsApp by making a separate API call before generating the checkout URL"
           },
@@ -1326,7 +1326,7 @@ export const chapter58: Chapter = {
         },
         {
           id: 19,
-          question: "TutorClaw's generate_stripe_checkout_url tool uses a hardcoded product_id. A Stripe pricing change requires a new product_id. What is the correct architectural approach to handle this?",
+          question: "TutorClaw's get_upgrade_url tool uses a hardcoded product_id. A Stripe pricing change requires a new product_id. What is the correct architectural approach to handle this?",
           options: {
             A: "Update the product_id in the source code and redeploy every time pricing changes",
             B: "Move the product_id to an environment variable so it can be updated through configuration without a code change or redeployment — pricing configuration belongs in environment variables, not hardcoded in tool logic",
@@ -1434,10 +1434,10 @@ export const chapter58: Chapter = {
         },
         {
           id: 28,
-          question: "TutorClaw gets a referral code feature requiring changes to register_learner, generate_stripe_checkout_url, and a new update_referral_credit tool. What should happen to TutorClaw's published ClawHub spec?",
+          question: "TutorClaw gets a referral code feature requiring changes to register_learner, get_upgrade_url, and a new update_referral_credit tool. What should happen to TutorClaw's published ClawHub spec?",
           options: {
             A: "Update the spec silently — minor feature additions don't require version bumps",
-            B: "Publish a new version with an updated spec: document the new optional referral_code parameter in register_learner, the referral discount logic in generate_stripe_checkout_url, and the new update_referral_credit tool with its full contract. Increment the version number and include a changelog for integrators already using TutorClaw",
+            B: "Publish a new version with an updated spec: document the new optional referral_code parameter in register_learner, the referral discount logic in get_upgrade_url, and the new update_referral_credit tool with its full contract. Increment the version number and include a changelog for integrators already using TutorClaw",
             C: "Create a separate ClawHub listing for the referral-enabled version",
             D: "The new tool can be added without a version update since it is additive"
           },
@@ -1461,7 +1461,7 @@ export const chapter58: Chapter = {
           question: "A TutorClaw operator wants to offer a 'team plan' where one payment covers five learners. The current architecture supports one learner_id per Stripe customer. What minimum changes to the nine-tool blueprint would support team plans?",
           options: {
             A: "No changes needed — the current architecture handles this automatically",
-            B: "A new tool (create_team) that maps a Stripe customer to multiple learner_ids, updates to upgrade_tier that can apply a tier to all learners in a team, and updates to generate_stripe_checkout_url that can create team subscription sessions — plus JSON state schema changes to include a teams: [{team_id, learner_ids, tier}] structure",
+            B: "A new tool (create_team) that maps a Stripe customer to multiple learner_ids, updates to upgrade_tier that can apply a tier to all learners in a team, and updates to get_upgrade_url that can create team subscription sessions — plus JSON state schema changes to include a teams: [{team_id, learner_ids, tier}] structure",
             C: "Simply allow one learner to share their credentials with four others",
             D: "Create five separate Stripe subscriptions and link them with a common team_code in JSON state"
           },
@@ -1536,7 +1536,7 @@ export const chapter58: Chapter = {
         },
         {
           id: 6,
-          question: "A TutorClaw developer is in the Harness Phase and discovers that register_learner uses UUID learner IDs while track_progress accepts any string. They realize the mismatch because the agent passed a phone number to track_progress instead of a UUID. At which phase should this inconsistency have been caught?",
+          question: "A TutorClaw developer is in the Harness Phase and discovers that register_learner uses UUID learner IDs while update_progress accepts any string. They realize the mismatch because the agent passed a phone number to update_progress instead of a UUID. At which phase should this inconsistency have been caught?",
           options: {
             A: "The Harness Phase — it is working correctly by catching this integration issue",
             B: "The Blueprint Phase — when defining the shared learner_id contract across all tools, the type and format should have been specified once and applied consistently to all nine tool contracts. The inconsistency should never have survived into implementation",
@@ -1544,7 +1544,7 @@ export const chapter58: Chapter = {
             D: "The Reflection Phase — specification mismatches are documented during the spec audit"
           },
           correct: "B",
-          explanation: "Blueprint Phase is where cross-tool data contracts are established. The learner_id format is a shared contract that all state tools depend on — it must be defined once in the blueprint and inherited by all tools. If the blueprint had specified 'learner_id: UUID string format', both register_learner and track_progress developers would implement the same type. Harness Phase catches what Blueprint Phase missed, but the root fix is upstream."
+          explanation: "Blueprint Phase is where cross-tool data contracts are established. The learner_id format is a shared contract that all state tools depend on — it must be defined once in the blueprint and inherited by all tools. If the blueprint had specified 'learner_id: UUID string format', both register_learner and update_progress developers would implement the same type. Harness Phase catches what Blueprint Phase missed, but the root fix is upstream."
         },
         {
           id: 7,
@@ -1563,7 +1563,7 @@ export const chapter58: Chapter = {
           question: "A TutorClaw team completes Blueprint and Local Build phases. They want to skip the Harness Phase and go directly to Monetization. What specific risk does this create?",
           options: {
             A: "Stripe's API requires all MCP tools to be tested before payment integration can begin",
-            B: "Without Harness Phase integration testing, the Monetization Phase will add Stripe complexity on top of a potentially broken tool chain — a bug in how register_learner interacts with track_progress won't be discovered until it manifests inside the payment flow, making it much harder to isolate and fix",
+            B: "Without Harness Phase integration testing, the Monetization Phase will add Stripe complexity on top of a potentially broken tool chain — a bug in how register_learner interacts with update_progress won't be discovered until it manifests inside the payment flow, making it much harder to isolate and fix",
             C: "Skipping Harness Phase violates ClawHub's marketplace certification requirements",
             D: "The Monetization Phase cannot run without the Harness Phase's configuration files"
           },
@@ -1712,7 +1712,7 @@ export const chapter58: Chapter = {
             D: "Stripe's payment webhook is being connected to TutorClaw's event handler"
           },
           correct: "B",
-          explanation: "Harnessing means assembling independent components into a coordinated system. After the Local Build Phase, nine tools exist independently. The Harness Phase connects them: the agent is configured with all nine tool descriptions, state flows are tested (register_learner creates a record that track_progress can update), and multi-tool sequences are verified end-to-end. The metaphor is apt: a harness connects individual elements into a working unit."
+          explanation: "Harnessing means assembling independent components into a coordinated system. After the Local Build Phase, nine tools exist independently. The Harness Phase connects them: the agent is configured with all nine tool descriptions, state flows are tested (register_learner creates a record that update_progress can update), and multi-tool sequences are verified end-to-end. The metaphor is apt: a harness connects individual elements into a working unit."
         },
         {
           id: 21,
@@ -1748,7 +1748,7 @@ export const chapter58: Chapter = {
             D: "New features after publication bypass the phase model and are implemented directly"
           },
           correct: "B",
-          explanation: "The six-phase model applies to new capabilities regardless of when they arise. Google Classroom integration likely requires a new authentication tool, modifications to register_learner to accept Google identity, and changes to track_progress to sync with Classroom's gradebook API. These are architectural decisions that must be blueprinted before implementation begins — adding them directly in the Local Build Phase without a blueprint creates exactly the integration problems the Blueprint Phase prevents."
+          explanation: "The six-phase model applies to new capabilities regardless of when they arise. Google Classroom integration likely requires a new authentication tool, modifications to register_learner to accept Google identity, and changes to update_progress to sync with Classroom's gradebook API. These are architectural decisions that must be blueprinted before implementation begins — adding them directly in the Local Build Phase without a blueprint creates exactly the integration problems the Blueprint Phase prevents."
         },
         {
           id: 24,
@@ -1812,15 +1812,15 @@ export const chapter58: Chapter = {
         },
         {
           id: 29,
-          question: "TutorClaw's Reflection Phase reveals that both track_progress and get_learner_profile write to overlapping JSON state fields. What should the Reflection Phase produce as output for this finding?",
+          question: "TutorClaw's Reflection Phase reveals that both update_progress and get_learner_state write to overlapping JSON state fields. What should the Reflection Phase produce as output for this finding?",
           options: {
             A: "A note that the overlap exists, with no action required",
             B: "An explicit architectural decision: either (1) designate one tool as the sole writer of the shared fields and make the other read-only for those fields, or (2) document that both tools write the same fields intentionally (with idempotency guarantees) and specify the write semantics clearly. The Reflection Phase must produce a decision, not just a finding",
-            C: "Remove get_learner_profile from the tool manifest since it duplicates track_progress",
+            C: "Remove get_learner_state from the tool manifest since it duplicates update_progress",
             D: "Merge both tools into a single tool to eliminate the overlap"
           },
           correct: "B",
-          explanation: "The Reflection Phase produces decisions, not observations. Overlapping write responsibilities is an architectural ambiguity that will cause bugs if two tools ever write conflicting values to the same field. The team must decide: which tool owns the field? If track_progress writes completion_status and get_learner_profile also writes it (perhaps with a different value), the last-write-wins outcome is non-deterministic. Assigning clear ownership resolves the ambiguity before it causes production incidents."
+          explanation: "The Reflection Phase produces decisions, not observations. Overlapping write responsibilities is an architectural ambiguity that will cause bugs if two tools ever write conflicting values to the same field. The team must decide: which tool owns the field? If update_progress writes completion_status and get_learner_state also writes it (perhaps with a different value), the last-write-wins outcome is non-deterministic. Assigning clear ownership resolves the ambiguity before it causes production incidents."
         },
         {
           id: 30,
@@ -1850,7 +1850,7 @@ export const chapter58: Chapter = {
             D: "Whether ClawHub's marketplace API accepts the TutorClaw schema without errors"
           },
           correct: "B",
-          explanation: "Integration tests cover what unit tests cannot: that state written by register_learner is correctly read by get_learner_profile, that tier upgrades triggered by webhook handling are enforced by get_chapter_content, and that the full PRIMM-Lite sequence works as an orchestrated multi-tool flow."
+          explanation: "Integration tests cover what unit tests cannot: that state written by register_learner is correctly read by get_learner_state, that tier upgrades triggered by webhook handling are enforced by get_chapter_content, and that the full PRIMM-Lite sequence works as an orchestrated multi-tool flow."
         },
         {
           id: 2,
@@ -1950,15 +1950,15 @@ export const chapter58: Chapter = {
         },
         {
           id: 10,
-          question: "TutorClaw unit tests verify: (1) free-tier get_chapter_content returns accessible: false, and (2) when accessible is false, the agent calls generate_stripe_checkout_url. Both tests pass. But in production, the agent doesn't always call generate_stripe_checkout_url after receiving accessible: false. What does this reveal about test coverage?",
+          question: "TutorClaw unit tests verify: (1) free-tier get_chapter_content returns accessible: false, and (2) when accessible is false, the agent calls get_upgrade_url. Both tests pass. But in production, the agent doesn't always call get_upgrade_url after receiving accessible: false. What does this reveal about test coverage?",
           options: {
-            A: "The tests are wrong — the agent should never automatically call generate_stripe_checkout_url",
+            A: "The tests are wrong — the agent should never automatically call get_upgrade_url",
             B: "The tests verify tool behavior and isolated agent behavior separately, but not the integrated decision-making chain. An agent's real orchestration decision depends on conversational context, system prompt interpretation, and multiple preceding tool results — unit tests for each step pass, but the actual agent reasoning that connects them is not tested. Integration testing with real agent orchestration is needed to catch this gap",
             C: "The production agent has a different version than the tested agent",
             D: "Stripe's API is blocking the checkout URL generation in production"
           },
           correct: "B",
-          explanation: "This is the classic unit test coverage gap: each unit passes but the integrated behavior fails. The agent's decision to call generate_stripe_checkout_url depends on how it interprets accessible: false within the full conversational context — not just the isolated test case. Testing the agent's actual orchestration requires running the full agent (with real system prompt and tool chain) through realistic conversation scenarios, not just testing each tool and each agent decision in isolation."
+          explanation: "This is the classic unit test coverage gap: each unit passes but the integrated behavior fails. The agent's decision to call get_upgrade_url depends on how it interprets accessible: false within the full conversational context — not just the isolated test case. Testing the agent's actual orchestration requires running the full agent (with real system prompt and tool chain) through realistic conversation scenarios, not just testing each tool and each agent decision in isolation."
         },
         {
           id: 11,
@@ -1989,12 +1989,12 @@ export const chapter58: Chapter = {
           question: "TutorClaw's integration test checks the full flow: register learner, upgrade tier, track progress, get profile. A new developer asks: 'Why test all these steps together rather than each tool independently?' What is the correct answer?",
           options: {
             A: "Testing them together saves time compared to four separate tests",
-            B: "Integration tests verify that state written by one tool is correctly read by subsequent tools — that register_learner's record format is compatible with what track_progress writes to, and that get_learner_profile reads both correctly. Individual unit tests cannot catch incompatibilities between tools because they each test against their own assumptions, not against each other's actual outputs",
+            B: "Integration tests verify that state written by one tool is correctly read by subsequent tools — that register_learner's record format is compatible with what update_progress writes to, and that get_learner_state reads both correctly. Individual unit tests cannot catch incompatibilities between tools because they each test against their own assumptions, not against each other's actual outputs",
             C: "ClawHub requires integration tests as a condition of marketplace listing",
             D: "Integration tests are only needed when tools share a database"
           },
           correct: "B",
-          explanation: "Integration tests catch interface incompatibilities between tools. register_learner might create a record with field completion_list but track_progress expects progress_entries — unit tests for each tool would pass using their own test fixtures, but the real state file created by register_learner would break track_progress. Integration tests use the real tool chain with real state, exposing these field-name and type mismatches that unit tests cannot see."
+          explanation: "Integration tests catch interface incompatibilities between tools. register_learner might create a record with field completion_list but update_progress expects progress_entries — unit tests for each tool would pass using their own test fixtures, but the real state file created by register_learner would break update_progress. Integration tests use the real tool chain with real state, exposing these field-name and type mismatches that unit tests cannot see."
         },
         {
           id: 14,
@@ -2010,15 +2010,15 @@ export const chapter58: Chapter = {
         },
         {
           id: 15,
-          question: "TutorClaw's spec audit reveals list_chapters should return curriculum-ordered chapters, but the curriculum sequence was never formally defined. What should the audit produce for this finding?",
+          question: "TutorClaw's spec audit reveals get_exercises should return curriculum-ordered chapters, but the curriculum sequence was never formally defined. What should the audit produce for this finding?",
           options: {
             A: "Leave the ordering unspecified — curriculum sequence is a content decision, not a tool concern",
-            B: "The audit must produce two artifacts: (1) a formal definition of the curriculum sequence (which chapter comes first, second, etc.), and (2) an updated tool spec that explicitly states list_chapters returns chapters in this defined sequence. The gap between spec and implementation here is a missing specification, not just an implementation deviation — the audit fills the gap",
+            B: "The audit must produce two artifacts: (1) a formal definition of the curriculum sequence (which chapter comes first, second, etc.), and (2) an updated tool spec that explicitly states get_exercises returns chapters in this defined sequence. The gap between spec and implementation here is a missing specification, not just an implementation deviation — the audit fills the gap",
             C: "Note that alphabetical order is acceptable since curriculum order was never defined",
             D: "Ask ClawHub's editorial team to define the correct curriculum sequence"
           },
           correct: "B",
-          explanation: "The Reflection Phase fills specification gaps, not just implementation deviations. When the curriculum sequence was never formally defined, the audit must produce the definition. Without it, every future developer who touches list_chapters will make independent assumptions about ordering. The audit produces the authoritative answer: 'The curriculum sequence is chapters 1, 2, 3... in this pedagogical order, and list_chapters must return them in this sequence.' This becomes the durable specification."
+          explanation: "The Reflection Phase fills specification gaps, not just implementation deviations. When the curriculum sequence was never formally defined, the audit must produce the definition. Without it, every future developer who touches get_exercises will make independent assumptions about ordering. The audit produces the authoritative answer: 'The curriculum sequence is chapters 1, 2, 3... in this pedagogical order, and get_exercises must return them in this sequence.' This becomes the durable specification."
         },
         {
           id: 16,
@@ -2046,10 +2046,10 @@ export const chapter58: Chapter = {
         },
         {
           id: 18,
-          question: "TutorClaw is published on ClawHub as version 1.0.0. A fix changes get_learner_profile's output field from 'completion_status' to 'is_completed' — a breaking change. What should happen to TutorClaw's ClawHub listing?",
+          question: "TutorClaw is published on ClawHub as version 1.0.0. A fix changes get_learner_state's output field from 'completion_status' to 'is_completed' — a breaking change. What should happen to TutorClaw's ClawHub listing?",
           options: {
             A: "Update the field silently — field renaming is a minor change that doesn't require version bumps",
-            B: "Publish version 2.0.0 with a clear changelog entry: 'BREAKING: get_learner_profile output field renamed from completion_status to is_completed — update any code reading this field.' Existing installations using the 1.0.0 spec will break if they upgrade without code changes — the version bump and changelog communicate this risk clearly",
+            B: "Publish version 2.0.0 with a clear changelog entry: 'BREAKING: get_learner_state output field renamed from completion_status to is_completed — update any code reading this field.' Existing installations using the 1.0.0 spec will break if they upgrade without code changes — the version bump and changelog communicate this risk clearly",
             C: "Keep the old field name in production and only rename it in the documentation",
             D: "Remove TutorClaw from ClawHub until all users have migrated to the new field name"
           },
@@ -2145,7 +2145,7 @@ export const chapter58: Chapter = {
           question: "An institution uses TutorClaw's managed deployment for 300 students. After two weeks, they report that one student's completion status is appearing on another student's profile. What is the most likely cause in TutorClaw's state management?",
           options: {
             A: "ClawHub's managed deployment mode shares state across all users by design",
-            B: "A learner_id collision or lookup error — the most likely cause is that learner records are being looked up by a non-unique key (e.g., a generated ID that collides, or a phone number that was incorrectly normalized), causing get_learner_profile to return the wrong learner's record. The institution's SSO identifiers may be mapping multiple students to the same internal learner_id",
+            B: "A learner_id collision or lookup error — the most likely cause is that learner records are being looked up by a non-unique key (e.g., a generated ID that collides, or a phone number that was incorrectly normalized), causing get_learner_state to return the wrong learner's record. The institution's SSO identifiers may be mapping multiple students to the same internal learner_id",
             C: "JSON files cannot support multiple concurrent users without data mixing",
             D: "The managed deployment mode uses a shared conversation context that mixes learner sessions"
           },
@@ -2198,7 +2198,7 @@ export const chapter58: Chapter = {
             D: "Production monitoring is the responsibility of ClawHub's platform team"
           },
           correct: "B",
-          explanation: "Production observability is a pre-publication requirement, not a post-incident response. Waiting for user complaints means failures affect real learners before they are detected. Synthetic monitoring (a scheduled agent interaction that exercises register_learner → get_chapter_content → track_progress) detects breakages within minutes. Health check endpoints enable load balancers to remove unhealthy instances. Error rate alerting surfaces degradation before it becomes a crisis. These must be in place on day one."
+          explanation: "Production observability is a pre-publication requirement, not a post-incident response. Waiting for user complaints means failures affect real learners before they are detected. Synthetic monitoring (a scheduled agent interaction that exercises register_learner → get_chapter_content → update_progress) detects breakages within minutes. Health check endpoints enable load balancers to remove unhealthy instances. Error rate alerting surfaces degradation before it becomes a crisis. These must be in place on day one."
         }
       ]
     }
@@ -2209,18 +2209,18 @@ export const chapter58: Chapter = {
       mcqs: [
         { id: 1, question: "Before writing any TutorClaw implementation code, you blueprint all nine tools on paper. A colleague says this is 'premature over-design.' What is the strongest counter-argument?", options: { A: "Blueprint is required by ClawHub marketplace submission process", B: "Pre-specifying nine tool contracts forces all input/output schemas, tier access rules, and inter-tool dependencies to be designed as a coherent system. Finding interface mismatches on paper is free; finding them after implementing five tools costs hours of rework", C: "It is premature over-design — prototype first, design later", D: "Blueprint reduces API costs by specifying tools upfront" }, correct: "B", explanation: "Blueprinting prevents integration failures: when nine tools are each designed independently without a contract, tool A's output format may not match what tool B expects as input. Tier access rules may be inconsistent. Designing on paper forces these conflicts to surface before a line of code is written — at zero cost. The alternative (build then integrate) discovers interface mismatches after all nine tools are built, maximizing rework cost." },
         { id: 2, question: "TutorClaw uses PRIMM-Lite pedagogy. A student submits code for feedback. In the PRIMM-Lite flow, what comes before code submission?", options: { A: "Immediate grading with a score", B: "Predict and Run phases — PRIMM-Lite: Predict (student predicts what code will do before running), Run (student executes to see actual output), then Investigate/Modify/Make. Prediction builds mental models; seeing actual vs. predicted output surfaces misconceptions before the student writes new code", C: "A written exam about the topic", D: "Teacher approval before the student can see the code" }, correct: "B", explanation: "PRIMM-Lite sequence: Predict → Run → Investigate → Modify → Make. The pedagogical insight: learners who predict first engage cognitively before execution. When prediction ≠ result, the mismatch creates a teachable moment — the gap between expectation and reality is where learning happens. Jumping straight to code submission skips the prediction phase that PRIMM is designed around." },
-        { id: 3, question: "TutorClaw has three tiers. A free-tier user tries to access `generate_guidance` which is a paid-tier tool. What should the tool do?", options: { A: "Generate the guidance but add a watermark", B: "Return a tier restriction response with upgrade information — the blueprint defined tier access rules per tool. Returning a clear 'this feature requires Professional tier' response with upgrade path is better UX than a generic error, and enables the Stripe checkout flow", C: "Generate guidance but limit the response length", D: "Ask the user to verify their email first" }, correct: "B", explanation: "Tier access design: tools check `get_learner_profile` tier status and return appropriate responses. Free-tier hitting a paid tool should receive a response that explains the restriction and the upgrade path — this is intentional product design, not an error state. The `generate_stripe_checkout_url` tool exists precisely to handle this flow. Blueprint-defined tier rules ensure consistent enforcement across all nine tools." },
+        { id: 3, question: "TutorClaw has three tiers. A free-tier user tries to access `generate_guidance` which is a paid-tier tool. What should the tool do?", options: { A: "Generate the guidance but add a watermark", B: "Return a tier restriction response with upgrade information — the blueprint defined tier access rules per tool. Returning a clear 'this feature requires Professional tier' response with upgrade path is better UX than a generic error, and enables the Stripe checkout flow", C: "Generate guidance but limit the response length", D: "Ask the user to verify their email first" }, correct: "B", explanation: "Tier access design: tools check `get_learner_state` tier status and return appropriate responses. Free-tier hitting a paid tool should receive a response that explains the restriction and the upgrade path — this is intentional product design, not an error state. The `get_upgrade_url` tool exists precisely to handle this flow. Blueprint-defined tier rules ensure consistent enforcement across all nine tools." },
         { id: 4, question: "SOUL.md defines TutorClaw's personality. IDENTITY.md defines its role boundaries. What happens if TutorClaw receives a request to 'just give me the answer' instead of guiding the student?", options: { A: "TutorClaw provides the answer — student satisfaction is the priority", B: "SOUL.md and IDENTITY.md define the agent's constraint boundaries — TutorClaw's identity includes pedagogical boundaries (guide, don't give answers). The agent declines to give direct answers per its SOUL.md philosophy and instead returns to the PRIMM-Lite guidance flow", C: "TutorClaw gives the answer after displaying a warning", D: "The request triggers an escalation to human tutors" }, correct: "B", explanation: "Agent identity files define behavioral constraints: SOUL.md establishes personality philosophy (Socratic guide, not answer machine). IDENTITY.md establishes role boundaries (tutoring within PRIMM-Lite, not homework completion service). When a request conflicts with identity, the agent applies identity constraints — gracefully redirecting to the pedagogical approach rather than capitulating to convenience. Chapter 58: identity files are the agent's behavioral constitution." },
         { id: 5, question: "TutorClaw uses JSON files for state persistence. A student's progress is tracked across sessions. What happens if the JSON state file is corrupted or missing?", options: { A: "TutorClaw crashes with an unhandled error", B: "The implementation should handle missing/corrupted state gracefully — re-initialize with default state, log the recovery, and potentially notify the user. Robust JSON persistence requires defensive read logic: try to read, fall back to default state if read fails, always write atomically", C: "The student's account is permanently deleted", D: "JSON state cannot be corrupted — it's always consistent" }, correct: "B", explanation: "Defensive JSON persistence: state files can be missing (first run), corrupted (interrupted write), or stale (schema changed after update). Robust implementation: read with try/catch → if fails, initialize with defaults → log recovery action. Atomic writes prevent corruption: write to temp file, verify, rename to final path. Chapter 58 covers JSON state management as practical persistence infrastructure, including failure modes that real implementations must handle." },
-        { id: 6, question: "Stripe integration in TutorClaw generates checkout URLs for tier upgrades. What must happen after a successful payment to unlock the tier?", options: { A: "The tier upgrades automatically when payment is detected by the app", B: "Stripe sends a webhook to TutorClaw's backend after successful payment. The webhook handler verifies the event signature, upgrades the learner's tier in the JSON state, and the next `get_learner_profile` call returns the new tier. Webhooks are the event-driven payment confirmation mechanism", C: "The student manually tells TutorClaw they have paid", D: "The tier upgrade happens immediately when the Stripe checkout URL is generated" }, correct: "B", explanation: "Stripe payment flow: checkout URL generated → user pays on Stripe's hosted page → Stripe sends `payment_intent.succeeded` webhook to app endpoint → webhook verifies Stripe signature (security) → updates learner tier in JSON state → subsequent tool calls reflect new tier. Chapter 58: webhooks are the integration point between Stripe's payment system and TutorClaw's state. Without webhook handling, payments don't translate to tier changes." },
+        { id: 6, question: "Stripe integration in TutorClaw generates checkout URLs for tier upgrades. What must happen after a successful payment to unlock the tier?", options: { A: "The tier upgrades automatically when payment is detected by the app", B: "Stripe sends a webhook to TutorClaw's backend after successful payment. The webhook handler verifies the event signature, upgrades the learner's tier in the JSON state, and the next `get_learner_state` call returns the new tier. Webhooks are the event-driven payment confirmation mechanism", C: "The student manually tells TutorClaw they have paid", D: "The tier upgrade happens immediately when the Stripe checkout URL is generated" }, correct: "B", explanation: "Stripe payment flow: checkout URL generated → user pays on Stripe's hosted page → Stripe sends `payment_intent.succeeded` webhook to app endpoint → webhook verifies Stripe signature (security) → updates learner tier in JSON state → subsequent tool calls reflect new tier. Chapter 58: webhooks are the integration point between Stripe's payment system and TutorClaw's state. Without webhook handling, payments don't translate to tier changes." },
         { id: 7, question: "Publishing TutorClaw to ClawHub requires a complete tool manifest. What does the manifest document?", options: { A: "The source code for all nine tools", B: "Tool descriptions, input/output schemas, tier requirements, and capability metadata — the ClawHub manifest is the discovery layer. Users browsing ClawHub see what TutorClaw does from the manifest; agents invoking TutorClaw know the tool contracts from the manifest schemas", C: "The revenue sharing agreement with ClawHub", D: "A video demo of TutorClaw in action" }, correct: "B", explanation: "ClawHub manifest is the public contract: tool names, what each does (description), input parameters (schema), output formats (schema), tier requirements per tool, and capability categories. This mirrors the agentskills.io standard. The manifest enables discovery (users find TutorClaw by its capabilities) and integration (other agents know how to invoke tools correctly). Chapter 58: blueprint → implementation → manifest → publish is the complete TutorClaw lifecycle." },
-        { id: 8, question: "TutorClaw's six build phases are ordered. Why must the JSON state tools be built before the pedagogy tools?", options: { A: "JSON tools are simpler and should always be built first", B: "Pedagogy tools (generate_guidance, submit_code) depend on learner state from state tools (register_learner, track_progress). Building state tools first means they're verified and available when pedagogy tool development begins — dependency order prevents building on untested foundations", C: "Build order is arbitrary — all six phases can be done simultaneously", D: "ClawHub requires state tools to be registered before other tools" }, correct: "B", explanation: "Dependency-ordered build phases: state tools are the foundation — they define learner profiles, tier status, and progress tracking that all other tools consume. Building pedagogy tools before state tools means building on an unverified interface (track_progress might work differently than assumed). Phase order: state foundation → content retrieval → pedagogy → monetization → testing → publishing. Each phase builds on verified prior phases." },
-        { id: 9, question: "During TutorClaw testing, you discover that `track_progress` works correctly in isolation but produces wrong results when called after `submit_code`. What type of testing would have caught this?", options: { A: "Unit testing each tool in isolation", B: "Integration testing — testing tool interactions in realistic sequences (submit_code → track_progress). Tool isolation tests verify individual behavior; integration tests verify that tool outputs correctly chain as inputs to subsequent tools. Chapter 58's testing phase explicitly includes multi-tool workflow testing", C: "Load testing to verify performance under concurrent users", D: "Security testing of input validation" }, correct: "B", explanation: "Integration testing catches inter-tool contract violations: unit tests verify each tool individually (submit_code works ✓, track_progress works ✓). Integration tests verify that tools work in sequence (submit_code output → track_progress input → expected state update). The failure mode — correct isolation, wrong interaction — is a contract mismatch only visible in integrated execution. Chapter 58's testing phase: test the nine tools as a system, not just as nine independent functions." },
-        { id: 10, question: "A student completes all levels in the free tier and asks for Advanced topics. TutorClaw responds with an upgrade prompt. This requires coordination between which tools?", options: { A: "Only generate_guidance needs to be called", B: "get_learner_profile (check current tier and progress) → tier check (free tier, advanced content is Professional) → generate_stripe_checkout_url (produce upgrade URL) → return response with upgrade prompt and checkout link. Multiple tools coordinate to produce this response", C: "Only generate_stripe_checkout_url needs to be called", D: "Tier checks happen automatically without tool calls" }, correct: "B", explanation: "Multi-tool coordination: the Advanced topic request triggers a workflow: get_learner_profile reveals free tier + completed free content → tier check against get_chapter_content (Advanced = Professional tier) → generate_stripe_checkout_url creates upgrade link → response combines 'you've completed free content + here's what Professional unlocks + upgrade link.' This is why blueprinting all nine tools together is essential — the upgrade flow requires three tools to coordinate correctly." },
+        { id: 8, question: "TutorClaw's six build phases are ordered. Why must the JSON state tools be built before the pedagogy tools?", options: { A: "JSON tools are simpler and should always be built first", B: "Pedagogy tools (generate_guidance, submit_code) depend on learner state from state tools (register_learner, update_progress). Building state tools first means they're verified and available when pedagogy tool development begins — dependency order prevents building on untested foundations", C: "Build order is arbitrary — all six phases can be done simultaneously", D: "ClawHub requires state tools to be registered before other tools" }, correct: "B", explanation: "Dependency-ordered build phases: state tools are the foundation — they define learner profiles, tier status, and progress tracking that all other tools consume. Building pedagogy tools before state tools means building on an unverified interface (update_progress might work differently than assumed). Phase order: state foundation → content retrieval → pedagogy → monetization → testing → publishing. Each phase builds on verified prior phases." },
+        { id: 9, question: "During TutorClaw testing, you discover that `update_progress` works correctly in isolation but produces wrong results when called after `submit_code`. What type of testing would have caught this?", options: { A: "Unit testing each tool in isolation", B: "Integration testing — testing tool interactions in realistic sequences (submit_code → update_progress). Tool isolation tests verify individual behavior; integration tests verify that tool outputs correctly chain as inputs to subsequent tools. Chapter 58's testing phase explicitly includes multi-tool workflow testing", C: "Load testing to verify performance under concurrent users", D: "Security testing of input validation" }, correct: "B", explanation: "Integration testing catches inter-tool contract violations: unit tests verify each tool individually (submit_code works ✓, update_progress works ✓). Integration tests verify that tools work in sequence (submit_code output → update_progress input → expected state update). The failure mode — correct isolation, wrong interaction — is a contract mismatch only visible in integrated execution. Chapter 58's testing phase: test the nine tools as a system, not just as nine independent functions." },
+        { id: 10, question: "A student completes all levels in the free tier and asks for Advanced topics. TutorClaw responds with an upgrade prompt. This requires coordination between which tools?", options: { A: "Only generate_guidance needs to be called", B: "get_learner_state (check current tier and progress) → tier check (free tier, advanced content is Professional) → get_upgrade_url (produce upgrade URL) → return response with upgrade prompt and checkout link. Multiple tools coordinate to produce this response", C: "Only get_upgrade_url needs to be called", D: "Tier checks happen automatically without tool calls" }, correct: "B", explanation: "Multi-tool coordination: the Advanced topic request triggers a workflow: get_learner_state reveals free tier + completed free content → tier check against get_chapter_content (Advanced = Professional tier) → get_upgrade_url creates upgrade link → response combines 'you've completed free content + here's what Professional unlocks + upgrade link.' This is why blueprinting all nine tools together is essential — the upgrade flow requires three tools to coordinate correctly." },
         { id: 11, question: "SOUL.md says TutorClaw is 'patient, encouraging, and never discouraging.' A student submits incorrect code three times. How should TutorClaw respond on the third failure?", options: { A: "Tell the student they're not understanding the material and should seek help elsewhere", B: "Maintain SOUL.md personality: patient encouragement + pedagogical support. 'You're building toward the solution — let's look at what your code does in the Predict phase again.' Identity files define behavioral invariants that hold even under student frustration or repeated failure", C: "Give the answer after three failures to prevent discouragement", D: "Ask the student if they want to skip this exercise" }, correct: "B", explanation: "Identity as behavioral invariant: SOUL.md constraints don't relax under stress conditions — patience and encouragement are more important after repeated failure, not less. The agent's SOUL.md-defined persona is tested by difficult scenarios, not routine ones. Chapter 58: SOUL.md and IDENTITY.md define consistent behavioral guardrails. An agent that maintains persona when things are easy but breaks persona under difficulty has not internalized its identity files." },
         { id: 12, question: "What is the pedagogical argument for using PRIMM over direct instruction (just showing students how to solve problems)?", options: { A: "PRIMM is faster than direct instruction for covering curriculum", B: "PRIMM builds mental models through prediction and discovery rather than passive reception. Students who predict, observe discrepancies, and modify code develop deeper understanding than students who watch solutions. Cognitive engagement during prediction creates more durable learning than observing correct answers", C: "PRIMM reduces the amount of content needed in the curriculum", D: "Direct instruction is equally effective — PRIMM is just more engaging" }, correct: "B", explanation: "PRIMM's pedagogical foundation: learning through prediction activates prior knowledge, creates expectations, and makes discrepancies visible. When a student's prediction is wrong, they're motivated to understand why — this curiosity drives investigation. Direct instruction provides correct solutions without this cognitive activation. TutorClaw's PRIMM-Lite implementation (Predict → Run phases before Modify/Make) operationalizes this principle: students must engage cognitively before receiving guidance." },
         { id: 13, question: "You're considering storing learner progress in a cloud database instead of JSON files. What is the trade-off Chapter 58 addresses by choosing JSON?", options: { A: "JSON is faster than databases for all use cases", B: "JSON files: zero infrastructure cost, works offline/locally, no external service dependency, simple debugging. Database: scalable, queryable, concurrent access, production-grade. For TutorClaw's initial build (single-user, learning context), JSON simplicity accelerates delivery. Database migration is a well-defined upgrade path if scale requires it", C: "JSON files are more secure than databases", D: "Databases are not supported by ClawHub" }, correct: "B", explanation: "JSON vs. database decision: Chapter 58 uses JSON for deliberate reasons — initial TutorClaw builds should minimize infrastructure complexity. JSON: no database setup, no connection management, no service dependencies, directly readable for debugging. The trade-off: JSON doesn't scale to concurrent users or complex queries. But for the learning build phase, JSON delivers working state persistence without infrastructure overhead. Production TutorClaw may graduate to a database; the learning implementation stays simple." },
-        { id: 14, question: "TutorClaw's `list_chapters` tool returns available chapters. A Professional-tier student should see more chapters than a free-tier student. How is this implemented?", options: { A: "Run two separate list_chapters tools — one for each tier", B: "list_chapters calls get_learner_profile to get tier → filters chapter list based on tier rules. Free tier: Chapters 1-3. Professional: all chapters. Single tool, tier-aware filtering. The tool contract includes tier parameter or calls profile tool internally to apply access rules", C: "Create separate chapter lists in different JSON files for each tier", D: "Tier filtering is done on the client side, not in the tool" }, correct: "B", explanation: "Tier-aware tool design: a single list_chapters tool handles multiple tiers by integrating with the learner profile. This keeps tier logic centralized in the tool layer rather than duplicated in client code. The blueprint defined per-tool tier access rules precisely for this reason — each content and pedagogy tool knows which tier can access what. Single implementation with tier context produces different outputs for different users from the same tool." },
+        { id: 14, question: "TutorClaw's `get_exercises` tool returns available chapters. A Professional-tier student should see more chapters than a free-tier student. How is this implemented?", options: { A: "Run two separate get_exercises tools — one for each tier", B: "get_exercises calls get_learner_state to get tier → filters chapter list based on tier rules. Free tier: Chapters 1-3. Professional: all chapters. Single tool, tier-aware filtering. The tool contract includes tier parameter or calls profile tool internally to apply access rules", C: "Create separate chapter lists in different JSON files for each tier", D: "Tier filtering is done on the client side, not in the tool" }, correct: "B", explanation: "Tier-aware tool design: a single get_exercises tool handles multiple tiers by integrating with the learner profile. This keeps tier logic centralized in the tool layer rather than duplicated in client code. The blueprint defined per-tool tier access rules precisely for this reason — each content and pedagogy tool knows which tier can access what. Single implementation with tier context produces different outputs for different users from the same tool." },
         { id: 15, question: "Chapter 58 covers the complete TutorClaw build from blueprint to ClawHub. What is the most transferable lesson for building other MCP agent applications?", options: { A: "All MCP applications need exactly nine tools", B: "Blueprint tool contracts before implementation, order build phases by dependency, design identity via SOUL/IDENTITY files before coding behavior, integrate monetization at the tool level (not as an afterthought), and test tools as a system not just in isolation. These principles generalize beyond TutorClaw to any multi-tool agent application", C: "MCP applications must use the PRIMM pedagogy pattern", D: "ClawHub is the only valid deployment target for MCP applications" }, correct: "B", explanation: "TutorClaw generalizes: (1) blueprint-first prevents interface mismatches; (2) dependency-ordered build prevents building on unverified foundations; (3) identity files create consistent agent persona; (4) monetization integrated at tool level (tier checks in every tool) rather than bolted on later; (5) integration testing verifies tool chains not just individual tools. These five lessons apply to any complex MCP agent application, not just tutoring systems." },
       ]
     }
